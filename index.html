@@ -786,24 +786,39 @@ function Reveal({ children, delay = 0, y = 24, className = "", as: Tag = "div" }
 }
 
 // ---------- I18N ----------
-const VB_I18N = {
-  fr: {
-    sub: "PREMIUM LANDSCAPE SERVICES",
-    nav: { philosophie: "Philosophie", expertise: "Expertise", portfolio: "Portfolio", resilience: "Résilience", contact: "Contact" },
-    cta: { initiate: "Initier un projet" },
-  },
-  en: {
-    sub: "PREMIUM LANDSCAPE SERVICES",
-    nav: { philosophie: "Philosophy", expertise: "Expertise", portfolio: "Portfolio", resilience: "Resilience", contact: "Contact" },
-    cta: { initiate: "Start a project" },
-  },
-  es: {
-    sub: "SERVICIOS DE PAISAJISMO PREMIUM",
-    nav: { philosophie: "Filosofía", expertise: "Experiencia", portfolio: "Portafolio", resilience: "Resiliencia", contact: "Contacto" },
-    cta: { initiate: "Iniciar un proyecto" },
-  },
+// ── i18n : chargement depuis fichiers JSON externes ──────────────────────────
+// Cache des traductions déjà chargées
+const I18N_CACHE = {};
+
+async function loadLang(lang) {
+  if (I18N_CACHE[lang]) return I18N_CACHE[lang];
+  try {
+    const res = await fetch(`i18n/${lang}.json`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const data = await res.json();
+    I18N_CACHE[lang] = data;
+    return data;
+  } catch (e) {
+    console.warn(`[i18n] Impossible de charger ${lang}.json, fallback FR`, e);
+    // Fallback : on renvoie le cache FR s'il existe, sinon on recharge FR
+    if (lang !== "fr") return loadLang("fr");
+    return {};
+  }
+}
+
+// Traductions FR pré-chargées inline pour éviter tout flash au démarrage
+I18N_CACHE["fr"] = {
+  nav: { sub: "PREMIUM LANDSCAPE SERVICES", philosophie: "Philosophie", expertise: "Expertise", portfolio: "Portfolio", resilience: "Résilience", contact: "Contact", cta: "Initier un projet" },
+  hero: { eyebrow: "Atelier — Est. 2014", cities: "Rabat · Casablanca · Marrakech · Fès", tagline: "— Le voyage commence ici", h1_line1: "L'art du", h1_em: "paysage", h1_accent: "d'exception.", desc: "Concepteurs, jardiniers, bâtisseurs. Nous dessinons des extérieurs habités — taillés dans la pierre, écrits par l'eau, validés par le climat.", cta_primary: "Commencer l'ascension", cta_secondary: "Voir nos sommets", scroll: "scroll", signature: "la signature" },
+  philosophie: { step: "Étape 01 — La fondation", img_label1: "/ texture · pierre", img_caption: "Chaque projet commence sous nos pieds — la lecture du sol, de l'orientation, de la pluie qui ne viendra pas.", section_tag: "— Philosophie", h2_line1: "L'équilibre entre la", h2_em: "main de l'homme", h2_line2: "et la", h2_accent: "force organique.", p1: "Nous croyons qu'un jardin n'est pas un décor. C'est un lieu qui respire, qui se patine, qui résiste — et qui, avec le temps, devient plus juste qu'au premier jour.", p2: "Architecture minérale, gestion fine de l'eau, plantations endémiques : trois exigences, une seule signature. La nôtre.", stat1_n: "+9 ans", stat1_l: "d'atelier", stat2_n: "+22", stat2_l: "grands projets", stat3_n: "+33", stat3_l: "projets résidentiels", img_label2: "/ vivant", quote: '"Patience"', quote_author: "Adil B. — fondateur" },
+  expertise: { step: "Étape 02 — L'ascension", h2_line1: "Quatre paliers,", h2_em: "une seule", h2_accent: "trajectoire.", intro: "Notre méthode emprunte au jardin ce qu'il a de plus précieux : la lenteur. Quatre étapes, conduites comme une ascension — chacune valide la précédente, chacune prépare la suivante.", steps: [ { n:"01", title:"Étude & lecture du site", sub:"Topographie · ensoleillement · vent · sol", body:"Nous arpentons. Nous écoutons. Nous mesurons. Le projet est d'abord une carte du terrain." }, { n:"02", title:"Conception architecturale", sub:"Plans masse · 3D · matériauthèque", body:"Le jardin se dessine comme un bâtiment : volumes, circulations, points de fuite, silences." }, { n:"03", title:"Maîtrise minérale & hydraulique", sub:"Pierre sèche · bassins · drainage", body:"L'eau est sculptée. La pierre est posée. Le climat dicte les contraintes — nous les transformons en parti pris." }, { n:"04", title:"Plantation & entretien signé", sub:"Espèces résilientes · suivi pluriannuel", body:"Au sommet, le vivant. Nous accompagnons chaque jardin sur 5, 10, 20 ans — c'est là qu'il prend sa forme." } ] },
+  portfolio: { step: "Étape 03 — Les sommets atteints", h2_line1: "Réalisations", h2_em: "signées", desc: "5 hectares de patrimoine vivant au cœur de Fès. Réhabilitation complète du Parc Mérinide Bab Lamer — lac artificiel de 5 000 m², flore locale, matériaux de Fès. Inauguré en novembre 2025.", cta: "Voir toutes les réalisations →", projects: [ { title:"Parc Mérinide Bab Lamer", loc:"Fès, Maroc", type:"Public & Patrimonial", desc:"Restauration et réaménagement de 5 hectares au cœur de Fès. Lac artificiel de 5 000 m², flore locale, matériaux de Fès. Inauguré en novembre 2025." }, { title:"Étang Naturel 1 000 m²", loc:"Rabat, Maroc", type:"Hydraulique & Ornement", desc:"Étang naturel de 1 000 m² avec filtration biologique, plantes aquatiques, carpes Koï japonaises et aérateurs OASE." }, { title:"Parc Mérinide — Lac", loc:"Fès, Maroc", type:"Public & Patrimonial", desc:"Lac artificiel de 5 000 m² au cœur du Parc Mérinide Bab Lamer. Filtration naturelle, flore endémique et berges aménagées." } ], lb_client:"Client", lb_budget:"Budget", lb_close:"Fermer", lb_prev:"Photo précédente", lb_next:"Photo suivante" },
+  resilience: { step: "Étape 04 — Le climat tient", h2_line1: "Un jardin qui", h2_accent: "résiste", h2_line2: "à son siècle.", desc: "Sécheresses, vents salins, gel tardif. Concevoir un jardin haut de gamme aujourd'hui, c'est l'imaginer pour le climat de 2050 — pas celui de 1990. Notre engagement est écrit là-dedans.", pillars: [ { t:"Endémique", d:"100% des plantations adaptées au climat local. Aucune espèce dépendante de l'arrosage continu." }, { t:"Hydrique", d:"Goutte-à-goutte intelligent, récupération d'eau de pluie, paillage végétal — la sobriété par défaut." }, { t:"Pérenne", d:"Une garantie de croissance sur 3 ans, un suivi sur 10. Le vivant exige du temps long." } ] },
+  contact: { step: "Étape 05 — La rencontre au sommet", h2_line1: "Initions", h2_em: "un projet", h2_accent: "d'exception.", desc: "Premier rendez-vous offert. Nous étudions chaque demande sous 72h et n'engageons qu'un nombre limité de projets par an.", label_atelier: "Atelier", label_direct: "Direct", form_name: "Votre nom", form_email: "Email", form_type: "Type de projet", form_message: "Quelques mots sur votre projet", form_submit: "Envoyer la demande →", project_types: [["design","Conception"],["realisation","Réalisation"],["entretien","Entretien signé"],["conseil","Conseil"]], success_title: "Merci.", success_body: "Votre demande a été reçue. Nous reviendrons vers vous sous 72 heures, depuis l'atelier.", success_again: "Envoyer un autre message" },
+  footer: { quote: '"Un jardin n\'est jamais terminé. Il commence."', col1_title: "Atelier", col1_items: ["Philosophie","Équipe","Presse","Carrières"], col2_title: "Services", col2_items: ["Conception","Réalisation","Entretien","Conseil"], col3_title: "Suivre l'atelier", col3_items: ["Instagram — @atelier.aba","Journal — newsletter mensuelle","Linkedin"], copyright: "© 2026 — ABA sarl au — Atelier Boumahdi Adil", legal: "Mentions légales", privacy: "Confidentialité" },
 };
-const VBLangContext = React.createContext({ lang: "fr", setLang: () => {}, t: VB_I18N.fr });
+
+const VBLangContext = React.createContext({ lang: "fr", setLang: () => {}, t: I18N_CACHE["fr"] });
 
 // ---------- NAV ----------
 function Nav({ scrollY, accent }) {
@@ -879,7 +894,7 @@ function Nav({ scrollY, accent }) {
               e.currentTarget.style.color = accent;
             }}
           >
-            Initier un projet
+            {t.nav.cta}
           </button>
           <div role="group" aria-label="Language" style={{ display: "flex", gap: 4, marginLeft: 4 }}>
             {["fr","en","es"].map((c) => (
@@ -925,6 +940,7 @@ function Hero({ scrollY, accent, vh }) {
   const drawProgress = Math.min(1, 0.15 + scrollY / 600);
   const parallax = Math.min(scrollY * 0.35, 400);
   const titleParallax = scrollY * 0.15;
+  const { t } = React.useContext(VBLangContext);
 
   return (
     <section className="relative w-full overflow-hidden" style={{ minHeight: "100vh" }} data-screen-label="01 Hero">
@@ -962,8 +978,8 @@ function Hero({ scrollY, accent, vh }) {
 
       {/* Eyebrow / brand tag top-left */}
       <div className="absolute top-28 left-6 lg:left-12 text-white/80" style={{ fontFamily: "'Inter', sans-serif" }}>
-        <div className="text-[11px] tracking-[0.4em] uppercase opacity-70">Atelier — Est. 2014</div>
-        <div className="mt-2 text-[11px] tracking-[0.3em] uppercase opacity-50">Rabat · Casablanca · Marrakech · Fès</div>
+        <div className="text-[11px] tracking-[0.4em] uppercase opacity-70">{t.hero?.eyebrow || "Atelier — Est. 2014"}</div>
+        <div className="mt-2 text-[11px] tracking-[0.3em] uppercase opacity-50">{t.hero?.cities || "Rabat · Casablanca · Marrakech · Fès"}</div>
       </div>
 
       {/* Logo mark — large, drawing on scroll, behind the title */}
@@ -995,7 +1011,7 @@ function Hero({ scrollY, accent, vh }) {
           className="text-white/70 text-[11px] tracking-[0.45em] uppercase mb-6"
           style={{ fontFamily: "'Inter', sans-serif" }}
         >
-          — Le voyage commence ici
+          {t.hero?.tagline || "— Le voyage commence ici"}
         </div>
         <h1
           className="text-white"
@@ -1007,17 +1023,16 @@ function Hero({ scrollY, accent, vh }) {
             letterSpacing: "-0.02em",
           }}
         >
-          L'art du<br />
-          <span style={{ fontWeight: 600, fontStyle: "italic" }}>paysage</span><br />
-          d'<span style={{ color: accent, fontWeight: 600 }}>exception</span>.
+          {t.hero?.h1_line1 || "L'art du"}<br />
+          <span style={{ fontWeight: 600, fontStyle: "italic" }}>{t.hero?.h1_em || "paysage"}</span><br />
+          <span style={{ color: accent, fontWeight: 600 }}>{t.hero?.h1_accent || "d'exception."}</span>
         </h1>
 
         <p
           className="mt-8 text-white/70 max-w-md"
           style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, lineHeight: 1.7, fontWeight: 300 }}
         >
-          Concepteurs, jardiniers, bâtisseurs. Nous dessinons des extérieurs habités —
-          taillés dans la pierre, écrits par l'eau, validés par le climat.
+          {t.hero?.desc || "Concepteurs, jardiniers, bâtisseurs. Nous dessinons des extérieurs habités — taillés dans la pierre, écrits par l'eau, validés par le climat."}
         </p>
 
         <div className="mt-10 flex items-center gap-6">
@@ -1034,14 +1049,14 @@ function Hero({ scrollY, accent, vh }) {
             onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
             onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
           >
-            Commencer l'ascension
+            {t.hero?.cta_primary || "Commencer l'ascension"}
           </button>
           <button
             className="text-white/80 text-[12px] tracking-[0.28em] uppercase border-b border-white/30 pb-1"
             style={{ fontFamily: "'Inter', sans-serif" }}
             onClick={() => document.getElementById("portfolio")?.scrollIntoView({ behavior: "smooth" })}
           >
-            Voir nos sommets
+            {t.hero?.cta_secondary || "Voir nos sommets"}
           </button>
         </div>
       </div>
@@ -1052,7 +1067,7 @@ function Hero({ scrollY, accent, vh }) {
         <span>31°37'N · 8°00'W</span>
         <div style={{ width: 1, height: 24, background: "rgba(255,255,255,0.3)" }} />
         <div className="flex flex-col items-center gap-2">
-          <span>scroll</span>
+          <span>{t.hero?.scroll || "scroll"}</span>
           <div style={{ width: 1, height: 32, background: "rgba(255,255,255,0.3)", position: "relative", overflow: "hidden" }}>
             <div style={{ position: "absolute", left: 0, right: 0, height: 12, background: accent, animation: "scrollDot 2s ease-in-out infinite" }} />
           </div>
@@ -1065,7 +1080,7 @@ function Hero({ scrollY, accent, vh }) {
         ABA
         <div className="text-[10px] tracking-[0.4em] uppercase opacity-60 mt-2"
           style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.4em" }}>
-          la signature
+          {t.hero?.signature || "la signature"}
         </div>
       </div>
 
@@ -1090,6 +1105,7 @@ function Philosophie({ accent, scrollY }) {
   }, [scrollY]);
   const par1 = Math.max(-80, Math.min(80, (localY - 600) * 0.06));
   const par2 = Math.max(-100, Math.min(100, (localY - 600) * -0.08));
+  const { t } = React.useContext(VBLangContext);
 
   return (
     <section
@@ -1105,7 +1121,7 @@ function Philosophie({ accent, scrollY }) {
         <Reveal>
           <div className="flex items-center gap-4 mb-20" style={{ fontFamily: "'Inter', sans-serif" }}>
             <span style={{ width: 40, height: 1, background: "#1A1A1A", opacity: 0.3 }} />
-            <span className="text-[11px] tracking-[0.4em] uppercase text-black/60">Étape 01 — La fondation</span>
+            <span className="text-[11px] tracking-[0.4em] uppercase text-black/60">{t.philosophie?.step || "Étape 01 — La fondation"}</span>
           </div>
         </Reveal>
 
@@ -1124,15 +1140,14 @@ function Philosophie({ accent, scrollY }) {
               >
                 <div className="absolute bottom-3 left-3 text-white text-[10px] tracking-[0.3em] uppercase"
                   style={{ fontFamily: "'Inter', sans-serif", textShadow: "0 1px 12px rgba(0,0,0,0.7)" }}>
-                  / texture · pierre
+                  {t.philosophie?.img_label1 || "/ texture · pierre"}
                 </div>
               </div>
             </Reveal>
             <Reveal delay={250}>
               <div className="mt-6 text-[12px] leading-relaxed text-black/60"
                 style={{ fontFamily: "'Inter', sans-serif", fontWeight: 300 }}>
-                Chaque projet commence sous nos pieds — la lecture du sol,
-                de l'orientation, de la pluie qui ne viendra pas.
+                {t.philosophie?.img_caption || "Chaque projet commence sous nos pieds — la lecture du sol, de l'orientation, de la pluie qui ne viendra pas."}
               </div>
             </Reveal>
           </div>
@@ -1154,19 +1169,17 @@ function Philosophie({ accent, scrollY }) {
                 letterSpacing: "-0.02em",
                 color: "#1A1A1A",
               }}>
-                L'équilibre entre la <span style={{ fontStyle: "italic", fontWeight: 500 }}>main de l'homme</span>
-                <br />et la <span style={{ color: accent, fontWeight: 500 }}>force organique</span>.
+                {t.philosophie?.h2_line1 || "L'équilibre entre la"} <span style={{ fontStyle: "italic", fontWeight: 500 }}>{t.philosophie?.h2_em || "main de l'homme"}</span>
+                <br />{t.philosophie?.h2_line2 || "et la"} <span style={{ color: accent, fontWeight: 500 }}>{t.philosophie?.h2_accent || "force organique."}</span>
               </h2>
             </Reveal>
             <Reveal delay={260}>
               <div className="mt-12 grid sm:grid-cols-2 gap-10 max-w-[640px]">
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.75, color: "#1A1A1A", fontWeight: 300 }}>
-                  Nous croyons qu'un jardin n'est pas un décor. C'est un lieu qui respire,
-                  qui se patine, qui résiste — et qui, avec le temps, devient plus juste qu'au premier jour.
+                  {t.philosophie?.p1 || "Nous croyons qu'un jardin n'est pas un décor. C'est un lieu qui respire, qui se patine, qui résiste — et qui, avec le temps, devient plus juste qu'au premier jour."}
                 </p>
                 <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.75, color: "#1A1A1A", fontWeight: 300 }}>
-                  Architecture minérale, gestion fine de l'eau, plantations endémiques :
-                  trois exigences, une seule signature. La nôtre.
+                  {t.philosophie?.p2 || "Architecture minérale, gestion fine de l'eau, plantations endémiques : trois exigences, une seule signature. La nôtre."}
                 </p>
               </div>
             </Reveal>
@@ -1175,9 +1188,9 @@ function Philosophie({ accent, scrollY }) {
             <Reveal delay={400}>
               <div className="mt-16 flex flex-wrap gap-12" style={{ fontFamily: "'Inter', sans-serif" }}>
                 {[
-                  ["+9 ans", "d'atelier"],
-                  ["+22", "grands projets"],
-                  ["+33", "projets résidentiels"],
+                  [t.philosophie?.stat1_n || "+9 ans", t.philosophie?.stat1_l || "d'atelier"],
+                  [t.philosophie?.stat2_n || "+22", t.philosophie?.stat2_l || "grands projets"],
+                  [t.philosophie?.stat3_n || "+33", t.philosophie?.stat3_l || "projets résidentiels"],
                 ].map(([n, l]) => (
                   <div key={l}>
                     <div style={{ fontFamily: "'Montserrat', sans-serif", fontSize: 36, fontWeight: 300, color: "#1A1A1A", lineHeight: 1.1, whiteSpace: "nowrap" }}>
@@ -1204,16 +1217,16 @@ function Philosophie({ accent, scrollY }) {
               >
                 <div className="absolute top-3 left-3 text-white text-[10px] tracking-[0.3em] uppercase"
                   style={{ fontFamily: "'Inter', sans-serif", textShadow: "0 1px 12px rgba(0,0,0,0.7)" }}>
-                  / vivant
+                  {t.philosophie?.img_label2 || "/ vivant"}
                 </div>
                 <div className="absolute bottom-0 left-0 right-0 p-4"
                   style={{ background: "linear-gradient(0deg, rgba(0,0,0,0.6), transparent)" }}>
                   <div className="text-white" style={{ fontFamily: "'Caveat', cursive", fontSize: 32, lineHeight: 1 }}>
-                    "Patience"
+                    {t.philosophie?.quote || '"Patience"'}
                   </div>
                   <div className="text-white/70 text-[10px] tracking-[0.3em] uppercase mt-1"
                     style={{ fontFamily: "'Inter', sans-serif" }}>
-                    Adil B. — fondateur
+                    {t.philosophie?.quote_author || "Adil B. — fondateur"}
                   </div>
                 </div>
               </div>
@@ -1227,7 +1240,8 @@ function Philosophie({ accent, scrollY }) {
 
 // ---------- EXPERTISE — ascending steps ----------
 function Expertise({ accent }) {
-  const steps = [
+  const { t } = React.useContext(VBLangContext);
+  const steps = (t.expertise?.steps || [
     {
       n: "01",
       title: "Étude & lecture du site",
@@ -1252,7 +1266,7 @@ function Expertise({ accent }) {
       sub: "Espèces résilientes · suivi pluriannuel",
       body: "Au sommet, le vivant. Nous accompagnons chaque jardin sur 5, 10, 20 ans — c'est là qu'il prend sa forme.",
     },
-  ];
+  ]);
 
   return (
     <section id="expertise" data-section="expertise" className="relative bg-[#F6F4EE]" style={{ paddingTop: 160, paddingBottom: 200 }}
@@ -1261,7 +1275,7 @@ function Expertise({ accent }) {
         <Reveal>
           <div className="flex items-center gap-4 mb-20" style={{ fontFamily: "'Inter', sans-serif" }}>
             <span style={{ width: 40, height: 1, background: "#1A1A1A", opacity: 0.3 }} />
-            <span className="text-[11px] tracking-[0.4em] uppercase text-black/60">Étape 02 — L'ascension</span>
+            <span className="text-[11px] tracking-[0.4em] uppercase text-black/60">{t.expertise?.step || "Étape 02 — L'ascension"}</span>
           </div>
         </Reveal>
 
@@ -1276,18 +1290,16 @@ function Expertise({ accent }) {
                 letterSpacing: "-0.02em",
                 color: "#1A1A1A",
               }}>
-                Quatre paliers,<br />
-                <span style={{ fontStyle: "italic", fontWeight: 500 }}>une seule</span>
-                <br /><span style={{ color: accent, fontWeight: 500 }}>trajectoire.</span>
+                {t.expertise?.h2_line1 || "Quatre paliers,"}<br />
+                <span style={{ fontStyle: "italic", fontWeight: 500 }}>{t.expertise?.h2_em || "une seule"}</span>
+                <br /><span style={{ color: accent, fontWeight: 500 }}>{t.expertise?.h2_accent || "trajectoire."}</span>
               </h2>
             </Reveal>
           </div>
           <div className="col-span-12 lg:col-span-6 lg:col-start-7">
             <Reveal delay={120}>
               <p style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, lineHeight: 1.7, color: "#1A1A1A", fontWeight: 300 }}>
-                Notre méthode emprunte au jardin ce qu'il a de plus précieux : la lenteur.
-                Quatre étapes, conduites comme une ascension — chacune valide la précédente,
-                chacune prépare la suivante.
+                {t.expertise?.intro || "Notre méthode emprunte au jardin ce qu'il a de plus précieux : la lenteur. Quatre étapes, conduites comme une ascension — chacune valide la précédente, chacune prépare la suivante."}
               </p>
             </Reveal>
           </div>
@@ -1401,6 +1413,7 @@ const PROJECT_DATA = {
 
 // ---------- LIGHTBOX COMPONENT ----------
 function Lightbox({ projectTitle, accent, onClose }) {
+  const { t } = React.useContext(VBLangContext);
   const data = PROJECT_DATA[projectTitle];
   const [idx, setIdx] = useState(0);
   const touchStartX = useRef(null);
@@ -1457,7 +1470,7 @@ function Lightbox({ projectTitle, accent, onClose }) {
         }}
         onMouseEnter={(e) => e.currentTarget.style.borderColor = accent}
         onMouseLeave={(e) => e.currentTarget.style.borderColor = "rgba(255,255,255,0.25)"}
-        aria-label="Fermer"
+        aria-label={t?.portfolio?.lb_close || "Fermer"}
       >✕</button>
 
       {/* Photo counter */}
@@ -1502,7 +1515,7 @@ function Lightbox({ projectTitle, accent, onClose }) {
             }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.background = "transparent"; }}
-            aria-label="Photo précédente"
+            aria-label={t?.portfolio?.lb_prev || "Photo précédente"}
           >‹</button>
         )}
 
@@ -1519,7 +1532,7 @@ function Lightbox({ projectTitle, accent, onClose }) {
             }}
             onMouseEnter={(e) => { e.currentTarget.style.borderColor = accent; e.currentTarget.style.background = "rgba(255,255,255,0.06)"; }}
             onMouseLeave={(e) => { e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"; e.currentTarget.style.background = "transparent"; }}
-            aria-label="Photo suivante"
+            aria-label={t?.portfolio?.lb_next || "Photo suivante"}
           >›</button>
         )}
       </div>
@@ -1542,9 +1555,9 @@ function Lightbox({ projectTitle, accent, onClose }) {
           </div>
         </div>
         <div style={{ flexShrink: 0, textAlign: "right" }}>
-          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", marginBottom: 4 }}>Client</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", marginBottom: 4 }}>{t?.portfolio?.lb_client || "Client"}</div>
           <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: "rgba(255,255,255,0.8)" }}>{data.client}</div>
-          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", marginTop: 12, marginBottom: 4 }}>Budget</div>
+          <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 11, letterSpacing: "0.3em", color: "rgba(255,255,255,0.4)", textTransform: "uppercase", marginTop: 12, marginBottom: 4 }}>{t?.portfolio?.lb_budget || "Budget"}</div>
           <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, color: accent }}>{data.budget}</div>
         </div>
       </div>
@@ -1557,6 +1570,7 @@ function Lightbox({ projectTitle, accent, onClose }) {
 }
 
 function Portfolio({ accent, scrollY }) {
+  const { t } = React.useContext(VBLangContext);
   const [lightbox, setLightbox] = useState(null);
   const openLightbox = (title) => setLightbox(title);
   const closeLightbox = () => setLightbox(null);
@@ -1574,7 +1588,7 @@ function Portfolio({ accent, scrollY }) {
         <Reveal>
           <div className="flex items-center gap-4 mb-20" style={{ fontFamily: "'Inter', sans-serif" }}>
             <span style={{ width: 40, height: 1, background: "#FFFFFF", opacity: 0.3 }} />
-            <span className="text-[11px] tracking-[0.4em] uppercase text-white/60">Étape 03 — Les sommets atteints</span>
+            <span className="text-[11px] tracking-[0.4em] uppercase text-white/60">{t.portfolio?.step || "Étape 03 — Les sommets atteints"}</span>
           </div>
         </Reveal>
 
@@ -1588,8 +1602,8 @@ function Portfolio({ accent, scrollY }) {
                 lineHeight: 0.96,
                 letterSpacing: "-0.02em",
               }}>
-                Réalisations<br />
-                <span style={{ fontStyle: "italic", fontWeight: 500 }}>signées</span>{" "}
+                {t.portfolio?.h2_line1 || "Réalisations"}<br />
+                <span style={{ fontStyle: "italic", fontWeight: 500 }}>{t.portfolio?.h2_em || "signées"}</span>{" "}
 <span style={{ fontFamily: "'Montserrat', sans-serif", color: accent, fontWeight: 500, fontStyle: "normal", letterSpacing: "0.18em" }}>ABA</span>.
               </h2>
             </Reveal>
@@ -1597,8 +1611,7 @@ function Portfolio({ accent, scrollY }) {
           <div className="col-span-12 lg:col-span-5 lg:col-start-8 self-end">
             <Reveal delay={140}>
               <p className="text-white/70" style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.7, fontWeight: 300 }}>
-                5 hectares de patrimoine vivant au cœur de Fès. Réhabilitation complète du Parc Mérinide Bab Lamer —
-                lac artificiel de 5 000 m², flore locale, matériaux de Fès. Inauguré en novembre 2025.
+                {t.portfolio?.desc || "5 hectares de patrimoine vivant au cœur de Fès. Réhabilitation complète du Parc Mérinide Bab Lamer — lac artificiel de 5 000 m², flore locale, matériaux de Fès. Inauguré en novembre 2025."}
               </p>
             </Reveal>
           </div>
@@ -1636,7 +1649,7 @@ function Portfolio({ accent, scrollY }) {
               onMouseEnter={(e) => { e.currentTarget.style.background = accent; e.currentTarget.style.color = "#1A1A1A"; }}
               onMouseLeave={(e) => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = accent; }}
             >
-              Voir toutes les réalisations →
+              {t.portfolio?.cta || "Voir toutes les réalisations →"}
             </a>
           </div>
         </Reveal>
@@ -1706,6 +1719,7 @@ function ProjectCard({ p, aspect, parallax, accent, onClick }) {
 
 // ---------- RÉSILIENCE ----------
 function Resilience({ accent, scrollY }) {
+  const { t } = React.useContext(VBLangContext);
   const ref = useRef(null);
   const [localY, setLocalY] = useState(0);
   useEffect(() => {
@@ -1715,11 +1729,11 @@ function Resilience({ accent, scrollY }) {
   }, [scrollY]);
   const par = Math.max(-200, Math.min(200, (localY - 600) * 0.12));
 
-  const pillars = [
+  const pillars = (t.resilience?.pillars || [
     { t: "Endémique", d: "100% des plantations adaptées au climat local. Aucune espèce dépendante de l'arrosage continu." },
     { t: "Hydrique", d: "Goutte-à-goutte intelligent, récupération d'eau de pluie, paillage végétal — la sobriété par défaut." },
     { t: "Pérenne", d: "Une garantie de croissance sur 3 ans, un suivi sur 10. Le vivant exige du temps long." },
-  ];
+  ]);
 
   return (
     <section id="resilience" data-section="resilience" className="relative" style={{ paddingTop: 200, paddingBottom: 200, color: "#fff" }}
@@ -1742,7 +1756,7 @@ function Resilience({ accent, scrollY }) {
         <Reveal>
           <div className="flex items-center gap-4 mb-16" style={{ fontFamily: "'Inter', sans-serif" }}>
             <span style={{ width: 40, height: 1, background: "#FFFFFF", opacity: 0.4 }} />
-            <span className="text-[11px] tracking-[0.4em] uppercase text-white/70">Étape 04 — Le climat tient</span>
+            <span className="text-[11px] tracking-[0.4em] uppercase text-white/70">{t.resilience?.step || "Étape 04 — Le climat tient"}</span>
           </div>
         </Reveal>
 
@@ -1756,16 +1770,15 @@ function Resilience({ accent, scrollY }) {
                 lineHeight: 0.96,
                 letterSpacing: "-0.02em",
               }}>
-                Un jardin qui<br />
-                <span style={{ fontStyle: "italic", color: accent, fontWeight: 500 }}>résiste</span>{" "}
-                à son siècle.
+                {t.resilience?.h2_line1 || "Un jardin qui"}<br />
+                <span style={{ fontStyle: "italic", color: accent, fontWeight: 500 }}>{t.resilience?.h2_accent || "résiste"}</span>{" "}
+                {t.resilience?.h2_line2 || "à son siècle."}
               </h2>
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-10 max-w-xl text-white/80"
                 style={{ fontFamily: "'Inter', sans-serif", fontSize: 17, lineHeight: 1.75, fontWeight: 300 }}>
-                Sécheresses, vents salins, gel tardif. Concevoir un jardin haut de gamme aujourd'hui,
-                c'est l'imaginer pour le climat de 2050 — pas celui de 1990. Notre engagement est écrit là-dedans.
+                {t.resilience?.desc || "Sécheresses, vents salins, gel tardif. Concevoir un jardin haut de gamme aujourd'hui, c'est l'imaginer pour le climat de 2050 — pas celui de 1990. Notre engagement est écrit là-dedans."}
               </p>
             </Reveal>
           </div>
@@ -1800,6 +1813,7 @@ function Resilience({ accent, scrollY }) {
 
 // ---------- CONTACT ----------
 function Contact({ accent }) {
+  const { t } = React.useContext(VBLangContext);
   const [form, setForm] = useState({ name: "", email: "", project: "design", message: "" });
   const [sent, setSent] = useState(false);
   const submit = (e) => {
@@ -1815,7 +1829,7 @@ function Contact({ accent }) {
         <Reveal>
           <div className="flex items-center gap-4 mb-20" style={{ fontFamily: "'Inter', sans-serif" }}>
             <span style={{ width: 40, height: 1, background: "#FFFFFF", opacity: 0.3 }} />
-            <span className="text-[11px] tracking-[0.4em] uppercase text-white/60">Étape 05 — La rencontre au sommet</span>
+            <span className="text-[11px] tracking-[0.4em] uppercase text-white/60">{t.contact?.step || "Étape 05 — La rencontre au sommet"}</span>
           </div>
         </Reveal>
 
@@ -1829,22 +1843,21 @@ function Contact({ accent }) {
                 lineHeight: 0.96,
                 letterSpacing: "-0.02em",
               }}>
-                Initions<br />
-                <span style={{ fontStyle: "italic", fontWeight: 500 }}>un projet</span><br />
-                <span style={{ color: accent, fontWeight: 500 }}>d'exception.</span>
+                {t.contact?.h2_line1 || "Initions"}<br />
+                <span style={{ fontStyle: "italic", fontWeight: 500 }}>{t.contact?.h2_em || "un projet"}</span><br />
+                <span style={{ color: accent, fontWeight: 500 }}>{t.contact?.h2_accent || "d'exception."}</span>
               </h2>
             </Reveal>
             <Reveal delay={120}>
               <p className="mt-10 max-w-md text-white/70"
                 style={{ fontFamily: "'Inter', sans-serif", fontSize: 16, lineHeight: 1.75, fontWeight: 300 }}>
-                Premier rendez-vous offert. Nous étudions chaque demande sous 72h
-                et n'engageons qu'un nombre limité de projets par an.
+                {t.contact?.desc || "Premier rendez-vous offert. Nous étudions chaque demande sous 72h et n'engageons qu'un nombre limité de projets par an."}
               </p>
             </Reveal>
             <Reveal delay={220}>
               <div className="mt-16 grid grid-cols-2 gap-10" style={{ fontFamily: "'Inter', sans-serif" }}>
                 <div>
-                  <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Atelier</div>
+                  <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">{t.contact?.label_atelier || "Atelier"}</div>
                   <div className="text-white/90" style={{ fontSize: 14, lineHeight: 1.6 }}>
                     ABA sarl au<br />
                     20, Rue Aguelmame Sidi Ali<br />
@@ -1852,7 +1865,7 @@ function Contact({ accent }) {
                   </div>
                 </div>
                 <div>
-                  <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">Direct</div>
+                  <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-2">{t.contact?.label_direct || "Direct"}</div>
                   <div className="text-white/90" style={{ fontSize: 14, lineHeight: 1.6 }}>
                     contact@ab-landscapes.com<br />
                     info@ab-landscapes.com<br />
@@ -1868,34 +1881,34 @@ function Contact({ accent }) {
               {sent ? (
                 <div className="border border-white/10 p-10" style={{ background: "rgba(186,204,35,0.04)" }}>
                   <div style={{ fontFamily: "'Caveat', cursive", color: accent, fontSize: 56, lineHeight: 1 }}>
-                    Merci.
+                    {t.contact?.success_title || "Merci."}
                   </div>
                   <p className="mt-6 text-white/80" style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.7, fontWeight: 300 }}>
-                    Votre demande a été reçue. Nous reviendrons vers vous sous 72 heures, depuis l'atelier.
+                    {t.contact?.success_body || "Votre demande a été reçue. Nous reviendrons vers vous sous 72 heures, depuis l'atelier."}
                   </p>
                   <button
                     onClick={() => { setSent(false); setForm({ name: "", email: "", project: "design", message: "" }); }}
                     className="mt-10 text-[11px] tracking-[0.3em] uppercase border-b pb-1"
                     style={{ fontFamily: "'Inter', sans-serif", borderColor: accent, color: accent }}
                   >
-                    Envoyer un autre message
+                    {t.contact?.success_again || "Envoyer un autre message"}
                   </button>
                 </div>
               ) : (
                 <form onSubmit={submit} className="flex flex-col gap-8">
-                  <Field label="Votre nom" value={form.name} onChange={(v) => setForm({ ...form, name: v })} accent={accent} />
-                  <Field label="Email" type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} accent={accent} />
+                  <Field label={t.contact?.form_name || "Votre nom"} value={form.name} onChange={(v) => setForm({ ...form, name: v })} accent={accent} />
+                  <Field label={t.contact?.form_email || "Email"} type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} accent={accent} />
 
                   <div>
                     <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-3"
-                      style={{ fontFamily: "'Inter', sans-serif" }}>Type de projet</div>
+                      style={{ fontFamily: "'Inter', sans-serif" }}>{t.contact?.form_type || "Type de projet"}</div>
                     <div className="flex flex-wrap gap-2">
-                      {[
+                      {(t.contact?.project_types || [
                         ["design", "Conception"],
                         ["realisation", "Réalisation"],
                         ["entretien", "Entretien signé"],
                         ["conseil", "Conseil"],
-                      ].map(([k, l]) => (
+                      ]).map(([k, l]) => (
                         <button
                           key={k}
                           type="button"
@@ -1916,7 +1929,7 @@ function Contact({ accent }) {
                   </div>
 
                   <Field
-                    label="Quelques mots sur votre projet"
+                    label={t.contact?.form_message || "Quelques mots sur votre projet"}
                     value={form.message}
                     onChange={(v) => setForm({ ...form, message: v })}
                     accent={accent}
@@ -1936,7 +1949,7 @@ function Contact({ accent }) {
                     onMouseEnter={(e) => (e.currentTarget.style.transform = "translateY(-2px)")}
                     onMouseLeave={(e) => (e.currentTarget.style.transform = "translateY(0)")}
                   >
-                    Envoyer la demande →
+                    {t.contact?.form_submit || "Envoyer la demande →"}
                   </button>
                 </form>
               )}
@@ -1993,6 +2006,7 @@ function Field({ label, value, onChange, accent, type = "text", multiline = fals
 
 // ---------- FOOTER ----------
 function Footer({ accent }) {
+  const { t } = React.useContext(VBLangContext);
   return (
     <footer className="bg-[#0F0F0F] text-white border-t border-white/5"
       data-screen-label="07 Footer">
@@ -2014,7 +2028,7 @@ function Footer({ accent }) {
             </div>
             <div className="mt-8 max-w-md text-white/60"
               style={{ fontFamily: "'Inter', sans-serif", fontSize: 13, lineHeight: 1.7 }}>
-              "Un jardin n'est jamais terminé. Il commence."
+              {t.footer?.quote || `"Un jardin n'est jamais terminé. Il commence."`}
             </div>
             <div className="mt-3 text-white/40"
               style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 400, fontSize: 14, letterSpacing: "0.32em" }}>
@@ -2024,38 +2038,36 @@ function Footer({ accent }) {
 
           <div className="col-span-6 md:col-span-2">
             <div className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4"
-              style={{ fontFamily: "'Inter', sans-serif" }}>Atelier</div>
+              style={{ fontFamily: "'Inter', sans-serif" }}>{t.footer?.col1_title || "Atelier"}</div>
             <ul className="flex flex-col gap-2 text-white/70 text-[13px]"
               style={{ fontFamily: "'Inter', sans-serif" }}>
-              <li>Philosophie</li><li>Équipe</li><li>Presse</li><li>Carrières</li>
+              {(t.footer?.col1_items || ["Philosophie","Équipe","Presse","Carrières"]).map((it) => <li key={it}>{it}</li>)}
             </ul>
           </div>
           <div className="col-span-6 md:col-span-2">
             <div className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4"
-              style={{ fontFamily: "'Inter', sans-serif" }}>Services</div>
+              style={{ fontFamily: "'Inter', sans-serif" }}>{t.footer?.col2_title || "Services"}</div>
             <ul className="flex flex-col gap-2 text-white/70 text-[13px]"
               style={{ fontFamily: "'Inter', sans-serif" }}>
-              <li>Conception</li><li>Réalisation</li><li>Entretien</li><li>Conseil</li>
+              {(t.footer?.col2_items || ["Conception","Réalisation","Entretien","Conseil"]).map((it) => <li key={it}>{it}</li>)}
             </ul>
           </div>
           <div className="col-span-12 md:col-span-3">
             <div className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-4"
-              style={{ fontFamily: "'Inter', sans-serif" }}>Suivre l'atelier</div>
+              style={{ fontFamily: "'Inter', sans-serif" }}>{t.footer?.col3_title || "Suivre l'atelier"}</div>
             <ul className="flex flex-col gap-2 text-white/70 text-[13px]"
               style={{ fontFamily: "'Inter', sans-serif" }}>
-              <li>Instagram — @atelier.aba</li>
-              <li>Journal — newsletter mensuelle</li>
-              <li>Linkedin</li>
+              {(t.footer?.col3_items || ["Instagram — @atelier.aba","Journal — newsletter mensuelle","Linkedin"]).map((it) => <li key={it}>{it}</li>)}
             </ul>
           </div>
         </div>
 
         <div className="mt-16 pt-8 border-t border-white/5 flex flex-wrap items-center justify-between gap-4 text-[11px] tracking-[0.2em] uppercase text-white/40"
           style={{ fontFamily: "'Inter', sans-serif" }}>
-          <div>© 2026 — ABA sarl au — Atelier Boumahdi Adil</div>
+          <div>{t.footer?.copyright || "© 2026 — ABA sarl au — Atelier Boumahdi Adil"}</div>
           <div className="flex gap-6">
-            <span>Mentions légales</span>
-            <span>Confidentialité</span>
+            <span>{t.footer?.legal || "Mentions légales"}</span>
+            <span>{t.footer?.privacy || "Confidentialité"}</span>
             <span>31°37'N · 8°00'W</span>
           </div>
         </div>
@@ -2136,7 +2148,13 @@ const PALETTES = {
 function App() {
   const [tweaks, setTweak] = window.useTweaks ? window.useTweaks(TWEAK_DEFAULTS) : [TWEAK_DEFAULTS, () => {}];
   const [lang, setLang] = React.useState("fr");
-  const t = VB_I18N[lang] || VB_I18N.fr;
+  const [t, setT] = React.useState(I18N_CACHE["fr"]);
+
+  // Charger la traduction JSON à chaque changement de langue
+  React.useEffect(() => {
+    loadLang(lang).then(data => setT(data));
+  }, [lang]);
+
   const scrollY = useScrollProgress();
   const [docHeight, setDocHeight] = useState(0);
   useEffect(() => {

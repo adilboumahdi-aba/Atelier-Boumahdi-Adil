@@ -1,0 +1,166 @@
+{
+  "nav": {
+    "sub": "PREMIUM LANDSCAPE SERVICES",
+    "philosophie": "Philosophy",
+    "expertise": "Expertise",
+    "portfolio": "Portfolio",
+    "resilience": "Resilience",
+    "contact": "Contact",
+    "cta": "Start a project"
+  },
+  "hero": {
+    "eyebrow": "Studio — Est. 2014",
+    "cities": "Rabat · Casablanca · Marrakech · Fès",
+    "tagline": "— The journey begins here",
+    "h1_line1": "The art of",
+    "h1_em": "landscape",
+    "h1_accent": "excellence.",
+    "desc": "Designers, gardeners, builders. We create inhabited outdoor spaces — carved from stone, written in water, validated by climate.",
+    "cta_primary": "Begin the ascent",
+    "cta_secondary": "View our summits",
+    "scroll": "scroll",
+    "signature": "the signature"
+  },
+  "philosophie": {
+    "step": "Step 01 — The Foundation",
+    "img_label1": "/ texture · stone",
+    "img_caption": "Every project begins beneath our feet — reading the soil, orientation, and rain that will not come.",
+    "section_tag": "— Philosophy",
+    "h2_line1": "The balance between",
+    "h2_em": "the human hand",
+    "h2_line2": "and the",
+    "h2_accent": "organic force.",
+    "p1": "We believe a garden is not a decoration. It is a place that breathes, that patinas, that resists — and that, with time, becomes more right than on the first day.",
+    "p2": "Mineral architecture, precise water management, endemic planting: three requirements, one signature. Ours.",
+    "stat1_n": "+9 yrs",
+    "stat1_l": "of studio",
+    "stat2_n": "+22",
+    "stat2_l": "major projects",
+    "stat3_n": "+33",
+    "stat3_l": "residential projects",
+    "img_label2": "/ living",
+    "quote": "\"Patience\"",
+    "quote_author": "Adil B. — founder"
+  },
+  "expertise": {
+    "step": "Step 02 — The Ascent",
+    "h2_line1": "Four stages,",
+    "h2_em": "one single",
+    "h2_accent": "trajectory.",
+    "intro": "Our method borrows from the garden what it holds most precious: slowness. Four steps, conducted like an ascent — each validates the one before, each prepares the one after.",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Site study & analysis",
+        "sub": "Topography · sunlight · wind · soil",
+        "body": "We walk. We listen. We measure. The project is first a map of the terrain."
+      },
+      {
+        "n": "02",
+        "title": "Architectural design",
+        "sub": "Master plans · 3D · material library",
+        "body": "The garden is drawn like a building: volumes, circulation, vanishing points, silences."
+      },
+      {
+        "n": "03",
+        "title": "Mineral & hydraulic mastery",
+        "sub": "Dry stone · water features · drainage",
+        "body": "Water is sculpted. Stone is laid. Climate dictates the constraints — we transform them into a design statement."
+      },
+      {
+        "n": "04",
+        "title": "Planting & signed maintenance",
+        "sub": "Resilient species · multi-year follow-up",
+        "body": "At the summit, the living. We accompany each garden over 5, 10, 20 years — that is where it takes its true form."
+      }
+    ]
+  },
+  "portfolio": {
+    "step": "Step 03 — The Summits Reached",
+    "h2_line1": "Creations",
+    "h2_em": "signed",
+    "desc": "5 hectares of living heritage at the heart of Fès. Full rehabilitation of Parc Mérinide Bab Lamer — 5,000 m² artificial lake, local flora, materials from Fès. Inaugurated in November 2025.",
+    "cta": "View all projects →",
+    "projects": [
+      {
+        "title": "Parc Mérinide Bab Lamer",
+        "loc": "Fès, Morocco",
+        "type": "Public & Heritage",
+        "desc": "Restoration and redesign of 5 hectares at the heart of Fès. 5,000 m² artificial lake, local flora, materials from Fès. Inaugurated in November 2025."
+      },
+      {
+        "title": "Natural Pond 1,000 m²",
+        "loc": "Rabat, Morocco",
+        "type": "Hydraulic & Ornamental",
+        "desc": "1,000 m² natural pond with biological filtration, aquatic plants, Japanese Koi carp and OASE aerators."
+      },
+      {
+        "title": "Mérinide Park — Lake",
+        "loc": "Fès, Morocco",
+        "type": "Public & Heritage",
+        "desc": "5,000 m² artificial lake at the heart of Parc Mérinide Bab Lamer. Natural filtration, endemic flora and landscaped banks."
+      }
+    ],
+    "lb_client": "Client",
+    "lb_budget": "Budget",
+    "lb_close": "Close",
+    "lb_prev": "Previous photo",
+    "lb_next": "Next photo"
+  },
+  "resilience": {
+    "step": "Step 04 — Climate Holds",
+    "h2_line1": "A garden that",
+    "h2_accent": "resists",
+    "h2_line2": "its century.",
+    "desc": "Droughts, salt winds, late frost. Designing a high-end garden today means imagining it for the climate of 2050 — not 1990. Our commitment is written into this.",
+    "pillars": [
+      {
+        "t": "Endemic",
+        "d": "100% of plantings adapted to the local climate. No species dependent on continuous irrigation."
+      },
+      {
+        "t": "Water-wise",
+        "d": "Smart drip irrigation, rainwater harvesting, vegetable mulching — sobriety by default."
+      },
+      {
+        "t": "Perennial",
+        "d": "A 3-year growth guarantee, with monitoring over 10. Living things require long timeframes."
+      }
+    ]
+  },
+  "contact": {
+    "step": "Step 05 — The Summit Meeting",
+    "h2_line1": "Let us begin",
+    "h2_em": "a project",
+    "h2_accent": "of excellence.",
+    "desc": "First consultation offered. We review every enquiry within 72 hours and commit to a limited number of projects per year.",
+    "label_atelier": "Studio",
+    "label_direct": "Direct",
+    "form_name": "Your name",
+    "form_email": "Email",
+    "form_type": "Project type",
+    "form_message": "A few words about your project",
+    "form_submit": "Send enquiry →",
+    "project_types": [
+      ["design",      "Design"],
+      ["realisation", "Construction"],
+      ["entretien",   "Maintenance"],
+      ["conseil",     "Consulting"]
+    ],
+    "success_title": "Thank you.",
+    "success_body": "Your enquiry has been received. We will get back to you within 72 hours, from the studio.",
+    "success_again": "Send another message"
+  },
+  "footer": {
+    "quote": "\"A garden is never finished. It begins.\"",
+    "col1_title": "Studio",
+    "col1_items": ["Philosophy", "Team", "Press", "Careers"],
+    "col2_title": "Services",
+    "col2_items": ["Design", "Construction", "Maintenance", "Consulting"],
+    "col3_title": "Follow the studio",
+    "col3_items": ["Instagram — @atelier.aba", "Journal — monthly newsletter", "Linkedin"],
+    "copyright": "© 2026 — ABA sarl au — Atelier Boumahdi Adil",
+    "legal": "Legal notice",
+    "privacy": "Privacy policy"
+  }
+}

@@ -1,0 +1,166 @@
+{
+  "nav": {
+    "sub": "SERVICIOS DE PAISAJISMO PREMIUM",
+    "philosophie": "Filosofía",
+    "expertise": "Experiencia",
+    "portfolio": "Portafolio",
+    "resilience": "Resiliencia",
+    "contact": "Contacto",
+    "cta": "Iniciar un proyecto"
+  },
+  "hero": {
+    "eyebrow": "Estudio — Est. 2014",
+    "cities": "Rabat · Casablanca · Marrakech · Fès",
+    "tagline": "— El viaje comienza aquí",
+    "h1_line1": "El arte del",
+    "h1_em": "paisaje",
+    "h1_accent": "de excepción.",
+    "desc": "Diseñadores, jardineros, constructores. Creamos exteriores habitados — tallados en piedra, escritos en agua, validados por el clima.",
+    "cta_primary": "Comenzar el ascenso",
+    "cta_secondary": "Ver nuestras cimas",
+    "scroll": "scroll",
+    "signature": "la firma"
+  },
+  "philosophie": {
+    "step": "Paso 01 — Los Cimientos",
+    "img_label1": "/ textura · piedra",
+    "img_caption": "Cada proyecto comienza bajo nuestros pies — la lectura del suelo, la orientación, la lluvia que no llegará.",
+    "section_tag": "— Filosofía",
+    "h2_line1": "El equilibrio entre",
+    "h2_em": "la mano del hombre",
+    "h2_line2": "y la",
+    "h2_accent": "fuerza orgánica.",
+    "p1": "Creemos que un jardín no es una decoración. Es un lugar que respira, que se pátina, que resiste — y que, con el tiempo, se vuelve más justo que el primer día.",
+    "p2": "Arquitectura mineral, gestión precisa del agua, plantaciones endémicas: tres exigencias, una sola firma. La nuestra.",
+    "stat1_n": "+9 años",
+    "stat1_l": "de estudio",
+    "stat2_n": "+22",
+    "stat2_l": "grandes proyectos",
+    "stat3_n": "+33",
+    "stat3_l": "proyectos residenciales",
+    "img_label2": "/ vivo",
+    "quote": "\"Paciencia\"",
+    "quote_author": "Adil B. — fundador"
+  },
+  "expertise": {
+    "step": "Paso 02 — El Ascenso",
+    "h2_line1": "Cuatro etapas,",
+    "h2_em": "una sola",
+    "h2_accent": "trayectoria.",
+    "intro": "Nuestro método toma prestado del jardín lo que tiene de más precioso: la lentitud. Cuatro etapas, conducidas como un ascenso — cada una valida la anterior, cada una prepara la siguiente.",
+    "steps": [
+      {
+        "n": "01",
+        "title": "Estudio y análisis del sitio",
+        "sub": "Topografía · iluminación · viento · suelo",
+        "body": "Caminamos. Escuchamos. Medimos. El proyecto es ante todo un mapa del terreno."
+      },
+      {
+        "n": "02",
+        "title": "Diseño arquitectónico",
+        "sub": "Plantas maestras · 3D · mediateca de materiales",
+        "body": "El jardín se dibuja como un edificio: volúmenes, circulaciones, puntos de fuga, silencios."
+      },
+      {
+        "n": "03",
+        "title": "Dominio mineral e hidráulico",
+        "sub": "Piedra seca · estanques · drenaje",
+        "body": "El agua se esculpe. La piedra se asienta. El clima dicta las limitaciones — las transformamos en propuesta de diseño."
+      },
+      {
+        "n": "04",
+        "title": "Plantación y mantenimiento firmado",
+        "sub": "Especies resilientes · seguimiento plurianual",
+        "body": "En la cima, lo vivo. Acompañamos cada jardín durante 5, 10, 20 años — es ahí donde toma su forma definitiva."
+      }
+    ]
+  },
+  "portfolio": {
+    "step": "Paso 03 — Las Cimas Alcanzadas",
+    "h2_line1": "Realizaciones",
+    "h2_em": "firmadas",
+    "desc": "5 hectáreas de patrimonio vivo en el corazón de Fès. Rehabilitación completa del Parc Mérinide Bab Lamer — lago artificial de 5.000 m², flora local, materiales de Fès. Inaugurado en noviembre de 2025.",
+    "cta": "Ver todas las realizaciones →",
+    "projects": [
+      {
+        "title": "Parc Mérinide Bab Lamer",
+        "loc": "Fès, Marruecos",
+        "type": "Público y Patrimonial",
+        "desc": "Restauración y reacondicionamiento de 5 hectáreas en el corazón de Fès. Lago artificial de 5.000 m², flora local, materiales de Fès. Inaugurado en noviembre de 2025."
+      },
+      {
+        "title": "Estanque Natural 1.000 m²",
+        "loc": "Rabat, Marruecos",
+        "type": "Hidráulico y Ornamental",
+        "desc": "Estanque natural de 1.000 m² con filtración biológica, plantas acuáticas, carpas Koi japonesas y aireadores OASE."
+      },
+      {
+        "title": "Parque Mérinide — Lago",
+        "loc": "Fès, Marruecos",
+        "type": "Público y Patrimonial",
+        "desc": "Lago artificial de 5.000 m² en el corazón del Parque Mérinide Bab Lamer. Filtración natural, flora endémica y márgenes acondicionadas."
+      }
+    ],
+    "lb_client": "Cliente",
+    "lb_budget": "Presupuesto",
+    "lb_close": "Cerrar",
+    "lb_prev": "Foto anterior",
+    "lb_next": "Foto siguiente"
+  },
+  "resilience": {
+    "step": "Paso 04 — El Clima Aguanta",
+    "h2_line1": "Un jardín que",
+    "h2_accent": "resiste",
+    "h2_line2": "a su siglo.",
+    "desc": "Sequías, vientos salinos, heladas tardías. Diseñar un jardín de lujo hoy es imaginarlo para el clima de 2050 — no el de 1990. Nuestro compromiso está escrito en eso.",
+    "pillars": [
+      {
+        "t": "Endémico",
+        "d": "100% de las plantaciones adaptadas al clima local. Ninguna especie dependiente del riego continuo."
+      },
+      {
+        "t": "Hídrico",
+        "d": "Goteo inteligente, recolección de agua de lluvia, mulching vegetal — la sobriedad por defecto."
+      },
+      {
+        "t": "Perenne",
+        "d": "Una garantía de crecimiento durante 3 años, con seguimiento a 10. Lo vivo exige tiempo largo."
+      }
+    ]
+  },
+  "contact": {
+    "step": "Paso 05 — El Encuentro en la Cima",
+    "h2_line1": "Iniciemos",
+    "h2_em": "un proyecto",
+    "h2_accent": "de excepción.",
+    "desc": "Primera consulta gratuita. Estudiamos cada solicitud en 72 horas y solo comprometemos un número limitado de proyectos al año.",
+    "label_atelier": "Estudio",
+    "label_direct": "Contacto",
+    "form_name": "Su nombre",
+    "form_email": "Correo electrónico",
+    "form_type": "Tipo de proyecto",
+    "form_message": "Algunas palabras sobre su proyecto",
+    "form_submit": "Enviar solicitud →",
+    "project_types": [
+      ["design",      "Diseño"],
+      ["realisation", "Construcción"],
+      ["entretien",   "Mantenimiento"],
+      ["conseil",     "Consultoría"]
+    ],
+    "success_title": "Gracias.",
+    "success_body": "Su solicitud ha sido recibida. Nos pondremos en contacto con usted en 72 horas, desde el estudio.",
+    "success_again": "Enviar otro mensaje"
+  },
+  "footer": {
+    "quote": "\"Un jardín nunca está terminado. Comienza.\"",
+    "col1_title": "Estudio",
+    "col1_items": ["Filosofía", "Equipo", "Prensa", "Carreras"],
+    "col2_title": "Servicios",
+    "col2_items": ["Diseño", "Construcción", "Mantenimiento", "Consultoría"],
+    "col3_title": "Seguir el estudio",
+    "col3_items": ["Instagram — @atelier.aba", "Diario — newsletter mensual", "Linkedin"],
+    "copyright": "© 2026 — ABA sarl au — Atelier Boumahdi Adil",
+    "legal": "Aviso legal",
+    "privacy": "Privacidad"
+  }
+}
