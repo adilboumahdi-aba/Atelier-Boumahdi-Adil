@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "WebFetch(domain:api.anthropic.com)",
+      "mcp__Claude_in_Chrome__tabs_context_mcp",
+      "Bash(curl -s \"https://api.anthropic.com/v1/design/h/4mD7Qq2oSfPARRhGwZESAg?open_file=variant-b.html\" -o /tmp/design_file.html)",
+      "Bash(echo \"Exit: $?\")",
+      "Read(//tmp/**)",
+      "Bash(curl -s -I \"https://api.anthropic.com/v1/design/h/4mD7Qq2oSfPARRhGwZESAg?open_file=variant-b.html\")",
+      "Bash(cp /tmp/design_file.html /tmp/design_file.html.gz)",
+      "Bash(gunzip -f /tmp/design_file.html.gz)",
+      "Bash(tar -xf /tmp/design_file.html -C /tmp/)",
+      "Bash(git --version)",
+      "Bash(gh --version)",
+      "Bash(gh auth *)",
+      "Bash(cp variant-b.html index.html)",
+      "Bash(git add *)",
+      "Bash(git commit *)",
+      "Bash(git push *)",
+      "Bash(python3 -)",
+      "WebFetch(domain:docs.google.com)",
+      "WebFetch(domain:fr.le360.ma)",
+      "Bash(cp \"/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/01_Parc-Historique-Merinide-Bab-Lamer_Fes_2022/Capture d'écran 2026-05-06 à 19.40.26.png\" /tmp/cap1.png)",
+      "Bash(cp \"/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/01_Parc-Historique-Merinide-Bab-Lamer_Fes_2022/Capture d'écran 2026-05-06 à 19.39.56.png\" /tmp/cap2.png)",
+      "Bash(cp \"/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/01_Parc-Historique-Merinide-Bab-Lamer_Fes_2022/Capture d'écran 2026-05-06 à 19.38.35.png\" /tmp/cap3.png)",
+      "Bash(python3 -c \"import PIL; print\\('Pillow:', PIL.__version__\\)\")",
+      "Bash(pip3 install *)",
+      "Bash(python3 -c \"import numpy; print\\('NumPy:', numpy.__version__\\)\")",
+      "Bash(brew install *)",
+      "Bash(python3 -m venv /tmp/aba-venv)",
+      "Bash(/tmp/aba-venv/bin/pip install *)",
+      "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/assets/portfolio/parc-bab-lamer/enhanced/*.jpg' '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/assets/portfolio/parc-bab-lamer/')",
+      "Bash(python3 -c ' *)",
+      "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/11_Etang-Artificiel-1000m2_Rabat_2024/WhatsApp Image 2026-05-06 at 19.59.31.jpeg' /tmp/etang1.jpg)",
+      "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/11_Etang-Artificiel-1000m2_Rabat_2024/WhatsApp Image 2026-05-06 at 19.59.32.jpeg' /tmp/etang2.jpg)",
+      "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/11_Etang-Artificiel-1000m2_Rabat_2024/02.jpeg' /tmp/etang3.jpg)",
+      "mcp__Claude_Preview__preview_start"
+    ]
+  }
+}
