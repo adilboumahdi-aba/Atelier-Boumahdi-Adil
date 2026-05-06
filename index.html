@@ -1361,12 +1361,12 @@ function Expertise({ accent }) {
 // ---------- PORTFOLIO with subtle parallax ----------
 function Portfolio({ accent, scrollY }) {
   const projects = [
-    { img: IMG.port1, title: "Villa Tahanaout", loc: "Atlas, Maroc", year: "2024", size: "tall" },
-    { img: IMG.port5, title: "Domaine du Cap", loc: "Cap d'Antibes, FR", year: "2024", size: "wide" },
-    { img: IMG.port4, title: "Riad Hivernal", loc: "Marrakech medina", year: "2023", size: "tall" },
-    { img: IMG.port2, title: "Cour minérale", loc: "Essaouira", year: "2023", size: "square" },
-    { img: IMG.port3, title: "Belvédère ouest", loc: "Bouches-du-Rhône", year: "2025", size: "wide" },
-    { img: IMG.port6, title: "Jardin sec", loc: "Almería, ES", year: "2025", size: "tall" },
+    { img: "assets/portfolio/parc-bab-lamer/bab-lamer-vue-aerienne.jpg", title: "Parc Historique Mérinide Bab Lamer", loc: "Fès, Maroc", year: "2022", size: "wide" },
+    { img: "assets/portfolio/parc-bab-lamer/bab-lamer-capture-19h39.jpg", title: "Lac Artificiel 5 000 m²", loc: "Fès, Maroc", year: "2022", size: "tall" },
+    { img: "assets/portfolio/parc-bab-lamer/bab-lamer-lac.jpg", title: "Berges & Promenade", loc: "Fès, Maroc", year: "2022", size: "tall" },
+    { img: "assets/portfolio/parc-bab-lamer/bab-lamer-capture-19h38.jpg", title: "Espaces Verts & Allées", loc: "Fès, Maroc", year: "2022", size: "wide" },
+    { img: "assets/portfolio/parc-bab-lamer/bab-lamer-capture-19h40.jpg", title: "Aménagements Extérieurs", loc: "Fès, Maroc", year: "2022", size: "square" },
+    { img: "assets/portfolio/parc-bab-lamer/bab-lamer-portail-historique.jpg", title: "Portail Mérinide — 1276", loc: "Fès, Maroc", year: "2022", size: "tall" },
   ];
 
   return (
@@ -1399,8 +1399,8 @@ function Portfolio({ accent, scrollY }) {
           <div className="col-span-12 lg:col-span-5 lg:col-start-8 self-end">
             <Reveal delay={140}>
               <p className="text-white/70" style={{ fontFamily: "'Inter', sans-serif", fontSize: 15, lineHeight: 1.7, fontWeight: 300 }}>
-                Chaque projet est un site, un climat, une histoire — et la rencontre rare de tous les trois.
-                Quelques fragments, du Maroc à la Méditerranée.
+                5 hectares de patrimoine vivant au cœur de Fès. Réhabilitation complète du Parc Mérinide Bab Lamer —
+                lac artificiel de 5 000 m², flore locale, matériaux de Fès. Inauguré en novembre 2025.
               </p>
             </Reveal>
           </div>
