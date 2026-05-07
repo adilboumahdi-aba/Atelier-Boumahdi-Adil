@@ -34,7 +34,8 @@
       "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/11_Etang-Artificiel-1000m2_Rabat_2024/WhatsApp Image 2026-05-06 at 19.59.31.jpeg' /tmp/etang1.jpg)",
       "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/11_Etang-Artificiel-1000m2_Rabat_2024/WhatsApp Image 2026-05-06 at 19.59.32.jpeg' /tmp/etang2.jpg)",
       "Bash(cp '/Users/adilboumahdi/Desktop/ABA sarl au/MAC-IPAD EXCHANGE/00_AB LANDSCAPES_CLAUDE TEAM AI WORKSPACE/00_ABA WEBSITE DESIGN/INPUT/04_PORTFOLIO/REALISES/11_Etang-Artificiel-1000m2_Rabat_2024/02.jpeg' /tmp/etang3.jpg)",
-      "mcp__Claude_Preview__preview_start"
+      "mcp__Claude_Preview__preview_start",
+      "mcp__Vercel__deploy_to_vercel"
     ]
   }
 }
