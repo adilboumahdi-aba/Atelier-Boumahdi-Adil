@@ -44,10 +44,10 @@
   },
   "expertise": {
     "step": "Paso 02 — El Ascenso",
-    "h2_line1": "Cuatro etapas,",
+    "h2_line1": "Cinco etapas,",
     "h2_em": "una sola",
     "h2_accent": "trayectoria.",
-    "intro": "Nuestro método toma prestado del jardín lo que tiene de más precioso: la lentitud. Cuatro etapas, conducidas como un ascenso — cada una valida la anterior, cada una prepara la siguiente.",
+    "intro": "Nuestro método toma prestado del jardín lo que tiene de más precioso: la lentitud. Cinco etapas, conducidas como un ascenso — cada una valida la anterior, cada una prepara la siguiente.",
     "steps": [
       {
         "n": "01",
@@ -57,18 +57,24 @@
       },
       {
         "n": "02",
+        "title": "Diálogo & visión compartida",
+        "sub": "Brief · deseos · modo de vida · escenarios",
+        "body": "Reconciliar al cliente con su espacio es el corazón de nuestro oficio. Cartografiamos expectativas, modos de vida, silencios — luego exploramos juntos los escenarios que harán surgir del sitio su belleza, biodiversidad y carácter propio."
+      },
+      {
+        "n": "03",
         "title": "Diseño arquitectónico",
         "sub": "Plantas maestras · 3D · mediateca de materiales",
         "body": "El jardín se dibuja como un edificio: volúmenes, circulaciones, puntos de fuga, silencios."
       },
       {
-        "n": "03",
+        "n": "04",
         "title": "Dominio mineral e hidráulico",
         "sub": "Piedra seca · estanques · drenaje",
         "body": "El agua se esculpe. La piedra se asienta. El clima dicta las limitaciones — las transformamos en propuesta de diseño."
       },
       {
-        "n": "04",
+        "n": "05",
         "title": "Plantación y mantenimiento firmado",
         "sub": "Especies resilientes · seguimiento plurianual",
         "body": "En la cima, lo vivo. Acompañamos cada jardín durante 5, 10, 20 años — es ahí donde toma su forma definitiva."

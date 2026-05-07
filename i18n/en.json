@@ -44,10 +44,10 @@
   },
   "expertise": {
     "step": "Step 02 — The Ascent",
-    "h2_line1": "Four stages,",
+    "h2_line1": "Five stages,",
     "h2_em": "one single",
     "h2_accent": "trajectory.",
-    "intro": "Our method borrows from the garden what it holds most precious: slowness. Four steps, conducted like an ascent — each validates the one before, each prepares the one after.",
+    "intro": "Our method borrows from the garden what it holds most precious: slowness. Five steps, conducted like an ascent — each validates the one before, each prepares the one after.",
     "steps": [
       {
         "n": "01",
@@ -57,18 +57,24 @@
       },
       {
         "n": "02",
+        "title": "Dialogue & shared vision",
+        "sub": "Brief · desires · lifestyle · scenarios",
+        "body": "Reconciling the client with their space is the heart of our craft. We map expectations, lifestyles, silences — then explore together the scenarios that will draw out the site's beauty, biodiversity, and enduring character."
+      },
+      {
+        "n": "03",
         "title": "Architectural design",
         "sub": "Master plans · 3D · material library",
         "body": "The garden is drawn like a building: volumes, circulation, vanishing points, silences."
       },
       {
-        "n": "03",
+        "n": "04",
         "title": "Mineral & hydraulic mastery",
         "sub": "Dry stone · water features · drainage",
         "body": "Water is sculpted. Stone is laid. Climate dictates the constraints — we transform them into a design statement."
       },
       {
-        "n": "04",
+        "n": "05",
         "title": "Planting & signed maintenance",
         "sub": "Resilient species · multi-year follow-up",
         "body": "At the summit, the living. We accompany each garden over 5, 10, 20 years — that is where it takes its true form."
