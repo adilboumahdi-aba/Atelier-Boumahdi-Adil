@@ -1460,17 +1460,22 @@ function Expertise({ accent }) {
                   </p>
                 </div>
                 <div className="col-span-12 lg:col-span-1 flex justify-end items-start">
-                  <div style={{
-                    width: 36, height: 36, borderRadius: "50%", border: `1px solid ${accent}`,
-                    display: "grid", placeItems: "center", color: accent,
-                    transition: "background 200ms, color 200ms",
-                  }}
-                    className="group-hover:bg-[var(--accent)]"
+                  <button
+                    onClick={() => document.getElementById("contact")?.scrollIntoView({ behavior: "smooth" })}
+                    title="Initier un projet"
+                    style={{
+                      width: 36, height: 36, borderRadius: "50%", border: `1px solid ${accent}`,
+                      display: "grid", placeItems: "center", color: accent,
+                      background: "transparent", cursor: "pointer",
+                      transition: "background 200ms, color 200ms",
+                    }}
+                    onMouseEnter={e => { e.currentTarget.style.background = accent; e.currentTarget.style.color = "#1A1A1A"; }}
+                    onMouseLeave={e => { e.currentTarget.style.background = "transparent"; e.currentTarget.style.color = accent; }}
                   >
                     <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
                       <path d="M2 10 L10 2 M10 2 H4 M10 2 V8" stroke="currentColor" strokeWidth="1.4" strokeLinecap="round" />
                     </svg>
-                  </div>
+                  </button>
                 </div>
               </div>
             </Reveal>
