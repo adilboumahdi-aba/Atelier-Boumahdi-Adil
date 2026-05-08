@@ -122,15 +122,23 @@
     "pillars": [
       {
         "t": "Endémique",
-        "d": "100% des plantations adaptées au climat local. Aucune espèce dépendante de l'arrosage continu."
+        "d": "Chaque plantation est choisie pour le sol, le vent, le soleil de son lieu. Aucune espèce sous perfusion — uniquement le vivant qui appartient déjà à ce paysage."
       },
       {
-        "t": "Hydrique",
-        "d": "Goutte-à-goutte intelligent, récupération d'eau de pluie, paillage végétal — la sobriété par défaut."
+        "t": "Identitaire",
+        "d": "Un jardin ABA raconte un territoire, une mémoire, une culture. Le paysage comme langage — chaque projet est une réponse à un lieu précis, jamais un catalogue."
+      },
+      {
+        "t": "Résilient",
+        "d": "Sécheresses, vents salins, gels tardifs. Nous concevons pour le climat de 2050 — pas celui de 1990. La robustesse est un parti-pris architectural, pas une option."
+      },
+      {
+        "t": "Métamorphose",
+        "d": "Un jardin n'est jamais figé. Il se densifie, change de lumière, révèle ses volumes au fil des saisons. Nous concevons pour ce que le jardin sera dans dix ans — pas demain."
       },
       {
         "t": "Pérenne",
-        "d": "Une garantie de croissance sur 3 ans, un suivi sur 10. Le vivant exige du temps long."
+        "d": "Garantie de croissance sur 3 ans, suivi sur 10. Nous signons chaque jardin dans la durée — parce que le vivant exige du temps long, et que c'est là qu'il prend sa vraie forme."
       }
     ]
   },

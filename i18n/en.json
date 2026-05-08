@@ -122,15 +122,23 @@
     "pillars": [
       {
         "t": "Endemic",
-        "d": "100% of plantings adapted to the local climate. No species dependent on continuous irrigation."
+        "d": "Every plant chosen for the soil, wind, and sun of its place. No species on life support — only what already belongs to that landscape."
       },
       {
-        "t": "Water-wise",
-        "d": "Smart drip irrigation, rainwater harvesting, vegetable mulching — sobriety by default."
+        "t": "Identity",
+        "d": "An ABA garden tells the story of a territory, a memory, a culture. Landscape as language — every project answers a specific place, never a catalogue."
+      },
+      {
+        "t": "Resilient",
+        "d": "Droughts, salt winds, late frosts. We design for the climate of 2050 — not 1990. Robustness is an architectural stance, not an option."
+      },
+      {
+        "t": "Metamorphosis",
+        "d": "A garden is never fixed. It densifies, shifts in light, reveals its volumes across seasons. We design for what the garden will become in ten years — not tomorrow."
       },
       {
         "t": "Perennial",
-        "d": "A 3-year growth guarantee, with monitoring over 10. Living things require long timeframes."
+        "d": "3-year growth guarantee, 10-year monitoring. We sign each garden over time — because living things require the long view, and that is where they find their true form."
       }
     ]
   },
