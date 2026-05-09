@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<style>
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  @import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,200;0,400;0,600;1,400&family=Inter:wght@300;400&display=swap');
+
+  body {
+    width: 1200px;
+    height: 630px;
+    overflow: hidden;
+    background: #111109;
+    font-family: 'Inter', sans-serif;
+    position: relative;
+  }
+
+  /* Background image */
+  .bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1501854140801-50d01698950b?auto=format&fit=crop&w=1200&q=80');
+    background-size: cover;
+    background-position: center 40%;
+    opacity: 0.35;
+  }
+
+  /* Dark gradient overlay */
+  .overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(10,10,8,0.95) 0%, rgba(10,10,8,0.7) 50%, rgba(10,10,8,0.5) 100%);
+  }
+
+  /* Accent line top */
+  .accent-line {
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: #BACC23;
+  }
+
+  /* Content */
+  .content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 52px 72px 48px;
+  }
+
+  /* Top — logo */
+  .logo-row {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+  }
+  .logo-mark {
+    width: 42px;
+    height: 48px;
+  }
+  .logo-text {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+  }
+  .logo-name {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 600;
+    font-size: 13px;
+    letter-spacing: 0.22em;
+    color: #fff;
+  }
+  .logo-sub {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.45);
+    text-transform: uppercase;
+  }
+
+  /* Cities */
+  .cities {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    color: rgba(255,255,255,0.35);
+    text-transform: uppercase;
+    margin-left: auto;
+  }
+
+  /* Middle — headline */
+  .headline {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding-top: 12px;
+  }
+  .eyebrow {
+    font-size: 11px;
+    letter-spacing: 0.4em;
+    text-transform: uppercase;
+    color: #BACC23;
+    margin-bottom: 20px;
+    font-family: 'Inter', sans-serif;
+  }
+  .h1 {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 200;
+    font-size: 72px;
+    line-height: 0.96;
+    letter-spacing: -0.02em;
+    color: #fff;
+  }
+  .h1 em {
+    font-style: italic;
+    font-weight: 400;
+  }
+  .h1 .accent {
+    color: #BACC23;
+    font-weight: 500;
+    font-style: normal;
+  }
+  .desc {
+    margin-top: 22px;
+    font-size: 14px;
+    line-height: 1.6;
+    color: rgba(255,255,255,0.55);
+    max-width: 560px;
+  }
+
+  /* Bottom bar */
+  .bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 24px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+  }
+  .services {
+    display: flex;
+    gap: 28px;
+  }
+  .service-tag {
+    font-size: 10px;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.4);
+  }
+  .url-tag {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    color: rgba(255,255,255,0.3);
+  }
+  .url-tag span {
+    color: #BACC23;
+  }
+
+  /* Right side — vertical label */
+  .right-decor {
+    position: absolute;
+    right: 48px;
+    top: 50%;
+    transform: translateY(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 16px;
+  }
+  .vertical-text {
+    writing-mode: vertical-rl;
+    text-orientation: mixed;
+    transform: rotate(180deg);
+    font-size: 9px;
+    letter-spacing: 0.35em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.2);
+  }
+  .vertical-line {
+    width: 1px;
+    height: 60px;
+    background: rgba(255,255,255,0.12);
+  }
+  .green-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #BACC23;
+  }
+</style>
+</head>
+<body>
+  <div class="bg"></div>
+  <div class="overlay"></div>
+  <div class="accent-line"></div>
+
+  <div class="content">
+    <!-- Top logo row -->
+    <div class="logo-row">
+      <svg class="logo-mark" viewBox="0 0 60 68" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <polyline points="30,4 56,64" stroke="#BACC23" stroke-width="5" stroke-linecap="round"/>
+        <polyline points="30,4 4,64" stroke="#BACC23" stroke-width="5" stroke-linecap="round"/>
+        <line x1="14" y1="44" x2="46" y2="44" stroke="#BACC23" stroke-width="5" stroke-linecap="round"/>
+      </svg>
+      <div class="logo-text">
+        <div class="logo-name">A B A — ATELIER BOUMAHDI ADIL</div>
+        <div class="logo-sub">Premium Landscape Services</div>
+      </div>
+      <div class="cities">Rabat · Casablanca · Marrakech · Fès</div>
+    </div>
+
+    <!-- Headline -->
+    <div class="headline">
+      <div class="eyebrow">Studio — Est. 2015 — Maroc</div>
+      <div class="h1">
+        L'art du<br>
+        <em>paysage</em> <span class="accent">d'exception.</span>
+      </div>
+      <div class="desc">
+        Concepteurs, architectes paysagistes, agronomes, jardiniers, bâtisseurs.<br>
+        Nous dessinons des extérieurs habités — taillés dans la pierre, écrits par l'eau.
+      </div>
+    </div>
+
+    <!-- Bottom bar -->
+    <div class="bottom">
+      <div class="services">
+        <span class="service-tag">Conception</span>
+        <span class="service-tag">Réalisation</span>
+        <span class="service-tag">Entretien signé</span>
+        <span class="service-tag">Conseil</span>
+      </div>
+      <div class="url-tag"><span>www.</span>ab-landscapes.com</div>
+    </div>
+  </div>
+
+  <!-- Right vertical decor -->
+  <div class="right-decor">
+    <div class="green-dot"></div>
+    <div class="vertical-line"></div>
+    <div class="vertical-text">Paysagisme · Maroc · 2015</div>
+    <div class="vertical-line"></div>
+  </div>
+</body>
+</html>
