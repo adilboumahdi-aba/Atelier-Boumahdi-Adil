@@ -152,6 +152,7 @@
     "label_direct": "Contacto",
     "form_name": "Su nombre",
     "form_email": "Correo electrónico",
+    "form_phone": "Teléfono",
     "form_type": "Tipo de proyecto",
     "form_message": "Algunas palabras sobre su proyecto",
     "form_submit": "Enviar solicitud →",

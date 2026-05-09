@@ -160,8 +160,33 @@
       font-weight: var(--body-weight);
       letter-spacing: var(--letter-tracking);
       -webkit-font-smoothing: antialiased;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
     }
+    /* Autoriser la sélection dans les champs de formulaire */
+    input, textarea, select {
+      -webkit-user-select: text !important;
+      -moz-user-select: text !important;
+      user-select: text !important;
+    }
+    /* Bloquer le drag & drop des images */
+    img {
+      -webkit-user-drag: none;
+      -khtml-user-drag: none;
+      -moz-user-drag: none;
+      -o-user-drag: none;
+      user-drag: none;
+      pointer-events: none;
+    }
+    /* Autoriser les pointer-events sur les liens et boutons mais pas sur les images dans les cards */
+    a img, button img, nav img { pointer-events: auto; }
     ::selection { background: var(--accent); color: var(--bg); }
+    /* Bloquer l'impression */
+    @media print {
+      body { display: none !important; }
+    }
     html { scrollbar-color: var(--accent) var(--bg); }
 
     /* Light theme override */
@@ -1948,7 +1973,8 @@ function Resilience({ accent, scrollY }) {
 // ---------- CONTACT ----------
 function Contact({ accent }) {
   const { t } = React.useContext(VBLangContext);
-  const [form, setForm] = useState({ name: "", email: "", projects: [], message: "" });
+  const [form, setForm] = useState({ name: "", email: "", phone: "", projects: [], message: "" });
+  const [errors, setErrors] = useState({});
   const toggleProject = (k) => {
     if (k === "clé-en-main") {
       // Sélectionne tout ou désélectionne tout
@@ -1967,7 +1993,15 @@ function Contact({ accent }) {
   const [submitting, setSubmitting] = useState(false);
   const submit = async (e) => {
     e.preventDefault();
-    if (!form.name || !form.email || submitting) return;
+    // Validation
+    const newErrors = {};
+    if (!form.name.trim())  newErrors.name  = true;
+    if (!form.email.trim()) newErrors.email = true;
+    if (!form.phone.trim()) newErrors.phone = true;
+    if (form.projects.length === 0) newErrors.projects = true;
+    if (Object.keys(newErrors).length > 0) { setErrors(newErrors); return; }
+    setErrors({});
+    if (submitting) return;
     setSubmitting(true);
     try {
       const res = await fetch("https://api.web3forms.com/submit", {
@@ -1977,6 +2011,7 @@ function Contact({ accent }) {
           access_key: "1eba26f0-bd01-4151-ba20-80f605bce534",
           name: form.name,
           email: form.email,
+          phone: form.phone,
           project_type: form.projects.length > 0 ? form.projects.join(" + ") : "(non précisé)",
           message: form.message || "(aucun message)",
           subject: `[ABA] Nouveau projet — ${form.projects.join(" + ") || "non précisé"} — ${form.name}`,
@@ -2058,7 +2093,7 @@ function Contact({ accent }) {
                     {t.contact?.success_body || "Votre demande a été reçue. Nous reviendrons vers vous sous 72 heures, depuis l'atelier."}
                   </p>
                   <button
-                    onClick={() => { setSent(false); setForm({ name: "", email: "", projects: [], message: "" }); }}
+                    onClick={() => { setSent(false); setErrors({}); setForm({ name: "", email: "", phone: "", projects: [], message: "" }); }}
                     className="mt-10 text-[11px] tracking-[0.3em] uppercase border-b pb-1"
                     style={{ fontFamily: "'Inter', sans-serif", borderColor: accent, color: accent }}
                   >
@@ -2067,14 +2102,26 @@ function Contact({ accent }) {
                 </div>
               ) : (
                 <form onSubmit={submit} className="flex flex-col gap-8">
-                  <Field label={t.contact?.form_name || "Votre nom"} value={form.name} onChange={(v) => setForm({ ...form, name: v })} accent={accent} />
-                  <Field label={t.contact?.form_email || "Email"} type="email" value={form.email} onChange={(v) => setForm({ ...form, email: v })} accent={accent} />
+                  <Field label={t.contact?.form_name || "Votre nom"} required error={errors.name}
+                    value={form.name} onChange={(v) => { setForm({ ...form, name: v }); setErrors({...errors, name: false}); }} accent={accent} />
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <Field label={t.contact?.form_email || "Email"} type="email" required error={errors.email}
+                      value={form.email} onChange={(v) => { setForm({ ...form, email: v }); setErrors({...errors, email: false}); }} accent={accent} />
+                    <Field label={t.contact?.form_phone || "Téléphone"} type="tel" required error={errors.phone}
+                      value={form.phone} onChange={(v) => { setForm({ ...form, phone: v }); setErrors({...errors, phone: false}); }} accent={accent} />
+                  </div>
 
                   <div>
-                    <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-1"
-                      style={{ fontFamily: "'Inter', sans-serif" }}>{t.contact?.form_type || "Prestations souhaitées"}</div>
-                    <div className="text-[10px] text-white/30 mb-3"
-                      style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.05em" }}>Sélection multiple possible</div>
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="text-[10px] tracking-[0.3em] uppercase text-white/50"
+                        style={{ fontFamily: "'Inter', sans-serif" }}>{t.contact?.form_type || "Prestations souhaitées"}</div>
+                      <span style={{ color: "#ff6b6b", fontSize: 12, lineHeight: 1 }}>*</span>
+                    </div>
+                    <div className="text-[10px] mb-3"
+                      style={{ fontFamily: "'Inter', sans-serif", letterSpacing: "0.05em",
+                        color: errors.projects ? "#ff6b6b" : "rgba(255,255,255,0.3)" }}>
+                      {errors.projects ? "Veuillez sélectionner au moins une prestation" : "Sélection multiple possible"}
+                    </div>
                     <div className="flex flex-wrap gap-2">
                       {(t.contact?.project_types || [
                         ["design",      "Conception"],
@@ -2157,12 +2204,23 @@ function Contact({ accent }) {
   );
 }
 
-function Field({ label, value, onChange, accent, type = "text", multiline = false }) {
+function Field({ label, value, onChange, accent, type = "text", multiline = false, required = false, error = false }) {
   const [focus, setFocus] = useState(false);
+  const borderColor = error ? "#ff6b6b" : focus ? accent : "rgba(255,255,255,0.2)";
+  const sharedStyle = {
+    fontFamily: "'Inter', sans-serif",
+    fontSize: 15,
+    color: "#fff",
+    borderColor,
+    transition: "border-color 180ms",
+  };
   return (
     <label className="block">
-      <div className="text-[10px] tracking-[0.3em] uppercase text-white/50 mb-3"
-        style={{ fontFamily: "'Inter', sans-serif" }}>{label}</div>
+      <div className="flex items-center gap-2 mb-3">
+        <span className="text-[10px] tracking-[0.3em] uppercase"
+          style={{ fontFamily: "'Inter', sans-serif", color: error ? "#ff6b6b" : "rgba(255,255,255,0.5)" }}>{label}</span>
+        {required && <span style={{ color: error ? "#ff6b6b" : "rgba(255,255,255,0.3)", fontSize: 12, lineHeight: 1 }}>*</span>}
+      </div>
       {multiline ? (
         <textarea
           value={value}
@@ -2171,13 +2229,7 @@ function Field({ label, value, onChange, accent, type = "text", multiline = fals
           onBlur={() => setFocus(false)}
           rows={4}
           className="w-full bg-transparent border-b py-3 outline-none resize-none"
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 15,
-            color: "#fff",
-            borderColor: focus ? accent : "rgba(255,255,255,0.2)",
-            transition: "border-color 180ms",
-          }}
+          style={sharedStyle}
         />
       ) : (
         <input
@@ -2187,15 +2239,12 @@ function Field({ label, value, onChange, accent, type = "text", multiline = fals
           onFocus={() => setFocus(true)}
           onBlur={() => setFocus(false)}
           className="w-full bg-transparent border-b py-3 outline-none"
-          style={{
-            fontFamily: "'Inter', sans-serif",
-            fontSize: 15,
-            color: "#fff",
-            borderColor: focus ? accent : "rgba(255,255,255,0.2)",
-            transition: "border-color 180ms",
-          }}
+          style={sharedStyle}
         />
       )}
+      {error && <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "#ff6b6b", marginTop: 4, letterSpacing: "0.05em" }}>
+        Ce champ est obligatoire
+      </div>}
     </label>
   );
 }
@@ -2566,6 +2615,88 @@ function App() {
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(<App />);
 
+</script>
+
+<!-- ═══════════════════════════════════════════════
+     PROTECTION DU CONTENU — ABA Atelier Boumahdi Adil
+     © 2026 Tous droits réservés
+     ═══════════════════════════════════════════════ -->
+<script>
+(function() {
+
+  // 1. Bloquer le clic droit (menu contextuel)
+  document.addEventListener('contextmenu', function(e) {
+    e.preventDefault();
+    return false;
+  });
+
+  // 2. Bloquer la sélection de texte (hors champs de saisie)
+  document.addEventListener('selectstart', function(e) {
+    if (!e.target.closest('input, textarea, select')) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // 3. Bloquer le copier/coller/couper (hors champs de saisie)
+  ['copy', 'cut'].forEach(function(evt) {
+    document.addEventListener(evt, function(e) {
+      if (!e.target.closest('input, textarea')) {
+        e.preventDefault();
+        return false;
+      }
+    });
+  });
+
+  // 4. Bloquer le drag & drop des images
+  document.addEventListener('dragstart', function(e) {
+    if (e.target.tagName === 'IMG' || e.target.closest('[style*="background-image"]')) {
+      e.preventDefault();
+      return false;
+    }
+  });
+
+  // 5. Bloquer les raccourcis clavier sensibles
+  document.addEventListener('keydown', function(e) {
+    const tag = e.target.tagName.toLowerCase();
+    const inForm = (tag === 'input' || tag === 'textarea');
+
+    // Ctrl/Cmd + C (copier) — bloqué hors formulaire
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'c' && !inForm) {
+      e.preventDefault(); return false;
+    }
+    // Ctrl/Cmd + S (enregistrer la page)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 's') {
+      e.preventDefault(); return false;
+    }
+    // Ctrl/Cmd + U (afficher le code source)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'u') {
+      e.preventDefault(); return false;
+    }
+    // Ctrl/Cmd + P (imprimer)
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'p') {
+      e.preventDefault(); return false;
+    }
+    // Ctrl/Cmd + A (sélectionner tout) — bloqué hors formulaire
+    if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'a' && !inForm) {
+      e.preventDefault(); return false;
+    }
+    // F12 (DevTools)
+    if (e.key === 'F12') {
+      e.preventDefault(); return false;
+    }
+    // Ctrl+Shift+I / Ctrl+Shift+J / Ctrl+Shift+C (DevTools)
+    if ((e.ctrlKey || e.metaKey) && e.shiftKey && ['i','j','c'].includes(e.key.toLowerCase())) {
+      e.preventDefault(); return false;
+    }
+  });
+
+  // 6. Bloquer l'impression via CSS (Ctrl+P bloqué par le keydown handler ci-dessus)
+
+  // 7. Bloquer Ctrl+Shift+I / F12 via CSS print + message discret
+  // (La détection active des DevTools est désactivée pour éviter les faux positifs)
+
+})();
 </script>
 </body>
 </html>

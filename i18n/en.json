@@ -152,6 +152,7 @@
     "label_direct": "Direct",
     "form_name": "Your name",
     "form_email": "Email",
+    "form_phone": "Phone number",
     "form_type": "Project type",
     "form_message": "A few words about your project",
     "form_submit": "Send enquiry →",
