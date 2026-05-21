@@ -2318,19 +2318,76 @@ function Footer({ accent }) {
               style={{ fontFamily: "'Inter', sans-serif" }}>{t.footer?.col3_title || "Suivre l'atelier"}</div>
             <ul className="flex flex-col gap-2 text-white/70 text-[13px]"
               style={{ fontFamily: "'Inter', sans-serif" }}>
-              {(t.footer?.col3_items || ["Instagram — @atelierboumahdiadil","Journal — newsletter mensuelle","LinkedIn","WhatsApp Business"]).map((it, i) => {
+              {(["Instagram — @atelierboumahdiadil","LinkedIn","WhatsApp Business"]).map((it, i) => {
                 const hrefs = [
                   "https://www.instagram.com/atelierboumahdiadil/",
-                  "#contact",
                   "https://www.linkedin.com/in/adil-boumahdi",
                   "https://wa.me/212661920316?text=Bonjour%20ABA%2C%20je%20souhaite%20discuter%20d%27un%20projet%20paysager.",
                 ];
-                return <li key={it}><a href={hrefs[i]} target={i !== 1 ? "_blank" : "_self"} rel="noopener noreferrer"
+                return <li key={it}><a href={hrefs[i]} target="_blank" rel="noopener noreferrer"
                   style={{ color: "inherit", textDecoration: "none", transition: "color 200ms" }}
                   onMouseEnter={e => e.currentTarget.style.color = accent}
                   onMouseLeave={e => e.currentTarget.style.color = ""}>{it}</a></li>;
               })}
             </ul>
+
+            {/* Newsletter Brevo — Journal hebdomadaire */}
+            <div style={{ marginTop: 24 }}>
+              <div className="text-[10px] tracking-[0.3em] uppercase text-white/40 mb-3"
+                style={{ fontFamily: "'Inter', sans-serif" }}>Journal hebdomadaire</div>
+              <form
+                action="https://2841c208.sibforms.com/serve/MUIFAK0S-hOm74Fy1HPGKIimqMbEb4t2WvYZ_b5TwQ1gvP3nDDDZmH8PXZwcWOE_bjZ6_dJ7VT-UwbCILrU_wShXmeiRN2QKVOo2rrd904tQKFgE_EjQjY8gnrIfEfx_tUMxQPAJQ0hvLZ7hm6SljWafWrT8CnjQy6o1qnIdXXfiY0azyoaKm5e_n2wZP4jrObC7l9pzg63_Z1W3CA=="
+                method="POST"
+                target="_blank"
+                style={{ display: "flex", gap: 0, alignItems: "flex-end" }}
+              >
+                <input type="hidden" name="email_address_check" value="" />
+                <input type="hidden" name="locale" value="fr" />
+                <input
+                  type="email"
+                  name="EMAIL"
+                  placeholder="votre@email.com"
+                  required
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    borderBottom: `1px solid rgba(255,255,255,0.2)`,
+                    color: "#fff",
+                    fontSize: 13,
+                    padding: "6px 0",
+                    outline: "none",
+                    flex: 1,
+                    fontFamily: "'Inter', sans-serif",
+                    userSelect: "text",
+                    WebkitUserSelect: "text",
+                  }}
+                />
+                <button
+                  type="submit"
+                  style={{
+                    background: "transparent",
+                    border: "none",
+                    borderBottom: `1px solid ${accent}`,
+                    color: accent,
+                    fontSize: 11,
+                    cursor: "pointer",
+                    letterSpacing: "0.2em",
+                    textTransform: "uppercase",
+                    fontFamily: "'Inter', sans-serif",
+                    padding: "6px 8px",
+                    whiteSpace: "nowrap",
+                    transition: "opacity 200ms",
+                  }}
+                  onMouseEnter={e => e.currentTarget.style.opacity = "0.7"}
+                  onMouseLeave={e => e.currentTarget.style.opacity = "1"}
+                >
+                  S'abonner →
+                </button>
+              </form>
+              <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, color: "rgba(255,255,255,0.25)", marginTop: 6 }}>
+                Un regard par semaine — sans spam.
+              </div>
+            </div>
           </div>
         </div>
 
