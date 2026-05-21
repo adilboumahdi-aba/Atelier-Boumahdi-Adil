@@ -2012,9 +2012,16 @@ function Contact({ accent }) {
           name: form.name,
           email: form.email,
           phone: form.phone,
-          project_type: form.projects.length > 0 ? form.projects.join(" + ") : "(non précisé)",
+          project_type: (() => {
+            const labels = { design: "Conception", realisation: "Réalisation", entretien: "Entretien signé", conseil: "Conseil" };
+            return form.projects.length > 0 ? form.projects.map(k => labels[k] || k).join(" + ") : "(non précisé)";
+          })(),
           message: form.message || "(aucun message)",
-          subject: `[ABA] Nouveau projet — ${form.projects.join(" + ") || "non précisé"} — ${form.name}`,
+          subject: (() => {
+            const labels = { design: "Conception", realisation: "Réalisation", entretien: "Entretien signé", conseil: "Conseil" };
+            const prestations = form.projects.map(k => labels[k] || k).join(" + ") || "non précisé";
+            return `[ABA] Nouveau projet — ${prestations} — ${form.name}`;
+          })(),
           from_name: "ABA — Site Web",
         }),
       });
