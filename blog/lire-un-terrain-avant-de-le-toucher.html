@@ -1,0 +1,651 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lire un terrain avant de le toucher — ABA Paysage</title>
+  <meta name="description" content="Avant tout projet paysager, une lecture rigoureuse du terrain s'impose. Sol, ensoleillement, vent, topographie : les 4 disciplines du paysagiste expert." />
+  <meta name="keywords" content="paysagiste Maroc, étude de terrain, conception paysagère, jardin Rabat, ABA paysage" />
+  <meta property="og:title" content="Lire un terrain avant de le toucher — ABA" />
+  <meta property="og:description" content="La première discipline du paysagiste : lire un site avant d'y poser une seule pierre." />
+  <meta property="og:image" content="https://www.ab-landscapes.com/assets/og-cover.jpg" />
+  <meta property="og:url" content="https://www.ab-landscapes.com/blog/lire-un-terrain-avant-de-le-toucher.html" />
+  <link rel="canonical" href="https://www.ab-landscapes.com/blog/lire-un-terrain-avant-de-le-toucher.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    /* ══════════════════════════════════════════
+       TOKENS — deux thèmes, une seule structure
+    ══════════════════════════════════════════ */
+
+    /* THÈME D — Pierre chaude (défaut) */
+    :root, [data-theme="dark"] {
+      --accent:        #BACC23;
+      --accent-dim:    rgba(186,204,35,0.35);
+
+      --bg:            #13130E;
+      --bg2:           #1B1B13;
+      --bg3:           #222218;
+      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
+
+      --text:          #F2EDE3;
+      --text-body:     #C8C4BA;
+      --text-muted:    rgba(242,237,227,0.40);
+      --border:        rgba(242,237,227,0.08);
+      --border2:       rgba(242,237,227,0.13);
+
+      --hero-grid-op:  0.035;
+      --hero-svg-op:   0.10;
+      --quote-mark-op: 0.10;
+
+      --toggle-bg:     #1B1B13;
+      --toggle-border: rgba(242,237,227,0.15);
+      --toggle-text:   rgba(242,237,227,0.55);
+      --toggle-active-bg:   #BACC23;
+      --toggle-active-text: #13130E;
+
+      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
+    }
+
+    /* THÈME B — Crème lumineuse */
+    [data-theme="light"] {
+      --bg:            #FAF9F5;
+      --bg2:           #F2EDE4;
+      --bg3:           #E8E2D8;
+      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
+
+      --text:          #1A1A14;
+      --text-body:     #3A3A2E;
+      --text-muted:    rgba(26,26,20,0.45);
+      --border:        rgba(26,26,20,0.08);
+      --border2:       rgba(26,26,20,0.14);
+
+      --hero-grid-op:  0.04;
+      --hero-svg-op:   0.08;
+      --quote-mark-op: 0.18;
+
+      --toggle-bg:     #FAF9F5;
+      --toggle-border: rgba(26,26,20,0.18);
+      --toggle-text:   rgba(26,26,20,0.50);
+      --toggle-active-bg:   #1A1A14;
+      --toggle-active-text: #FAF9F5;
+    }
+
+    /* ══════════════════════════════════════════
+       BASE
+    ══════════════════════════════════════════ */
+    html { font-size: 17px; scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text-body);
+      font-family: 'Inter', sans-serif;
+      font-weight: 300;
+      line-height: 2.0;
+      -webkit-font-smoothing: antialiased;
+      transition: var(--transition);
+    }
+
+    /* ══════════════════════════════════════════
+       TOGGLE THÈME
+    ══════════════════════════════════════════ */
+    .theme-toggle {
+      display: flex; align-items: center;
+      background: var(--toggle-bg);
+      border: 1px solid var(--toggle-border);
+      border-radius: 2px;
+      overflow: hidden;
+      transition: var(--transition);
+    }
+    .theme-btn {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--toggle-text);
+      background: transparent; border: none; cursor: pointer;
+      transition: background 250ms, color 250ms;
+      white-space: nowrap;
+    }
+    .theme-btn svg { flex-shrink: 0; }
+    .theme-btn.active {
+      background: var(--toggle-active-bg);
+      color: var(--toggle-active-text);
+    }
+    .theme-divider {
+      width: 1px; height: 20px;
+      background: var(--toggle-border);
+      flex-shrink: 0;
+    }
+
+    /* ══════════════════════════════════════════
+       NAV
+    ══════════════════════════════════════════ */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px; height: 60px;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      transition: var(--transition);
+    }
+    .nav-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 17px; font-weight: 400; letter-spacing: 0.12em;
+      color: var(--text); text-decoration: none;
+      transition: color 380ms;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
+    .nav-back {
+      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
+      color: var(--text-muted); text-decoration: none; transition: color 200ms;
+    }
+    .nav-back:hover { color: var(--accent); }
+    .nav-cta {
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--bg); background: var(--accent);
+      padding: 9px 22px; text-decoration: none; transition: opacity 200ms;
+    }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* ══════════════════════════════════════════
+       HERO — même structure pour les deux thèmes
+    ══════════════════════════════════════════ */
+    .hero {
+      min-height: 88vh;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 0 56px 72px;
+      position: relative; overflow: hidden;
+      background: var(--bg-hero);
+      transition: background 380ms ease;
+    }
+    [data-theme="light"] .hero {
+      background: var(--bg2);
+    }
+    .hero-grid {
+      position: absolute; inset: 0;
+      opacity: var(--hero-grid-op);
+      background-image:
+        linear-gradient(var(--text) 1px, transparent 1px),
+        linear-gradient(90deg, var(--text) 1px, transparent 1px);
+      background-size: 72px 72px;
+      transition: opacity 380ms;
+    }
+    .hero-svg {
+      position: absolute; right: -20px; top: 0; bottom: 0;
+      width: 52%; opacity: var(--hero-svg-op);
+      transition: opacity 380ms;
+    }
+    .hero::after {
+      content: '';
+      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
+      background: linear-gradient(to bottom, transparent, var(--bg));
+      pointer-events: none; transition: var(--transition);
+    }
+
+    .hero-content { position: relative; z-index: 2; max-width: 680px; }
+    .hero-eyebrow {
+      display: flex; align-items: center; gap: 14px;
+      font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px;
+    }
+    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
+    .hero-meta-top {
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
+    }
+    .hero h1 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(40px, 5.5vw, 72px);
+      font-weight: 300; line-height: 1.08;
+      color: var(--text); margin-bottom: 28px;
+      transition: color 380ms;
+    }
+    .hero h1 em { font-style: italic; color: var(--accent); }
+    .hero-desc {
+      font-size: 16px; line-height: 1.75;
+      color: var(--text-muted); max-width: 500px;
+      margin-bottom: 36px; transition: color 380ms;
+    }
+    .hero-byline {
+      display: flex; align-items: center; gap: 20px;
+      font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted);
+      transition: color 380ms;
+    }
+    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
+
+    /* ══════════════════════════════════════════
+       ARTICLE BODY
+    ══════════════════════════════════════════ */
+    .article {
+      max-width: 700px; margin: 0 auto;
+      padding: 20px 40px 100px;
+    }
+
+    .chapeau {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 23px; font-weight: 300; font-style: italic;
+      line-height: 1.65; color: var(--text);
+      padding-left: 28px; border-left: 2px solid var(--accent);
+      margin-bottom: 56px;
+      transition: color 380ms, border-color 380ms;
+    }
+
+    p {
+      font-size: 17px; line-height: 2.0;
+      color: var(--text-body); margin-bottom: 28px;
+      transition: color 380ms;
+    }
+    p strong { color: var(--text); font-weight: 500; }
+
+    .divider {
+      display: flex; align-items: center; gap: 20px;
+      margin: 60px 0 44px;
+      font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
+      color: var(--text-muted); transition: color 380ms;
+    }
+    .divider::before, .divider::after {
+      content:''; flex:1; height:1px;
+      background: var(--border2); transition: background 380ms;
+    }
+
+    .section-head {
+      display: flex; align-items: baseline; gap: 20px;
+      margin: 64px 0 28px;
+    }
+    .section-num {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 52px; font-weight: 300;
+      color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0;
+    }
+    .section-head h2 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 29px; font-weight: 400;
+      color: var(--text); line-height: 1.2; transition: color 380ms;
+    }
+
+    /* Grille 4 cartes */
+    .grid4 {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; margin: 44px 0;
+      background: var(--border); transition: background 380ms;
+    }
+    .g-item {
+      background: var(--bg2); padding: 32px 28px;
+      border-top: 2px solid transparent;
+      transition: border-color 240ms, background 380ms;
+    }
+    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
+    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
+    .g-item h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 20px; font-weight: 400;
+      color: var(--text); margin-bottom: 10px; line-height: 1.2;
+      transition: color 380ms;
+    }
+    .g-item p {
+      font-size: 14px !important; line-height: 1.8 !important;
+      color: var(--text-muted) !important; margin: 0 !important;
+    }
+    .g-tag {
+      display: inline-block; margin-top: 12px;
+      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
+      color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px;
+    }
+
+    /* Pull quote */
+    .pull-quote {
+      margin: 60px 0; padding: 48px 52px;
+      background: var(--bg3);
+      border-top: 1px solid var(--accent);
+      position: relative; transition: background 380ms;
+    }
+    .pull-quote::before {
+      content: '"';
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 140px; line-height: 0.75;
+      color: var(--accent); opacity: var(--quote-mark-op);
+      position: absolute; top: 24px; left: 36px;
+      transition: opacity 380ms;
+    }
+    .pull-quote p {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 26px !important; font-style: italic;
+      font-weight: 300; line-height: 1.55 !important;
+      color: var(--text) !important;
+      margin: 0 !important; position: relative; z-index: 1;
+    }
+    .pull-quote cite {
+      display: block; margin-top: 18px;
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; letter-spacing: 0.24em;
+      text-transform: uppercase; color: var(--accent);
+      font-style: normal;
+    }
+
+    /* Schéma */
+    .visual {
+      background: var(--bg2); border: 1px solid var(--border2);
+      padding: 40px; margin: 60px 0;
+      transition: background 380ms, border-color 380ms;
+    }
+    .visual-label {
+      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 28px;
+    }
+    .visual svg { width:100%; display:block; }
+
+    /* Signature */
+    .signature {
+      display: flex; align-items: center; gap: 20px;
+      margin-top: 72px; padding-top: 36px;
+      border-top: 1px solid var(--border2);
+      transition: border-color 380ms;
+    }
+    .sig-avatar {
+      width: 52px; height: 52px; border-radius: 50%;
+      background: var(--bg3); border: 1px solid var(--border2);
+      display: flex; align-items: center; justify-content: center;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 19px; color: var(--accent); flex-shrink: 0;
+      transition: background 380ms, border-color 380ms;
+    }
+    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
+    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
+
+    /* CTA */
+    .cta {
+      margin-top: 80px; padding: 56px 52px;
+      background: var(--bg3); border-top: 1px solid var(--accent);
+      text-align: center; position: relative;
+      transition: background 380ms;
+    }
+    .cta::before {
+      content: ''; position: absolute;
+      top: -1px; left: 50%; transform: translateX(-50%);
+      width: 80px; height: 2px; background: var(--accent);
+    }
+    .cta h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 34px; font-weight: 300;
+      color: var(--text); line-height: 1.2; margin-bottom: 16px;
+      transition: color 380ms;
+    }
+    .cta h3 em { font-style: italic; color: var(--accent); }
+    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
+    .cta-btn {
+      display: inline-block;
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: #13130E; background: var(--accent);
+      padding: 15px 40px; text-decoration: none; transition: opacity 200ms;
+    }
+    .cta-btn:hover { opacity: 0.85; }
+
+    /* Articles suivants */
+    .related {
+      margin-top: 56px; padding-top: 36px;
+      border-top: 1px solid var(--border); transition: border-color 380ms;
+    }
+    .related-label {
+      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
+    }
+    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
+    .rel-card {
+      background: var(--bg2); padding: 28px 24px;
+      border-top: 2px solid var(--border);
+      text-decoration: none; color: var(--text);
+      transition: border-color 200ms, background 380ms; display: block;
+    }
+    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
+    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
+    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
+
+    /* Footer */
+    footer {
+      margin-top: 80px; padding: 32px 56px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px; transition: border-color 380ms;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
+    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
+
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; height: 56px; }
+      .nav-back { display: none; }
+      .nav-cta { display: none; }
+      .hero { padding: 0 20px 52px; min-height: 70vh; }
+      .article { padding: 16px 20px 72px; }
+      .grid4 { grid-template-columns: 1fr; }
+      .related-grid { grid-template-columns: 1fr; }
+      .pull-quote { padding: 32px 24px; }
+      .pull-quote p { font-size: 20px !important; }
+      .cta { padding: 40px 24px; }
+      footer { padding: 24px 20px; }
+      .theme-btn span { display: none; }
+      .theme-btn { padding: 6px 10px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
+  <div class="nav-right">
+
+    <!-- TOGGLE THÈME -->
+    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
+      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+        </svg>
+        <span>Pierre</span>
+      </button>
+      <div class="theme-divider"></div>
+      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="5"/>
+          <line x1="12" y1="1" x2="12" y2="3"/>
+          <line x1="12" y1="21" x2="12" y2="23"/>
+          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+          <line x1="1" y1="12" x2="3" y2="12"/>
+          <line x1="21" y1="12" x2="23" y2="12"/>
+          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+        </svg>
+        <span>Crème</span>
+      </button>
+    </div>
+
+    <a href="../blog.html" class="nav-back">← Journal</a>
+    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-grid"></div>
+  <svg class="hero-svg" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+    <ellipse cx="420" cy="320" rx="360" ry="200" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+    <ellipse cx="420" cy="320" rx="280" ry="152" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+    <ellipse cx="420" cy="320" rx="200" ry="106" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+    <ellipse cx="420" cy="320" rx="130" ry="68" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+    <ellipse cx="420" cy="320" rx="68" ry="36" stroke="#BACC23" stroke-width="1.4" fill="none"/>
+    <circle cx="90" cy="90" r="36" stroke="#BACC23" stroke-width="0.7" fill="none"/>
+    <line x1="90" y1="45" x2="90" y2="26" stroke="#BACC23" stroke-width="0.7"/>
+    <line x1="90" y1="135" x2="90" y2="154" stroke="#BACC23" stroke-width="0.7"/>
+    <line x1="45" y1="90" x2="26" y2="90" stroke="#BACC23" stroke-width="0.7"/>
+    <line x1="135" y1="90" x2="154" y2="90" stroke="#BACC23" stroke-width="0.7"/>
+    <path d="M620 55 Q652 44 670 67 Q688 90 714 78" stroke="#BACC23" stroke-width="0.8" fill="none"/>
+    <path d="M608 82 Q640 71 658 94 Q676 117 702 105" stroke="#BACC23" stroke-width="0.6" fill="none"/>
+    <circle cx="640" cy="460" r="28" stroke="#BACC23" stroke-width="0.7" fill="none"/>
+    <text x="640" y="446" text-anchor="middle" fill="#BACC23" font-size="9" font-family="Inter" opacity="0.5">N</text>
+    <polygon points="640,448 636,460 640,456 644,460" fill="#BACC23" opacity="0.5"/>
+  </svg>
+  <div class="hero-content">
+    <div class="hero-eyebrow">Journal de l'Atelier</div>
+    <div class="hero-meta-top">N° 01 · Expertise · Mai 2026</div>
+    <h1>Lire un terrain<br/><em>avant de le toucher</em></h1>
+    <p class="hero-desc">La première discipline du paysagiste — et la plus sous-estimée. Ce que nous analysons avant qu'une seule pierre soit posée.</p>
+    <div class="hero-byline">
+      <span>Adil Boumahdi</span>
+      <div class="hero-byline-dot"></div>
+      <span>8 min de lecture</span>
+      <div class="hero-byline-dot"></div>
+      <span>Conception · Étude de site</span>
+    </div>
+  </div>
+</section>
+
+<!-- ARTICLE -->
+<article class="article">
+
+  <p class="chapeau">
+    Avant qu'un plan soit dessiné, avant qu'un seul matériau soit choisi, avant même la première réunion client — nous marchons. Nous lisons. Nous écoutons ce que le terrain a à dire. C'est là que commence, en réalité, tout projet paysager sérieux.
+  </p>
+
+  <p>Un espace extérieur n'est pas une page blanche. Il a une mémoire géologique vieille de milliers d'années, une orientation solaire qui change heure par heure et de saison en saison, des vents dominants qui sculptent imperceptiblement la végétation existante, un sol dont la composition déterminera dans dix ans si vos plantations prospèrent ou survivent péniblement.</p>
+
+  <p>Chez ABA, l'étude de site n'est pas une formalité administrative. C'est la fondation sur laquelle repose <strong>l'intégralité des décisions qui suivront</strong>. Elle conditionne le choix des espèces végétales, le positionnement des structures minérales, la conception du réseau d'irrigation, la gestion des eaux pluviales et l'orientation des espaces de vie extérieurs.</p>
+
+  <div class="divider">Les quatre lectures du terrain</div>
+
+  <div class="grid4">
+    <div class="g-item">
+      <span class="g-icon">🪨</span>
+      <h3>Le sol</h3>
+      <p>Sa texture, son pH, sa capacité de drainage et sa composition organique. Un sol argileux retient l'eau et nécessitera un réseau de drainage. Un sol sableux la laisse filer — certaines espèces s'en accommoderont, d'autres exigeront un amendement avant toute plantation.</p>
+      <span class="g-tag">Fondation</span>
+    </div>
+    <div class="g-item">
+      <span class="g-icon">☀️</span>
+      <h3>L'ensoleillement</h3>
+      <p>Les zones d'ombre portée à différentes heures et en différentes saisons. Ce que vous voyez à 10h en mars n'a rien à voir avec 15h en juillet. Positionner une pergola, un bassin ou une zone de plantation sans cette lecture, c'est laisser le hasard décider à votre place.</p>
+      <span class="g-tag">Orientation</span>
+    </div>
+    <div class="g-item">
+      <span class="g-icon">💨</span>
+      <h3>Le vent</h3>
+      <p>Au Maroc, le chergui dessèche en quelques jours ce que des semaines d'arrosage ont construit. Le vent marin charge en sel et brûle les feuillages les plus délicats. Identifier les vents dominants d'un site, c'est concevoir des coupe-vents là où ils sont réellement utiles.</p>
+      <span class="g-tag">Résilience</span>
+    </div>
+    <div class="g-item">
+      <span class="g-icon">📐</span>
+      <h3>La topographie</h3>
+      <p>Les pentes orientent naturellement les eaux de ruissellement. Une terrasse mal positionnée devient un point de stagnation ou d'érosion. Nous lisons le relief avant d'y tracer quoi que ce soit — chaque courbe de niveau est une information, pas un obstacle.</p>
+      <span class="g-tag">Hydraulique</span>
+    </div>
+  </div>
+
+  <p>Cette étape de lecture préalable est ce qui permet, ensuite, de dessiner avec précision et non par approximation. Elle transforme les contraintes du site — exposition difficile, sol ingrat, vent violent — en éléments de composition. <strong>Ce que d'autres voient comme des problèmes, nous les lisons comme des partis pris potentiels.</strong></p>
+
+  <div class="pull-quote">
+    <p>Un extérieur bien conçu commence sous les pieds, pas sur l'écran. La richesse d'un projet paysager tient d'abord à la qualité de l'écoute qui le précède.</p>
+    <cite>— Adil Boumahdi, fondateur ABA</cite>
+  </div>
+
+  <div class="section-head">
+    <span class="section-num">02</span>
+    <h2>Ce que révèle une visite de site sérieuse</h2>
+  </div>
+
+  <p>Lors de chaque première visite, nous arrivons avec des instruments simples : un luxmètre pour mesurer l'intensité lumineuse, une sonde pour prélever un échantillon de sol, un hygromètre pour évaluer l'humidité ambiante, et surtout — du temps. Du temps pour marcher le site en entier, pour observer les traces laissées par l'eau, pour identifier les zones de végétation spontanée qui indiquent toujours quelque chose sur les conditions locales.</p>
+
+  <p><strong>Un relevé topographique précis est systématiquement réalisé</strong> pour les projets de plus de 500 m². Sur les grandes surfaces — parcs, domaines, lotissements — nous utilisons des relevés photogrammétriques par drone qui nous donnent un modèle numérique du terrain en trois dimensions, base de toutes les études hydrauliques qui suivront.</p>
+
+  <div class="visual">
+    <div class="visual-label">— Schéma · Analyse d'un site type</div>
+    <svg viewBox="0 0 600 240" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path d="M 30 190 Q 100 170 160 182 Q 210 194 255 168 Q 305 140 360 158 Q 410 174 460 148 Q 510 128 570 138 L 570 210 L 30 210 Z"
+        fill="rgba(186,204,35,0.06)" stroke="#BACC23" stroke-width="1"/>
+      <circle cx="510" cy="36" r="18" stroke="#BACC23" stroke-width="0.8" fill="none"/>
+      <line x1="510" y1="12" x2="510" y2="4" stroke="#BACC23" stroke-width="0.8"/>
+      <line x1="532" y1="14" x2="539" y2="7" stroke="#BACC23" stroke-width="0.8"/>
+      <line x1="528" y1="36" x2="536" y2="36" stroke="#BACC23" stroke-width="0.8"/>
+      <line x1="500" y1="54" x2="320" y2="158" stroke="#BACC23" stroke-width="0.4" stroke-dasharray="4,6" opacity="0.35"/>
+      <line x1="505" y1="52" x2="160" y2="178" stroke="#BACC23" stroke-width="0.4" stroke-dasharray="4,6" opacity="0.25"/>
+      <path d="M 30 55 Q 70 43 90 58" stroke="#BACC23" stroke-width="1" fill="none"/>
+      <text x="8" y="53" fill="#BACC23" font-size="8" font-family="Inter" opacity="0.55">vent</text>
+      <path d="M 255 168 Q 300 198 340 188 Q 380 182 420 200" stroke="#5599ff" stroke-width="0.8" stroke-dasharray="3,4" fill="none" opacity="0.45"/>
+      <text x="290" y="224" fill="#5599ff" font-size="8" font-family="Inter" opacity="0.5">ruissellement</text>
+      <text x="110" y="162" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.6">zone argile</text>
+      <text x="350" y="144" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.6">zone sableuse</text>
+      <circle cx="68" cy="210" r="16" stroke="rgba(186,204,35,0.25)" stroke-width="0.6" fill="none"/>
+      <text x="68" y="198" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.5">N</text>
+      <line x1="68" y1="200" x2="68" y2="210" stroke="#BACC23" stroke-width="0.8" opacity="0.5"/>
+    </svg>
+  </div>
+
+  <div class="section-head">
+    <span class="section-num">03</span>
+    <h2>Pourquoi cette rigueur change tout</h2>
+  </div>
+
+  <p>Un projet paysager qui ne s'appuie pas sur une lecture rigoureuse du terrain finit toujours par payer le prix de cette omission. Des espèces végétales qui dépérissent parce que le sol était inadapté. Un réseau d'irrigation surdimensionné parce que l'exposition n'avait pas été étudiée. Des terrasses qui se fissurent parce que les mouvements de terrain n'avaient pas été anticipés.</p>
+
+  <p>À l'inverse, un site bien lu devient une opportunité. <strong>Cette colline en fond de parcelle</strong> que le client voyait comme un inconvénient devient un belvédère naturel. <strong>Ce segment de terrain argileux</strong> révèle sa capacité à recevoir un étang naturel sans imperméabilisation artificielle. <strong>Ce vent dominant</strong> donne la direction des haies de protection qui créent des micro-climats favorables à l'intérieur du jardin.</p>
+
+  <p>C'est cette lecture — précise, patiente, rigoureuse — qui différencie un jardin dessiné d'un jardin conçu. L'un répond à une commande. L'autre répond à un lieu.</p>
+
+  <div class="signature">
+    <div class="sig-avatar">AB</div>
+    <div class="sig-text">
+      <h4>Adil Boumahdi</h4>
+      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
+    </div>
+  </div>
+
+  <div class="cta">
+    <h3>Votre projet mérite<br/><em>une lecture attentive.</em></h3>
+    <p>Première consultation offerte. Nous étudions chaque demande sous 72h et n'engageons qu'un nombre limité de projets par an.</p>
+    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
+  </div>
+
+  <div class="related">
+    <div class="related-label">— Articles suivants</div>
+    <div class="related-grid">
+      <a href="#" class="rel-card">
+        <span class="rel-tag">N° 02 · Minéral</span>
+        <h4>La pierre sèche : pourquoi elle dure 300 ans</h4>
+      </a>
+      <a href="#" class="rel-card">
+        <span class="rel-tag">N° 03 · Végétal</span>
+        <h4>Choisir une plante endémique, pas décorative</h4>
+      </a>
+    </div>
+  </div>
+
+</article>
+
+<footer>
+  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
+  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
+</footer>
+
+<script>
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('aba-blog-theme', t);
+    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+    document.getElementById('btn-light').classList.toggle('active', t === 'light');
+  }
+  // Restore saved preference
+  const saved = localStorage.getItem('aba-blog-theme');
+  if (saved) setTheme(saved);
+</script>
+
+</body>
+</html>
