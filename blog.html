@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Journal de l'Atelier — ABA Paysage</title>
+  <meta name="description" content="Expertise paysagère, maîtrise minérale, végétale et hydraulique. Le regard hebdomadaire d'ABA sur l'art du jardin d'exception." />
+  <meta property="og:title" content="Journal de l'Atelier — ABA" />
+  <meta property="og:image" content="https://www.ab-landscapes.com/assets/og-cover.jpg" />
+  <link rel="canonical" href="https://www.ab-landscapes.com/blog.html" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #BACC23;
+      --bg: #0D0D0B;
+      --bg2: #141410;
+      --bg3: #1A1A14;
+      --text: #E8E4DC;
+      --text-body: #C4C0B6;
+      --muted: rgba(232,228,220,0.40);
+      --border: rgba(232,228,220,0.08);
+      --border2: rgba(232,228,220,0.13);
+    }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body {
+      background: var(--bg); color: var(--text-body);
+      font-family: 'Inter', sans-serif; font-weight: 300;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* NAV */
+    nav {
+      position: sticky; top: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 56px; height: 60px;
+      background: rgba(13,13,11,0.96); backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--border);
+    }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.12em; color: var(--text); text-decoration: none; }
+    .nav-logo span { color: var(--accent); }
+    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-site { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 200ms; }
+    .nav-site:hover { color: var(--accent); }
+    .nav-cta { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 9px 22px; text-decoration: none; }
+    .nav-cta:hover { opacity: 0.85; }
+
+    /* HERO JOURNAL */
+    .journal-hero {
+      padding: 100px 56px 72px;
+      border-bottom: 1px solid var(--border);
+      position: relative; overflow: hidden;
+    }
+    .journal-hero-grid {
+      position: absolute; inset: 0; opacity: 0.03;
+      background-image: linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px);
+      background-size: 72px 72px;
+    }
+    .journal-hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .hero-eyebrow { font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--accent); margin-bottom: 24px; display: flex; align-items: center; gap: 14px; }
+    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
+    .journal-hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 24px; }
+    .journal-hero h1 em { font-style: italic; color: var(--accent); }
+    .journal-hero p { font-size: 15px; line-height: 1.8; color: var(--muted); max-width: 480px; margin-bottom: 40px; }
+    .hero-stats { display: flex; gap: 40px; }
+    .stat-item { }
+    .stat-n { font-family: 'Cormorant Garamond', serif; font-size: 32px; font-weight: 300; color: var(--text); line-height: 1; }
+    .stat-l { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); margin-top: 4px; }
+
+    /* FILTRES */
+    .filters {
+      padding: 0 56px;
+      border-bottom: 1px solid var(--border);
+      display: flex; align-items: center; gap: 4px;
+      overflow-x: auto;
+    }
+    .filter-btn {
+      font-family: 'Inter', sans-serif;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 16px 20px; background: transparent; border: none;
+      color: var(--muted); cursor: pointer; white-space: nowrap;
+      border-bottom: 2px solid transparent; transition: color 200ms, border-color 200ms;
+    }
+    .filter-btn.active { color: var(--accent); border-bottom-color: var(--accent); }
+    .filter-btn:hover { color: var(--text); }
+
+    /* FEATURED — article mis en avant */
+    .featured {
+      display: grid; grid-template-columns: 1fr 1fr;
+      border-bottom: 1px solid var(--border);
+    }
+    .featured-visual {
+      background: var(--bg2);
+      min-height: 480px; position: relative; overflow: hidden;
+      border-right: 1px solid var(--border);
+    }
+    .featured-svg {
+      position: absolute; inset: 0; width: 100%; height: 100%;
+      opacity: 0.12;
+    }
+    .featured-badge {
+      position: absolute; top: 32px; left: 32px;
+      font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase;
+      color: var(--bg); background: var(--accent); padding: 6px 14px;
+    }
+    .featured-num {
+      position: absolute; bottom: 32px; right: 32px;
+      font-family: 'Cormorant Garamond', serif; font-size: 96px; font-weight: 300;
+      color: var(--accent); opacity: 0.15; line-height: 1;
+    }
+    .featured-content {
+      padding: 56px 52px;
+      display: flex; flex-direction: column; justify-content: center;
+    }
+    .featured-tag { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--accent); margin-bottom: 20px; }
+    .featured-content h2 { font-family: 'Cormorant Garamond', serif; font-size: clamp(26px, 3vw, 40px); font-weight: 300; line-height: 1.2; color: var(--text); margin-bottom: 20px; }
+    .featured-content h2 em { font-style: italic; color: var(--accent); }
+    .featured-excerpt { font-size: 15px; line-height: 1.8; color: var(--muted); margin-bottom: 36px; }
+    .featured-meta { display: flex; align-items: center; gap: 16px; font-size: 11px; color: var(--muted); margin-bottom: 32px; }
+    .meta-dot { width: 3px; height: 3px; border-radius: 50%; background: var(--accent); }
+    .read-btn {
+      display: inline-flex; align-items: center; gap: 10px;
+      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--bg); background: var(--accent);
+      padding: 13px 28px; text-decoration: none; align-self: flex-start;
+      transition: opacity 200ms;
+    }
+    .read-btn:hover { opacity: 0.85; }
+
+    /* GRILLE ARTICLES */
+    .articles-section { padding: 64px 56px 100px; }
+    .section-header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 48px;
+    }
+    .section-title { font-size: 10px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--muted); }
+    .section-count { font-size: 10px; letter-spacing: 0.2em; color: var(--muted); }
+
+    .articles-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr);
+      gap: 1px; background: var(--border);
+    }
+
+    .article-card {
+      background: var(--bg); padding: 36px 32px;
+      border-top: 2px solid transparent;
+      text-decoration: none; color: var(--text);
+      transition: border-color 220ms, background 220ms;
+      display: flex; flex-direction: column;
+    }
+    .article-card:hover { border-color: var(--accent); background: var(--bg2); }
+    .article-card.coming-soon { opacity: 0.4; pointer-events: none; }
+
+    .card-issue { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 16px; }
+    .card-domain {
+      display: inline-flex; align-items: center; gap: 6px;
+      font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--muted); margin-bottom: 20px;
+    }
+    .domain-dot { width: 5px; height: 5px; border-radius: 50%; flex-shrink: 0; }
+    .domain-mineral { background: #8B7355; }
+    .domain-vegetal { background: #5A7A3A; }
+    .domain-eau { background: #3A6B8A; }
+    .domain-conception { background: #BACC23; }
+    .domain-projet { background: #9B6B9B; }
+    .domain-entretien { background: #8A6B3A; }
+
+    .card-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 21px; font-weight: 400; line-height: 1.25;
+      color: var(--text); margin-bottom: 16px; flex: 1;
+    }
+    .card-excerpt { font-size: 13px; line-height: 1.75; color: var(--muted); margin-bottom: 28px; }
+    .card-footer { display: flex; align-items: center; justify-content: space-between; margin-top: auto; }
+    .card-date { font-size: 10px; letter-spacing: 0.15em; color: var(--muted); }
+    .card-read { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--accent); }
+    .card-soon { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); }
+
+    /* NEWSLETTER INLINE */
+    .newsletter-strip {
+      margin: 0 0 1px; background: var(--bg3);
+      border-top: 1px solid var(--accent);
+      display: grid; grid-template-columns: 1fr 1fr;
+      padding: 0;
+    }
+    .newsletter-text { padding: 40px 52px; border-right: 1px solid var(--border); }
+    .newsletter-text h3 { font-family: 'Cormorant Garamond', serif; font-size: 26px; font-weight: 300; color: var(--text); margin-bottom: 8px; }
+    .newsletter-text h3 em { font-style: italic; color: var(--accent); }
+    .newsletter-text p { font-size: 13px; line-height: 1.7; color: var(--muted); }
+    .newsletter-form-wrap { padding: 40px 52px; display: flex; flex-direction: column; justify-content: center; }
+    .newsletter-label { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--muted); margin-bottom: 16px; }
+    .newsletter-row { display: flex; gap: 0; align-items: stretch; }
+    .newsletter-input {
+      flex: 1; background: transparent;
+      border: none; border-bottom: 1px solid var(--border2);
+      color: var(--text); font-family: 'Inter', sans-serif;
+      font-size: 14px; padding: 8px 0; outline: none;
+      transition: border-color 200ms;
+    }
+    .newsletter-input::placeholder { color: var(--muted); }
+    .newsletter-input:focus { border-bottom-color: var(--accent); }
+    .newsletter-submit {
+      background: transparent; border: none;
+      border-bottom: 1px solid var(--accent);
+      color: var(--accent); font-family: 'Inter', sans-serif;
+      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 8px 16px; cursor: pointer; white-space: nowrap;
+      transition: background 200ms, color 200ms;
+    }
+    .newsletter-submit:hover { background: var(--accent); color: var(--bg); }
+    .newsletter-note { font-size: 10px; color: rgba(232,228,220,0.22); margin-top: 8px; }
+
+    /* FOOTER */
+    footer {
+      padding: 32px 56px;
+      border-top: 1px solid var(--border);
+      display: flex; justify-content: space-between; align-items: center;
+      flex-wrap: wrap; gap: 12px;
+    }
+    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--muted); letter-spacing: 0.1em; }
+    .footer-copy { font-size: 11px; color: rgba(232,228,220,0.2); }
+
+    /* RESPONSIVE */
+    @media (max-width: 1024px) {
+      .articles-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 20px; }
+      .journal-hero { padding: 72px 20px 48px; }
+      .filters { padding: 0 20px; }
+      .featured { grid-template-columns: 1fr; }
+      .featured-visual { min-height: 260px; }
+      .featured-content { padding: 36px 24px; }
+      .articles-section { padding: 40px 20px 72px; }
+      .articles-grid { grid-template-columns: 1fr; }
+      .newsletter-strip { grid-template-columns: 1fr; }
+      .newsletter-text { border-right: none; border-bottom: 1px solid var(--border); padding: 32px 24px; }
+      .newsletter-form-wrap { padding: 32px 24px; }
+      footer { padding: 24px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
+  <div class="nav-right">
+    <a href="preview.html" class="nav-site">← Site principal</a>
+    <a href="preview.html#contact" class="nav-cta">Initier un projet</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<header class="journal-hero">
+  <div class="journal-hero-grid"></div>
+  <div class="journal-hero-content">
+    <div class="hero-eyebrow">Journal de l'Atelier</div>
+    <h1>Le regard<br/><em>d'un paysagiste.</em></h1>
+    <p>Expertise paysagère, maîtrise minérale, végétale et hydraulique. Un regard par semaine sur l'art du jardin d'exception — depuis l'atelier ABA.</p>
+    <div class="hero-stats">
+      <div class="stat-item">
+        <div class="stat-n">12</div>
+        <div class="stat-l">Articles · Saison 1</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">5</div>
+        <div class="stat-l">Domaines couverts</div>
+      </div>
+      <div class="stat-item">
+        <div class="stat-n">~8'</div>
+        <div class="stat-l">Lecture par article</div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- FILTRES -->
+<div class="filters">
+  <button class="filter-btn active">Tous</button>
+  <button class="filter-btn">Conception</button>
+  <button class="filter-btn">Minéral</button>
+  <button class="filter-btn">Végétal</button>
+  <button class="filter-btn">Eau</button>
+  <button class="filter-btn">Entretien</button>
+  <button class="filter-btn">Projet ABA</button>
+</div>
+
+<!-- ARTICLE FEATURED -->
+<div class="featured">
+  <div class="featured-visual">
+    <svg class="featured-svg" viewBox="0 0 600 500" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
+      <ellipse cx="300" cy="280" rx="320" ry="190" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+      <ellipse cx="300" cy="280" rx="240" ry="140" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+      <ellipse cx="300" cy="280" rx="165" ry="94" stroke="#BACC23" stroke-width="0.9" fill="none"/>
+      <ellipse cx="300" cy="280" rx="100" ry="56" stroke="#BACC23" stroke-width="1.1" fill="none"/>
+      <ellipse cx="300" cy="280" rx="48" ry="28" stroke="#BACC23" stroke-width="1.4" fill="none"/>
+      <circle cx="80" cy="80" r="32" stroke="#BACC23" stroke-width="0.7" fill="none"/>
+      <line x1="80" y1="42" x2="80" y2="24" stroke="#BACC23" stroke-width="0.7"/>
+      <line x1="80" y1="118" x2="80" y2="136" stroke="#BACC23" stroke-width="0.7"/>
+      <line x1="42" y1="80" x2="24" y2="80" stroke="#BACC23" stroke-width="0.7"/>
+      <line x1="118" y1="80" x2="136" y2="80" stroke="#BACC23" stroke-width="0.7"/>
+      <path d="M480 50 Q510 40 528 58 Q546 76 570 66" stroke="#BACC23" stroke-width="0.8" fill="none"/>
+    </svg>
+    <div class="featured-badge">N° 01 · Parution</div>
+    <div class="featured-num">01</div>
+  </div>
+  <div class="featured-content">
+    <div class="featured-tag">
+      <span style="display:inline-block;width:5px;height:5px;border-radius:50%;background:#BACC23;margin-right:8px;vertical-align:middle;"></span>
+      Conception · Étude de site
+    </div>
+    <h2>Lire un terrain<br/><em>avant de le toucher</em></h2>
+    <p class="featured-excerpt">La première discipline du paysagiste — et la plus sous-estimée. Avant qu'une seule pierre soit posée, nous marchons. Nous lisons. Nous écoutons ce que le terrain a à dire.</p>
+    <div class="featured-meta">
+      <span>Adil Boumahdi</span>
+      <div class="meta-dot"></div>
+      <span>8 min de lecture</span>
+      <div class="meta-dot"></div>
+      <span>Mai 2026</span>
+    </div>
+    <a href="blog/lire-un-terrain-avant-de-le-toucher.html" class="read-btn">
+      Lire l'article →
+    </a>
+  </div>
+</div>
+
+<!-- GRILLE ARTICLES -->
+<section class="articles-section">
+  <div class="section-header">
+    <span class="section-title">— Tous les articles</span>
+    <span class="section-count">1 publié · 11 à venir</span>
+  </div>
+
+  <div class="articles-grid">
+
+    <!-- N°01 — PUBLIÉ -->
+    <a href="blog/lire-un-terrain-avant-de-le-toucher.html" class="article-card">
+      <div class="card-issue">N° 01</div>
+      <div class="card-domain">
+        <span class="domain-dot domain-conception"></span>
+        Conception
+      </div>
+      <h3 class="card-title">Lire un terrain avant de le toucher</h3>
+      <p class="card-excerpt">Sol, ensoleillement, vent, topographie : les quatre lectures que nous faisons de chaque site avant toute intervention.</p>
+      <div class="card-footer">
+        <span class="card-date">Mai 2026</span>
+        <span class="card-read">Lire →</span>
+      </div>
+    </a>
+
+    <!-- N°02 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 02</div>
+      <div class="card-domain"><span class="domain-dot domain-mineral"></span>Minéral</div>
+      <h3 class="card-title">La pierre sèche : pourquoi elle dure 300 ans</h3>
+      <p class="card-excerpt">Une technique millénaire, aucun liant, une durabilité exceptionnelle. Ce que la pierre sèche dit d'un territoire.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°03 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 03</div>
+      <div class="card-domain"><span class="domain-dot domain-vegetal"></span>Végétal</div>
+      <h3 class="card-title">Choisir une plante endémique, pas décorative</h3>
+      <p class="card-excerpt">Aucune espèce sous perfusion. Ce que signifie planter en accord avec un sol, un vent, un territoire.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°04 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 04</div>
+      <div class="card-domain"><span class="domain-dot domain-projet"></span>Projet ABA</div>
+      <h3 class="card-title">Parc Mérinide — de la lecture du site à l'inauguration</h3>
+      <p class="card-excerpt">5 hectares, un lac de 5 000 m², une flore endémique. Le workflow complet d'un projet public patrimonial.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°05 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 05</div>
+      <div class="card-domain"><span class="domain-dot domain-eau"></span>Eau</div>
+      <h3 class="card-title">Un lac artificiel, comment ça vit vraiment</h3>
+      <p class="card-excerpt">Filtration, oxygénation, équilibre biologique. La technique derrière la beauté d'un plan d'eau.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°06 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 06</div>
+      <div class="card-domain"><span class="domain-dot domain-conception"></span>Conception</div>
+      <h3 class="card-title">Revêtements extérieurs : la technique derrière l'esthétique</h3>
+      <p class="card-excerpt">Grès cérame, pierre naturelle, béton désactivé, bois. Ce que chaque matériau implique en termes de pose et durabilité.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°07 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 07</div>
+      <div class="card-domain"><span class="domain-dot domain-eau"></span>Eau</div>
+      <h3 class="card-title">Arrosage automatique — concevoir pour économiser</h3>
+      <p class="card-excerpt">Goutte-à-goutte, asperseurs, secteurs, programmation. Un système bien conçu divise la consommation d'eau par trois.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°08 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 08</div>
+      <div class="card-domain"><span class="domain-dot domain-projet"></span>Projet ABA</div>
+      <h3 class="card-title">Étang Rabat — hydraulique, filtre biologique, Koi</h3>
+      <p class="card-excerpt">1 000 m² de bassin naturel. Le détail technique d'un projet hydraulique et ornemental de haute exigence.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°09 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 09</div>
+      <div class="card-domain"><span class="domain-dot domain-entretien"></span>Entretien</div>
+      <h3 class="card-title">L'entretien signé : ce qu'un jardin sans suivi devient</h3>
+      <p class="card-excerpt">Un jardin abandonné à lui-même ne vieillit pas bien. Ce que notre garantie de suivi change concrètement sur 10 ans.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°10 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 10</div>
+      <div class="card-domain"><span class="domain-dot domain-conception"></span>Conception</div>
+      <h3 class="card-title">Éclairage d'ambiance : la nuit comme deuxième jardin</h3>
+      <p class="card-excerpt">Basse tension, LED, variation d'intensité. L'éclairage extérieur conçu révèle un jardin que le jour ne montre pas.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°11 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 11</div>
+      <div class="card-domain"><span class="domain-dot domain-conception"></span>Conception</div>
+      <h3 class="card-title">Villa, hôtel, parc urbain — même rigueur, autre échelle</h3>
+      <p class="card-excerpt">De 300 m² à 10 hectares, notre méthode ne change pas. Ce qui change, c'est la coordination et la logistique.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+    <!-- N°12 — À VENIR -->
+    <div class="article-card coming-soon">
+      <div class="card-issue">N° 12</div>
+      <div class="card-domain"><span class="domain-dot domain-projet"></span>Projet ABA</div>
+      <h3 class="card-title">Bilan Saison 1 — ABA, la signature</h3>
+      <p class="card-excerpt">Ce que douze regards sur le paysage disent d'un atelier, d'une méthode et d'une exigence. La signature en mouvement.</p>
+      <div class="card-footer">
+        <span class="card-date">Bientôt</span>
+        <span class="card-soon">À paraître</span>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<div class="newsletter-strip">
+  <div class="newsletter-text">
+    <h3>Journal hebdomadaire<br/><em>de l'Atelier.</em></h3>
+    <p>Un regard par semaine — expertise, projets, savoir-faire. Sans spam.</p>
+  </div>
+  <div class="newsletter-form-wrap">
+    <div class="newsletter-label">S'abonner au Journal</div>
+    <form action="https://2841c208.sibforms.com/serve/MUIFAK0S-hOm74Fy1HPGKIimqMbEb4t2WvYZ_b5TwQ1gvP3nDDDZmH8PXZwcWOE_bjZ6_dJ7VT-UwbCILrU_wShXmeiRN2QKVOo2rrd904tQKFgE_EjQjY8gnrIfEfx_tUMxQPAJQ0hvLZ7hm6SljWafWrT8CnjQy6o1qnIdXXfiY0azyoaKm5e_n2wZP4jrObC7l9pzg63_Z1W3CA==" method="POST" target="_blank">
+      <input type="hidden" name="email_address_check" value="" />
+      <input type="hidden" name="locale" value="fr" />
+      <div class="newsletter-row">
+        <input type="email" name="EMAIL" class="newsletter-input" placeholder="votre@email.com" required />
+        <button type="submit" class="newsletter-submit">S'abonner →</button>
+      </div>
+    </form>
+    <div class="newsletter-note">Un regard par semaine — sans spam.</div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
+  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
+</footer>
+
+<script>
+  // Filtres
+  document.querySelectorAll('.filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+    });
+  });
+</script>
+
+</body>
+</html>
