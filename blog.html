@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,22 +13,41 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    :root {
+
+    /* ── THÈME SOMBRE (défaut) ── */
+    :root, [data-theme="dark"] {
       --accent: #BACC23;
-      --bg: #0D0D0B;
-      --bg2: #141410;
-      --bg3: #1A1A14;
-      --text: #E8E4DC;
-      --text-body: #C4C0B6;
-      --muted: rgba(232,228,220,0.40);
-      --border: rgba(232,228,220,0.08);
-      --border2: rgba(232,228,220,0.13);
+      --bg:   #13130E;
+      --bg2:  #1B1B13;
+      --bg3:  #222218;
+      --text: #F2EDE3;
+      --text-body: #C8C4BA;
+      --muted: rgba(242,237,227,0.40);
+      --border:  rgba(242,237,227,0.08);
+      --border2: rgba(242,237,227,0.13);
+      --nav-bg: rgba(19,19,14,0.96);
+      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease, opacity 380ms ease;
     }
+
+    /* ── THÈME CLAIR ── */
+    [data-theme="light"] {
+      --bg:   #FAF9F5;
+      --bg2:  #F2EDE4;
+      --bg3:  #E8E2D8;
+      --text: #1A1A14;
+      --text-body: #3A3A2E;
+      --muted: rgba(26,26,20,0.45);
+      --border:  rgba(26,26,20,0.08);
+      --border2: rgba(26,26,20,0.14);
+      --nav-bg: rgba(250,249,245,0.97);
+    }
+
     html { font-size: 16px; scroll-behavior: smooth; }
     body {
       background: var(--bg); color: var(--text-body);
       font-family: 'Inter', sans-serif; font-weight: 300;
       -webkit-font-smoothing: antialiased;
+      transition: var(--transition);
     }
 
     /* NAV */
@@ -36,16 +55,35 @@
       position: sticky; top: 0; z-index: 100;
       display: flex; align-items: center; justify-content: space-between;
       padding: 0 56px; height: 60px;
-      background: rgba(13,13,11,0.96); backdrop-filter: blur(16px);
+      background: var(--nav-bg); backdrop-filter: blur(16px);
       border-bottom: 1px solid var(--border);
+      transition: var(--transition);
     }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.12em; color: var(--text); text-decoration: none; }
+    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.12em; color: var(--text); text-decoration: none; transition: color 380ms ease; }
     .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 24px; }
+    .nav-right { display: flex; align-items: center; gap: 20px; }
     .nav-site { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--muted); text-decoration: none; transition: color 200ms; }
     .nav-site:hover { color: var(--accent); }
-    .nav-cta { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 9px 22px; text-decoration: none; }
+    .nav-cta { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 9px 22px; text-decoration: none; transition: opacity 200ms; }
     .nav-cta:hover { opacity: 0.85; }
+
+    /* THEME TOGGLE */
+    .theme-toggle {
+      display: flex; align-items: center;
+      border: 1px solid var(--border2); border-radius: 2px;
+      overflow: hidden;
+    }
+    .theme-btn {
+      display: flex; align-items: center; gap: 5px;
+      font-family: 'Inter', sans-serif;
+      font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase;
+      padding: 6px 11px; border: none; cursor: pointer;
+      background: transparent; color: var(--muted);
+      transition: background 280ms ease, color 280ms ease;
+    }
+    .theme-btn.active { background: var(--accent); color: var(--bg); }
+    .theme-btn:not(.active):hover { color: var(--text); }
+    .theme-divider { width: 1px; height: 18px; background: var(--border2); flex-shrink: 0; }
 
     /* HERO JOURNAL */
     .journal-hero {
@@ -210,7 +248,7 @@
       transition: background 200ms, color 200ms;
     }
     .newsletter-submit:hover { background: var(--accent); color: var(--bg); }
-    .newsletter-note { font-size: 10px; color: rgba(232,228,220,0.22); margin-top: 8px; }
+    .newsletter-note { font-size: 10px; color: var(--muted); opacity: 0.55; margin-top: 8px; }
 
     /* FOOTER */
     footer {
@@ -248,6 +286,18 @@
 <nav>
   <a href="preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
   <div class="nav-right">
+    <!-- Toggle thème lecture -->
+    <div class="theme-toggle">
+      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Thème sombre Pierre">
+        <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><path d="M7 1C3.686 1 1 3.686 1 7s2.686 6 6 6 6-2.686 6-6S10.314 1 7 1zm0 1v10A5 5 0 0 1 7 2z" fill="currentColor"/></svg>
+        <span>Pierre</span>
+      </button>
+      <div class="theme-divider"></div>
+      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Thème clair Crème">
+        <svg width="11" height="11" viewBox="0 0 14 14" fill="none"><circle cx="7" cy="7" r="2.8" fill="currentColor"/><line x1="7" y1="1" x2="7" y2="2.4" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="7" y1="11.6" x2="7" y2="13" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="1" y1="7" x2="2.4" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="11.6" y1="7" x2="13" y2="7" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="2.93" y1="2.93" x2="3.96" y2="3.96" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="10.04" y1="10.04" x2="11.07" y2="11.07" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="11.07" y1="2.93" x2="10.04" y2="3.96" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/><line x1="3.96" y1="10.04" x2="2.93" y2="11.07" stroke="currentColor" stroke-width="1.3" stroke-linecap="round"/></svg>
+        <span>Crème</span>
+      </button>
+    </div>
     <a href="preview.html" class="nav-site">← Site principal</a>
     <a href="preview.html#contact" class="nav-cta">Initier un projet</a>
   </div>
@@ -513,7 +563,26 @@
 </footer>
 
 <script>
-  // Filtres
+  /* ── THÈME TOGGLE ─────────────────────────────────── */
+  function setTheme(t) {
+    document.documentElement.setAttribute('data-theme', t);
+    localStorage.setItem('aba-blog-theme', t);
+    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
+    document.getElementById('btn-light').classList.toggle('active', t === 'light');
+  }
+  // Appliquer immédiatement le thème sauvegardé (avant render pour éviter le flash)
+  (function() {
+    const saved = localStorage.getItem('aba-blog-theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    // Les boutons seront mis à jour au DOMContentLoaded
+  })();
+  document.addEventListener('DOMContentLoaded', () => {
+    const saved = localStorage.getItem('aba-blog-theme') || 'dark';
+    document.getElementById('btn-dark').classList.toggle('active', saved === 'dark');
+    document.getElementById('btn-light').classList.toggle('active', saved === 'light');
+  });
+
+  /* ── FILTRES ──────────────────────────────────────── */
   document.querySelectorAll('.filter-btn').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
