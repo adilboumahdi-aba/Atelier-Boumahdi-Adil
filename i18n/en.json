@@ -6,7 +6,8 @@
     "portfolio": "Portfolio",
     "resilience": "Resilience",
     "contact": "Contact",
-    "cta": "Start a project"
+    "cta": "Start a project",
+    "journal": "Journal"
   },
   "hero": {
     "eyebrow": "Studio — Est. 2015",
@@ -157,10 +158,22 @@
     "form_message": "A few words about your project",
     "form_submit": "Send enquiry →",
     "project_types": [
-      ["design",      "Design"],
-      ["realisation", "Construction"],
-      ["entretien",   "Maintenance"],
-      ["conseil",     "Consulting"]
+      [
+        "design",
+        "Design"
+      ],
+      [
+        "realisation",
+        "Construction"
+      ],
+      [
+        "entretien",
+        "Maintenance"
+      ],
+      [
+        "conseil",
+        "Consulting"
+      ]
     ],
     "success_title": "Thank you.",
     "success_body": "Your enquiry has been received. We will get back to you within 72 hours, from the studio.",
@@ -169,11 +182,26 @@
   "footer": {
     "quote": "\"A garden is never finished. It begins.\"",
     "col1_title": "Studio",
-    "col1_items": ["Philosophy", "Team", "Press", "Careers"],
+    "col1_items": [
+      "Philosophy",
+      "Team",
+      "Press",
+      "Careers"
+    ],
     "col2_title": "Services",
-    "col2_items": ["Design", "Construction", "Maintenance", "Consulting"],
+    "col2_items": [
+      "Design",
+      "Construction",
+      "Maintenance",
+      "Consulting"
+    ],
     "col3_title": "Follow the studio",
-    "col3_items": ["Instagram — @atelierboumahdiadil", "Journal — monthly newsletter", "LinkedIn", "WhatsApp Business"],
+    "col3_items": [
+      "Instagram — @atelierboumahdiadil",
+      "Journal — monthly newsletter",
+      "LinkedIn",
+      "WhatsApp Business"
+    ],
     "copyright": "© 2026 — ABA sarl au — Atelier Boumahdi Adil",
     "legal": "Legal notice",
     "privacy": "Privacy policy"

@@ -937,7 +937,7 @@ async function loadLang(lang) {
 
 // Traductions FR pré-chargées inline pour éviter tout flash au démarrage
 I18N_CACHE["fr"] = {
-  nav: { sub: "PREMIUM LANDSCAPE SERVICES", philosophie: "Philosophie", expertise: "Expertise", portfolio: "Portfolio", resilience: "Résilience", contact: "Contact", cta: "Initier un projet" },
+  nav: { sub: "PREMIUM LANDSCAPE SERVICES", philosophie: "Philosophie", expertise: "Expertise", portfolio: "Portfolio", resilience: "Résilience", contact: "Contact", journal: "Journal", cta: "Initier un projet" },
   hero: { eyebrow: "Atelier — Est. 2015", cities: "Rabat · Casablanca · Marrakech · Fès", tagline: "— Le voyage commence ici", h1_line1: "L'art du", h1_em: "paysage", h1_accent: "d'exception.", desc: "Concepteurs, architectes paysagistes, agronomes, jardiniers, bâtisseurs. Nous dessinons des extérieurs habités — taillés dans la pierre, écrits par l'eau, validés par le climat.", cta_primary: "Commencer l'ascension", cta_secondary: "Voir nos sommets", scroll: "scroll", signature: "la signature" },
   philosophie: { step: "Étape 01 — La fondation", img_label1: "/ texture · pierre", img_caption: "Chaque projet commence sous nos pieds — la lecture du sol, de l'orientation, de la pluie qui ne viendra pas.", section_tag: "— Philosophie", h2_line1: "L'équilibre entre la", h2_em: "main de l'homme", h2_line2: "et la", h2_accent: "force organique.", p1: "Nous croyons qu'un jardin n'est pas un décor. C'est un lieu qui respire, qui se patine, qui résiste — et qui, avec le temps, devient plus juste qu'au premier jour.", p2: "Architecture minérale, gestion fine de l'eau, plantations endémiques : trois exigences, une seule signature. La nôtre.", stat1_n: "+11 ans", stat1_l: "d'atelier", stat2_n: "+22", stat2_l: "grands projets", stat3_n: "+33", stat3_l: "projets résidentiels", img_label2: "/ vivant", quote: '"Patience"', quote_author: "Adil B. — fondateur" },
   expertise: { step: "Étape 02 — L'ascension", h2_line1: "Cinq paliers,", h2_em: "une seule", h2_accent: "trajectoire.", intro: "Notre méthode emprunte au jardin ce qu'il a de plus précieux : la lenteur. Cinq étapes, conduites comme une ascension — chacune valide la précédente, chacune prépare la suivante.", steps: [ { n:"01", title:"Étude & lecture du site", sub:"Topographie · ensoleillement · vent · sol", body:"Nous arpentons. Nous écoutons. Nous mesurons. Le projet est d'abord une carte du terrain." }, { n:"02", title:"Dialogue & vision partagée", sub:"Brief · désirs · mode de vie · scénarios", body:"Réconcilier le client avec son espace, c'est le cœur de notre métier. Nous cartographions les attentes, les modes de vie, les silences — puis explorons ensemble les scénarios qui feront surgir du site sa beauté, sa biodiversité, son caractère propre." }, { n:"03", title:"Conception architecturale", sub:"Plans masse · 3D · matériauthèque", body:"Le jardin se dessine comme un bâtiment : volumes, circulations, points de fuite, silences." }, { n:"04", title:"Maîtrise minérale & hydraulique", sub:"Pierre sèche · bassins · drainage", body:"L'eau est sculptée. La pierre est posée. Le climat dicte les contraintes — nous les transformons en parti pris." }, { n:"05", title:"Plantation & entretien signé", sub:"Espèces résilientes · suivi pluriannuel", body:"Au sommet, le vivant. Nous accompagnons chaque jardin sur 5, 10, 20 ans — c'est là qu'il prend sa forme." } ] },
@@ -1004,6 +1004,28 @@ function Nav({ scrollY, accent }) {
               {it.label}
             </button>
           ))}
+          <a
+            href="blog.html"
+            className="text-[13px] tracking-[0.18em] uppercase"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontWeight: 400,
+              color: accent,
+              textDecoration: "none",
+              transition: "opacity 200ms",
+              display: "flex",
+              alignItems: "center",
+              gap: 5,
+            }}
+            onMouseEnter={(e) => e.currentTarget.style.opacity = "0.7"}
+            onMouseLeave={(e) => e.currentTarget.style.opacity = "1"}
+          >
+            <svg width="10" height="10" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0 }}>
+              <circle cx="5" cy="5" r="4" stroke="currentColor" strokeWidth="1.2"/>
+              <circle cx="5" cy="5" r="1.5" fill="currentColor"/>
+            </svg>
+            {t.nav.journal}
+          </a>
           <button
             onClick={() => go("contact")}
             className="text-[12px] tracking-[0.2em] uppercase px-5 py-3 border"
@@ -1057,6 +1079,26 @@ function Nav({ scrollY, accent }) {
               {it.label}
             </button>
           ))}
+          <a
+            href="blog.html"
+            style={{
+              fontFamily: "'Inter', sans-serif",
+              fontSize: 13,
+              letterSpacing: "0.18em",
+              textTransform: "uppercase",
+              color: accent,
+              textDecoration: "none",
+              display: "flex",
+              alignItems: "center",
+              gap: 6,
+            }}
+          >
+            <svg width="8" height="8" viewBox="0 0 10 10" fill="none" style={{ flexShrink: 0 }}>
+              <circle cx="5" cy="5" r="4" stroke="currentColor" strokeWidth="1.4"/>
+              <circle cx="5" cy="5" r="1.5" fill="currentColor"/>
+            </svg>
+            {t.nav.journal}
+          </a>
         </div>
       ) : null}
     </header>
