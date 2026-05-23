@@ -419,6 +419,60 @@
     .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
 
     /* ══════════════════════════════════════════
+       GALERIE DE RÉFÉRENCES
+    ══════════════════════════════════════════ */
+    .fig-label {
+      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+      font-family: 'Inter', sans-serif; font-weight: 400;
+    }
+    .fig-single { margin: 52px 0; }
+    .fig-duo {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin: 52px 0;
+    }
+    .fig-mosaic {
+      display: grid;
+      grid-template-columns: 3fr 2fr;
+      gap: 8px; margin: 52px 0;
+    }
+    .fig-mosaic > :first-child { grid-row: span 2; }
+    .fig-img {
+      position: relative; overflow: hidden;
+      background: var(--bg3);
+    }
+    .fig-img img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover;
+      filter: saturate(0.78) contrast(1.04) brightness(0.97);
+      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fig-img:hover img { transform: scale(1.045); }
+    .ratio-21-9 { aspect-ratio: 21/9; }
+    .ratio-16-9 { aspect-ratio: 16/9; }
+    .ratio-4-3  { aspect-ratio: 4/3; }
+    .ratio-3-2  { aspect-ratio: 3/2; }
+    .fig-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 36px 14px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
+      font-weight: 300; pointer-events: none;
+    }
+    .fig-caption {
+      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
+      color: var(--text-muted); font-family: 'Inter', sans-serif;
+      font-weight: 300; line-height: 1.65; transition: color 380ms;
+    }
+    .fig-caption strong { color: var(--text-body); font-weight: 400; }
+    .fig-credit {
+      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
+      color: var(--text-muted); opacity: 0.40;
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+
+    /* ══════════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════════ */
     @media (max-width: 768px) {
@@ -435,6 +489,9 @@
       footer { padding: 24px 20px; }
       .theme-btn span { display: none; }
       .theme-btn { padding: 6px 10px; }
+      .fig-duo { grid-template-columns: 1fr; gap: 20px; }
+      .fig-mosaic { grid-template-columns: 1fr; }
+      .fig-mosaic > :first-child { grid-row: span 1; }
     }
   </style>
 </head>
@@ -521,6 +578,21 @@
 
   <p>Chez ABA, l'étude de site n'est pas une formalité administrative. C'est la fondation sur laquelle repose <strong>l'intégralité des décisions qui suivront</strong>. Elle conditionne le choix des espèces végétales, le positionnement des structures minérales, la conception du réseau d'irrigation, la gestion des eaux pluviales et l'orientation des espaces de vie extérieurs.</p>
 
+  <!-- ── GALERIE 01 · Cinématique · lire avant d'intervenir ── -->
+  <div class="fig-single" style="margin: 44px 0 52px;">
+    <div class="fig-label">— Lire avant d'intervenir</div>
+    <div class="fig-img ratio-21-9">
+      <img
+        src="https://images.unsplash.com/photo-1481125783028-3650c763e383?auto=format&fit=crop&w=1600&q=85"
+        alt="Horizon de colline désertique — lecture du terrain paysager"
+        loading="lazy"
+      />
+      <span class="fig-overlay">Avant tout trait, avant tout choix — marcher le terrain</span>
+    </div>
+    <p class="fig-caption"><strong>La première lecture est toujours à pied.</strong> Le site est parcouru dans tous les sens avant qu'un plan soit esquissé — en cherchant l'eau, l'ombre portée, la direction du vent, les points hauts et bas du relief. Ce que le drone ne voit pas encore, les pieds le sentent.</p>
+    <p class="fig-credit">Photo · Stephen Pedersen — Unsplash</p>
+  </div>
+
   <div class="divider">Les quatre lectures du terrain</div>
 
   <div class="grid4">
@@ -556,6 +628,43 @@
     <p>Un extérieur bien conçu commence sous les pieds, pas sur l'écran. La richesse d'un projet paysager tient d'abord à la qualité de l'écoute qui le précède.</p>
     <cite>— Adil Boumahdi, fondateur ABA</cite>
   </div>
+
+  <!-- ── GALERIE 02 · Mosaïque · relief et végétation ── -->
+  <div style="margin: 52px 0 8px;">
+    <div class="fig-label">— Relief, sol, végétation spontanée</div>
+  </div>
+  <div class="fig-mosaic">
+    <div>
+      <div class="fig-img ratio-4-3">
+        <img
+          src="https://images.unsplash.com/photo-1620841321437-1fdf89e1371e?auto=format&fit=crop&w=900&q=82"
+          alt="Collines vertes et brunes — topographie révélatrice des conditions paysagères"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Relief · exposition · drainage naturel</span>
+      </div>
+      <p class="fig-caption"><strong>Le relief parle.</strong> Chaque dénivelé indique où va l'eau, quelles zones sont en ombre portée l'après-midi, où la végétation sera protégée du vent. Lire une pente, c'est déjà concevoir le drainage.</p>
+    </div>
+    <div>
+      <div class="fig-img ratio-16-9" style="margin-bottom: 8px;">
+        <img
+          src="https://images.unsplash.com/photo-1629746958979-08060ed5bf0b?auto=format&fit=crop&w=700&q=82"
+          alt="Arbres sur versant montagneux — végétation révélatrice des conditions de sol"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Végétation spontanée · indicateur de sol</span>
+      </div>
+      <div class="fig-img ratio-16-9">
+        <img
+          src="https://images.unsplash.com/photo-1739464889400-e87ec57f246d?auto=format&fit=crop&w=700&q=82"
+          alt="Vallée avec montagne — topographie et microclimats à lire"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Fond de vallée · microclimat · cuvette naturelle</span>
+      </div>
+    </div>
+  </div>
+  <p class="fig-credit">Photos · Daniil Silantev / Stefanos Nt / Saban Onay — Unsplash</p>
 
   <div class="section-head">
     <span class="section-num">02</span>
@@ -599,6 +708,33 @@
   <p>À l'inverse, un site bien lu devient une opportunité. <strong>Cette colline en fond de parcelle</strong> que le client voyait comme un inconvénient devient un belvédère naturel. <strong>Ce segment de terrain argileux</strong> révèle sa capacité à recevoir un étang naturel sans imperméabilisation artificielle. <strong>Ce vent dominant</strong> donne la direction des haies de protection qui créent des micro-climats favorables à l'intérieur du jardin.</p>
 
   <p>C'est cette lecture — précise, patiente, rigoureuse — qui différencie un jardin dessiné d'un jardin conçu. L'un répond à une commande. L'autre répond à un lieu.</p>
+
+  <!-- ── GALERIE 03 · Duo · le terrain comme matière de conception ── -->
+  <div class="fig-duo" style="margin: 44px 0 12px;">
+    <div>
+      <div class="fig-img ratio-4-3">
+        <img
+          src="https://images.unsplash.com/photo-1680089606451-fa249c95eaa6?auto=format&fit=crop&w=800&q=82"
+          alt="Chemin de terre dans les montagnes — cheminement naturel du terrain"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Contrainte lue → parti pris de conception</span>
+      </div>
+      <p class="fig-caption"><strong>Le terrain impose ses chemins.</strong> Un paysagiste ne trace pas des allées arbitraires — il suit ce que le site a déjà décidé par ses pentes, ses sols et ses vues naturelles.</p>
+    </div>
+    <div>
+      <div class="fig-img ratio-4-3">
+        <img
+          src="https://images.unsplash.com/photo-1525159873586-29425110f608?auto=format&fit=crop&w=800&q=82"
+          alt="Pentes verdoyantes — topographie lue comme composition paysagère"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Topographie lue → composition paysagère</span>
+      </div>
+      <p class="fig-caption"><strong>La contrainte devient structure.</strong> Ce que le client voyait comme un problème — une pente, un creux, une butte — devient, lu correctement, l'élément structurant de tout le projet.</p>
+    </div>
+  </div>
+  <p class="fig-credit" style="margin-bottom: 48px;">Photos · Elias Tsapaliaris / Jeremy Bishop — Unsplash</p>
 
   <div class="signature">
     <div class="sig-avatar">AB</div>

@@ -196,6 +196,66 @@
     .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
     .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
 
+    /* ══════════════════════════════════════════
+       GALERIE DE RÉFÉRENCES
+    ══════════════════════════════════════════ */
+    .fig-label {
+      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+      font-family: 'Inter', sans-serif; font-weight: 400;
+    }
+    .fig-single { margin: 52px 0; }
+    .fig-strip {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 6px; margin: 52px 0;
+    }
+    .fig-portrait-pair {
+      display: grid; grid-template-columns: 2fr 1.4fr;
+      gap: 8px; margin: 52px 0;
+    }
+    .fig-stack { display: flex; flex-direction: column; gap: 8px; }
+    .fig-img {
+      position: relative; overflow: hidden;
+      background: var(--bg3);
+    }
+    .fig-img img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover;
+      filter: saturate(0.78) contrast(1.04) brightness(0.97);
+      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fig-img:hover img { transform: scale(1.045); }
+    .ratio-21-9 { aspect-ratio: 21/9; }
+    .ratio-16-9 { aspect-ratio: 16/9; }
+    .ratio-4-3  { aspect-ratio: 4/3; }
+    .ratio-3-2  { aspect-ratio: 3/2; }
+    .ratio-2-3  { aspect-ratio: 2/3; }
+    .ratio-1-1  { aspect-ratio: 1/1; }
+    .fig-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 36px 14px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
+      font-weight: 300; pointer-events: none;
+    }
+    .fig-caption {
+      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
+      color: var(--text-muted); font-family: 'Inter', sans-serif;
+      font-weight: 300; line-height: 1.65; transition: color 380ms;
+    }
+    .fig-caption strong { color: var(--text-body); font-weight: 400; }
+    .fig-strip-caption {
+      margin-top: 8px; font-size: 9.5px; letter-spacing: 0.16em;
+      text-transform: uppercase; color: var(--text-muted);
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+    .fig-credit {
+      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
+      color: var(--text-muted); opacity: 0.40;
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+
     @media (max-width: 768px) {
       nav { padding: 0 20px; height: 56px; }
       .nav-back, .nav-cta { display: none; }
@@ -211,6 +271,11 @@
       .theme-btn { padding: 6px 10px; }
       .plant-item { grid-template-columns: 1fr 1fr; }
       .plant-use { display: none; }
+      .fig-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
+      .fig-portrait-pair { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 480px) {
+      .fig-strip { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -332,6 +397,50 @@
   <p>Une plante endémique est une espèce qui a évolué pendant des millénaires dans une zone géographique précise. Elle s'est adaptée au sol local, au régime hydrique local, aux vents dominants, aux variations thermiques, aux insectes et aux oiseaux du territoire. <strong>Elle n'a pas besoin qu'on l'aide à survivre — parce qu'elle a déjà résolu tous ces problèmes seule.</strong></p>
 
   <p>La différence avec une plante purement décorative est fondamentale. Une plante décorative a été sélectionnée, souvent hybridée, pour maximiser l'impact visuel : floraison abondante, feuillage spectaculaire, port architectural. Elle a été optimisée pour la pépinière et le catalogue — pas pour un sol argileux à 600 m d'altitude dans le Moyen-Atlas.</p>
+
+  <!-- ── GALERIE 01 · Film-strip · l'endémique dans son milieu ── -->
+  <div style="margin: 44px 0 0;">
+    <div class="fig-label">— L'endémique dans son milieu naturel</div>
+    <div class="fig-strip">
+      <div>
+        <div class="fig-img ratio-3-2">
+          <img
+            src="https://images.unsplash.com/photo-1771784056984-88140713f9ae?auto=format&fit=crop&w=700&q=82"
+            alt="Oliviers sur versant aride — endémique méditerranéen sans irrigation"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Olivier sauvage · versant aride · zéro irrigation</span>
+        </div>
+        <p class="fig-strip-caption">Olea europaea</p>
+        <p class="fig-caption" style="font-size:10.5px;">L'olivier résiste 40 ans sans eau supplémentaire. Il a résolu le problème seul.</p>
+      </div>
+      <div>
+        <div class="fig-img ratio-3-2">
+          <img
+            src="https://images.unsplash.com/photo-1764096535287-32774de348d2?auto=format&fit=crop&w=700&q=82"
+            alt="Mur de pierre avec végétation endémique — co-existence naturelle"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Pierre et végétal · co-évolution naturelle</span>
+        </div>
+        <p class="fig-strip-caption">Pierre locale + végétal endémique</p>
+        <p class="fig-caption" style="font-size:10.5px;">La plante endémique colonise spontanément le minéral local — aucune aide requise.</p>
+      </div>
+      <div>
+        <div class="fig-img ratio-3-2">
+          <img
+            src="https://images.unsplash.com/photo-1773979687273-3e7c342d913e?auto=format&fit=crop&w=700&q=82"
+            alt="Arbre à floraison rose — espèce endémique en fleurs au printemps"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Floraison endémique · printemps · faune locale</span>
+        </div>
+        <p class="fig-strip-caption">Floraison printanière</p>
+        <p class="fig-caption" style="font-size:10.5px;">Chaque floraison endémique nourrit une chaîne trophique locale entière.</p>
+      </div>
+    </div>
+    <p class="fig-credit">Photos · Drawchicken Studio / Yen Vu / Rancy Tan — Unsplash</p>
+  </div>
 
   <div class="divider">Quatre raisons de choisir l'endémique</div>
 
@@ -493,6 +602,49 @@
     </svg>
   </div>
 
+  <!-- ── GALERIE 02 · Portrait + duo empilé · le végétal en place ── -->
+  <div style="margin: 52px 0 8px;">
+    <div class="fig-label">— La plante endémique dans le projet</div>
+  </div>
+  <div class="fig-portrait-pair">
+    <div>
+      <div class="fig-img ratio-2-3">
+        <img
+          src="https://images.unsplash.com/photo-1745057305694-dce726cfcf37?auto=format&fit=crop&w=700&q=82"
+          alt="Escalier en pierre avec grand arbres — végétation installée en hauteur"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Végétation installée · 5 ans · structure verticale</span>
+      </div>
+      <p class="fig-caption"><strong>La verticalité vient avec le temps.</strong> Une plantation endémique dense et structurée prend entre 3 et 7 ans pour révéler sa stature. Le résultat est sans comparaison avec tout ce qu'une pépinière peut vendre.</p>
+    </div>
+    <div class="fig-stack">
+      <div>
+        <div class="fig-img ratio-1-1">
+          <img
+            src="https://images.unsplash.com/photo-1770460192475-08e7ea9299d3?auto=format&fit=crop&w=600&q=82"
+            alt="Jardin avec allées en pierre et végétation méditerranéenne"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Allées pierre + strates végétales</span>
+        </div>
+        <p class="fig-caption" style="font-size:10.5px;"><strong>Trois strates superposées</strong> — arboré, arbustif, herbacé — créent un écosystème autonome.</p>
+      </div>
+      <div>
+        <div class="fig-img ratio-1-1">
+          <img
+            src="https://images.unsplash.com/photo-1557868363-e58c250144cf?auto=format&fit=crop&w=600&q=82"
+            alt="Allée bordée d'arbres — intégration végétale dans espace extérieur"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Canopée fermée · ombre naturelle</span>
+        </div>
+        <p class="fig-caption" style="font-size:10.5px;"><strong>La canopée se ferme</strong> en 5 à 8 ans — créant une ombre naturelle qui réduit l'arrosage de 30%.</p>
+      </div>
+    </div>
+  </div>
+  <p class="fig-credit">Photos · Kelly Cristine / George / Tom Wheatley — Unsplash</p>
+
   <div class="section-head">
     <span class="section-num">03</span>
     <h2>La règle des trois ans</h2>
@@ -516,6 +668,20 @@
   </div>
 
   <p>Ce protocole simple transforme radicalement le résultat à long terme. <strong>Un jardin planté selon ces principes, dix ans plus tard, est plus dense, plus stable et plus beau qu'au premier jour</strong> — et il ne coûte presque rien à entretenir. C'est l'exact inverse d'un jardin d'apparat planté trop vite avec des espèces inadaptées.</p>
+
+  <!-- ── GALERIE 03 · Pleine largeur · le jardin abouti ── -->
+  <div class="fig-single" style="margin: 44px 0 8px;">
+    <div class="fig-img ratio-16-9">
+      <img
+        src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1400&q=85"
+        alt="Allée bordée d'arbres et mur de pierre — jardin endémique mature"
+        loading="lazy"
+      />
+      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Jardin endémique mature · allée · mur calcaire · canopée fermée</span>
+    </div>
+    <p class="fig-caption"><strong>Ce que devient un jardin endémique après dix ans.</strong> Dense, structuré, ombragé. La végétation locale n'a pas besoin d'être gérée — elle se règle seule sur le territoire dont elle est issue.</p>
+    <p class="fig-credit">Photo · Miguel Ángel Sanz — Unsplash</p>
+  </div>
 
   <div class="pull-quote">
     <p>On ne plante pas pour cette saison. On plante pour ce que le jardin sera dans vingt ans. Et dans vingt ans, seul le vivant qui appartient vraiment à ce lieu sera encore là pour le prouver.</p>
