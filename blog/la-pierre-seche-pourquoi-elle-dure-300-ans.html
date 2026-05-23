@@ -446,6 +446,63 @@
     .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
 
     /* ══════════════════════════════════════════
+       GALERIE DE RÉFÉRENCES
+    ══════════════════════════════════════════ */
+    .fig-label {
+      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 18px;
+      font-family: 'Inter', sans-serif; font-weight: 400;
+    }
+    .fig-duo {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 12px; margin: 52px 0;
+    }
+    .fig-trio {
+      display: grid; grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px; margin: 18px 0 50px;
+    }
+    .fig-single { margin: 52px 0; }
+    .fig-img {
+      position: relative; overflow: hidden;
+      background: var(--bg3);
+    }
+    .fig-img img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover;
+      filter: saturate(0.78) contrast(1.04) brightness(0.97);
+      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fig-img:hover img { transform: scale(1.045); }
+    .ratio-4-3  { aspect-ratio: 4/3; }
+    .ratio-3-2  { aspect-ratio: 3/2; }
+    .ratio-16-9 { aspect-ratio: 16/9; }
+    .fig-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 36px 14px 12px;
+      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
+      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
+      font-weight: 300; pointer-events: none;
+    }
+    .fig-caption {
+      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
+      color: var(--text-muted); font-family: 'Inter', sans-serif;
+      font-weight: 300; line-height: 1.65;
+      transition: color 380ms;
+    }
+    .fig-caption strong { color: var(--text-body); font-weight: 400; }
+    .fig-mat-label {
+      margin-top: 9px; font-size: 9.5px; letter-spacing: 0.18em;
+      text-transform: uppercase; color: var(--text-muted);
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+    .fig-credit {
+      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
+      color: var(--text-muted); opacity: 0.40;
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+
+    /* ══════════════════════════════════════════
        RESPONSIVE
     ══════════════════════════════════════════ */
     @media (max-width: 768px) {
@@ -455,6 +512,8 @@
       .hero { padding: 0 20px 52px; min-height: 70vh; }
       .article { padding: 16px 20px 72px; }
       .grid4 { grid-template-columns: 1fr; }
+      .fig-duo { grid-template-columns: 1fr; gap: 20px; }
+      .fig-trio { grid-template-columns: 1fr 1fr; gap: 10px; }
       .related-grid { grid-template-columns: 1fr; }
       .pull-quote { padding: 32px 24px; }
       .pull-quote p { font-size: 20px !important; }
@@ -462,6 +521,9 @@
       footer { padding: 24px 20px; }
       .theme-btn span { display: none; }
       .theme-btn { padding: 6px 10px; }
+    }
+    @media (max-width: 480px) {
+      .fig-trio { grid-template-columns: 1fr; }
     }
   </style>
 </head>
@@ -600,6 +662,33 @@
 
   <p>Chez ABA, nous l'utilisons chaque fois que le site s'y prête : terrasses en pente, murets de soutènement, escaliers extérieurs, emmarchements de jardins. Non par nostalgie. Parce que c'est la solution la plus honnête, la plus durable et — paradoxalement — la plus cohérente avec les exigences d'un jardin premium qui doit vieillir sans trahir.</p>
 
+  <!-- ── GALERIE 01 · Appareillage & vie des joints ── -->
+  <div class="fig-duo">
+    <div>
+      <div class="fig-img ratio-4-3">
+        <img
+          src="https://images.unsplash.com/photo-1697497710118-0d5cb5a7094a?auto=format&fit=crop&w=800&q=82"
+          alt="Mur en pierre sèche — appareillage croisé, joints décalés"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Appareillage croisé · joints décalés</span>
+      </div>
+      <p class="fig-caption"><strong>La logique du joint décalé</strong> — Chaque pierre repose sur deux du rang inférieur. Aucun joint vertical ne se superpose : les forces de compression se répartissent en éventail. Aucun liant, aucune faiblesse ponctuelle.</p>
+    </div>
+    <div>
+      <div class="fig-img ratio-4-3">
+        <img
+          src="https://images.unsplash.com/photo-1761837861663-4f15911466a7?auto=format&fit=crop&w=800&q=82"
+          alt="Joints de pierre sèche colonisés par la mousse — consolidation biologique"
+          loading="lazy"
+        />
+        <span class="fig-overlay">Joints colonisés · consolidation biologique</span>
+      </div>
+      <p class="fig-caption"><strong>Le vieillissement comme renforcement</strong> — Mousses et lichens augmentent mécaniquement l'accroche entre les blocs. Ce n'est pas de la dégradation. C'est de la consolidation vivante.</p>
+    </div>
+  </div>
+  <p class="fig-credit">Photos · Joe Halinar / Brian Cockley — Unsplash</p>
+
   <div class="divider">Pourquoi elle dure</div>
 
   <div class="grid4">
@@ -654,6 +743,50 @@
       <br/><br/>
       <strong style="color: var(--text);">Le basalte volcanique</strong> — plus difficile à travailler mais extrêmement dur, il est réservé aux zones à fort trafic et aux abords de plans d'eau. Sa teinte anthracite presque noire crée un contraste fort avec la végétation verte.
     </p>
+  </div>
+
+  <!-- ── GALERIE 02 · Les 3 matériaux ── -->
+  <div style="margin: 48px 0 0;">
+    <div class="fig-label">— Sélection matériaux · références visuelles ABA</div>
+    <div class="fig-trio">
+      <div>
+        <div class="fig-img ratio-3-2">
+          <img
+            src="https://images.unsplash.com/photo-1761637823587-1e81a9c63ee2?auto=format&fit=crop&w=600&q=82"
+            alt="Calcaire de l'Atlas — pierre de soutènement, tons ocre dorés"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Calcaire · Moyen-Atlas</span>
+        </div>
+        <p class="fig-mat-label">Calcaire de l'Atlas</p>
+        <p class="fig-caption" style="font-size:10.5px;">Tons ocre dorés, stratification naturelle régulière. Premier choix pour terrasses et murets.</p>
+      </div>
+      <div>
+        <div class="fig-img ratio-3-2">
+          <img
+            src="https://images.unsplash.com/photo-1774975787267-c46000e68cbc?auto=format&fit=crop&w=600&q=82"
+            alt="Pierre de taille calcaire fin — assises de finition, bordures de bassin"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Calcaire fin · Fès</span>
+        </div>
+        <p class="fig-mat-label">Pierre de Fès (Khettara)</p>
+        <p class="fig-caption" style="font-size:10.5px;">Grain fin, utilisé depuis le IXe siècle. Réservé aux assises visibles et emmarchements.</p>
+      </div>
+      <div>
+        <div class="fig-img ratio-3-2">
+          <img
+            src="https://images.unsplash.com/photo-1504672281656-e4981d70414b?auto=format&fit=crop&w=600&q=82"
+            alt="Basalte volcanique — teinte anthracite, zones à fort trafic"
+            loading="lazy"
+          />
+          <span class="fig-overlay">Basalte · zones de trafic</span>
+        </div>
+        <p class="fig-mat-label">Basalte volcanique</p>
+        <p class="fig-caption" style="font-size:10.5px;">Teinte anthracite, extrêmement dur. Abords de plans d'eau et zones de passage intense.</p>
+      </div>
+    </div>
+    <p class="fig-credit">Photos · Sergej Karpow / Hiroko Nishimura / Lou Batier — Unsplash</p>
   </div>
 
   <div class="visual">
@@ -727,6 +860,20 @@
   <p>Au Maroc, la pierre sèche est partout dans les territoires ruraux — les terrasses agricoles de l'Anti-Atlas, les seguias de pierre qui distribuaient l'eau depuis le XIe siècle, les enclos pastoraux des hautes plaines. C'est une technique qui a structuré les paysages marocains bien avant que le béton n'existe. La réutiliser dans nos projets, c'est puiser dans ce répertoire local.</p>
 
   <p>Elle est aussi, concrètement, la seule technique de soutènement qui <strong>améliore avec le temps</strong>. Les mousses qui colonisent les joints augmentent l'accroche entre les pierres. Les racines des plantes qui s'installent dans les interstices consolident mécaniquement la structure. Le vieillissement d'un mur en pierre sèche est un processus de renforcement, pas de dégradation.</p>
+
+  <!-- ── GALERIE 03 · Réalisation · plein format ── -->
+  <div class="fig-single">
+    <div class="fig-img ratio-16-9">
+      <img
+        src="https://images.unsplash.com/photo-1761928299635-14d606d1a7aa?auto=format&fit=crop&w=1400&q=85"
+        alt="Jardin avec mur en pierre sèche et végétation fleurie — intégration paysagère"
+        loading="lazy"
+      />
+      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Intégration végétale · mur en pierre locale · séquence herbacée-arbustive</span>
+    </div>
+    <p class="fig-caption"><strong>L'intégration comme principe</strong> — Le mur ne divise pas l'espace, il l'articule. La végétation ne cache pas la pierre, elle l'habite. C'est la logique d'un aménagement qui vieillit dans le sens du paysage, pas contre lui.</p>
+    <p class="fig-credit">Photo · Mohamed B. — Unsplash</p>
+  </div>
 
   <div class="pull-quote">
     <p>Dans cinquante ans, le mur en béton armé sera fissuré, carbonaté, rouillé. Le mur en pierre sèche sera plus beau et plus solide que le jour de sa pose. C'est tout ce qu'il y a à savoir sur la durabilité.</p>
