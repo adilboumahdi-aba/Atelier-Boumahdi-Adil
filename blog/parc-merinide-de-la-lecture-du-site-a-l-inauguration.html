@@ -244,6 +244,57 @@
       font-family: 'Inter', sans-serif; transition: color 380ms;
     }
 
+    /* ══════════════════════════════════════════
+       PLANCHES DE RÉFÉRENCE
+    ══════════════════════════════════════════ */
+    .herbier-section {
+      margin: 60px 0; padding: 36px 0 40px;
+      border-top: 1px solid var(--border2);
+      border-bottom: 1px solid var(--border2);
+      transition: border-color 380ms;
+    }
+    .herbier-title {
+      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
+      color: var(--text-muted); margin-bottom: 24px;
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+    .herbier-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 12px;
+    }
+    .herb-card { display: flex; flex-direction: column; }
+    .herb-plate {
+      aspect-ratio: 3/4; overflow: hidden;
+      border: 1px solid var(--border); background: var(--bg2);
+      margin-bottom: 10px;
+      transition: border-color 380ms, background 380ms;
+    }
+    .herb-plate img {
+      width: 100%; height: 100%; display: block;
+      object-fit: cover; object-position: top center;
+      filter: sepia(0.08) contrast(1.06) brightness(1.01);
+      transition: transform 800ms ease;
+    }
+    .herb-plate:hover img { transform: scale(1.04); }
+    .herb-name {
+      font-family: 'Cormorant Garamond', serif;
+      font-style: italic; font-size: 14px; font-weight: 400;
+      color: var(--text); margin-bottom: 3px; line-height: 1.3;
+      transition: color 380ms;
+    }
+    .herb-common {
+      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
+      color: var(--accent); margin-bottom: 4px;
+      font-family: 'Inter', sans-serif;
+    }
+    .herb-source {
+      font-size: 8.5px; color: var(--text-muted); opacity: 0.55;
+      font-family: 'Inter', sans-serif; transition: color 380ms;
+    }
+
+    @media (max-width: 600px) { .herbier-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
+
     @media (max-width: 768px) {
       nav { padding: 0 20px; height: 56px; }
       .nav-back, .nav-cta { display: none; }
@@ -606,6 +657,54 @@
       <text x="116" y="282" fill="#8B7355" font-size="7" font-family="Inter" opacity="0.4">Soutènement</text>
     </svg>
   </div>
+
+  <!-- ── PLANCHES · Herbier du Parc Mérinide ── -->
+  <section class="herbier-section">
+    <p class="herbier-title">Herbier du Parc · Espèces endémiques plantées</p>
+    <div class="herbier-grid">
+
+      <div class="herb-card">
+        <div class="herb-plate">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Ceratonia_siliqua_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-046.jpg"
+               alt="Ceratonia siliqua — caroubier endémique Méditerranée" loading="lazy">
+        </div>
+        <p class="herb-name">Ceratonia siliqua</p>
+        <p class="herb-common">Caroubier · Endémique Atlas</p>
+        <p class="herb-source">Köhler's Medizinal-Pflanzen, 1887</p>
+      </div>
+
+      <div class="herb-card">
+        <div class="herb-plate">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Punica_granatum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-220.jpg"
+               alt="Punica granatum — grenadier traditionnel jardins marocains" loading="lazy">
+        </div>
+        <p class="herb-name">Punica granatum</p>
+        <p class="herb-common">Grenadier · Jardins médinaux</p>
+        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+      </div>
+
+      <div class="herb-card">
+        <div class="herb-plate">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
+               alt="Myrtus communis — myrte des jardins andalous" loading="lazy">
+        </div>
+        <p class="herb-name">Myrtus communis</p>
+        <p class="herb-common">Myrte · Jardin andalou</p>
+        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+      </div>
+
+      <div class="herb-card">
+        <div class="herb-plate">
+          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Iris_germanica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-093.jpg"
+               alt="Iris germanica — plante de berge et bassin" loading="lazy">
+        </div>
+        <p class="herb-name">Iris germanica</p>
+        <p class="herb-common">Iris · Berges &amp; bassin</p>
+        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+      </div>
+
+    </div>
+  </section>
 
   <div class="section-head">
     <span class="section-num">03</span>
