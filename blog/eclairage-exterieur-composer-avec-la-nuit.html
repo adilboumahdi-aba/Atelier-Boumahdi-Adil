@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,1037 +13,294 @@
   <link rel="canonical" href="https://www.ab-landscapes.com/blog/eclairage-exterieur-composer-avec-la-nuit.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/journal.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ══════════════════════════════════════════
-       TOKENS — deux thèmes, une seule structure
-    ══════════════════════════════════════════ */
-
-    /* THÈME D — Pierre chaude (défaut) */
-    :root, [data-theme="dark"] {
-      --accent:        #BACC23;
-      --accent-dim:    rgba(186,204,35,0.35);
-
-      --bg:            #13130E;
-      --bg2:           #1B1B13;
-      --bg3:           #222218;
-      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
-
-      --text:          #F2EDE3;
-      --text-body:     #C8C4BA;
-      --text-muted:    rgba(242,237,227,0.40);
-      --border:        rgba(242,237,227,0.08);
-      --border2:       rgba(242,237,227,0.13);
-
-      --hero-grid-op:  0.035;
-      --hero-svg-op:   0.10;
-      --quote-mark-op: 0.10;
-
-      --toggle-bg:     #1B1B13;
-      --toggle-border: rgba(242,237,227,0.15);
-      --toggle-text:   rgba(242,237,227,0.55);
-      --toggle-active-bg:   #BACC23;
-      --toggle-active-text: #13130E;
-
-      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
+    /* Hero immersif — Lightscape */
+    .imm-hero { --ph-a:#c9ad7e; --ph-b:#8f7a52; --ph-c:#4a4334; }
+    /* Grille 4 types d'éclairage */
+    .light-grid {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--line); margin: 2em 0;
     }
-
-    /* THÈME B — Crème lumineuse */
-    [data-theme="light"] {
-      --bg:            #FAF9F5;
-      --bg2:           #F2EDE4;
-      --bg3:           #E8E2D8;
-      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
-
-      --text:          #1A1A14;
-      --text-body:     #3A3A2E;
-      --text-muted:    rgba(26,26,20,0.45);
-      --border:        rgba(26,26,20,0.08);
-      --border2:       rgba(26,26,20,0.14);
-
-      --hero-grid-op:  0.04;
-      --hero-svg-op:   0.08;
-      --quote-mark-op: 0.18;
-
-      --toggle-bg:     #FAF9F5;
-      --toggle-border: rgba(26,26,20,0.18);
-      --toggle-text:   rgba(26,26,20,0.50);
-      --toggle-active-bg:   #1A1A14;
-      --toggle-active-text: #FAF9F5;
+    .light-cell {
+      background: var(--surface); padding: 28px 24px;
+      border-top: 3px solid transparent;
+      transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
     }
-
-    /* ══════════════════════════════════════════
-       BASE
-    ══════════════════════════════════════════ */
-    html { font-size: 17px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text-body);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      line-height: 2.0;
-      -webkit-font-smoothing: antialiased;
-      transition: var(--transition);
+    .light-cell:hover { border-color: var(--accent); background: var(--surface-2); }
+    .light-cell__icon {
+      font-family: var(--serif-display); font-size: 28px; color: var(--ink-faint);
+      margin-bottom: 10px; line-height: 1;
     }
-
-    /* ══════════════════════════════════════════
-       TOGGLE THÈME
-    ══════════════════════════════════════════ */
-    .theme-toggle {
-      display: flex; align-items: center;
-      background: var(--toggle-bg);
-      border: 1px solid var(--toggle-border);
-      border-radius: 2px;
-      overflow: hidden;
-      transition: var(--transition);
+    .light-cell h3 {
+      font-family: var(--serif-display); font-size: 20px; font-weight: 500;
+      color: var(--ink); margin: 0 0 8px; line-height: 1.2;
     }
-    .theme-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 6px 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--toggle-text);
-      background: transparent; border: none; cursor: pointer;
-      transition: background 250ms, color 250ms;
-      white-space: nowrap;
+    .light-cell p {
+      font-family: var(--sans); font-size: 13.5px; line-height: 1.65;
+      color: var(--ink-soft); margin: 0;
     }
-    .theme-btn svg { flex-shrink: 0; }
-    .theme-btn.active {
-      background: var(--toggle-active-bg);
-      color: var(--toggle-active-text);
-    }
-    .theme-divider {
-      width: 1px; height: 20px;
-      background: var(--toggle-border);
-      flex-shrink: 0;
-    }
-
-    /* ══════════════════════════════════════════
-       NAV
-    ══════════════════════════════════════════ */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 56px; height: 60px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: var(--transition);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px; font-weight: 400; letter-spacing: 0.12em;
-      color: var(--text); text-decoration: none;
-      transition: color 380ms;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-back {
-      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none; transition: color 200ms;
-    }
-    .nav-back:hover { color: var(--accent); }
-    .nav-cta {
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--bg); background: var(--accent);
-      padding: 9px 22px; text-decoration: none; transition: opacity 200ms;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-
-    /* ══════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════ */
-    .hero {
-      min-height: 88vh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 56px 72px;
-      position: relative; overflow: hidden;
-      background: var(--bg-hero);
-      transition: background 380ms ease;
-    }
-    [data-theme="light"] .hero {
-      background: var(--bg2);
-    }
-    .hero-grid {
-      position: absolute; inset: 0;
-      opacity: var(--hero-grid-op);
-      background-image:
-        linear-gradient(var(--text) 1px, transparent 1px),
-        linear-gradient(90deg, var(--text) 1px, transparent 1px);
-      background-size: 72px 72px;
-      transition: opacity 380ms;
-    }
-    .hero-svg {
-      position: absolute; right: -20px; top: 0; bottom: 0;
-      width: 52%; opacity: var(--hero-svg-op);
-      transition: opacity 380ms;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none; transition: var(--transition);
-    }
-
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 14px;
-      font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px;
-    }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
-    .hero-meta-top {
-      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
-    }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 5.5vw, 72px);
-      font-weight: 300; line-height: 1.08;
-      color: var(--text); margin-bottom: 28px;
-      transition: color 380ms;
-    }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-desc {
-      font-size: 16px; line-height: 1.75;
-      color: var(--text-muted); max-width: 500px;
-      margin-bottom: 36px; transition: color 380ms;
-    }
-    .hero-byline {
-      display: flex; align-items: center; gap: 20px;
-      font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted);
-      transition: color 380ms;
-    }
-    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
-
-    /* ══════════════════════════════════════════
-       ARTICLE BODY
-    ══════════════════════════════════════════ */
-    .article {
-      max-width: 700px; margin: 0 auto;
-      padding: 20px 40px 100px;
-    }
-
-    .chapeau {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 23px; font-weight: 300; font-style: italic;
-      line-height: 1.65; color: var(--text);
-      padding-left: 28px; border-left: 2px solid var(--accent);
-      margin-bottom: 56px;
-      transition: color 380ms, border-color 380ms;
-    }
-
-    p {
-      font-size: 17px; line-height: 2.0;
-      color: var(--text-body); margin-bottom: 28px;
-      transition: color 380ms;
-    }
-    p strong { color: var(--text); font-weight: 500; }
-
-    .divider {
-      display: flex; align-items: center; gap: 20px;
-      margin: 60px 0 44px;
-      font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--text-muted); transition: color 380ms;
-    }
-    .divider::before, .divider::after {
-      content:''; flex:1; height:1px;
-      background: var(--border2); transition: background 380ms;
-    }
-
-    .section-head {
-      display: flex; align-items: baseline; gap: 20px;
-      margin: 64px 0 28px;
-    }
-    .section-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 52px; font-weight: 300;
-      color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0;
-    }
-    .section-head h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 29px; font-weight: 400;
-      color: var(--text); line-height: 1.2; transition: color 380ms;
-    }
-
-    /* Grille 4 cartes */
-    .grid4 {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; margin: 44px 0;
-      background: var(--border); transition: background 380ms;
-    }
-    .g-item {
-      background: var(--bg2); padding: 32px 28px;
-      border-top: 2px solid transparent;
-      transition: border-color 240ms, background 380ms;
-    }
-    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
-    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-    .g-item h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 400;
-      color: var(--text); margin-bottom: 10px; line-height: 1.2;
-      transition: color 380ms;
-    }
-    .g-item p {
-      font-size: 14px !important; line-height: 1.8 !important;
-      color: var(--text-muted) !important; margin: 0 !important;
-    }
-    .g-tag {
+    .light-tag {
       display: inline-block; margin-top: 12px;
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent-ink); border: 1px solid var(--line); padding: 3px 9px;
+      border-radius: var(--r-sm);
     }
-
-    /* Pull quote */
-    .pull-quote {
-      margin: 60px 0; padding: 48px 52px;
-      background: var(--bg3);
-      border-top: 1px solid var(--accent);
-      position: relative; transition: background 380ms;
-    }
-    .pull-quote::before {
-      content: '"';
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 140px; line-height: 0.75;
-      color: var(--accent); opacity: var(--quote-mark-op);
-      position: absolute; top: 24px; left: 36px;
-      transition: opacity 380ms;
-    }
-    .pull-quote p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px !important; font-style: italic;
-      font-weight: 300; line-height: 1.55 !important;
-      color: var(--text) !important;
-      margin: 0 !important; position: relative; z-index: 1;
-    }
-    .pull-quote cite {
-      display: block; margin-top: 18px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--accent);
-      font-style: normal;
-    }
-
-    /* Schéma */
-    .visual {
-      background: var(--bg2); border: 1px solid var(--border2);
-      padding: 40px; margin: 60px 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .visual-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px;
-    }
-    .visual svg { width:100%; display:block; }
-
-    /* Signature */
-    .signature {
-      display: flex; align-items: center; gap: 20px;
-      margin-top: 72px; padding-top: 36px;
-      border-top: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .sig-avatar {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--bg3); border: 1px solid var(--border2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px; color: var(--accent); flex-shrink: 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
-    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    /* CTA */
-    .cta {
-      margin-top: 80px; padding: 56px 52px;
-      background: var(--bg3); border-top: 1px solid var(--accent);
-      text-align: center; position: relative;
-      transition: background 380ms;
-    }
-    .cta::before {
-      content: ''; position: absolute;
-      top: -1px; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 2px; background: var(--accent);
-    }
-    .cta h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px; font-weight: 300;
-      color: var(--text); line-height: 1.2; margin-bottom: 16px;
-      transition: color 380ms;
-    }
-    .cta h3 em { font-style: italic; color: var(--accent); }
-    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
-    .cta-btn {
-      display: inline-block;
-      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: #13130E; background: var(--accent);
-      padding: 15px 40px; text-decoration: none; transition: opacity 200ms;
-    }
-    .cta-btn:hover { opacity: 0.85; }
-
-    /* Articles suivants */
-    .related {
-      margin-top: 56px; padding-top: 36px;
-      border-top: 1px solid var(--border); transition: border-color 380ms;
-    }
-    .related-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
-    }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
-    .rel-card {
-      background: var(--bg2); padding: 28px 24px;
-      border-top: 2px solid var(--border);
-      text-decoration: none; color: var(--text);
-      transition: border-color 200ms, background 380ms; display: block;
-    }
-    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
-    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
-    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
-
-    /* Footer */
-    footer {
-      margin-top: 80px; padding: 32px 56px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px; transition: border-color 380ms;
-    }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
-    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
-
-    /* ══════════════════════════════════════════
-       GALERIE DE RÉFÉRENCES
-    ══════════════════════════════════════════ */
-    .fig-label {
-      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-      font-family: 'Inter', sans-serif; font-weight: 400;
-    }
-    .fig-single { margin: 52px 0; }
-    .fig-duo {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin: 52px 0;
-    }
-    .fig-mosaic {
-      display: grid;
-      grid-template-columns: 3fr 2fr;
-      gap: 8px; margin: 52px 0;
-    }
-    .fig-mosaic > :first-child { grid-row: span 2; }
-    .fig-img {
-      position: relative; overflow: hidden;
-      background: var(--bg3);
-    }
-    .fig-img img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover;
-      filter: saturate(0.78) contrast(1.04) brightness(0.97);
-      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .fig-img:hover img { transform: scale(1.045); }
-    .ratio-21-9 { aspect-ratio: 21/9; }
-    .ratio-16-9 { aspect-ratio: 16/9; }
-    .ratio-4-3  { aspect-ratio: 4/3; }
-    .ratio-3-2  { aspect-ratio: 3/2; }
-    .fig-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
-      font-weight: 300; pointer-events: none;
-    }
-    .fig-caption {
-      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      font-weight: 300; line-height: 1.65; transition: color 380ms;
-    }
-    .fig-caption strong { color: var(--text-body); font-weight: 400; }
-    .fig-credit {
-      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); opacity: 0.40;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    /* ══════════════════════════════════════════
-       PLANCHES DE RÉFÉRENCE — HERBIER
-    ══════════════════════════════════════════ */
-    .herbier-section {
-      margin: 60px 0; padding: 36px 0 40px;
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .herbier-title {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .herbier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
+    @media (max-width: 600px) { .light-grid { grid-template-columns: 1fr; } }
+    /* Herbier nocturne */
+    .herbier-section { margin: 2.5em 0; padding: 2em 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .herbier-title { font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 20px; }
+    .herbier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .herb-card { display: flex; flex-direction: column; }
-    .herb-plate {
-      aspect-ratio: 3/4; overflow: hidden;
-      border: 1px solid var(--border); background: var(--bg2);
-      margin-bottom: 10px;
-      transition: border-color 380ms, background 380ms;
-    }
-    .herb-plate img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: top center;
-      filter: sepia(0.08) contrast(1.06) brightness(1.01);
-      transition: transform 800ms ease;
-    }
+    .herb-plate { aspect-ratio: 3/4; overflow: hidden; border: 1px solid var(--line-soft); background: var(--surface); border-radius: var(--r-sm); margin-bottom: 10px; }
+    .herb-plate img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; filter: sepia(0.06) contrast(1.05); transition: transform 0.7s var(--ease); }
     .herb-plate:hover img { transform: scale(1.04); }
-    .herb-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 14px; font-weight: 400;
-      color: var(--text); margin-bottom: 3px; line-height: 1.3;
-      transition: color 380ms;
-    }
-    .herb-common {
-      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-    .herb-note {
-      font-size: 10px; line-height: 1.55; color: var(--text-muted);
-      font-family: 'Inter', sans-serif; margin-bottom: 4px;
-      transition: color 380ms;
-    }
-    .herb-source {
-      font-size: 8.5px; color: var(--text-muted); opacity: 0.55;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
+    .herb-name { font-family: var(--serif-display); font-style: italic; font-size: 14px; font-weight: 400; color: var(--ink); margin-bottom: 3px; line-height: 1.3; }
+    .herb-common { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 4px; }
+    .herb-note { font-family: var(--sans); font-size: 11px; line-height: 1.55; color: var(--ink-soft); margin-bottom: 4px; }
+    .herb-source { font-family: var(--sans); font-size: 9px; color: var(--ink-faint); opacity: 0.55; }
     @media (max-width: 600px) { .herbier-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-    /* ══════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════ */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 56px; }
-      .nav-back { display: none; }
-      .nav-cta { display: none; }
-      .hero { padding: 0 20px 52px; min-height: 70vh; }
-      .article { padding: 16px 20px 72px; }
-      .grid4 { grid-template-columns: 1fr; }
-      .related-grid { grid-template-columns: 1fr; }
-      .pull-quote { padding: 32px 24px; }
-      .pull-quote p { font-size: 20px !important; }
-      .cta { padding: 40px 24px; }
-      footer { padding: 24px 20px; }
-      .theme-btn span { display: none; }
-      .theme-btn { padding: 6px 10px; }
-      .fig-duo { grid-template-columns: 1fr; gap: 20px; }
-      .fig-mosaic { grid-template-columns: 1fr; }
-      .fig-mosaic > :first-child { grid-row: span 1; }
-    }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
-  <div class="nav-right">
-
-    <!-- TOGGLE THÈME -->
-    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
-      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-        <span>Pierre</span>
-      </button>
-      <div class="theme-divider"></div>
-      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <span>Crème</span>
-      </button>
-    </div>
-
-    <a href="../blog.html" class="nav-back">← Journal</a>
-    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+<!-- MASTHEAD -->
+<header class="masthead"><div class="wrap masthead__bar">
+  <div class="masthead__left"><a href="../blog.html" class="aba-logo">
+    <svg class="aba-logo__icon" viewBox="0 0 30 34" fill="none"><rect x="1" y="1" width="28" height="32" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 25 L15 9 L22 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10.5 20 H19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
+  </a></div>
+  <div class="masthead__tools">
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
+    <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
   </div>
-</nav>
+</div></header>
+<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-
-  <!-- SVG ÉCLAIRAGE / NUIT -->
-  <svg class="hero-svg" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="opacity: var(--hero-svg-op)">
-    <!-- Fond nuit dégradé -->
-    <defs>
-      <radialGradient id="coneLight1" cx="50%" cy="100%" r="70%">
-        <stop offset="0%" stop-color="#BACC23" stop-opacity="0.18"/>
-        <stop offset="100%" stop-color="#BACC23" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="coneLight2" cx="50%" cy="100%" r="60%">
-        <stop offset="0%" stop-color="#BACC23" stop-opacity="0.14"/>
-        <stop offset="100%" stop-color="#BACC23" stop-opacity="0"/>
-      </radialGradient>
-      <radialGradient id="starGlow" cx="50%" cy="50%" r="50%">
-        <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9"/>
-        <stop offset="100%" stop-color="#ffffff" stop-opacity="0"/>
-      </radialGradient>
-    </defs>
-
-    <!-- Silhouette arbre 1 — grand arbre gauche -->
-    <path d="M 130 560 L 130 310 M 130 380 Q 80 340 55 300 M 130 340 Q 180 295 200 255 M 130 310 Q 100 270 120 230 M 130 350 Q 160 310 185 280"
-      stroke="#BACC23" stroke-width="1.8" stroke-linecap="round" fill="none" opacity="0.6"/>
-    <!-- Canopée arbre 1 -->
-    <ellipse cx="130" cy="245" rx="65" ry="45" fill="#BACC23" opacity="0.05"/>
-    <path d="M 68 270 Q 95 220 130 210 Q 165 220 192 265 Q 175 290 130 295 Q 85 290 68 270Z"
-      fill="#BACC23" opacity="0.04" stroke="#BACC23" stroke-width="0.5"/>
-
-    <!-- Cone de lumière sous arbre 1 (spot engraissant - projecteur vers le haut) -->
-    <path d="M 100 560 L 60 390 L 200 390 L 165 560Z"
-      fill="url(#coneLight1)" opacity="0.5"/>
-    <!-- Point lumineux sol arbre 1 -->
-    <circle cx="130" cy="555" r="6" fill="#BACC23" opacity="0.7"/>
-    <circle cx="130" cy="555" r="12" fill="#BACC23" opacity="0.15"/>
-
-    <!-- Silhouette arbre 2 — arbre droit -->
-    <path d="M 520 560 L 520 350 M 520 420 Q 460 375 440 330 M 520 390 Q 570 345 590 305 M 520 360 Q 495 320 510 280"
-      stroke="#BACC23" stroke-width="1.6" stroke-linecap="round" fill="none" opacity="0.5"/>
-    <!-- Canopée arbre 2 -->
-    <path d="M 438 340 Q 465 280 520 265 Q 575 275 600 335 Q 582 365 520 372 Q 458 365 438 340Z"
-      fill="#BACC23" opacity="0.04" stroke="#BACC23" stroke-width="0.5"/>
-
-    <!-- Cone spot arbre 2 -->
-    <path d="M 490 560 L 450 405 L 590 405 L 552 560Z"
-      fill="url(#coneLight2)" opacity="0.45"/>
-    <circle cx="520" cy="555" r="5" fill="#BACC23" opacity="0.65"/>
-    <circle cx="520" cy="555" r="10" fill="#BACC23" opacity="0.12"/>
-
-    <!-- Arbuste 3 — centre -->
-    <path d="M 330 560 L 330 450 M 330 490 Q 295 460 282 435 M 330 470 Q 362 445 374 420"
-      stroke="#BACC23" stroke-width="1.2" stroke-linecap="round" fill="none" opacity="0.45"/>
-    <ellipse cx="330" cy="420" rx="42" ry="28" fill="#BACC23" opacity="0.04" stroke="#BACC23" stroke-width="0.5"/>
-
-    <!-- Borne lumineuse gauche allée -->
-    <rect x="205" y="530" width="6" height="28" fill="#BACC23" opacity="0.55"/>
-    <circle cx="208" cy="527" r="5" fill="#BACC23" opacity="0.8"/>
-    <circle cx="208" cy="527" r="14" fill="#BACC23" opacity="0.08"/>
-    <!-- Halo sol borne gauche -->
-    <ellipse cx="208" cy="558" rx="25" ry="6" fill="#BACC23" opacity="0.10"/>
-
-    <!-- Borne lumineuse droite allée -->
-    <rect x="420" y="530" width="6" height="28" fill="#BACC23" opacity="0.55"/>
-    <circle cx="423" cy="527" r="5" fill="#BACC23" opacity="0.8"/>
-    <circle cx="423" cy="527" r="14" fill="#BACC23" opacity="0.08"/>
-    <ellipse cx="423" cy="558" rx="25" ry="6" fill="#BACC23" opacity="0.10"/>
-
-    <!-- Câblage basse tension — ligne tirets horizontale -->
-    <line x1="50" y1="548" x2="650" y2="548" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="6,10" opacity="0.3"/>
-
-    <!-- Spot encastré sol 1 -->
-    <circle cx="280" cy="550" r="4" fill="#BACC23" opacity="0.6"/>
-    <circle cx="280" cy="550" r="9" fill="#BACC23" opacity="0.07"/>
-    <!-- Spot encastré sol 2 -->
-    <circle cx="380" cy="550" r="4" fill="#BACC23" opacity="0.6"/>
-    <circle cx="380" cy="550" r="9" fill="#BACC23" opacity="0.07"/>
-
-    <!-- Plan d'eau éclairage indirect — ellipse basse -->
-    <ellipse cx="350" cy="520" rx="80" ry="16" fill="none" stroke="#BACC23" stroke-width="0.6" opacity="0.25"/>
-    <ellipse cx="350" cy="520" rx="65" ry="10" fill="#BACC23" opacity="0.04"/>
-    <!-- Reflet eau -->
-    <path d="M 290 518 Q 320 510 350 514 Q 380 510 410 518" stroke="white" stroke-width="0.5" opacity="0.15" fill="none"/>
-
-    <!-- Étoiles / points lumineux ciel -->
-    <circle cx="85" cy="60" r="1.5" fill="white" opacity="0.7"/>
-    <circle cx="185" cy="35" r="1" fill="white" opacity="0.55"/>
-    <circle cx="260" cy="80" r="1.2" fill="white" opacity="0.6"/>
-    <circle cx="370" cy="28" r="1.8" fill="white" opacity="0.65"/>
-    <circle cx="450" cy="55" r="1" fill="white" opacity="0.5"/>
-    <circle cx="555" cy="42" r="1.5" fill="white" opacity="0.62"/>
-    <circle cx="620" cy="90" r="1" fill="white" opacity="0.45"/>
-    <circle cx="145" cy="100" r="0.8" fill="white" opacity="0.5"/>
-    <circle cx="490" cy="100" r="1.2" fill="white" opacity="0.55"/>
-    <circle cx="310" cy="58" r="0.8" fill="white" opacity="0.4"/>
-    <circle cx="670" cy="130" r="1" fill="white" opacity="0.4"/>
-    <!-- Étoile brillante -->
-    <circle cx="420" cy="38" r="2.5" fill="url(#starGlow)" opacity="0.6"/>
-    <line x1="420" y1="28" x2="420" y2="48" stroke="white" stroke-width="0.4" opacity="0.3"/>
-    <line x1="410" y1="38" x2="430" y2="38" stroke="white" stroke-width="0.4" opacity="0.3"/>
-
-    <!-- Horizon ligne sol -->
-    <line x1="30" y1="560" x2="670" y2="560" stroke="#BACC23" stroke-width="0.5" opacity="0.2"/>
-
-    <!-- Annotation lumière rasante -->
-    <line x1="55" y1="400" x2="95" y2="420" stroke="#BACC23" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.35"/>
-    <text x="20" y="398" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.45">rasant</text>
-
-    <!-- Annotation engraissant -->
-    <line x1="148" y1="520" x2="160" y2="500" stroke="#BACC23" stroke-width="0.5" stroke-dasharray="2,4" opacity="0.35"/>
-    <text x="152" y="496" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.45">engraissant</text>
-  </svg>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Journal de l'Atelier</div>
-    <div class="hero-meta-top">N° 10 · Conception · Février 2027</div>
-    <h1>Éclairage extérieur :<br/><em>composer avec la nuit</em></h1>
-    <p class="hero-desc">La nuit n'est pas une absence de lumière. C'est une deuxième ambiance — et le paysagiste qui sait la composer livre un jardin deux fois plus beau.</p>
-    <div class="hero-byline">
-      <span>Adil Boumahdi</span>
-      <div class="hero-byline-dot"></div>
-      <span>8 min de lecture</span>
-      <div class="hero-byline-dot"></div>
-      <span>Conception · Éclairage paysager</span>
-    </div>
+<!-- HERO IMMERSIF -->
+<div class="imm-hero" style="--ph-a:#c9ad7e;--ph-b:#8f7a52;--ph-c:#4a4334;">
+  <div class="imm-hero__scrim"></div>
+  <div class="wrap imm-hero__inner">
+    <span class="a-cat" style="color:#e9c98f"><span class="chip__dot" style="background:#8f7a52;box-shadow:0 0 0 3px rgba(255,255,255,0.18)"></span>Lightscape</span>
+    <h1 class="a-title imm-hero__title">Éclairage extérieur : composer avec la nuit</h1>
+    <p class="a-dek imm-hero__dek">Lumière rasante, engraissante, indirecte. Un jardin bien éclairé à 2700K est plus beau la nuit que le jour.</p>
+    <div class="imm-hero__meta"><span>Par Adil Boumahdi</span><span class="dotsep"></span><span>Fév. 2027</span><span class="dotsep"></span><span>8 min de lecture</span></div>
   </div>
-</section>
+</div>
 
 <!-- ARTICLE -->
-<article class="article">
+<article class="article fade-up">
+  <div class="wrap-narrow prose">
 
-  <p class="chapeau">
-    La nuit tombée, la plupart des jardins disparaissent. Quelques projecteurs braqués depuis un angle impossible, une guirlande posée sans intention — et c'est tout. Chez ABA, nous considérons l'éclairage comme une discipline de composition à part entière. La nuit est une deuxième ambiance. Elle mérite sa propre partition.
-  </p>
+    <p class="dropcap">La nuit tombée, la plupart des jardins disparaissent. Quelques projecteurs braqués depuis un angle impossible, une guirlande posée sans intention — et c'est tout. Chez ABA, nous considérons l'éclairage comme une discipline de composition à part entière. La nuit est une deuxième ambiance. Elle mérite sa propre partition.</p>
 
-  <p>Il y a une thèse que nous défendons sans détour : <strong>un jardin bien éclairé est plus beau la nuit que le jour.</strong> Le jour, tout est visible — y compris les imperfections. La nuit, le regard est guidé. On ne voit que ce qu'on a décidé de montrer. Les ombres deviennent du volume, la pierre révèle sa texture, un arbre solitaire devient sculpture.</p>
+    <p>Il y a une thèse que nous défendons sans détour : <strong>un jardin bien éclairé est plus beau la nuit que le jour.</strong> Le jour, tout est visible — y compris les imperfections. La nuit, le regard est guidé. On ne voit que ce qu'on a décidé de montrer. Les ombres deviennent du volume, la pierre révèle sa texture, un arbre solitaire devient sculpture.</p>
 
-  <p>L'éclairage paysager n'est pas une question d'électricité. C'est une question de composition visuelle, de hiérarchie des plans, de température de couleur et de décision consciente sur ce qu'on laisse dans l'obscurité. La bonne lumière ne se voit pas — elle montre autre chose.</p>
+    <p>L'éclairage paysager n'est pas une question d'électricité. C'est une question de composition visuelle, de hiérarchie des plans, de température de couleur et de décision consciente sur ce qu'on laisse dans l'obscurité.</p>
 
-  <!-- ── GALERIE 01 · Cinématique · la nuit comme seconde ambiance ── -->
-  <div class="fig-single" style="margin: 44px 0 52px;">
-    <div class="fig-label">— La nuit comme seconde ambiance</div>
-    <div class="fig-img ratio-21-9">
-      <img
-        src="https://images.unsplash.com/photo-1558618048-ffd3e47bf880?auto=format&fit=crop&w=1600&q=85"
-        alt="Allée de jardin éclairée la nuit — ambiance lumineuse paysagère"
-        loading="lazy"
-      />
-      <span class="fig-overlay">La nuit révèle ce que le jour banalise</span>
+    <!-- Figure principale -->
+    <div style="margin:2em 0">
+      <figure class="figure">
+        <div class="figure__box" style="aspect-ratio:16/9">
+          <img src="https://images.unsplash.com/photo-1558618048-ffd3e47bf880?auto=format&fit=crop&w=1200&q=82"
+               alt="Allée de jardin éclairée la nuit — ambiance lumineuse paysagère"
+               style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
+        </div>
+        <figcaption>L'allée éclairée par des bornes rasantes à 2700K — le jardin n'est plus un espace, c'est une scène · Unsplash</figcaption>
+      </figure>
     </div>
-    <p class="fig-caption"><strong>L'allée disparaît le jour parmi les plantes.</strong> Éclairée par des bornes rasantes à 2700K, elle devient un chemin de lumière qui guide et dramatise simultanément. Le jardin n'est plus un espace — c'est une scène.</p>
-    <p class="fig-credit">Photo · Unsplash</p>
-  </div>
 
-  <div class="divider">Les quatre types d'éclairage paysager</div>
-
-  <div class="section-head">
-    <span class="section-num">01</span>
     <h2>Les 4 types d'éclairage paysager</h2>
-  </div>
 
-  <p>Avant de choisir un luminaire ou de tracer un circuit, nous cartographions le jardin selon ses intentions nocturnes. Quatre types de lumière couvrent l'essentiel des effets recherchés — et chacun correspond à une intention de composition précise.</p>
+    <p>Avant de choisir un luminaire ou de tracer un circuit, nous cartographions le jardin selon ses intentions nocturnes. Quatre types de lumière couvrent l'essentiel des effets recherchés.</p>
 
-  <div class="grid4">
-    <div class="g-item">
-      <span class="g-icon">〰</span>
-      <h3>La lumière rasante</h3>
-      <p>Projetée à faible angle depuis le sol, elle effleure la surface d'un mur, d'une dalle ou d'un tronc. Elle révèle les textures que la lumière frontale aplatit : les veines d'une pierre calcaire, le relief d'un crépi marocain traditionnel, l'écorce d'un olivier centenaire. Indispensable sur toute surface minérale de qualité.</p>
-      <span class="g-tag">Texture · Minéral</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">△</span>
-      <h3>La lumière engraissante</h3>
-      <p>Spot positionné au pied d'un arbre, dirigé vers le haut. Elle dramatise le port — la ramure se découpe sur le ciel, la silhouette prend une présence théâtrale. Particulièrement efficace sur les sujets à port travaillé : olivier, grenadier, pin parasol. Attention : source suffisamment puissante pour atteindre le tiers supérieur de la couronne.</p>
-      <span class="g-tag">Silhouette · Végétal</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">◎</span>
-      <h3>La lumière noyante</h3>
-      <p>Encastrée dans le sol, elle noie de lumière un plan rapproché — parterre de plantes basses, déversoir, pas japonais. L'effet est celui d'une lueur intérieure, comme si la lumière venait de sous la surface. Elle crée des zones d'intérêt au sol sans produire d'éblouissement. Idéale sur les matériaux à grains ou les couvre-sols texturés.</p>
-      <span class="g-tag">Sol · Proximité</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">◌</span>
-      <h3>La lumière indirecte</h3>
-      <p>Jamais la source visible — toujours la diffusion. Derrière un muret, sous un auvent, dans un bassin via un projecteur immergé IP68 : la lumière rebondit ou se diffuse et atteint l'œil sans jamais se montrer. C'est le type le plus sophistiqué et le plus délicat à calibrer. Son résultat : une ambiance enveloppante, sans agressivité, qui fait paraître le jardin plus grand.</p>
-      <span class="g-tag">Diffusion · Ambiance</span>
-    </div>
-  </div>
-
-  <p>Ces quatre types ne s'excluent pas — ils se combinent. Un bon plan lumière articule la hiérarchie des effets : <strong>un ou deux points forts</strong> (arbre sculpté, paroi minérale), des <strong>transitions douces</strong> (bornes d'allée, lumière noyante), et des <strong>zones d'ombre assumées</strong> qui donnent au regard un endroit où se reposer.</p>
-
-  <!-- ── GALERIE 02 · Mosaïque · effets et textures nocturnes ── -->
-  <div style="margin: 52px 0 8px;">
-    <div class="fig-label">— Éclairage, texture, silhouette</div>
-  </div>
-  <div class="fig-mosaic">
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1680089606451-fa249c95eaa6?auto=format&fit=crop&w=900&q=82"
-          alt="Chemin de jardin éclairé au crépuscule — lumière dorée rasante"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Lumière rasante · Texture minérale révélée</span>
+    <!-- Grille 4 types -->
+    <div class="light-grid">
+      <div class="light-cell">
+        <div class="light-cell__icon">〰</div>
+        <h3>La lumière rasante</h3>
+        <p>Projetée à faible angle depuis le sol, elle effleure la surface d'un mur, d'une dalle ou d'un tronc. Elle révèle les textures que la lumière frontale aplatit : les veines d'une pierre calcaire, le relief d'un crépi marocain, l'écorce d'un olivier centenaire. Indispensable sur toute surface minérale de qualité.</p>
+        <span class="light-tag">Texture · Minéral</span>
       </div>
-      <p class="fig-caption"><strong>La lumière rasante fait parler la pierre.</strong> Positionnée à 15–20 cm du sol sur une dalle calcaire, elle révèle le grain et les accidents de surface qu'une lumière frontale gommerait entièrement.</p>
-    </div>
-    <div>
-      <div class="fig-img ratio-16-9" style="margin-bottom: 8px;">
-        <img
-          src="https://images.unsplash.com/photo-1629746958979-08060ed5bf0b?auto=format&fit=crop&w=700&q=82"
-          alt="Silhouette d'arbre au crépuscule — effet engraissant lumière paysagère"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Engraissant · Silhouette dramatisée</span>
+      <div class="light-cell">
+        <div class="light-cell__icon">△</div>
+        <h3>La lumière engraissante</h3>
+        <p>Spot positionné au pied d'un arbre, dirigé vers le haut. Elle dramatise le port — la ramure se découpe sur le ciel, la silhouette prend une présence théâtrale. Particulièrement efficace sur les sujets à port travaillé : olivier, grenadier, pin parasol. Attention : source suffisamment puissante pour atteindre le tiers supérieur de la couronne.</p>
+        <span class="light-tag">Silhouette · Végétal</span>
       </div>
-      <div class="fig-img ratio-16-9">
-        <img
-          src="https://images.unsplash.com/photo-1620841321437-1fdf89e1371e?auto=format&fit=crop&w=700&q=82"
-          alt="Jardin éclairé indirectement — ambiance lumière diffuse"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Indirect · Diffusion enveloppante</span>
+      <div class="light-cell">
+        <div class="light-cell__icon">◎</div>
+        <h3>La lumière noyante</h3>
+        <p>Encastrée dans le sol, elle noie de lumière un plan rapproché — parterre de plantes basses, déversoir, pas japonais. L'effet est celui d'une lueur intérieure, comme si la lumière venait de sous la surface. Elle crée des zones d'intérêt au sol sans produire d'éblouissement. Idéale sur les matériaux à grains ou les couvre-sols texturés.</p>
+        <span class="light-tag">Sol · Proximité</span>
+      </div>
+      <div class="light-cell">
+        <div class="light-cell__icon">◌</div>
+        <h3>La lumière indirecte</h3>
+        <p>Jamais la source visible — toujours la diffusion. Derrière un muret, sous un auvent, dans un bassin via un projecteur immergé IP68 : la lumière rebondit ou se diffuse et atteint l'œil sans jamais se montrer. C'est le type le plus sophistiqué. Son résultat : une ambiance enveloppante, sans agressivité, qui fait paraître le jardin plus grand.</p>
+        <span class="light-tag">Diffusion · Ambiance</span>
       </div>
     </div>
-  </div>
-  <p class="fig-credit">Photos · Unsplash</p>
 
-  <div class="section-head">
-    <span class="section-num">02</span>
+    <p>Ces quatre types ne s'excluent pas — ils se combinent. Un bon plan lumière articule la hiérarchie des effets : <strong>un ou deux points forts</strong> (arbre sculpté, paroi minérale), des <strong>transitions douces</strong> (bornes d'allée, lumière noyante), et des <strong>zones d'ombre assumées</strong> qui donnent au regard un endroit où se reposer.</p>
+
+    <!-- Galerie mosaïque -->
+    <div style="margin:2em 0">
+      <p class="eyebrow" style="margin-bottom:14px">— Éclairage, texture, silhouette</p>
+      <div class="gal gal--2">
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:4/3">
+            <img src="https://images.unsplash.com/photo-1680089606451-fa249c95eaa6?auto=format&fit=crop&w=900&q=82"
+                 alt="Chemin de jardin éclairé au crépuscule — lumière dorée rasante"
+                 style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
+            <span class="figure__tag">Lumière rasante · Texture minérale</span>
+          </div>
+          <figcaption><strong>La lumière rasante fait parler la pierre.</strong> Positionnée à 15–20 cm du sol sur une dalle calcaire, elle révèle le grain et les accidents de surface.</figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:4/3">
+            <img src="https://images.unsplash.com/photo-1620841321437-1fdf89e1371e?auto=format&fit=crop&w=700&q=82"
+                 alt="Jardin éclairé indirectement — ambiance lumière diffuse"
+                 style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
+            <span class="figure__tag">Indirect · Diffusion enveloppante</span>
+          </div>
+          <figcaption><strong>L'éclairage indirect</strong> produit une ambiance enveloppante — la source ne se voit jamais, seul l'effet compte.</figcaption>
+        </figure>
+      </div>
+    </div>
+
     <h2>La technique au service de l'ambiance</h2>
-  </div>
 
-  <p>L'éclairage paysager repose sur un corpus technique précis. Maîtriser ces paramètres n'est pas accessoire — c'est ce qui détermine si la lumière vieillit bien, si elle résiste aux hivers marocains humides, et si elle produit l'ambiance visée à 22h ou se transforme en halo blafard qui dénature tout.</p>
+    <p>L'éclairage paysager repose sur un corpus technique précis. <strong>La température de couleur est le premier arbitrage.</strong> En extérieur, nous travaillons systématiquement en <strong>LED warm white 2700K pour les jardins</strong> — c'est la plage qui s'accorde avec la pierre chaude, le bois, les plantes et les tons ocres du paysage marocain. Le 3000K est acceptable en contexte plus contemporain. Le 4000K (blanc neutre) est à proscrire : trop froid, il donne un rendu clinique qui brise l'ambiance.</p>
 
-  <p><strong>La température de couleur est le premier arbitrage.</strong> En extérieur, nous travaillons systématiquement en <strong>LED warm white 2700K pour les jardins</strong> — c'est la plage qui s'accorde avec la pierre chaude, le bois, les plantes et les tons ocres du paysage marocain. Le 3000K est acceptable en contexte plus contemporain. Le 4000K (blanc neutre) est à proscrire : trop froid, il donne un rendu clinique qui brise l'ambiance. Le 6500K n'a aucune place dans un jardin de qualité.</p>
+    <p>La question de l'<strong>indice de protection IP</strong> conditionne la durabilité sur chantier. Pour tout luminaire en extérieur soumis à l'arrosage ou aux intempéries, l'IP65 est le minimum. Pour les projecteurs immergés dans un bassin ou une fontaine, le <strong>IP68 est obligatoire</strong>. Un luminaire sous-calibré oxyde en deux saisons dans nos conditions.</p>
 
-  <p>La question de l'<strong>indice de protection IP</strong> conditionne la durabilité sur chantier. Pour tout luminaire en extérieur soumis à l'arrosage ou aux intempéries, l'IP65 est le minimum. Pour les projecteurs immergés dans un bassin ou une fontaine, le <strong>IP68 est obligatoire</strong> — il garantit l'étanchéité à l'immersion continue. Un luminaire sous-calibré oxyde en deux saisons dans nos conditions.</p>
+    <p>L'<strong>automation crépusculaire</strong> est aujourd'hui un standard. Une cellule photoélectrique ou un minuterie astronomique allume le système sans intervention manuelle. Les scénarios horaires — intensité pleine à 20h, réduite à 23h, éteint après minuit — réduisent la consommation et protègent la faune nocturne.</p>
 
-  <p>Le choix entre <strong>circuit basse tension 12V</strong> et circuit 220V dépend du contexte. La basse tension est plus souple, plus sûre à poser (câbles simples, pas de fourreau obligatoire), et autorise les petits luminaires de précision comme les spots de 3W utilisés pour les rasants. Le 220V reste indispensable pour les projecteurs de forte puissance (éclairage d'arbre à 8–10m, projections sur façade). Dans tous les cas, un <strong>transformateur électronique dimmable</strong> permet d'ajuster l'intensité selon l'heure et l'ambiance souhaitée.</p>
+    <blockquote class="pullquote pullquote--bordered">
+      Un jardin bien éclairé est plus beau la nuit que le jour. Le jour, tout est visible. La nuit, on ne voit que ce qu'on a décidé de montrer.
+    </blockquote>
 
-  <p>L'<strong>automation crépusculaire</strong> est aujourd'hui un standard. Une cellule photoélectrique ou un minuterie astronomique (qui suit l'heure réelle du coucher de soleil) allume le système sans intervention manuelle. Les scénarios horaires — intensité pleine à 20h, réduite à 23h, éteint après minuit — réduisent la consommation et protègent la faune nocturne.</p>
-
-  <!-- SCHÉMA SVG PLAN LUMIÈRE -->
-  <div class="visual">
-    <div class="visual-label">— Schéma · Plan de sources lumineuses · jardin type ABA</div>
-    <svg viewBox="0 0 600 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Contour jardin -->
-      <rect x="30" y="30" width="540" height="240" rx="2" stroke="#BACC23" stroke-width="0.6" fill="rgba(186,204,35,0.02)"/>
-
-      <!-- Allée centrale -->
-      <rect x="255" y="30" width="90" height="240" fill="rgba(186,204,35,0.04)" stroke="#BACC23" stroke-width="0.4" stroke-dasharray="4,6"/>
-
-      <!-- Arbre 1 — gauche -->
-      <circle cx="130" cy="110" r="32" fill="rgba(186,204,35,0.05)" stroke="#BACC23" stroke-width="0.6"/>
-      <circle cx="130" cy="110" r="8" fill="#BACC23" opacity="0.12"/>
-      <!-- Spot engraissant arbre 1 -->
-      <circle cx="130" cy="150" r="5" fill="#BACC23" opacity="0.7"/>
-      <circle cx="130" cy="150" r="12" fill="#BACC23" opacity="0.10"/>
-      <!-- Diffusion lumière arbre 1 -->
-      <path d="M 130 150 L 98 110 L 162 110Z" fill="#BACC23" opacity="0.05"/>
-      <text x="90" y="170" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">engraissant</text>
-
-      <!-- Arbre 2 — droite -->
-      <circle cx="460" cy="120" r="38" fill="rgba(186,204,35,0.05)" stroke="#BACC23" stroke-width="0.6"/>
-      <circle cx="460" cy="120" r="10" fill="#BACC23" opacity="0.12"/>
-      <!-- Spot engraissant arbre 2 -->
-      <circle cx="460" cy="168" r="5" fill="#BACC23" opacity="0.7"/>
-      <circle cx="460" cy="168" r="12" fill="#BACC23" opacity="0.10"/>
-      <path d="M 460 168 L 422 122 L 498 122Z" fill="#BACC23" opacity="0.05"/>
-      <text x="422" y="188" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">engraissant</text>
-
-      <!-- Bassin / plan d'eau -->
-      <ellipse cx="150" cy="220" rx="55" ry="22" fill="rgba(85,153,255,0.06)" stroke="#5599ff" stroke-width="0.7" opacity="0.5"/>
-      <!-- Projecteur immergé -->
-      <circle cx="150" cy="220" r="4" fill="#5599ff" opacity="0.55"/>
-      <circle cx="150" cy="220" r="10" fill="#5599ff" opacity="0.08"/>
-      <text x="168" y="224" fill="#5599ff" font-size="7" font-family="Inter" opacity="0.5">indirect · IP68</text>
-
-      <!-- Bornes allée gauche -->
-      <rect x="249" y="90" width="5" height="14" fill="#BACC23" opacity="0.6"/>
-      <circle cx="252" cy="88" r="4" fill="#BACC23" opacity="0.8"/>
-      <circle cx="252" cy="88" r="10" fill="#BACC23" opacity="0.07"/>
-
-      <rect x="249" y="155" width="5" height="14" fill="#BACC23" opacity="0.6"/>
-      <circle cx="252" cy="153" r="4" fill="#BACC23" opacity="0.8"/>
-      <circle cx="252" cy="153" r="10" fill="#BACC23" opacity="0.07"/>
-
-      <!-- Bornes allée droite -->
-      <rect x="346" y="90" width="5" height="14" fill="#BACC23" opacity="0.6"/>
-      <circle cx="349" cy="88" r="4" fill="#BACC23" opacity="0.8"/>
-      <circle cx="349" cy="88" r="10" fill="#BACC23" opacity="0.07"/>
-
-      <rect x="346" y="155" width="5" height="14" fill="#BACC23" opacity="0.6"/>
-      <circle cx="349" cy="153" r="4" fill="#BACC23" opacity="0.8"/>
-      <circle cx="349" cy="153" r="10" fill="#BACC23" opacity="0.07"/>
-
-      <text x="238" y="62" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.5">bornes · allée</text>
-
-      <!-- Spot rasant mur -->
-      <rect x="30" y="25" width="540" height="8" fill="#BACC23" opacity="0.04"/>
-      <circle cx="120" cy="35" r="3.5" fill="#BACC23" opacity="0.6"/>
-      <circle cx="200" cy="35" r="3.5" fill="#BACC23" opacity="0.6"/>
-      <circle cx="400" cy="35" r="3.5" fill="#BACC23" opacity="0.6"/>
-      <circle cx="490" cy="35" r="3.5" fill="#BACC23" opacity="0.6"/>
-      <!-- Lumière rasante sur mur -->
-      <path d="M 120 38 L 115 90 L 125 90Z" fill="#BACC23" opacity="0.06"/>
-      <text x="380" y="22" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.5">spots rasants · mur</text>
-
-      <!-- Légende -->
-      <circle cx="45" cy="274" r="4" fill="#BACC23" opacity="0.7"/>
-      <text x="54" y="278" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">Spot/Borne 12V</text>
-      <circle cx="150" cy="274" r="4" fill="#5599ff" opacity="0.6"/>
-      <text x="159" y="278" fill="#5599ff" font-size="7" font-family="Inter" opacity="0.5">Projecteur IP68</text>
-      <circle cx="255" cy="274" r="4" stroke="#BACC23" stroke-width="0.6" fill="none" opacity="0.6"/>
-      <text x="264" y="278" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.5">Arbre éclairé</text>
-      <!-- Câblage basse tension -->
-      <line x1="360" y1="274" x2="395" y2="274" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="4,4" opacity="0.4"/>
-      <text x="400" y="278" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.5">Câble BT 12V</text>
-    </svg>
-  </div>
-
-  <div class="pull-quote">
-    <p>Un jardin bien éclairé est plus beau la nuit que le jour. Le jour, tout est visible. La nuit, on ne voit que ce qu'on a décidé de montrer.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
-
-  <div class="section-head">
-    <span class="section-num">03</span>
     <h2>Ce qu'on n'éclaire pas — et pourquoi</h2>
-  </div>
 
-  <p>La discipline de l'éclairage paysager n'est pas qu'une affaire d'ajout de lumière. Elle est aussi — peut-être surtout — une affaire de <strong>décision sur ce qu'on laisse dans l'ombre.</strong> C'est là que réside la différence entre un jardin éclairé par un électricien et un jardin composé par un paysagiste.</p>
+    <p>La discipline de l'éclairage paysager n'est pas qu'une affaire d'ajout de lumière. Elle est aussi — peut-être surtout — une affaire de <strong>décision sur ce qu'on laisse dans l'ombre.</strong> L'ombre n'est pas un défaut. C'est une respiration visuelle. Elle permet au regard de voyager, de se poser d'un point lumineux à l'autre sans saturation.</p>
 
-  <p>L'ombre n'est pas un défaut. C'est une respiration visuelle. Elle permet au regard de voyager, de butonner d'un point lumineux à l'autre sans saturation. Un jardin uniformément éclairé est un jardin sans mystère — et le mystère est précisément ce qu'on vient chercher dans un espace extérieur nocturne de qualité.</p>
+    <p>Il y a aussi une dimension écologique que nous prenons au sérieux. <strong>La biodiversité nocturne est fortement impactée par la pollution lumineuse.</strong> Les insectes nocturnes — pollinisateurs essentiels — sont désorientés par les sources lumineuses trop intenses ou de mauvaise température de couleur. Les chauves-souris, dont la présence régule les populations d'insectes indésirables, évitent les zones fortement éclairées.</p>
 
-  <p>Il y a aussi une dimension écologique que nous prenons au sérieux. <strong>La biodiversité nocturne est fortement impactée par la pollution lumineuse.</strong> Les insectes nocturnes — pollinisateurs essentiels — sont désorientés par les sources lumineuses trop intenses ou de mauvaise température de couleur. Les chauves-souris, dont la présence régule les populations d'insectes indésirables, évitent les zones fortement éclairées. Un jardin qui respecte la nuit préserve ses propres équilibres biologiques.</p>
+    <p>Nos recommandations pratiques : <strong>ne jamais pointer une source lumineuse vers le ciel</strong> (toujours vers le bas ou vers une surface réfléchissante), <strong>limiter la puissance</strong> aux strictes nécessités de confort visuel (5–8W suffisent pour un spot de jardin), et <strong>programmer l'extinction</strong> au-delà de minuit dans les zones résidentielles.</p>
 
-  <p>Nos recommandations pratiques : <strong>ne jamais pointer une source lumineuse vers le ciel</strong> (toujours vers le bas ou vers une surface réfléchissante), <strong>limiter la puissance</strong> aux strictes nécessités de confort visuel (5–8W suffisent pour un spot de jardin), et <strong>programmer l'extinction</strong> au-delà de minuit dans les zones résidentielles. La lumière nocturne doit être dosée comme un parfum — présente sans s'imposer.</p>
-
-  <!-- ── GALERIE 03 · Full-width 16:9 · jardin crépuscule ── -->
-  <div style="margin: 52px 0 8px;">
-    <div class="fig-label">— Le jardin au crépuscule</div>
-  </div>
-  <div class="fig-img ratio-16-9" style="margin-bottom: 12px;">
-    <img
-      src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1400&q=85"
-      alt="Jardin au crépuscule — lumière dorée et ombres longues, éclairage paysager"
-      loading="lazy"
-    />
-    <span class="fig-overlay">Le crépuscule comme répétition générale du plan lumière</span>
-  </div>
-  <p class="fig-caption"><strong>L'heure dorée valide les intentions nocturnes.</strong> Avant la nuit complète, le crépuscule révèle déjà comment le plan lumière se comportera : les volumes émergent, les textures s'affirment, les ombres longues commencent leur travail de composition.</p>
-  <p class="fig-credit" style="margin-bottom: 48px;">Photo · Unsplash</p>
-
-  <!-- ── HERBIER · Plantes à effet nocturne ── -->
-  <section class="herbier-section">
-    <p class="herbier-title">Planches botaniques · Végétaux à effet nocturne particulier</p>
-    <div class="herbier-grid">
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Lavandula_vera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-152.jpg"
-               alt="Jasminum officinale — Jasmin, parfum puissant la nuit" loading="lazy">
+    <!-- Figure crépuscule -->
+    <div style="margin:2em 0">
+      <figure class="figure">
+        <div class="figure__box" style="aspect-ratio:16/9">
+          <img src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1200&q=82"
+               alt="Jardin au crépuscule — lumière dorée et ombres longues, éclairage paysager"
+               style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
         </div>
-        <p class="herb-name">Jasminum officinale</p>
-        <p class="herb-common">Jasmin — Parfum nocturne</p>
-        <p class="herb-note">Le jasmin libère son parfum à la nuit. Planté près d'un espace de vie extérieur, il transforme l'air à partir de 20h. Son feuillage fin capte bien la lumière rasante.</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
-               alt="Myrtus communis — Myrte, feuillage brillant nocturne" loading="lazy">
-        </div>
-        <p class="herb-name">Myrtus communis</p>
-        <p class="herb-common">Myrte — Feuillage brillant</p>
-        <p class="herb-note">Ses petites feuilles cireuses captent et réfléchissent la lumière artificielle. Un myrte éclairé en lumière indirecte produit un effet de luminosité interne très recherché.</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Olea_europaea%2C_Koehler_1887.jpg"
-               alt="Olea europaea — Olivier, silhouette dramatique éclairée par le bas" loading="lazy">
-        </div>
-        <p class="herb-name">Olea europaea</p>
-        <p class="herb-common">Olivier — Silhouette sculpturale</p>
-        <p class="herb-note">L'olivier éclairé en engraissant devient sculpture vivante. La ramure tourmentée se découpe sur le ciel et ses feuilles argentées captent chaque nuance de lumière à 2700K.</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen — 1887</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg"
-               alt="Arbutus unedo — Arbousier, silhouette nocturne et feuillage persistant" loading="lazy">
-        </div>
-        <p class="herb-name">Arbutus unedo</p>
-        <p class="herb-common">Arbousier — Silhouette nocturne</p>
-        <p class="herb-note">Persistant, l'arbousier garde sa présence toute l'année. Son port irrégulier et son écorce rouge-brun se prêtent admirablement à l'éclairage rasant sur tronc.</p>
-        <p class="herb-source">Pierre-Joseph Redouté</p>
-      </div>
-
+        <figcaption>Le crépuscule comme répétition générale du plan lumière — les volumes émergent, les textures s'affirment, les ombres longues commencent leur travail de composition · Unsplash</figcaption>
+      </figure>
     </div>
-  </section>
 
-  <p>Ces quatre végétaux partagent une propriété commune : <strong>ils gagnent à être vus la nuit.</strong> Leurs textures, leurs ports et leurs propriétés sensorielles (parfum pour le jasmin, brillance pour le myrte, sculptural pour l'olivier) sont exaltés par une lumière bien positionnée. Le plan végétal et le plan lumière doivent être dessinés ensemble — pas l'un après l'autre.</p>
+    <!-- Herbier nocturne -->
+    <section class="herbier-section">
+      <p class="herbier-title">Planches botaniques · Végétaux à effet nocturne particulier</p>
+      <div class="herbier-grid">
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Lavandula_vera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-152.jpg"
+                 alt="Jasminum officinale — Jasmin, parfum puissant la nuit" loading="lazy">
+          </div>
+          <p class="herb-name">Jasminum officinale</p>
+          <p class="herb-common">Jasmin — Parfum nocturne</p>
+          <p class="herb-note">Le jasmin libère son parfum à la nuit. Planté près d'un espace de vie extérieur, il transforme l'air à partir de 20h. Son feuillage fin capte bien la lumière rasante.</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
+                 alt="Myrtus communis — Myrte, feuillage brillant nocturne" loading="lazy">
+          </div>
+          <p class="herb-name">Myrtus communis</p>
+          <p class="herb-common">Myrte — Feuillage brillant</p>
+          <p class="herb-note">Ses petites feuilles cireuses captent et réfléchissent la lumière artificielle. Un myrte éclairé en lumière indirecte produit un effet de luminosité interne très recherché.</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Olea_europaea%2C_Koehler_1887.jpg"
+                 alt="Olea europaea — Olivier, silhouette dramatique éclairée par le bas" loading="lazy">
+          </div>
+          <p class="herb-name">Olea europaea</p>
+          <p class="herb-common">Olivier — Silhouette sculpturale</p>
+          <p class="herb-note">L'olivier éclairé en engraissant devient sculpture vivante. La ramure tourmentée se découpe sur le ciel et ses feuilles argentées captent chaque nuance de lumière à 2700K.</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen — 1887</p>
+        </div>
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg"
+                 alt="Arbutus unedo — Arbousier, silhouette nocturne et feuillage persistant" loading="lazy">
+          </div>
+          <p class="herb-name">Arbutus unedo</p>
+          <p class="herb-common">Arbousier — Silhouette nocturne</p>
+          <p class="herb-note">Persistant, l'arbousier garde sa présence toute l'année. Son port irrégulier et son écorce rouge-brun se prêtent admirablement à l'éclairage rasant sur tronc.</p>
+          <p class="herb-source">Pierre-Joseph Redouté</p>
+        </div>
+      </div>
+    </section>
 
-  <div class="signature">
-    <div class="sig-avatar">AB</div>
-    <div class="sig-text">
-      <h4>Adil Boumahdi</h4>
-      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
+    <p>Ces quatre végétaux partagent une propriété commune : <strong>ils gagnent à être vus la nuit.</strong> Leurs textures, leurs ports et leurs propriétés sensorielles sont exaltés par une lumière bien positionnée. Le plan végétal et le plan lumière doivent être dessinés ensemble — pas l'un après l'autre.</p>
+
+  </div><!-- /wrap-narrow prose -->
+
+  <!-- FIN D'ARTICLE -->
+  <div class="article-foot">
+    <div class="author-bio">
+      <div class="author-bio__avatar">AB</div>
+      <div>
+        <div class="author-bio__name">Adil Boumahdi</div>
+        <div class="author-bio__role">Fondateur &amp; architecte paysagiste — ABA</div>
+        <div class="author-bio__cities">Rabat · Casablanca · Marrakech · Fès</div>
+      </div>
     </div>
-  </div>
 
-  <div class="cta">
-    <h3>Votre jardin mérite<br/><em>une nuit composée.</em></h3>
-    <p>Nous intégrons le plan lumière dès la conception, pas en fin de chantier. Première consultation offerte.</p>
-    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
-  </div>
+    <div class="cta">
+      <div class="cta__rule"></div>
+      <h2 class="cta__head">Votre jardin mérite une nuit composée.</h2>
+      <p class="cta__sub">Nous intégrons le plan lumière dès la conception.</p>
+      <a href="../preview.html#contact" class="btn btn--brand btn--lg">Initier un projet →</a>
+    </div>
 
-  <div class="related">
-    <div class="related-label">— Articles suivants</div>
-    <div class="related-grid">
-      <a href="lire-un-terrain-avant-de-le-toucher.html" class="rel-card">
-        <span class="rel-tag">N° 01 · Expertise</span>
-        <h4>Lire un terrain avant de le toucher</h4>
-      </a>
-      <a href="la-pierre-seche-pourquoi-elle-dure-300-ans.html" class="rel-card">
-        <span class="rel-tag">N° 02 · Minéral</span>
-        <h4>La pierre sèche : pourquoi elle dure 300 ans</h4>
-      </a>
+    <div class="related wrap-narrow">
+      <p class="eyebrow" style="margin-bottom:20px">— À lire aussi</p>
+      <div class="gal gal--2">
+        <a href="nuit-au-jardin.html" style="display:block;padding:24px 20px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line);transition:border-color 0.2s var(--ease);" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+          <span style="font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);">Lightscape</span>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:500;line-height:1.2;margin-top:8px;color:var(--ink);">La nuit au jardin</div>
+        </a>
+        <a href="eau-ecrite-dans-la-pierre.html" style="display:block;padding:24px 20px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line);transition:border-color 0.2s var(--ease);" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+          <span style="font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);">Aquatique</span>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:500;line-height:1.2;margin-top:8px;color:var(--ink);">L'eau écrite dans la pierre</div>
+        </a>
+      </div>
     </div>
   </div>
 
 </article>
 
-<footer>
-  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
-  <div class="footer-copy">© 2027 — ab-landscapes.com</div>
-</footer>
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer__grid">
+    <div><div class="footer__mark">ABA <em>Paysage</em></div><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
+  </div>
+  <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
+</div></footer>
 
 <script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('aba-blog-theme', t);
-    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-    document.getElementById('btn-light').classList.toggle('active', t === 'light');
-  }
-  // Restore saved preference
-  const saved = localStorage.getItem('aba-blog-theme');
-  if (saved) setTheme(saved);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
-
 </body>
 </html>

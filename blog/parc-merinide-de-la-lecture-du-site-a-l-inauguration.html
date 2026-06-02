@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,820 +13,388 @@
   <link rel="canonical" href="https://www.ab-landscapes.com/blog/parc-merinide-de-la-lecture-du-site-a-l-inauguration.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root, [data-theme="dark"] {
-      --accent:        #BACC23;
-      --accent-dim:    rgba(186,204,35,0.35);
-      --bg:            #13130E;
-      --bg2:           #1B1B13;
-      --bg3:           #222218;
-      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
-      --text:          #F2EDE3;
-      --text-body:     #C8C4BA;
-      --text-muted:    rgba(242,237,227,0.40);
-      --border:        rgba(242,237,227,0.08);
-      --border2:       rgba(242,237,227,0.13);
-      --hero-grid-op:  0.035;
-      --hero-svg-op:   0.12;
-      --quote-mark-op: 0.10;
-      --toggle-bg:     #1B1B13;
-      --toggle-border: rgba(242,237,227,0.15);
-      --toggle-text:   rgba(242,237,227,0.55);
-      --toggle-active-bg:   #BACC23;
-      --toggle-active-text: #13130E;
-      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
-    }
-
-    [data-theme="light"] {
-      --bg:            #FAF9F5;
-      --bg2:           #F2EDE4;
-      --bg3:           #E8E2D8;
-      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
-      --text:          #1A1A14;
-      --text-body:     #3A3A2E;
-      --text-muted:    rgba(26,26,20,0.45);
-      --border:        rgba(26,26,20,0.08);
-      --border2:       rgba(26,26,20,0.14);
-      --hero-grid-op:  0.04;
-      --hero-svg-op:   0.10;
-      --quote-mark-op: 0.18;
-      --toggle-bg:     #FAF9F5;
-      --toggle-border: rgba(26,26,20,0.18);
-      --toggle-text:   rgba(26,26,20,0.50);
-      --toggle-active-bg:   #1A1A14;
-      --toggle-active-text: #FAF9F5;
-    }
-
-    html { font-size: 17px; scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text-body); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 2.0; -webkit-font-smoothing: antialiased; transition: var(--transition); }
-
-    .theme-toggle { display: flex; align-items: center; background: var(--toggle-bg); border: 1px solid var(--toggle-border); border-radius: 2px; overflow: hidden; transition: var(--transition); }
-    .theme-btn { display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--toggle-text); background: transparent; border: none; cursor: pointer; transition: background 250ms, color 250ms; white-space: nowrap; }
-    .theme-btn svg { flex-shrink: 0; }
-    .theme-btn.active { background: var(--toggle-active-bg); color: var(--toggle-active-text); }
-    .theme-divider { width: 1px; height: 20px; background: var(--toggle-border); flex-shrink: 0; }
-
-    nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; height: 60px; background: var(--bg); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px); transition: var(--transition); }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.12em; color: var(--text); text-decoration: none; transition: color 380ms; }
-    .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-back { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 200ms; }
-    .nav-back:hover { color: var(--accent); }
-    .nav-cta { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 9px 22px; text-decoration: none; transition: opacity 200ms; }
-    .nav-cta:hover { opacity: 0.85; }
-
-    .hero { min-height: 88vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 56px 72px; position: relative; overflow: hidden; background: var(--bg-hero); transition: background 380ms ease; }
-    [data-theme="light"] .hero { background: var(--bg2); }
-    .hero-grid { position: absolute; inset: 0; opacity: var(--hero-grid-op); background-image: linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px); background-size: 72px 72px; transition: opacity 380ms; }
-    .hero-svg { position: absolute; right: -20px; top: 0; bottom: 0; width: 56%; opacity: var(--hero-svg-op); transition: opacity 380ms; }
-    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 220px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; transition: var(--transition); }
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
-    .hero-meta-top { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; transition: color 380ms; }
-    .hero-domain { display: inline-flex; align-items: center; gap: 7px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; transition: color 380ms; }
-    .domain-dot { width: 6px; height: 6px; border-radius: 50%; background: #9B6B9B; flex-shrink: 0; }
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 68px); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 28px; transition: color 380ms; }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-desc { font-size: 16px; line-height: 1.75; color: var(--text-muted); max-width: 500px; margin-bottom: 36px; transition: color 380ms; }
-    .hero-byline { display: flex; align-items: center; gap: 20px; font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); transition: color 380ms; }
-    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
-
-    /* Chiffres clés du projet */
-    .project-stats {
-      display: flex; gap: 0; margin-bottom: 40px;
-      border: 1px solid var(--border2); transition: border-color 380ms;
-    }
-    .pstat { padding: 20px 28px; border-right: 1px solid var(--border2); transition: border-color 380ms; }
-    .pstat:last-child { border-right: none; }
-    .pstat-n { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--accent); line-height: 1; }
-    .pstat-l { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; transition: color 380ms; }
-
-    .article { max-width: 700px; margin: 0 auto; padding: 20px 40px 100px; }
-    .chapeau { font-family: 'Cormorant Garamond', serif; font-size: 23px; font-weight: 300; font-style: italic; line-height: 1.65; color: var(--text); padding-left: 28px; border-left: 2px solid var(--accent); margin-bottom: 56px; transition: color 380ms, border-color 380ms; }
-    p { font-size: 17px; line-height: 2.0; color: var(--text-body); margin-bottom: 28px; transition: color 380ms; }
-    p strong { color: var(--text); font-weight: 500; }
-
-    .divider { display: flex; align-items: center; gap: 20px; margin: 60px 0 44px; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); transition: color 380ms; }
-    .divider::before, .divider::after { content:''; flex:1; height:1px; background: var(--border2); transition: background 380ms; }
-
-    .section-head { display: flex; align-items: baseline; gap: 20px; margin: 64px 0 28px; }
-    .section-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0; }
-    .section-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 29px; font-weight: 400; color: var(--text); line-height: 1.2; transition: color 380ms; }
-
-    .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 44px 0; background: var(--border); transition: background 380ms; }
-    .g-item { background: var(--bg2); padding: 32px 28px; border-top: 2px solid transparent; transition: border-color 240ms, background 380ms; }
-    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
-    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-    .g-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.2; transition: color 380ms; }
-    .g-item p { font-size: 14px !important; line-height: 1.8 !important; color: var(--text-muted) !important; margin: 0 !important; }
-    .g-tag { display: inline-block; margin-top: 12px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px; }
-
-    .pull-quote { margin: 60px 0; padding: 48px 52px; background: var(--bg3); border-top: 1px solid var(--accent); position: relative; transition: background 380ms; }
-    .pull-quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 140px; line-height: 0.75; color: var(--accent); opacity: var(--quote-mark-op); position: absolute; top: 24px; left: 36px; transition: opacity 380ms; }
-    .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 26px !important; font-style: italic; font-weight: 300; line-height: 1.55 !important; color: var(--text) !important; margin: 0 !important; position: relative; z-index: 1; }
-    .pull-quote cite { display: block; margin-top: 18px; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); font-style: normal; }
-
-    .visual { background: var(--bg2); border: 1px solid var(--border2); padding: 40px; margin: 60px 0; transition: background 380ms, border-color 380ms; }
-    .visual-label { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-    .visual svg { width:100%; display:block; }
-
-    /* Timeline workflow */
-    .timeline { margin: 44px 0; display: flex; flex-direction: column; gap: 0; }
-    .tl-item { display: grid; grid-template-columns: 64px 1fr; gap: 0; position: relative; }
-    .tl-item::before { content: ''; position: absolute; left: 31px; top: 48px; bottom: -1px; width: 1px; background: var(--border2); transition: background 380ms; }
-    .tl-item:last-child::before { display: none; }
-    .tl-num {
-      display: flex; align-items: flex-start; justify-content: center;
-      padding-top: 26px;
-    }
-    .tl-circle {
-      width: 28px; height: 28px; border-radius: 50%;
-      border: 1px solid var(--border2); background: var(--bg2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif; font-size: 13px;
-      color: var(--accent); flex-shrink: 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .tl-content { padding: 20px 0 36px 20px; border-bottom: 1px solid var(--border); transition: border-color 380ms; }
-    .tl-item:last-child .tl-content { border-bottom: none; }
-    .tl-phase { font-size: 9px; letter-spacing: 0.35em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
-    .tl-title { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.2; transition: color 380ms; }
-    .tl-body { font-size: 14px; line-height: 1.85; color: var(--text-muted); transition: color 380ms; }
-
-    .tech-note { margin: 44px 0; padding: 28px 32px; border-left: 2px solid var(--border2); background: var(--bg2); transition: background 380ms, border-color 380ms; }
-    .tech-note-label { font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .tech-note p { font-size: 14px !important; line-height: 1.85 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    .signature { display: flex; align-items: center; gap: 20px; margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--border2); transition: border-color 380ms; }
-    .sig-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--accent); flex-shrink: 0; transition: background 380ms, border-color 380ms; }
-    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
-    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    .cta { margin-top: 80px; padding: 56px 52px; background: var(--bg3); border-top: 1px solid var(--accent); text-align: center; position: relative; transition: background 380ms; }
-    .cta::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: var(--accent); }
-    .cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--text); line-height: 1.2; margin-bottom: 16px; transition: color 380ms; }
-    .cta h3 em { font-style: italic; color: var(--accent); }
-    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
-    .cta-btn { display: inline-block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #13130E; background: var(--accent); padding: 15px 40px; text-decoration: none; transition: opacity 200ms; }
-    .cta-btn:hover { opacity: 0.85; }
-
-    .related { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); transition: border-color 380ms; }
-    .related-label { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; transition: color 380ms; }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
-    .rel-card { background: var(--bg2); padding: 28px 24px; border-top: 2px solid var(--border); text-decoration: none; color: var(--text); transition: border-color 200ms, background 380ms; display: block; }
-    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
-    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
-    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
-
-    footer { margin-top: 80px; padding: 32px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; transition: border-color 380ms; }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
-    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; }
-
-    /* ══════════════════════════════════════════
-       GALERIE DE RÉFÉRENCES
-    ══════════════════════════════════════════ */
-    .fig-label {
-      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-      font-family: 'Inter', sans-serif; font-weight: 400;
-    }
-    .fig-single { margin: 52px 0; }
-    .fig-phases {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px; margin: 52px 0;
-    }
-    .fig-phase-tag {
-      margin-top: 9px; font-size: 8.5px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--accent);
-      font-family: 'Inter', sans-serif;
-    }
-    .fig-asymduo {
-      display: grid; grid-template-columns: 3fr 2fr;
-      gap: 10px; margin: 52px 0;
-    }
-    .fig-img {
-      position: relative; overflow: hidden;
-      background: var(--bg3);
-    }
-    .fig-img img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover;
-      filter: saturate(0.78) contrast(1.04) brightness(0.97);
-      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .fig-img:hover img { transform: scale(1.045); }
-    .ratio-21-9 { aspect-ratio: 21/9; }
-    .ratio-16-9 { aspect-ratio: 16/9; }
-    .ratio-4-3  { aspect-ratio: 4/3; }
-    .ratio-3-2  { aspect-ratio: 3/2; }
-    .fig-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
-      font-weight: 300; pointer-events: none;
-    }
-    .fig-caption {
-      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      font-weight: 300; line-height: 1.65; transition: color 380ms;
-    }
-    .fig-caption strong { color: var(--text-body); font-weight: 400; }
-    .fig-credit {
-      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); opacity: 0.40;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    /* ══════════════════════════════════════════
-       PLANCHES DE RÉFÉRENCE
-    ══════════════════════════════════════════ */
-    .herbier-section {
-      margin: 60px 0; padding: 36px 0 40px;
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .herbier-title {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .herbier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .herb-card { display: flex; flex-direction: column; }
-    .herb-plate {
-      aspect-ratio: 3/4; overflow: hidden;
-      border: 1px solid var(--border); background: var(--bg2);
-      margin-bottom: 10px;
-      transition: border-color 380ms, background 380ms;
-    }
-    .herb-plate img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: top center;
-      filter: sepia(0.08) contrast(1.06) brightness(1.01);
-      transition: transform 800ms ease;
-    }
-    .herb-plate:hover img { transform: scale(1.04); }
-    .herb-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 14px; font-weight: 400;
-      color: var(--text); margin-bottom: 3px; line-height: 1.3;
-      transition: color 380ms;
-    }
-    .herb-common {
-      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-    .herb-source {
-      font-size: 8.5px; color: var(--text-muted); opacity: 0.55;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    @media (max-width: 600px) { .herbier-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 56px; }
-      .nav-back, .nav-cta { display: none; }
-      .hero { padding: 0 20px 52px; min-height: 70vh; }
-      .article { padding: 16px 20px 72px; }
-      .grid4 { grid-template-columns: 1fr; }
-      .related-grid { grid-template-columns: 1fr; }
-      .pull-quote { padding: 32px 24px; }
-      .pull-quote p { font-size: 20px !important; }
-      .cta { padding: 40px 24px; }
-      footer { padding: 24px 20px; }
-      .theme-btn span { display: none; }
-      .theme-btn { padding: 6px 10px; }
-      .project-stats { flex-wrap: wrap; }
-      .pstat { border-right: none; border-bottom: 1px solid var(--border2); }
-      .tl-item { grid-template-columns: 48px 1fr; }
-      .fig-phases { grid-template-columns: 1fr; gap: 16px; }
-      .fig-asymduo { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/journal.css" />
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
-  <div class="nav-right">
-    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
-      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span>Pierre</span>
-      </button>
-      <div class="theme-divider"></div>
-      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <span>Crème</span>
-      </button>
-    </div>
-    <a href="../blog.html" class="nav-back">← Journal</a>
-    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+<!-- MASTHEAD -->
+<header class="masthead"><div class="wrap masthead__bar">
+  <div class="masthead__left"><a href="../blog.html" class="aba-logo">
+    <svg class="aba-logo__icon" viewBox="0 0 30 34" fill="none"><rect x="1" y="1" width="28" height="32" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 25 L15 9 L22 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10.5 20 H19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
+  </a></div>
+  <div class="masthead__tools">
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
+    <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
   </div>
-</nav>
+</div></header>
+<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
+<!-- ARTICLE IMMERSIF -->
+<article class="article fade-up">
 
-  <!-- SVG plan masse simplifié du parc -->
-  <svg class="hero-svg" viewBox="0 0 720 660" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <!-- Périmètre du parc — 5 ha -->
-    <path d="M 100 80 Q 340 55 560 90 Q 640 104 655 200 Q 668 310 640 430 Q 620 510 540 560 Q 440 610 300 598 Q 180 590 120 520 Q 70 458 68 340 Q 64 200 100 80 Z"
-      stroke="#BACC23" stroke-width="1.0" fill="rgba(186,204,35,0.03)"/>
-
-    <!-- Lac artificiel 5 000 m² -->
-    <path d="M 280 280 Q 340 240 410 258 Q 468 272 480 320 Q 492 370 456 402 Q 418 432 360 424 Q 298 414 272 376 Q 252 344 280 280 Z"
-      stroke="#5599ff" stroke-width="1.2" fill="rgba(85,153,255,0.08)"/>
-    <!-- Reflet surface eau -->
-    <path d="M 318 300 Q 360 285 400 298" stroke="#5599ff" stroke-width="0.6" fill="none" opacity="0.4"/>
-    <path d="M 300 330 Q 350 312 398 326" stroke="#5599ff" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <path d="M 290 360 Q 340 348 388 358" stroke="#5599ff" stroke-width="0.4" fill="none" opacity="0.25"/>
-    <text x="368" y="346" fill="#5599ff" font-size="8" font-family="Inter" opacity="0.55" text-anchor="middle">Lac · 5 000 m²</text>
-
-    <!-- Allées principales -->
-    <path d="M 100 80 Q 170 180 200 280 Q 220 340 272 376" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="6,4" fill="none" opacity="0.5"/>
-    <path d="M 560 90 Q 520 170 500 240 Q 490 268 480 320" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="6,4" fill="none" opacity="0.45"/>
-    <path d="M 300 598 Q 315 500 316 432" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="6,4" fill="none" opacity="0.4"/>
-
-    <!-- Allées secondaires -->
-    <path d="M 200 280 Q 235 270 272 280" stroke="#8B7355" stroke-width="0.6" stroke-dasharray="3,5" fill="none" opacity="0.4"/>
-    <path d="M 456 402 Q 490 430 520 460 Q 540 490 540 560" stroke="#8B7355" stroke-width="0.6" stroke-dasharray="3,5" fill="none" opacity="0.35"/>
-
-    <!-- Zones végétales — masses arbustives -->
-    <ellipse cx="160" cy="200" rx="38" ry="28" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.07)" opacity="0.8"/>
-    <ellipse cx="178" cy="460" rx="44" ry="32" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.07)" opacity="0.8"/>
-    <ellipse cx="520" cy="160" rx="36" ry="26" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.07)" opacity="0.7"/>
-    <ellipse cx="560" cy="480" rx="32" ry="24" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.06)" opacity="0.7"/>
-    <ellipse cx="370" cy="530" rx="48" ry="30" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.08)" opacity="0.75"/>
-    <ellipse cx="240" cy="130" rx="30" ry="22" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.06)" opacity="0.65"/>
-    <ellipse cx="480" cy="120" rx="26" ry="18" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.06)" opacity="0.6"/>
-
-    <!-- Entrée principale -->
-    <rect x="86" y="70" width="28" height="18" rx="2" stroke="#BACC23" stroke-width="0.9" fill="rgba(186,204,35,0.06)"/>
-    <text x="100" y="62" text-anchor="middle" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.6">Entrée</text>
-
-    <!-- Belvédère / point de vue -->
-    <circle cx="590" cy="218" r="14" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.05)"/>
-    <text x="590" y="222" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">Belvédère</text>
-
-    <!-- Fontainerie / jetd'eau -->
-    <circle cx="376" cy="340" r="8" stroke="#5599ff" stroke-width="1.0" fill="rgba(85,153,255,0.12)"/>
-    <line x1="376" y1="325" x2="376" y2="315" stroke="#5599ff" stroke-width="0.8" opacity="0.5"/>
-    <line x1="368" y1="327" x2="363" y2="319" stroke="#5599ff" stroke-width="0.7" opacity="0.4"/>
-    <line x1="384" y1="327" x2="389" y2="319" stroke="#5599ff" stroke-width="0.7" opacity="0.4"/>
-
-    <!-- Cotes -->
-    <line x1="100" y1="632" x2="560" y2="632" stroke="#BACC23" stroke-width="0.6" opacity="0.35"/>
-    <line x1="100" y1="628" x2="100" y2="636" stroke="#BACC23" stroke-width="0.6" opacity="0.35"/>
-    <line x1="560" y1="628" x2="560" y2="636" stroke="#BACC23" stroke-width="0.6" opacity="0.35"/>
-    <text x="330" y="648" text-anchor="middle" fill="#BACC23" font-size="8" font-family="Inter" opacity="0.4">≈ 250 m (façade principale)</text>
-
-    <!-- Nord -->
-    <circle cx="648" cy="88" r="22" stroke="#BACC23" stroke-width="0.5" fill="none" opacity="0.35"/>
-    <text x="648" y="76" text-anchor="middle" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.35">N</text>
-    <polygon points="648,78 644,90 648,86 652,90" fill="#BACC23" opacity="0.35"/>
-
-    <!-- Légende -->
-    <rect x="96" y="560" width="8" height="8" rx="1" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.04)"/>
-    <text x="108" y="568" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.55">Allée principale</text>
-    <ellipse cx="100" cy="584" rx="5" ry="4" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.07)"/>
-    <text x="108" y="588" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.5">Zone végétale</text>
-    <ellipse cx="100" cy="602" rx="5" ry="4" stroke="#5599ff" stroke-width="0.8" fill="rgba(85,153,255,0.07)"/>
-    <text x="108" y="606" fill="#5599ff" font-size="7.5" font-family="Inter" opacity="0.45">Plan d'eau</text>
-  </svg>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Journal de l'Atelier</div>
-    <div class="hero-domain"><span class="domain-dot"></span> Projet ABA · Patrimoine public</div>
-    <div class="hero-meta-top">N° 04 · Réalisation · Août 2026</div>
-    <h1>Parc Mérinide<br/><em>de la lecture à l'inauguration</em></h1>
-    <p class="hero-desc">5 hectares au cœur de Fès, un lac de 5 000 m², une flore endémique, des matériaux locaux. Le workflow complet d'un grand projet paysager public — étape par étape.</p>
-    <div class="hero-byline">
-      <span>Adil Boumahdi</span>
-      <div class="hero-byline-dot"></div>
-      <span>10 min de lecture</span>
-      <div class="hero-byline-dot"></div>
-      <span>Projet ABA · Patrimoine · Fès</span>
-    </div>
-  </div>
-</section>
-
-<!-- ARTICLE -->
-<article class="article">
-
-  <!-- Chiffres clés -->
-  <div class="project-stats">
-    <div class="pstat">
-      <div class="pstat-n">5 ha</div>
-      <div class="pstat-l">Surface totale</div>
-    </div>
-    <div class="pstat">
-      <div class="pstat-n">5 000 m²</div>
-      <div class="pstat-l">Lac artificiel</div>
-    </div>
-    <div class="pstat">
-      <div class="pstat-n">+40</div>
-      <div class="pstat-l">Espèces végétales</div>
-    </div>
-    <div class="pstat">
-      <div class="pstat-n">Nov. 2025</div>
-      <div class="pstat-l">Inauguration</div>
-    </div>
-  </div>
-
-  <p class="chapeau">
-    Il y a des projets qui résument ce qu'un atelier sait faire. Le Parc Mérinide Bab Lamer à Fès est celui-là pour ABA. Un site patrimonial au cœur de la médina, une topographie complexe, un programme ambitieux et une exigence de durabilité absolue. Voici comment on l'a construit — vraiment.
-  </p>
-
-  <p>Le Parc Mérinide Bab Lamer occupe un site exceptionnel : les hauteurs de la médina de Fès, face aux tombeaux mérinides, avec une vue directe sur la Kasbah Nouar et les toits de la vieille ville. Un lieu de mémoire, d'abord. Et un terrain accidenté, soumis à des contraintes hydrauliques fortes, à une exposition solaire intense et à des vents dominants qui balaient le site en été.</p>
-
-  <p>La commande était claire dans son ambition, complexe dans son exécution : <strong>transformer 5 hectares de terrain dégradé en un espace public de haute qualité</strong>, avec un plan d'eau de 5 000 m², une flore endémique adaptée au climat de Fès, des matériaux locaux et un système d'arrosage autonome. Livré. Inauguré en novembre 2025.</p>
-
-  <!-- ── GALERIE 01 · Bannière cinématique · le parc depuis les hauteurs ── -->
-  <div class="fig-single" style="margin: 44px 0 52px;">
-    <div class="fig-label">— Le site avant et après</div>
-    <div class="fig-img ratio-21-9">
-      <img
-        src="https://images.unsplash.com/photo-1715756520262-88ea3d306514?auto=format&fit=crop&w=1600&q=85"
-        alt="Plan d'eau dans un parc avec arbres et pont — Parc Mérinide référence"
-        loading="lazy"
-      />
-      <span class="fig-overlay">5 ha · plan d'eau · flore endémique · Fès 2025</span>
-    </div>
-    <p class="fig-caption"><strong>Un parc de 5 hectares au cœur de Fès.</strong> Le lac artificiel de 5 000 m² occupe la cuvette naturelle du terrain — positionnement dicté par la topographie, non par le plan. Les arbres endémiques plantés en 2023 atteignent aujourd'hui 4 à 5 mètres de hauteur.</p>
-    <p class="fig-credit">Photo · Mohamed B. — Unsplash</p>
-  </div>
-
-  <div class="divider">Le workflow complet</div>
-
-  <div class="timeline">
-    <div class="tl-item">
-      <div class="tl-num"><div class="tl-circle">1</div></div>
-      <div class="tl-content">
-        <div class="tl-phase">Phase 01 · Diagnostic</div>
-        <div class="tl-title">Lecture du site — 3 semaines</div>
-        <p class="tl-body">Relevé topographique par drone (modèle numérique de terrain 3D), analyse des sols sur 14 points de sondage, étude hydrologique du bassin versant, relevé photographique complet de la végétation existante, cartographie des zones d'ombre et d'ensoleillement. Aucune décision de conception avant que ce diagnostic soit complet.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-num"><div class="tl-circle">2</div></div>
-      <div class="tl-content">
-        <div class="tl-phase">Phase 02 · Conception</div>
-        <div class="tl-title">Plan masse et études techniques — 6 semaines</div>
-        <p class="tl-body">Plan masse au 1/200, définition des circulations, positionnement du lac en fond de vallée naturelle (profitant de la cuvette existante), sélection végétale endémique adaptée à l'altitude (290 m) et au sol calcaire, conception du réseau d'arrosage automatique, étude hydraulique du lac (bilan hydrique, systèmes de filtration, oxygénation).</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-num"><div class="tl-circle">3</div></div>
-      <div class="tl-content">
-        <div class="tl-phase">Phase 03 · Terrassements</div>
-        <div class="tl-title">Préparation du terrain — 8 semaines</div>
-        <p class="tl-body">Terrassements en courbes de niveau pour créer les terrasses paysagères, excavation de la cuvette du lac (3 600 m³ de terre déplacée), construction des murs de soutènement en pierre sèche locale (calcaire de l'Atlas), mise en place du réseau de drainage périphérique, préparation des sols par amendement organique sur toutes les zones de plantation.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-num"><div class="tl-circle">4</div></div>
-      <div class="tl-content">
-        <div class="tl-phase">Phase 04 · Lac artificiel</div>
-        <div class="tl-title">Hydraulique et étanchéité — 5 semaines</div>
-        <p class="tl-body">Géomembrane EPDM sur lit de sable compacté, système de filtration biologique (filtre à sable et filtre à roseaux), pompes d'oxygénation OASE, réseau de remplissage et de vidange partielle, plantes aquatiques en berge (joncs, roseaux, iris d'eau), mise en eau progressive sur 4 semaines pour contrôle de la qualité.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-num"><div class="tl-circle">5</div></div>
-      <div class="tl-content">
-        <div class="tl-phase">Phase 05 · Plantation</div>
-        <div class="tl-title">Végétalisation endémique — 4 semaines</div>
-        <p class="tl-body">+40 espèces végétales endémiques et méditerranéennes, 3 strates (arborée, arbustive, herbacée), 1 200 plants. Arganiers, pistachiers de l'Atlas, oliviers sauvages, chênes-lièges, lavandes du Maroc, euphorbes, couvre-sols aromatiques. Plantation d'automne pour optimiser l'établissement avant la chaleur estivale.</p>
-      </div>
-    </div>
-    <div class="tl-item">
-      <div class="tl-num"><div class="tl-circle">6</div></div>
-      <div class="tl-content">
-        <div class="tl-phase">Phase 06 · Finitions</div>
-        <div class="tl-title">Revêtements, mobilier, éclairage — 6 semaines</div>
-        <p class="tl-body">Allées en pierre de Fès (khettara locale), bornes d'éclairage basse tension LED, mobilier urbain en bois et acier Corten, signalétique patrimoniale, système d'arrosage automatique programmé (secteurs indépendants, sondes d'humidité). Réception technique et levée des réserves sur 2 semaines.</p>
+  <!-- Hero immersif plein cadre -->
+  <div class="imm-hero" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;">
+    <div class="imm-hero__scrim"></div>
+    <div class="wrap imm-hero__inner">
+      <span class="a-cat" style="color:#e9c98f"><span class="chip__dot" style="background:#6e7d88;box-shadow:0 0 0 3px rgba(255,255,255,0.18)"></span>Carnet de chantier</span>
+      <h1 class="a-title imm-hero__title">Parc Mérinide — de la lecture du site à l'inauguration</h1>
+      <p class="a-dek imm-hero__dek">5 hectares, un lac de 5 000 m², une flore endémique. Le workflow complet d'un projet public patrimonial.</p>
+      <div class="imm-hero__meta">
+        <span>Par Adil Boumahdi</span><span class="dotsep"></span><span>Août 2026</span><span class="dotsep"></span><span>10 min de lecture</span>
       </div>
     </div>
   </div>
 
-  <!-- ── GALERIE 02 · Triptyque phases · du diagnostic à l'inauguration ── -->
-  <div style="margin: 52px 0 8px;">
-    <div class="fig-label">— Trois moments du projet</div>
-  </div>
-  <div class="fig-phases">
-    <div>
-      <div class="fig-img ratio-4-3">
+  <!-- Prose après le hero -->
+  <div class="wrap-narrow prose" style="padding-top:clamp(40px,5vw,72px)">
+
+    <!-- Chiffres clés -->
+    <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);margin:2em 0">
+      <div style="background:var(--surface);padding:24px 20px;text-align:center">
+        <div style="font-family:var(--serif-display);font-size:32px;font-weight:500;color:var(--ink)">5 ha</div>
+        <div style="font-family:var(--sans);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px">Surface totale</div>
+      </div>
+      <div style="background:var(--surface);padding:24px 20px;text-align:center">
+        <div style="font-family:var(--serif-display);font-size:32px;font-weight:500;color:var(--ink)">5 000 m²</div>
+        <div style="font-family:var(--sans);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px">Lac artificiel</div>
+      </div>
+      <div style="background:var(--surface);padding:24px 20px;text-align:center">
+        <div style="font-family:var(--serif-display);font-size:32px;font-weight:500;color:var(--ink)">+40</div>
+        <div style="font-family:var(--sans);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px">Espèces végétales</div>
+      </div>
+      <div style="background:var(--surface);padding:24px 20px;text-align:center">
+        <div style="font-family:var(--serif-display);font-size:32px;font-weight:500;color:var(--ink)">Nov. 2025</div>
+        <div style="font-family:var(--sans);font-size:11px;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);margin-top:6px">Inauguration</div>
+      </div>
+    </div>
+
+    <p class="a-lede">Il y a des projets qui résument ce qu'un atelier sait faire. Le Parc Mérinide Bab Lamer à Fès est celui-là pour ABA. Un site patrimonial au cœur de la médina, une topographie complexe, un programme ambitieux et une exigence de durabilité absolue. Voici comment on l'a construit — vraiment.</p>
+
+    <p>Le Parc Mérinide Bab Lamer occupe un site exceptionnel : les hauteurs de la médina de Fès, face aux tombeaux mérinides, avec une vue directe sur la Kasbah Nouar et les toits de la vieille ville. Un lieu de mémoire, d'abord. Et un terrain accidenté, soumis à des contraintes hydrauliques fortes, à une exposition solaire intense et à des vents dominants qui balaient le site en été.</p>
+
+    <p>La commande était claire dans son ambition, complexe dans son exécution : <strong>transformer 5 hectares de terrain dégradé en un espace public de haute qualité</strong>, avec un plan d'eau de 5 000 m², une flore endémique adaptée au climat de Fès, des matériaux locaux et un système d'arrosage autonome. Livré. Inauguré en novembre 2025.</p>
+
+    <!-- Galerie 01 — Le site avant et après -->
+    <figure class="figure" style="margin:2.5em 0">
+      <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:21/9">
         <img
-          src="https://images.unsplash.com/photo-1557868363-e58c250144cf?auto=format&fit=crop&w=700&q=82"
-          alt="Allée ombragée entre les arbres — diagnostic site phase initiale"
+          src="https://images.unsplash.com/photo-1715756520262-88ea3d306514?auto=format&fit=crop&w=1600&q=85"
+          alt="Plan d'eau dans un parc avec arbres et pont — Parc Mérinide référence"
           loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;display:block"
         />
-        <span class="fig-overlay">Phase 01 · Diagnostic du site</span>
+        <span class="figure__tag">5 ha · plan d'eau · flore endémique · Fès 2025</span>
       </div>
-      <p class="fig-phase-tag">Phase 01 · Diagnostic</p>
-      <p class="fig-caption" style="font-size:10.5px;">3 semaines de relevé — topographie drone, 14 sondages sol, cartographie hydraulique complète.</p>
-    </div>
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1712590545187-a1a4b6964b5e?auto=format&fit=crop&w=700&q=82"
-          alt="Allée bordée d'arbres et arbustes — travaux de plantation en cours"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Phase 04–05 · Plantation · création des allées</span>
-      </div>
-      <p class="fig-phase-tag">Phases 04–05 · Création</p>
-      <p class="fig-caption" style="font-size:10.5px;">400+ espèces endémiques plantées. Allées en pierre de Fès. Murs de soutènement calcaire Atlas.</p>
-    </div>
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1758465026909-d062b068f453?auto=format&fit=crop&w=700&q=82"
-          alt="Lac de parc avec reflets d'arbres — plan d'eau finalisé inauguration"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Phase 06 · Inauguration · novembre 2025</span>
-      </div>
-      <p class="fig-phase-tag">Phase 06 · Inauguration</p>
-      <p class="fig-caption" style="font-size:10.5px;">Lac opérationnel, filtration biologique active, végétation établie. Ouverture publique novembre 2025.</p>
-    </div>
-  </div>
-  <p class="fig-credit">Photos · Tom Wheatley / Jacob Pretorius / Nick Hui — Unsplash</p>
+      <figcaption class="figure__cap"><strong>Un parc de 5 hectares au cœur de Fès.</strong> Le lac artificiel de 5 000 m² occupe la cuvette naturelle du terrain — positionnement dicté par la topographie, non par le plan. Les arbres endémiques plantés en 2023 atteignent aujourd'hui 4 à 5 mètres de hauteur. <span style="opacity:.5">Photo · Mohamed B. — Unsplash</span></figcaption>
+    </figure>
 
-  <div class="pull-quote">
-    <p>Un parc public, c'est un projet qui doit tenir 30 ans sans qu'on y revienne tous les trois mois pour réparer ce qui n'aurait pas dû lâcher. La durabilité n'est pas une option — c'est la condition de base.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
+    <h2>Le workflow complet — 18 mois, 6 phases</h2>
 
-  <div class="section-head">
-    <span class="section-num">02</span>
+    <!-- Timeline -->
+    <ul style="list-style:none;padding:0;margin:2em 0;border-top:1px solid var(--line)">
+
+      <li style="display:grid;grid-template-columns:48px 1fr;gap:0;padding:24px 0;border-bottom:1px solid var(--line)">
+        <div style="font-family:var(--serif-display);font-size:28px;font-weight:300;color:var(--ink-faint);line-height:1;padding-top:4px">1</div>
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">Phase 01 · Diagnostic</div>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Lecture du site — 3 semaines</div>
+          <p style="margin:0">Relevé topographique par drone (modèle numérique de terrain 3D), analyse des sols sur 14 points de sondage, étude hydrologique du bassin versant, relevé photographique complet de la végétation existante, cartographie des zones d'ombre et d'ensoleillement. Aucune décision de conception avant que ce diagnostic soit complet.</p>
+        </div>
+      </li>
+
+      <li style="display:grid;grid-template-columns:48px 1fr;gap:0;padding:24px 0;border-bottom:1px solid var(--line)">
+        <div style="font-family:var(--serif-display);font-size:28px;font-weight:300;color:var(--ink-faint);line-height:1;padding-top:4px">2</div>
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">Phase 02 · Conception</div>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Plan masse et études techniques — 6 semaines</div>
+          <p style="margin:0">Plan masse au 1/200, définition des circulations, positionnement du lac en fond de vallée naturelle (profitant de la cuvette existante), sélection végétale endémique adaptée à l'altitude (290 m) et au sol calcaire, conception du réseau d'arrosage automatique, étude hydraulique du lac (bilan hydrique, systèmes de filtration, oxygénation).</p>
+        </div>
+      </li>
+
+      <li style="display:grid;grid-template-columns:48px 1fr;gap:0;padding:24px 0;border-bottom:1px solid var(--line)">
+        <div style="font-family:var(--serif-display);font-size:28px;font-weight:300;color:var(--ink-faint);line-height:1;padding-top:4px">3</div>
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">Phase 03 · Terrassements</div>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Préparation du terrain — 8 semaines</div>
+          <p style="margin:0">Terrassements en courbes de niveau pour créer les terrasses paysagères, excavation de la cuvette du lac (3 600 m³ de terre déplacée), construction des murs de soutènement en pierre sèche locale (calcaire de l'Atlas), mise en place du réseau de drainage périphérique, préparation des sols par amendement organique sur toutes les zones de plantation.</p>
+        </div>
+      </li>
+
+      <li style="display:grid;grid-template-columns:48px 1fr;gap:0;padding:24px 0;border-bottom:1px solid var(--line)">
+        <div style="font-family:var(--serif-display);font-size:28px;font-weight:300;color:var(--ink-faint);line-height:1;padding-top:4px">4</div>
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">Phase 04 · Lac artificiel</div>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Hydraulique et étanchéité — 5 semaines</div>
+          <p style="margin:0">Géomembrane EPDM sur lit de sable compacté, système de filtration biologique (filtre à sable et filtre à roseaux), pompes d'oxygénation OASE, réseau de remplissage et de vidange partielle, plantes aquatiques en berge (joncs, roseaux, iris d'eau), mise en eau progressive sur 4 semaines pour contrôle de la qualité.</p>
+        </div>
+      </li>
+
+      <li style="display:grid;grid-template-columns:48px 1fr;gap:0;padding:24px 0;border-bottom:1px solid var(--line)">
+        <div style="font-family:var(--serif-display);font-size:28px;font-weight:300;color:var(--ink-faint);line-height:1;padding-top:4px">5</div>
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">Phase 05 · Plantation</div>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Végétalisation endémique — 4 semaines</div>
+          <p style="margin:0">+40 espèces végétales endémiques et méditerranéennes, 3 strates (arborée, arbustive, herbacée), 1 200 plants. Arganiers, pistachiers de l'Atlas, oliviers sauvages, chênes-lièges, lavandes du Maroc, euphorbes, couvre-sols aromatiques. Plantation d'automne pour optimiser l'établissement avant la chaleur estivale.</p>
+        </div>
+      </li>
+
+      <li style="display:grid;grid-template-columns:48px 1fr;gap:0;padding:24px 0;border-bottom:1px solid var(--line)">
+        <div style="font-family:var(--serif-display);font-size:28px;font-weight:300;color:var(--ink-faint);line-height:1;padding-top:4px">6</div>
+        <div>
+          <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:6px">Phase 06 · Finitions</div>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Revêtements, mobilier, éclairage — 6 semaines</div>
+          <p style="margin:0">Allées en pierre de Fès (khettara locale), bornes d'éclairage basse tension LED, mobilier urbain en bois et acier Corten, signalétique patrimoniale, système d'arrosage automatique programmé (secteurs indépendants, sondes d'humidité). Réception technique et levée des réserves sur 2 semaines.</p>
+        </div>
+      </li>
+
+    </ul>
+
+    <!-- Galerie 02 — Triptyque phases -->
+    <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin:2.5em 0">
+      <figure class="figure" style="margin:0">
+        <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:4/3">
+          <img
+            src="https://images.unsplash.com/photo-1557868363-e58c250144cf?auto=format&fit=crop&w=700&q=82"
+            alt="Allée ombragée entre les arbres — diagnostic site phase initiale"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block"
+          />
+          <span class="figure__tag">Phase 01 · Diagnostic</span>
+        </div>
+        <figcaption class="figure__cap" style="font-size:10.5px">3 semaines de relevé — topographie drone, 14 sondages sol, cartographie hydraulique complète.</figcaption>
+      </figure>
+      <figure class="figure" style="margin:0">
+        <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:4/3">
+          <img
+            src="https://images.unsplash.com/photo-1712590545187-a1a4b6964b5e?auto=format&fit=crop&w=700&q=82"
+            alt="Allée bordée d'arbres et arbustes — travaux de plantation en cours"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block"
+          />
+          <span class="figure__tag">Phases 04–05 · Création</span>
+        </div>
+        <figcaption class="figure__cap" style="font-size:10.5px">+40 espèces endémiques plantées. Allées en pierre de Fès. Murs de soutènement calcaire Atlas.</figcaption>
+      </figure>
+      <figure class="figure" style="margin:0">
+        <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:4/3">
+          <img
+            src="https://images.unsplash.com/photo-1758465026909-d062b068f453?auto=format&fit=crop&w=700&q=82"
+            alt="Lac de parc avec reflets d'arbres — plan d'eau finalisé inauguration"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block"
+          />
+          <span class="figure__tag">Phase 06 · Inauguration</span>
+        </div>
+        <figcaption class="figure__cap" style="font-size:10.5px">Lac opérationnel, filtration biologique active, végétation établie. Ouverture publique novembre 2025.</figcaption>
+      </figure>
+    </div>
+    <p style="font-family:var(--sans);font-size:10px;color:var(--ink-faint);opacity:.55;margin-top:-1em;margin-bottom:2em">Photos · Tom Wheatley / Jacob Pretorius / Nick Hui — Unsplash</p>
+
+    <blockquote class="pull">
+      <p>Un parc public, c'est un projet qui doit tenir 30 ans sans qu'on y revienne tous les trois mois pour réparer ce qui n'aurait pas dû lâcher. La durabilité n'est pas une option — c'est la condition de base.</p>
+      <cite>— Adil Boumahdi, fondateur ABA</cite>
+    </blockquote>
+
     <h2>Les quatre partis pris techniques</h2>
-  </div>
 
-  <div class="grid4">
-    <div class="g-item">
-      <span class="g-icon">🏛️</span>
-      <h3>Matériaux locaux exclusivement</h3>
-      <p>Calcaire de l'Atlas pour les murs de soutènement, pierre de Fès pour les allées, bois de cèdre de l'Atlas pour les pergolas. Aucun matériau importé. Ce choix est économique, écologique et surtout cohérent avec l'identité du lieu — la médina de Fès est construite dans ces mêmes pierres depuis le IXe siècle.</p>
-      <span class="g-tag">Identité territoriale</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">💧</span>
-      <h3>Lac à filtration biologique</h3>
-      <p>Pas de chlore, pas de produits chimiques. La qualité de l'eau est maintenue par un système de filtration biologique : filtre à sable, filtre à roseaux, plantes oxygénantes. Un équilibre biologique stable en 6 à 8 semaines, qui s'auto-régule ensuite. Coût d'entretien annuel : 80% inférieur à un bassin chimique.</p>
-      <span class="g-tag">Hydraulique naturelle</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🌿</span>
-      <h3>Zéro espèce exotique envahissante</h3>
-      <p>La checklist de sélection végétale excluait toute espèce figurant sur la liste UICN des envahissantes en zone méditerranéenne. Pas d'eucalyptus, pas d'acacia, pas de laurier-cerise. Chaque espèce plantée a été validée pour sa cohérence avec l'écosystème local de Fès-Meknès.</p>
-      <span class="g-tag">Biodiversité maîtrisée</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">⚙️</span>
-      <h3>Arrosage autonome intelligent</h3>
-      <p>14 secteurs indépendants, sondes d'humidité enterrées, programmation saisonnière automatique. Le système s'adapte à la météo réelle et réduit la consommation d'eau de 40 à 60% par rapport à un arrosage manuel. Prévu pour être progressivement sevré au fur et à mesure de l'établissement des espèces.</p>
-      <span class="g-tag">Autonomie progressive</span>
-    </div>
-  </div>
-
-  <div class="visual">
-    <div class="visual-label">— Plan schématique · Parc Mérinide Bab Lamer · Fès</div>
-    <svg viewBox="0 0 620 300" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Périmètre -->
-      <path d="M 40 40 Q 200 28 380 42 Q 480 50 510 110 Q 530 170 510 240 Q 490 280 380 292 Q 240 300 130 280 Q 60 264 40 200 Q 22 140 40 40 Z"
-        stroke="#BACC23" stroke-width="0.9" fill="rgba(186,204,35,0.02)"/>
-
-      <!-- Lac -->
-      <path d="M 220 140 Q 268 118 314 132 Q 350 144 356 172 Q 362 202 336 220 Q 306 238 266 230 Q 228 220 216 194 Q 206 168 220 140 Z"
-        stroke="#5599ff" stroke-width="1.1" fill="rgba(85,153,255,0.10)"/>
-      <text x="286" y="183" text-anchor="middle" fill="#5599ff" font-size="7.5" font-family="Inter" opacity="0.6">Lac · 5 000 m²</text>
-
-      <!-- Allées -->
-      <path d="M 40 40 Q 100 100 140 140 Q 178 174 216 194" stroke="#BACC23" stroke-width="0.7" stroke-dasharray="5,4" fill="none" opacity="0.45"/>
-      <path d="M 380 42 Q 400 90 390 120 Q 374 146 356 172" stroke="#BACC23" stroke-width="0.7" stroke-dasharray="5,4" fill="none" opacity="0.4"/>
-      <path d="M 286 230 Q 280 268 270 292" stroke="#BACC23" stroke-width="0.7" stroke-dasharray="5,4" fill="none" opacity="0.35"/>
-
-      <!-- Zones végétales -->
-      <ellipse cx="90" cy="110" rx="32" ry="22" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.08)" opacity="0.75"/>
-      <ellipse cx="460" cy="100" rx="28" ry="20" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)" opacity="0.7"/>
-      <ellipse cx="110" cy="240" rx="36" ry="24" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.08)" opacity="0.7"/>
-      <ellipse cx="430" cy="230" rx="30" ry="20" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)" opacity="0.65"/>
-      <ellipse cx="298" cy="58" rx="38" ry="20" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)" opacity="0.65"/>
-
-      <!-- Murs de soutènement -->
-      <path d="M 40 40 Q 60 80 68 140" stroke="#8B7355" stroke-width="1.5" opacity="0.4"/>
-      <path d="M 68 140 Q 70 200 80 240" stroke="#8B7355" stroke-width="1.2" opacity="0.35"/>
-
-      <!-- Points remarquables -->
-      <circle cx="40" cy="40" r="5" fill="#BACC23" opacity="0.6"/>
-      <text x="28" y="34" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">Entrée</text>
-
-      <circle cx="462" cy="68" r="5" fill="#BACC23" opacity="0.5"/>
-      <text x="442" y="60" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.45">Belvédère</text>
-
-      <!-- Cottes de surface -->
-      <text x="310" y="280" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.35" text-anchor="middle">5 hectares — Fès, Maroc · Alt. 290 m</text>
-
-      <!-- Nord -->
-      <circle cx="582" cy="40" r="18" stroke="#BACC23" stroke-width="0.5" fill="none" opacity="0.35"/>
-      <text x="582" y="30" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.35">N</text>
-      <polygon points="582,32 579,42 582,39 585,42" fill="#BACC23" opacity="0.35"/>
-
-      <!-- Légende -->
-      <line x1="38" y1="278" x2="52" y2="278" stroke="#BACC23" stroke-width="0.7" stroke-dasharray="4,3"/>
-      <text x="56" y="282" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.5">Allée</text>
-      <ellipse cx="44" cy="292" rx="5" ry="4" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)"/>
-      <text x="52" y="296" fill="#5A7A3A" font-size="7" font-family="Inter" opacity="0.45">Végétal</text>
-      <line x1="100" y1="278" x2="112" y2="278" stroke="#8B7355" stroke-width="1.5" opacity="0.4"/>
-      <text x="116" y="282" fill="#8B7355" font-size="7" font-family="Inter" opacity="0.4">Soutènement</text>
-    </svg>
-  </div>
-
-  <!-- ── PLANCHES · Herbier du Parc Mérinide ── -->
-  <section class="herbier-section">
-    <p class="herbier-title">Herbier du Parc · Espèces endémiques plantées</p>
-    <div class="herbier-grid">
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Ceratonia_siliqua_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-046.jpg"
-               alt="Ceratonia siliqua — caroubier endémique Méditerranée" loading="lazy">
-        </div>
-        <p class="herb-name">Ceratonia siliqua</p>
-        <p class="herb-common">Caroubier · Endémique Atlas</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen, 1887</p>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);margin:2em 0">
+      <div style="background:var(--surface);padding:28px 24px">
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px">Identité territoriale</div>
+        <h3 style="font-family:var(--serif-display);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Matériaux locaux exclusivement</h3>
+        <p style="margin:0;font-size:14px">Calcaire de l'Atlas pour les murs de soutènement, pierre de Fès pour les allées, bois de cèdre de l'Atlas pour les pergolas. Aucun matériau importé. Ce choix est économique, écologique et surtout cohérent avec l'identité du lieu — la médina de Fès est construite dans ces mêmes pierres depuis le IXe siècle.</p>
       </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Punica_granatum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-220.jpg"
-               alt="Punica granatum — grenadier traditionnel jardins marocains" loading="lazy">
-        </div>
-        <p class="herb-name">Punica granatum</p>
-        <p class="herb-common">Grenadier · Jardins médinaux</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+      <div style="background:var(--surface);padding:28px 24px">
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px">Hydraulique naturelle</div>
+        <h3 style="font-family:var(--serif-display);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Lac à filtration biologique</h3>
+        <p style="margin:0;font-size:14px">Pas de chlore, pas de produits chimiques. La qualité de l'eau est maintenue par un système de filtration biologique : filtre à sable, filtre à roseaux, plantes oxygénantes. Un équilibre biologique stable en 6 à 8 semaines, qui s'auto-régule ensuite. Coût d'entretien annuel : 80% inférieur à un bassin chimique.</p>
       </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
-               alt="Myrtus communis — myrte des jardins andalous" loading="lazy">
-        </div>
-        <p class="herb-name">Myrtus communis</p>
-        <p class="herb-common">Myrte · Jardin andalou</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+      <div style="background:var(--surface);padding:28px 24px">
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px">Biodiversité maîtrisée</div>
+        <h3 style="font-family:var(--serif-display);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Zéro espèce exotique envahissante</h3>
+        <p style="margin:0;font-size:14px">La checklist de sélection végétale excluait toute espèce figurant sur la liste UICN des envahissantes en zone méditerranéenne. Pas d'eucalyptus, pas d'acacia, pas de laurier-cerise. Chaque espèce plantée a été validée pour sa cohérence avec l'écosystème local de Fès-Meknès.</p>
       </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Iris_germanica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-093.jpg"
-               alt="Iris germanica — plante de berge et bassin" loading="lazy">
-        </div>
-        <p class="herb-name">Iris germanica</p>
-        <p class="herb-common">Iris · Berges &amp; bassin</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+      <div style="background:var(--surface);padding:28px 24px">
+        <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.28em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px">Autonomie progressive</div>
+        <h3 style="font-family:var(--serif-display);font-size:18px;font-weight:400;color:var(--ink);margin-bottom:10px;line-height:1.2">Arrosage autonome intelligent</h3>
+        <p style="margin:0;font-size:14px">14 secteurs indépendants, sondes d'humidité enterrées, programmation saisonnière automatique. Le système s'adapte à la météo réelle et réduit la consommation d'eau de 40 à 60% par rapport à un arrosage manuel. Prévu pour être progressivement sevré au fur et à mesure de l'établissement des espèces.</p>
       </div>
-
     </div>
-  </section>
 
-  <div class="section-head">
-    <span class="section-num">03</span>
+    <!-- Herbier du Parc Mérinide -->
+    <div style="margin:3em 0;padding:2em 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+      <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:1.5em">Herbier du Parc · Espèces endémiques plantées</div>
+      <div class="gal gal--2">
+        <figure class="figure">
+          <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:3/4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Ceratonia_siliqua_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-046.jpg"
+                 alt="Ceratonia siliqua — caroubier endémique Méditerranée" loading="lazy"
+                 style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"/>
+          </div>
+          <figcaption class="figure__cap">
+            <em>Ceratonia siliqua</em><br>
+            <span style="font-family:var(--sans);font-size:9px;letter-spacing:0.2em;text-transform:uppercase">Caroubier · Endémique Atlas</span><br>
+            <span style="opacity:.45;font-size:10px">Köhler's Medizinal-Pflanzen, 1887</span>
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:3/4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/30/Punica_granatum_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-220.jpg"
+                 alt="Punica granatum — grenadier traditionnel jardins marocains" loading="lazy"
+                 style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"/>
+          </div>
+          <figcaption class="figure__cap">
+            <em>Punica granatum</em><br>
+            <span style="font-family:var(--sans);font-size:9px;letter-spacing:0.2em;text-transform:uppercase">Grenadier · Jardins médinaux</span><br>
+            <span style="opacity:.45;font-size:10px">Köhler's Medizinal-Pflanzen</span>
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:3/4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
+                 alt="Myrtus communis — myrte des jardins andalous" loading="lazy"
+                 style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"/>
+          </div>
+          <figcaption class="figure__cap">
+            <em>Myrtus communis</em><br>
+            <span style="font-family:var(--sans);font-size:9px;letter-spacing:0.2em;text-transform:uppercase">Myrte · Jardin andalou</span><br>
+            <span style="opacity:.45;font-size:10px">Köhler's Medizinal-Pflanzen</span>
+          </figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:3/4">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Iris_germanica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-093.jpg"
+                 alt="Iris germanica — plante de berge et bassin" loading="lazy"
+                 style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block"/>
+          </div>
+          <figcaption class="figure__cap">
+            <em>Iris germanica</em><br>
+            <span style="font-family:var(--sans);font-size:9px;letter-spacing:0.2em;text-transform:uppercase">Iris · Berges &amp; bassin</span><br>
+            <span style="opacity:.45;font-size:10px">Köhler's Medizinal-Pflanzen</span>
+          </figcaption>
+        </figure>
+      </div>
+    </div>
+
     <h2>Ce que l'inauguration a révélé</h2>
-  </div>
 
-  <p>Novembre 2025. Le parc a été inauguré devant les autorités locales et les habitants du quartier. Ce moment — toujours intense pour une équipe qui a vécu un chantier de l'intérieur — a confirmé quelque chose que nous savions mais qui méritait d'être vérifié en conditions réelles : <strong>un espace public bien conçu s'approprie immédiatement</strong>.</p>
+    <p>Novembre 2025. Le parc a été inauguré devant les autorités locales et les habitants du quartier. Ce moment — toujours intense pour une équipe qui a vécu un chantier de l'intérieur — a confirmé quelque chose que nous savions mais qui méritait d'être vérifié en conditions réelles : <strong>un espace public bien conçu s'approprie immédiatement</strong>.</p>
 
-  <p>Dès le premier jour, les familles de la médina ont investi les allées, les enfants ont couru vers le lac, les anciens se sont installés sous les arganiers. Pas besoin de signalisation, pas besoin d'invitation. L'espace parle de lui-même parce qu'il a été conçu pour ces usages — pas pour une photo dans un catalogue.</p>
+    <p>Dès le premier jour, les familles de la médina ont investi les allées, les enfants ont couru vers le lac, les anciens se sont installés sous les arganiers. Pas besoin de signalisation, pas besoin d'invitation. L'espace parle de lui-même parce qu'il a été conçu pour ces usages — pas pour une photo dans un catalogue.</p>
 
-  <div class="tech-note">
-    <div class="tech-note-label">— Bilan technique · 6 mois après inauguration</div>
-    <p>
-      <strong style="color: var(--text);">Lac artificiel</strong> — Eau cristalline, équilibre biologique atteint en 7 semaines. Aucun traitement chimique depuis l'inauguration. Faune aquatique spontanée (grenouilles, libellules) présente dès le 3e mois.
-      <br/><br/>
-      <strong style="color: var(--text);">Végétation</strong> — 96% de reprise sur les plantations d'automne. Les 4% de pertes dues à des dommages mécaniques post-inauguration, remplacés en mars 2026. Premier été traversé sans arrosage supplémentaire sur les zones arborées établies.
-      <br/><br/>
-      <strong style="color: var(--text);">Infrastructures</strong> — Aucune réparation structurelle. Un capteur d'arrosage défaillant remplacé en janvier. Les murs de soutènement en pierre sèche n'ont montré aucun mouvement malgré les pluies exceptionnelles de décembre 2025 (180 mm en 48h).
-    </p>
-  </div>
+    <div style="margin:2em 0;padding:24px 28px;border-left:2px solid var(--line);background:var(--surface-raised)">
+      <div style="font-family:var(--sans);font-size:10px;letter-spacing:0.32em;text-transform:uppercase;color:var(--ink-faint);margin-bottom:14px">Bilan technique · 6 mois après inauguration</div>
+      <p style="font-size:14px;margin-bottom:12px"><strong>Lac artificiel</strong> — Eau cristalline, équilibre biologique atteint en 7 semaines. Aucun traitement chimique depuis l'inauguration. Faune aquatique spontanée (grenouilles, libellules) présente dès le 3e mois.</p>
+      <p style="font-size:14px;margin-bottom:12px"><strong>Végétation</strong> — 96% de reprise sur les plantations d'automne. Les 4% de pertes dues à des dommages mécaniques post-inauguration, remplacés en mars 2026. Premier été traversé sans arrosage supplémentaire sur les zones arborées établies.</p>
+      <p style="font-size:14px;margin:0"><strong>Infrastructures</strong> — Aucune réparation structurelle. Un capteur d'arrosage défaillant remplacé en janvier. Les murs de soutènement en pierre sèche n'ont montré aucun mouvement malgré les pluies exceptionnelles de décembre 2025 (180 mm en 48h).</p>
+    </div>
 
-  <p>Ce bilan à 6 mois n'est pas anecdotique. Il confirme que les choix techniques faits dès la phase de conception — matériaux locaux, filtration biologique, plantations endémiques — produisent exactement les résultats attendus. <strong>Un espace public construit avec rigueur ne demande pas à être réparé tous les six mois.</strong> Il vieillit bien parce qu'il a été pensé pour durer.</p>
+    <p>Ce bilan à 6 mois n'est pas anecdotique. Il confirme que les choix techniques faits dès la phase de conception — matériaux locaux, filtration biologique, plantations endémiques — produisent exactement les résultats attendus. <strong>Un espace public construit avec rigueur ne demande pas à être réparé tous les six mois.</strong> Il vieillit bien parce qu'il a été pensé pour durer.</p>
 
-  <div class="pull-quote">
-    <p>Voir les enfants de la médina courir vers le lac le premier jour — pas parce qu'on leur avait dit de le faire, mais parce que l'espace les y appelait. C'est ça, un projet réussi.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
+    <blockquote class="pull">
+      <p>Voir les enfants de la médina courir vers le lac le premier jour — pas parce qu'on leur avait dit de le faire, mais parce que l'espace les y appelait. C'est ça, un projet réussi.</p>
+      <cite>— Adil Boumahdi, fondateur ABA</cite>
+    </blockquote>
 
-  <!-- ── GALERIE 03 · Asymétrique 60/40 + pleine largeur · le lac et le parc ── -->
-  <div style="margin: 52px 0 8px;">
-    <div class="fig-label">— Le lac et les espaces</div>
-  </div>
-  <div class="fig-asymduo">
-    <div>
-      <div class="fig-img ratio-16-9">
+    <!-- Galerie 03 — Le lac et les espaces -->
+    <div style="display:grid;grid-template-columns:3fr 2fr;gap:10px;margin:2.5em 0">
+      <figure class="figure" style="margin:0">
+        <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:16/9">
+          <img
+            src="https://images.unsplash.com/photo-1633701226802-4da76b98479b?auto=format&fit=crop&w=1000&q=82"
+            alt="Fontaine dans un bassin de parc — filtration biologique plan d'eau"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block"
+          />
+          <span class="figure__tag">Lac biologique · filtration naturelle · sans chlore</span>
+        </div>
+        <figcaption class="figure__cap"><strong>Le lac comme cœur du parc.</strong> 5 000 m² d'eau filtrée biologiquement — filtre à sable, roseaux oxygénants, plantes aquatiques endémiques. L'eau reste limpide sans un gramme de produit chimique.</figcaption>
+      </figure>
+      <figure class="figure" style="margin:0">
+        <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:16/9">
+          <img
+            src="https://images.unsplash.com/photo-1692098074691-cba29855482e?auto=format&fit=crop&w=700&q=82"
+            alt="Fontaine en parc entourée d'arbres — jet d'eau et végétation"
+            loading="lazy"
+            style="width:100%;height:100%;object-fit:cover;display:block"
+          />
+          <span class="figure__tag">Fontainerie · circulation de l'eau</span>
+        </div>
+        <figcaption class="figure__cap"><strong>La fontainerie intégrée</strong> assure l'oxygénation du lac et crée les ambiances sonores du parc.</figcaption>
+      </figure>
+    </div>
+    <p style="font-family:var(--sans);font-size:10px;color:var(--ink-faint);opacity:.55;margin-top:-1em;margin-bottom:2em">Photos · Marjorie Pear / Jacques Dillies — Unsplash</p>
+
+    <figure class="figure" style="margin:2.5em 0">
+      <div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460;aspect-ratio:16/9">
         <img
-          src="https://images.unsplash.com/photo-1633701226802-4da76b98479b?auto=format&fit=crop&w=1000&q=82"
-          alt="Fontaine dans un bassin de parc — filtration biologique plan d'eau"
+          src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1400&q=85"
+          alt="Allée arborée avec mur de pierre et piliers — parc paysager mature"
           loading="lazy"
+          style="width:100%;height:100%;object-fit:cover;display:block"
         />
-        <span class="fig-overlay">Lac biologique · filtration naturelle · sans chlore</span>
+        <span class="figure__tag">Parc Mérinide · allée principale · pierre locale · végétation endémique établie</span>
       </div>
-      <p class="fig-caption"><strong>Le lac comme cœur du parc.</strong> 5 000 m² d'eau filtrée biologiquement — filtre à sable, roseaux oxygénants, plantes aquatiques endémiques. L'eau reste limpide sans un gramme de produit chimique.</p>
-    </div>
-    <div>
-      <div class="fig-img ratio-16-9">
-        <img
-          src="https://images.unsplash.com/photo-1692098074691-cba29855482e?auto=format&fit=crop&w=700&q=82"
-          alt="Fontaine en parc entourée d'arbres — jet d'eau et végétation"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Fontainerie · circulation de l'eau</span>
-      </div>
-      <p class="fig-caption"><strong>La fontainerie intégrée</strong> assure l'oxygénation du lac et crée les ambiances sonores du parc.</p>
-    </div>
-  </div>
-  <p class="fig-credit" style="margin-bottom: 48px;">Photos · Marjorie Pear / Jacques Dillies — Unsplash</p>
+      <figcaption class="figure__cap"><strong>L'allée principale du parc.</strong> Pierre de Fès au sol, calcaire de l'Atlas pour les murs, cèdre de l'Atlas pour les pergolas. Aucun matériau importé — chaque élément appartient à la géologie de Fès-Meknès. <span style="opacity:.5">Photo · Miguel Ángel Sanz — Unsplash</span></figcaption>
+    </figure>
 
-  <div class="fig-single">
-    <div class="fig-img ratio-16-9">
-      <img
-        src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1400&q=85"
-        alt="Allée arborée avec mur de pierre et piliers — parc paysager mature"
-        loading="lazy"
-      />
-      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Parc Mérinide · allée principale · pierre locale · végétation endémique établie</span>
-    </div>
-    <p class="fig-caption"><strong>L'allée principale du parc.</strong> Pierre de Fès au sol, calcaire de l'Atlas pour les murs, cèdre de l'Atlas pour les pergolas. Aucun matériau importé — chaque élément appartient à la géologie de Fès-Meknès.</p>
-    <p class="fig-credit">Photo · Miguel Ángel Sanz — Unsplash</p>
-  </div>
+    <blockquote class="pull">
+      <p>Dans ce parc, dans vingt ans, les arbres que nous avons plantés feront de l'ombre à des enfants qui ne savent pas encore marcher. C'est ça, construire dans la durée.</p>
+      <cite>— Adil Boumahdi, fondateur ABA</cite>
+    </blockquote>
 
-  <div class="pull-quote">
-    <p>Dans ce parc, dans vingt ans, les arbres que nous avons plantés feront de l'ombre à des enfants qui ne savent pas encore marcher. C'est ça, construire dans la durée.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
+    <p>Le Parc Mérinide Bab Lamer restera longtemps une référence pour ABA. Non pas parce qu'il est grand — nous travaillons aussi bien à l'échelle d'un jardin de 300 m². Mais parce qu'il démontre que la méthode que nous appliquons à chaque projet, quelle qu'en soit l'échelle, produit des résultats durables, vivants et identitaires. Ce parc appartient à Fès. Il le méritait.</p>
 
-  <p>Le Parc Mérinide Bab Lamer restera longtemps une référence pour ABA. Non pas parce qu'il est grand — nous travaillons aussi bien à l'échelle d'un jardin de 300 m². Mais parce qu'il démontre que la méthode que nous appliquons à chaque projet, quelle qu'en soit l'échelle, produit des résultats durables, vivants et identitaires. Ce parc appartient à Fès. Il le méritait.</p>
-
-  <div class="signature">
-    <div class="sig-avatar">AB</div>
-    <div class="sig-text">
-      <h4>Adil Boumahdi</h4>
-      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
-    </div>
-  </div>
-
-  <div class="cta">
-    <h3>Votre projet,<br/><em>quelle qu'en soit l'échelle.</em></h3>
-    <p>De 300 m² à 50 hectares, notre méthode ne change pas. La rigueur, les matériaux locaux, le vivant qui dure. Depuis l'atelier ABA.</p>
-    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
-  </div>
-
-  <div class="related">
-    <div class="related-label">— À lire aussi</div>
-    <div class="related-grid">
-      <a href="lire-un-terrain-avant-de-le-toucher.html" class="rel-card">
-        <span class="rel-tag">N° 01 · Conception</span>
-        <h4>Lire un terrain avant de le toucher</h4>
-      </a>
-      <a href="choisir-une-plante-endemique-pas-decorative.html" class="rel-card">
-        <span class="rel-tag">N° 03 · Végétal</span>
-        <h4>Choisir une plante endémique, pas décorative</h4>
-      </a>
-    </div>
-  </div>
+  </div><!-- /wrap-narrow -->
 
 </article>
 
-<footer>
-  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
-  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
-</footer>
+<!-- ARTICLE FOOT -->
+<div class="wrap article-foot">
+  <div class="author-bio"><div class="author-bio__avatar">AB</div><div>
+    <div class="author-bio__name">Adil Boumahdi</div>
+    <div class="author-bio__role">Fondateur &amp; architecte paysagiste — ABA</div>
+    <div class="author-bio__cities">Rabat · Casablanca · Marrakech · Fès</div>
+  </div></div>
+  <div class="cta"><div class="cta__rule"></div>
+    <p class="cta__head">Votre projet mérite <em>un atelier exigeant.</em></p>
+    <p class="cta__sub">De l'esquisse à la dernière pierre — diagnostic, conception, chantier, inauguration.</p>
+    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section class="wrap related"><div class="section-head" style="margin:0 0 26px"><h2>À lire ensuite</h2></div>
+  <div class="grid grid--edit">
+    <article class="card card--md col-6" style="cursor:pointer" onclick="location.href='villa-des-oudayas-patio.html'">
+      <div class="card__media"><figure class="figure"><div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460"><span class="figure__tag">Carnet</span></div></figure></div>
+      <div class="card__cat"><span class="chip__dot" style="background:#6e7d88"></span>Carnet de chantier</div>
+      <h3 class="card__title">Villa des Oudayas : journal d'un patio</h3>
+      <div class="card__meta"><span>Atelier ABA</span><span class="dotsep"></span><span>4 min</span></div>
+    </article>
+    <article class="card card--md col-6" style="cursor:pointer" onclick="location.href='eau-ecrite-dans-la-pierre.html'">
+      <div class="card__media"><figure class="figure"><div class="figure__box" style="--ph-a:#9db9c4;--ph-b:#6d96a3;--ph-c:#3f6e7a"><span class="figure__tag">Waterscape</span></div></figure></div>
+      <div class="card__cat"><span class="chip__dot" style="background:#6d96a3"></span>Waterscape</div>
+      <h3 class="card__title">L'eau écrite dans la pierre</h3>
+      <div class="card__meta"><span>Adil Boumahdi</span><span class="dotsep"></span><span>7 min</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer__grid">
+    <div><div class="footer__mark">ABA <em>Paysage</em></div><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
+  </div>
+  <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
+</div></footer>
 
 <script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('aba-blog-theme', t);
-    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-    document.getElementById('btn-light').classList.toggle('active', t === 'light');
-  }
-  const saved = localStorage.getItem('aba-blog-theme');
-  if (saved) setTheme(saved);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
 
 </body>

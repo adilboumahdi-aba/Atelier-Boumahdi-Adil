@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,850 +13,330 @@
   <link rel="canonical" href="https://www.ab-landscapes.com/blog/etang-rabat-hydraulique-filtre-biologique-koi.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/journal.css" />
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root, [data-theme="dark"] {
-      --accent:        #BACC23;
-      --accent-dim:    rgba(186,204,35,0.35);
-      --bg:            #13130E;
-      --bg2:           #1B1B13;
-      --bg3:           #222218;
-      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
-      --text:          #F2EDE3;
-      --text-body:     #C8C4BA;
-      --text-muted:    rgba(242,237,227,0.40);
-      --border:        rgba(242,237,227,0.08);
-      --border2:       rgba(242,237,227,0.13);
-      --hero-grid-op:  0.035;
-      --hero-svg-op:   0.12;
-      --quote-mark-op: 0.10;
-      --toggle-bg:     #1B1B13;
-      --toggle-border: rgba(242,237,227,0.15);
-      --toggle-text:   rgba(242,237,227,0.55);
-      --toggle-active-bg:   #BACC23;
-      --toggle-active-text: #13130E;
-      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
+    /* Catégorie couleurs — Carnet de chantier */
+    .a-cat { color: #6e7d88; }
+    .chip__dot { background: #6e7d88 !important; }
+    /* Chiffres clés */
+    .koi-stats {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+      background: var(--line); margin: 2em 0; border-radius: var(--r-md); overflow: hidden;
     }
-
-    [data-theme="light"] {
-      --bg:            #FAF9F5;
-      --bg2:           #F2EDE4;
-      --bg3:           #E8E2D8;
-      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
-      --text:          #1A1A14;
-      --text-body:     #3A3A2E;
-      --text-muted:    rgba(26,26,20,0.45);
-      --border:        rgba(26,26,20,0.08);
-      --border2:       rgba(26,26,20,0.14);
-      --hero-grid-op:  0.04;
-      --hero-svg-op:   0.10;
-      --quote-mark-op: 0.18;
-      --toggle-bg:     #FAF9F5;
-      --toggle-border: rgba(26,26,20,0.18);
-      --toggle-text:   rgba(26,26,20,0.50);
-      --toggle-active-bg:   #1A1A14;
-      --toggle-active-text: #FAF9F5;
+    .koi-stat {
+      background: var(--surface); padding: 24px 20px;
     }
-
-    html { font-size: 17px; scroll-behavior: smooth; }
-    body { background: var(--bg); color: var(--text-body); font-family: 'Inter', sans-serif; font-weight: 300; line-height: 2.0; -webkit-font-smoothing: antialiased; transition: var(--transition); }
-
-    .theme-toggle { display: flex; align-items: center; background: var(--toggle-bg); border: 1px solid var(--toggle-border); border-radius: 2px; overflow: hidden; transition: var(--transition); }
-    .theme-btn { display: flex; align-items: center; gap: 6px; padding: 6px 14px; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--toggle-text); background: transparent; border: none; cursor: pointer; transition: background 250ms, color 250ms; white-space: nowrap; }
-    .theme-btn svg { flex-shrink: 0; }
-    .theme-btn.active { background: var(--toggle-active-bg); color: var(--toggle-active-text); }
-    .theme-divider { width: 1px; height: 20px; background: var(--toggle-border); flex-shrink: 0; }
-
-    nav { position: sticky; top: 0; z-index: 100; display: flex; align-items: center; justify-content: space-between; padding: 0 56px; height: 60px; background: var(--bg); border-bottom: 1px solid var(--border); backdrop-filter: blur(16px); transition: var(--transition); }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.12em; color: var(--text); text-decoration: none; transition: color 380ms; }
-    .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-back { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 200ms; }
-    .nav-back:hover { color: var(--accent); }
-    .nav-cta { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 9px 22px; text-decoration: none; transition: opacity 200ms; }
-    .nav-cta:hover { opacity: 0.85; }
-
-    .hero { min-height: 88vh; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 56px 72px; position: relative; overflow: hidden; background: var(--bg-hero); transition: background 380ms ease; }
-    [data-theme="light"] .hero { background: var(--bg2); }
-    .hero-grid { position: absolute; inset: 0; opacity: var(--hero-grid-op); background-image: linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px); background-size: 72px 72px; transition: opacity 380ms; }
-    .hero-svg { position: absolute; right: -20px; top: 0; bottom: 0; width: 56%; opacity: var(--hero-svg-op); transition: opacity 380ms; }
-    .hero::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 220px; background: linear-gradient(to bottom, transparent, var(--bg)); pointer-events: none; transition: var(--transition); }
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
-    .hero-meta-top { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; transition: color 380ms; }
-    .hero-domain { display: inline-flex; align-items: center; gap: 7px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; transition: color 380ms; }
-    .domain-dot { width: 6px; height: 6px; border-radius: 50%; background: #9B6B9B; flex-shrink: 0; }
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(38px, 5vw, 68px); font-weight: 300; line-height: 1.1; color: var(--text); margin-bottom: 28px; transition: color 380ms; }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-desc { font-size: 16px; line-height: 1.75; color: var(--text-muted); max-width: 500px; margin-bottom: 36px; transition: color 380ms; }
-    .hero-byline { display: flex; align-items: center; gap: 20px; font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); transition: color 380ms; }
-    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
-
-    /* Chiffres clés du projet */
-    .project-stats {
-      display: flex; gap: 0; margin-bottom: 40px;
-      border: 1px solid var(--border2); transition: border-color 380ms;
+    .koi-stat__n {
+      font-family: var(--serif-display); font-size: 32px; font-weight: 500;
+      color: var(--accent-ink); line-height: 1;
     }
-    .pstat { padding: 20px 28px; border-right: 1px solid var(--border2); transition: border-color 380ms; }
-    .pstat:last-child { border-right: none; }
-    .pstat-n { font-family: 'Cormorant Garamond', serif; font-size: 28px; font-weight: 300; color: var(--accent); line-height: 1; }
-    .pstat-l { font-size: 9px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); margin-top: 4px; transition: color 380ms; }
-
-    .article { max-width: 700px; margin: 0 auto; padding: 20px 40px 100px; }
-    .chapeau { font-family: 'Cormorant Garamond', serif; font-size: 23px; font-weight: 300; font-style: italic; line-height: 1.65; color: var(--text); padding-left: 28px; border-left: 2px solid var(--accent); margin-bottom: 56px; transition: color 380ms, border-color 380ms; }
-    p { font-size: 17px; line-height: 2.0; color: var(--text-body); margin-bottom: 28px; transition: color 380ms; }
-    p strong { color: var(--text); font-weight: 500; }
-
-    .divider { display: flex; align-items: center; gap: 20px; margin: 60px 0 44px; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); transition: color 380ms; }
-    .divider::before, .divider::after { content:''; flex:1; height:1px; background: var(--border2); transition: background 380ms; }
-
-    .section-head { display: flex; align-items: baseline; gap: 20px; margin: 64px 0 28px; }
-    .section-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0; }
-    .section-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 29px; font-weight: 400; color: var(--text); line-height: 1.2; transition: color 380ms; }
-
-    .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 44px 0; background: var(--border); transition: background 380ms; }
-    .g-item { background: var(--bg2); padding: 32px 28px; border-top: 2px solid transparent; transition: border-color 240ms, background 380ms; }
-    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
-    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-    .g-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.2; transition: color 380ms; }
-    .g-item p { font-size: 14px !important; line-height: 1.8 !important; color: var(--text-muted) !important; margin: 0 !important; }
-    .g-tag { display: inline-block; margin-top: 12px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px; }
-
-    .pull-quote { margin: 60px 0; padding: 48px 52px; background: var(--bg3); border-top: 1px solid var(--accent); position: relative; transition: background 380ms; }
-    .pull-quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 140px; line-height: 0.75; color: var(--accent); opacity: var(--quote-mark-op); position: absolute; top: 24px; left: 36px; transition: opacity 380ms; }
-    .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 26px !important; font-style: italic; font-weight: 300; line-height: 1.55 !important; color: var(--text) !important; margin: 0 !important; position: relative; z-index: 1; }
-    .pull-quote cite { display: block; margin-top: 18px; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); font-style: normal; }
-
-    .visual { background: var(--bg2); border: 1px solid var(--border2); padding: 40px; margin: 60px 0; transition: background 380ms, border-color 380ms; }
-    .visual-label { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-    .visual svg { width:100%; display:block; }
-
-    .tech-note { margin: 44px 0; padding: 28px 32px; border-left: 2px solid var(--border2); background: var(--bg2); transition: background 380ms, border-color 380ms; }
-    .tech-note-label { font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .tech-note p { font-size: 14px !important; line-height: 1.85 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    .signature { display: flex; align-items: center; gap: 20px; margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--border2); transition: border-color 380ms; }
-    .sig-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--accent); flex-shrink: 0; transition: background 380ms, border-color 380ms; }
-    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
-    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    .cta { margin-top: 80px; padding: 56px 52px; background: var(--bg3); border-top: 1px solid var(--accent); text-align: center; position: relative; transition: background 380ms; }
-    .cta::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: var(--accent); }
-    .cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--text); line-height: 1.2; margin-bottom: 16px; transition: color 380ms; }
-    .cta h3 em { font-style: italic; color: var(--accent); }
-    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
-    .cta-btn { display: inline-block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #13130E; background: var(--accent); padding: 15px 40px; text-decoration: none; transition: opacity 200ms; }
-    .cta-btn:hover { opacity: 0.85; }
-
-    .related { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); transition: border-color 380ms; }
-    .related-label { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; transition: color 380ms; }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
-    .rel-card { background: var(--bg2); padding: 28px 24px; border-top: 2px solid var(--border); text-decoration: none; color: var(--text); transition: border-color 200ms, background 380ms; display: block; }
-    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
-    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
-    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
-
-    footer { margin-top: 80px; padding: 32px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; transition: border-color 380ms; }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
-    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; }
-
-    /* ══════════════════════════════════════════
-       GALERIE DE RÉFÉRENCES
-    ══════════════════════════════════════════ */
-    .fig-label {
-      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-      font-family: 'Inter', sans-serif; font-weight: 400;
+    .koi-stat__l {
+      font-family: var(--sans); font-size: 10.5px; font-weight: 600; letter-spacing: 0.14em;
+      text-transform: uppercase; color: var(--ink-faint); margin-top: 5px;
     }
-    .fig-single { margin: 52px 0; }
-    .fig-phases {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px; margin: 52px 0;
+    @media (max-width: 600px) {
+      .koi-stats { grid-template-columns: 1fr 1fr; }
     }
-    .fig-phase-tag {
-      margin-top: 9px; font-size: 8.5px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--accent);
-      font-family: 'Inter', sans-serif;
+    /* Grid 4 types */
+    .grid4 {
+      display: grid; grid-template-columns: 1fr 1fr; gap: 1px;
+      background: var(--line); margin: 2em 0; border-radius: var(--r-md); overflow: hidden;
     }
-    .fig-asymduo {
-      display: grid; grid-template-columns: 3fr 2fr;
-      gap: 10px; margin: 52px 0;
+    .g-item {
+      background: var(--surface); padding: 28px 24px;
+      border-top: 3px solid transparent;
+      transition: border-color 0.25s var(--ease), background 0.25s var(--ease);
     }
-    .fig-img {
-      position: relative; overflow: hidden;
-      background: var(--bg3);
+    .g-item:hover { border-color: var(--accent); background: var(--surface-2); }
+    .g-item h3 {
+      font-family: var(--serif-display); font-size: 20px; font-weight: 500;
+      color: var(--ink); margin: 0 0 8px; line-height: 1.2;
     }
-    .fig-img img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover;
-      filter: saturate(0.78) contrast(1.04) brightness(0.97);
-      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    .g-item p {
+      font-family: var(--sans); font-size: 13.5px; line-height: 1.65;
+      color: var(--ink-soft); margin: 0;
     }
-    .fig-img:hover img { transform: scale(1.045); }
-    .ratio-21-9 { aspect-ratio: 21/9; }
-    .ratio-16-9 { aspect-ratio: 16/9; }
-    .ratio-4-3  { aspect-ratio: 4/3; }
-    .ratio-3-2  { aspect-ratio: 3/2; }
-    .fig-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
-      font-weight: 300; pointer-events: none;
+    .g-tag {
+      display: inline-block; margin-top: 12px;
+      font-family: var(--sans); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+      color: var(--accent-ink); border: 1px solid var(--line); padding: 3px 9px;
+      border-radius: var(--r-sm);
     }
-    .fig-caption {
-      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      font-weight: 300; line-height: 1.65; transition: color 380ms;
-    }
-    .fig-caption strong { color: var(--text-body); font-weight: 400; }
-    .fig-credit {
-      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); opacity: 0.40;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    /* ══════════════════════════════════════════
-       PLANCHES DE RÉFÉRENCE — HERBIER
-    ══════════════════════════════════════════ */
-    .herbier-section {
-      margin: 60px 0; padding: 36px 0 40px;
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .herbier-title {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .herbier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
+    @media (max-width: 600px) { .grid4 { grid-template-columns: 1fr; } }
+    /* Herbier */
+    .herbier-section { margin: 2.5em 0; padding: 2em 0; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); }
+    .herbier-title { font-family: var(--sans); font-size: 10.5px; font-weight: 700; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 20px; }
+    .herbier-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 14px; }
     .herb-card { display: flex; flex-direction: column; }
-    .herb-plate {
-      aspect-ratio: 3/4; overflow: hidden;
-      border: 1px solid var(--border); background: var(--bg2);
-      margin-bottom: 10px;
-      transition: border-color 380ms, background 380ms;
-    }
-    .herb-plate img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: top center;
-      filter: sepia(0.08) contrast(1.06) brightness(1.01);
-      transition: transform 800ms ease;
-    }
+    .herb-plate { aspect-ratio: 3/4; overflow: hidden; border: 1px solid var(--line-soft); background: var(--surface); border-radius: var(--r-sm); margin-bottom: 10px; }
+    .herb-plate img { width: 100%; height: 100%; display: block; object-fit: cover; object-position: top center; filter: sepia(0.06) contrast(1.05); transition: transform 0.7s var(--ease); }
     .herb-plate:hover img { transform: scale(1.04); }
-    .herb-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 14px; font-weight: 400;
-      color: var(--text); margin-bottom: 3px; line-height: 1.3;
-      transition: color 380ms;
-    }
-    .herb-common {
-      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-    .herb-source {
-      font-size: 8.5px; color: var(--text-muted); opacity: 0.55;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    /* ══════════════════════════════════════════
-       SCHÉMA TECHNIQUE — COUPE BASSIN
-    ══════════════════════════════════════════ */
-    .schema-legende {
-      display: flex; flex-wrap: wrap; gap: 14px;
-      margin-top: 20px;
-    }
-    .schema-item {
-      display: flex; align-items: center; gap: 6px;
-      font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-    }
-    .schema-dot {
-      width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0;
-    }
-
+    .herb-name { font-family: var(--serif-display); font-style: italic; font-size: 14px; font-weight: 400; color: var(--ink); margin-bottom: 3px; line-height: 1.3; }
+    .herb-common { font-family: var(--sans); font-size: 9px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint); margin-bottom: 3px; }
+    .herb-source { font-family: var(--sans); font-size: 9px; color: var(--ink-faint); opacity: 0.55; }
     @media (max-width: 600px) { .herbier-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 56px; }
-      .nav-back, .nav-cta { display: none; }
-      .hero { padding: 0 20px 52px; min-height: 70vh; }
-      .article { padding: 16px 20px 72px; }
-      .grid4 { grid-template-columns: 1fr; }
-      .related-grid { grid-template-columns: 1fr; }
-      .pull-quote { padding: 32px 24px; }
-      .pull-quote p { font-size: 20px !important; }
-      .cta { padding: 40px 24px; }
-      footer { padding: 24px 20px; }
-      .theme-btn span { display: none; }
-      .theme-btn { padding: 6px 10px; }
-      .project-stats { flex-wrap: wrap; }
-      .pstat { border-right: none; border-bottom: 1px solid var(--border2); }
-      .fig-phases { grid-template-columns: 1fr; gap: 16px; }
-      .fig-asymduo { grid-template-columns: 1fr; }
-    }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
-  <div class="nav-right">
-    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
-      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span>Pierre</span>
-      </button>
-      <div class="theme-divider"></div>
-      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <span>Crème</span>
-      </button>
-    </div>
-    <a href="../blog.html" class="nav-back">← Journal</a>
-    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+<!-- MASTHEAD -->
+<header class="masthead"><div class="wrap masthead__bar">
+  <div class="masthead__left"><a href="../blog.html" class="aba-logo">
+    <svg class="aba-logo__icon" viewBox="0 0 30 34" fill="none"><rect x="1" y="1" width="28" height="32" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 25 L15 9 L22 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10.5 20 H19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
+  </a></div>
+  <div class="masthead__tools">
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
+    <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
   </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-
-  <!-- SVG — Étang Koi, coupe et vue de dessus stylisée -->
-  <svg class="hero-svg" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="opacity: var(--hero-svg-op);">
-
-    <!-- Forme organique du bassin — ovale irrégulier -->
-    <path d="M 200 180 Q 260 130 350 125 Q 450 118 510 165 Q 570 210 568 295 Q 566 385 510 430 Q 452 476 350 478 Q 248 480 192 428 Q 136 374 138 290 Q 140 220 200 180 Z"
-      stroke="#3A6B8A" stroke-width="1.5" fill="rgba(58,107,138,0.07)"/>
-
-    <!-- Ondulations de surface — concentriques -->
-    <path d="M 230 210 Q 290 165 370 162 Q 450 158 492 200 Q 534 242 530 295 Q 526 350 490 382 Q 452 414 370 415 Q 282 416 238 378 Q 190 336 192 280 Q 194 240 230 210 Z"
-      stroke="#3A6B8A" stroke-width="0.8" fill="none" opacity="0.5"/>
-    <path d="M 265 245 Q 315 208 370 206 Q 430 204 462 238 Q 494 272 492 305 Q 490 342 462 365 Q 432 388 370 388 Q 305 388 270 362 Q 234 334 236 298 Q 238 265 265 245 Z"
-      stroke="#3A6B8A" stroke-width="0.6" fill="none" opacity="0.35"/>
-    <path d="M 298 275 Q 330 252 366 251 Q 406 250 428 270 Q 450 290 448 310 Q 446 334 428 348 Q 408 362 370 362 Q 330 362 308 346 Q 282 326 284 305 Q 284 288 298 275 Z"
-      stroke="#3A6B8A" stroke-width="0.5" fill="none" opacity="0.25"/>
-
-    <!-- Reflet surface eau — lignes courbes -->
-    <path d="M 260 265 Q 310 252 355 255" stroke="#3A6B8A" stroke-width="0.6" fill="none" opacity="0.4"/>
-    <path d="M 250 290 Q 305 274 360 278" stroke="#3A6B8A" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <path d="M 255 316 Q 310 300 365 304" stroke="#3A6B8A" stroke-width="0.4" fill="none" opacity="0.22"/>
-    <path d="M 380 265 Q 420 258 450 270" stroke="#3A6B8A" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <path d="M 375 295 Q 415 285 448 298" stroke="#3A6B8A" stroke-width="0.4" fill="none" opacity="0.22"/>
-
-    <!-- Silhouettes de Koi — formes simples en mouvement -->
-    <!-- Koi 1 — grand, Kohaku -->
-    <ellipse cx="320" cy="280" rx="38" ry="12" fill="#9B6B9B" opacity="0.45" transform="rotate(-20, 320, 280)"/>
-    <path d="M 285 265 Q 276 258 272 270 Q 276 275 285 272 Z" fill="#9B6B9B" opacity="0.4"/>
-
-    <!-- Koi 2 — médium, Sanke -->
-    <ellipse cx="410" cy="310" rx="30" ry="9" fill="#9B6B9B" opacity="0.35" transform="rotate(15, 410, 310)"/>
-    <path d="M 437 302 Q 446 297 450 306 Q 446 310 437 308 Z" fill="#9B6B9B" opacity="0.32"/>
-
-    <!-- Koi 3 — petit, Showa -->
-    <ellipse cx="355" cy="345" rx="24" ry="7" fill="#BACC23" opacity="0.3" transform="rotate(-35, 355, 345)"/>
-    <path d="M 333 330 Q 325 325 322 334 Q 325 338 333 335 Z" fill="#BACC23" opacity="0.28"/>
-
-    <!-- Koi 4 -->
-    <ellipse cx="440" cy="258" rx="22" ry="7" fill="#9B6B9B" opacity="0.28" transform="rotate(25, 440, 258)"/>
-
-    <!-- Koi 5 -->
-    <ellipse cx="290" cy="330" rx="26" ry="8" fill="#BACC23" opacity="0.25" transform="rotate(10, 290, 330)"/>
-
-    <!-- Plantes de berge — formes verticales, côté gauche -->
-    <line x1="165" y1="340" x2="165" y2="280" stroke="#5A7A3A" stroke-width="1.2" opacity="0.55"/>
-    <ellipse cx="165" cy="278" rx="8" ry="14" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.12)" opacity="0.6"/>
-    <line x1="154" y1="350" x2="150" y2="298" stroke="#5A7A3A" stroke-width="1.0" opacity="0.45"/>
-    <ellipse cx="150" cy="296" rx="6" ry="11" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.10)" opacity="0.5"/>
-
-    <!-- Plantes de berge — côté droit -->
-    <line x1="548" y1="295" x2="548" y2="238" stroke="#5A7A3A" stroke-width="1.2" opacity="0.5"/>
-    <ellipse cx="548" cy="236" rx="7" ry="12" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.10)" opacity="0.55"/>
-    <line x1="558" y1="310" x2="560" y2="262" stroke="#5A7A3A" stroke-width="1.0" opacity="0.4"/>
-
-    <!-- Plantes de berge — haut -->
-    <line x1="320" y1="140" x2="320" y2="88" stroke="#5A7A3A" stroke-width="1.1" opacity="0.45"/>
-    <ellipse cx="320" cy="86" rx="9" ry="15" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.10)" opacity="0.5"/>
-    <line x1="338" y1="136" x2="342" y2="82" stroke="#5A7A3A" stroke-width="0.9" opacity="0.38"/>
-    <ellipse cx="342" cy="80" rx="6" ry="10" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.08)" opacity="0.42"/>
-
-    <!-- Nymphéas — fleurs de surface -->
-    <circle cx="350" cy="305" r="9" stroke="#9B6B9B" stroke-width="0.8" fill="rgba(155,107,155,0.08)" opacity="0.55"/>
-    <circle cx="350" cy="305" r="4" fill="#9B6B9B" opacity="0.2"/>
-    <circle cx="395" cy="280" r="7" stroke="#9B6B9B" stroke-width="0.7" fill="rgba(155,107,155,0.06)" opacity="0.45"/>
-    <circle cx="305" cy="318" r="6" stroke="#BACC23" stroke-width="0.6" fill="rgba(186,204,35,0.06)" opacity="0.4"/>
-
-    <!-- Bullage / oxygénation — bulles stylisées -->
-    <circle cx="370" cy="350" r="3" stroke="#3A6B8A" stroke-width="0.7" fill="none" opacity="0.35"/>
-    <circle cx="378" cy="342" r="2" stroke="#3A6B8A" stroke-width="0.6" fill="none" opacity="0.28"/>
-    <circle cx="362" cy="344" r="1.5" stroke="#3A6B8A" stroke-width="0.6" fill="none" opacity="0.22"/>
-
-    <!-- Skimmer — indication technique -->
-    <rect x="148" y="190" width="18" height="12" rx="2" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.05)" opacity="0.5"/>
-    <text x="157" y="183" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.45">Skimmer</text>
-
-    <!-- Bottom drain -->
-    <circle cx="354" cy="430" r="8" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.05)" opacity="0.45"/>
-    <text x="354" y="447" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.4">Bottom drain</text>
-
-    <!-- Cote profondeur -->
-    <line x1="580" y1="150" x2="580" y2="440" stroke="#BACC23" stroke-width="0.6" opacity="0.3"/>
-    <line x1="576" y1="150" x2="584" y2="150" stroke="#BACC23" stroke-width="0.6" opacity="0.3"/>
-    <line x1="576" y1="440" x2="584" y2="440" stroke="#BACC23" stroke-width="0.6" opacity="0.3"/>
-    <text x="592" y="302" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.35" transform="rotate(90, 592, 302)">1,8 m</text>
-
-    <!-- Cascade / retour eau -->
-    <path d="M 192 200 Q 168 170 160 148 Q 154 130 148 112" stroke="#3A6B8A" stroke-width="1.0" stroke-dasharray="4,3" fill="none" opacity="0.45"/>
-    <text x="124" y="108" fill="#3A6B8A" font-size="7" font-family="Inter" opacity="0.4">Cascade</text>
-
-    <!-- Annotation volume -->
-    <text x="354" y="302" text-anchor="middle" fill="#3A6B8A" font-size="8.5" font-family="Inter" opacity="0.3">25 m³</text>
-  </svg>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Journal de l'Atelier</div>
-    <div class="hero-domain"><span class="domain-dot"></span> Projet ABA · Villa privée Rabat</div>
-    <div class="hero-meta-top">N° 08 · Réalisation · Décembre 2026</div>
-    <h1>L'étang de Rabat —<br/><em>hydraulique, filtre biologique et Koi</em></h1>
-    <p class="hero-desc">25 m³, profondeur 1,8 m, 12 Koi adultes dans une villa contemporaine de Rabat. Un bassin Koi de haute qualité, c'est d'abord un écosystème complet — pas un aquarium outdoor.</p>
-    <div class="hero-byline">
-      <span>Adil Boumahdi</span>
-      <div class="hero-byline-dot"></div>
-      <span>10 min de lecture</span>
-      <div class="hero-byline-dot"></div>
-      <span>Projet ABA · Aquatique · Rabat</span>
-    </div>
-  </div>
-</section>
+</div></header>
+<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
 
 <!-- ARTICLE -->
-<article class="article">
+<article class="article fade-up" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460">
 
-  <!-- Chiffres clés -->
-  <div class="project-stats">
-    <div class="pstat">
-      <div class="pstat-n">25 m³</div>
-      <div class="pstat-l">Volume du bassin</div>
+  <!-- HEADER CLASSIQUE centré -->
+  <header class="wrap-narrow" style="text-align:center;padding-top:clamp(16px,3vw,36px)">
+    <div style="display:flex;justify-content:center;margin-bottom:6px">
+      <span class="a-cat"><span class="chip__dot"></span>Carnet de chantier</span>
     </div>
-    <div class="pstat">
-      <div class="pstat-n">1,8 m</div>
-      <div class="pstat-l">Profondeur max</div>
-    </div>
-    <div class="pstat">
-      <div class="pstat-n">12</div>
-      <div class="pstat-l">Koi adultes</div>
-    </div>
-    <div class="pstat">
-      <div class="pstat-n">800 m²</div>
-      <div class="pstat-l">Surface du jardin</div>
+    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px">L'étang de Rabat — hydraulique, filtre biologique et Koi</h1>
+    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 18px">25 m³, 1,8 m de profondeur, 12 Koi adultes.</p>
+    <div class="a-byline" style="justify-content:center"><span>Par <b>Adil Boumahdi</b></span><span class="dotsep"></span><span>Déc. 2026</span><span class="dotsep"></span><span>10 min de lecture</span></div>
+  </header>
+
+  <!-- Figure principale -->
+  <div class="wrap" style="margin:8px auto clamp(28px,4vw,48px)">
+    <div style="margin:2em 0">
+      <figure class="figure">
+        <div class="figure__box" style="aspect-ratio:16/9">
+          <img src="https://images.unsplash.com/photo-1633701226802-4da76b98479b?auto=format&fit=crop&w=1200&q=82"
+               alt="Fontaine et bassin dans un jardin contemporain — référence étang Koi Rabat"
+               style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
+        </div>
+        <figcaption>L'étang intégré au jardin contemporain — Profondeur 1,8 m, volume 25 m³, filtration mécanique + biologique + UV · Référence Unsplash</figcaption>
+      </figure>
     </div>
   </div>
 
-  <p class="chapeau">
-    Un étang à Koi n'est pas une décoration aquatique. Ce n'est pas un ornement posé dans un jardin, ni un aquarium à ciel ouvert. C'est un écosystème vivant, géré avec précision — où chaque litre d'eau, chaque poisson, chaque plante de berge joue un rôle dans un équilibre dynamique. Ce projet à Rabat l'illustre dans tous ses détails.
-  </p>
+  <!-- Contenu -->
+  <div class="wrap-narrow prose">
 
-  <p>La villa se situe dans un quartier résidentiel de Rabat, jardin de 800 m², architecture contemporaine aux lignes épurées. La maîtrise d'ouvrage souhaitait un bassin à Koi — pas un simple ornement d'eau, mais un véritable projet aquatique de haute qualité, intégré à la végétation, autonome dans son entretien, durable dans sa conception. <strong>Le brief était précis, les contraintes réelles.</strong></p>
-
-  <p>Contraintes du site : sol argileux à faible perméabilité (avantage pour l'étanchéité, inconvénient pour les fondations), jardins existants à préserver au maximum, ensoleillement fort en été (Rabat, orientation sud-ouest), pas de possibilité de machinerie lourde dans le jardin. La conception a dû intégrer chacun de ces paramètres dès le départ — pas en cours de chantier.</p>
-
-  <!-- ── GALERIE 01 · Bannière cinématique · bassin/fontaine dans jardin ── -->
-  <div class="fig-single" style="margin: 44px 0 52px;">
-    <div class="fig-label">— Le projet, vue d'ensemble</div>
-    <div class="fig-img ratio-21-9">
-      <img
-        src="https://images.unsplash.com/photo-1633701226802-4da76b98479b?auto=format&fit=crop&w=1600&q=85"
-        alt="Fontaine et bassin dans un jardin contemporain — référence étang Koi Rabat"
-        loading="lazy"
-      />
-      <span class="fig-overlay">Étang Koi · villa Rabat · hydraulique complète · 25 m³</span>
+    <!-- Chiffres clés -->
+    <div class="koi-stats">
+      <div class="koi-stat"><div class="koi-stat__n">25 m³</div><div class="koi-stat__l">Volume du bassin</div></div>
+      <div class="koi-stat"><div class="koi-stat__n">1,8 m</div><div class="koi-stat__l">Profondeur max</div></div>
+      <div class="koi-stat"><div class="koi-stat__n">12</div><div class="koi-stat__l">Koi adultes</div></div>
+      <div class="koi-stat"><div class="koi-stat__n">800 m²</div><div class="koi-stat__l">Surface du jardin</div></div>
     </div>
-    <p class="fig-caption"><strong>L'étang intégré au jardin contemporain.</strong> La forme organique du bassin rompt avec la géométrie stricte de la villa pour créer une transition naturelle entre l'architecture et le végétal. Profondeur 1,8 m, volume 25 m³, filtration mécanique + biologique + UV.</p>
-    <p class="fig-credit">Photo · référence — Unsplash</p>
-  </div>
 
-  <div class="divider">Le projet hydraulique complet</div>
+    <p class="dropcap">Un étang à Koi n'est pas une décoration aquatique. Ce n'est pas un ornement posé dans un jardin, ni un aquarium à ciel ouvert. C'est un écosystème vivant, géré avec précision — où chaque litre d'eau, chaque poisson, chaque plante de berge joue un rôle dans un équilibre dynamique. Ce projet à Rabat l'illustre dans tous ses détails.</p>
 
-  <!-- SECTION 01 -->
-  <div class="section-head">
-    <span class="section-num">01</span>
+    <p>La villa se situe dans un quartier résidentiel de Rabat, jardin de 800 m², architecture contemporaine aux lignes épurées. La maîtrise d'ouvrage souhaitait un bassin à Koi — pas un simple ornement d'eau, mais un véritable projet aquatique de haute qualité, intégré à la végétation, autonome dans son entretien, durable dans sa conception. <strong>Le brief était précis, les contraintes réelles.</strong></p>
+
+    <p>Contraintes du site : sol argileux à faible perméabilité (avantage pour l'étanchéité, inconvénient pour les fondations), jardins existants à préserver au maximum, ensoleillement fort en été (Rabat, orientation sud-ouest), pas de possibilité de machinerie lourde dans le jardin. La conception a dû intégrer chacun de ces paramètres dès le départ — pas en cours de chantier.</p>
+
     <h2>La conception hydraulique</h2>
-  </div>
 
-  <p>Un bassin à Koi se dimensionne à partir des poissons, pas à partir du jardin. La règle de base est simple mais non négociable : <strong>1 000 litres minimum par Koi adulte</strong>. Pour 12 Koi, le volume minimum est 12 000 litres — soit 12 m³. Nous avons retenu 25 m³ pour deux raisons : la marge de confort thermique en été marocain, et la capacité à accueillir les Koi à leur taille adulte (certaines variétés atteignent 60 à 80 cm, voire plus).</p>
+    <p>Un bassin à Koi se dimensionne à partir des poissons, pas à partir du jardin. La règle de base est simple mais non négociable : <strong>1 000 litres minimum par Koi adulte</strong>. Pour 12 Koi, le volume minimum est 12 000 litres — soit 12 m³. Nous avons retenu 25 m³ pour deux raisons : la marge de confort thermique en été marocain, et la capacité à accueillir les Koi à leur taille adulte (certaines variétés atteignent 60 à 80 cm, voire plus).</p>
 
-  <p>La profondeur de 1,8 m n'est pas arbitraire. En été à Rabat, l'eau de surface peut dépasser 28°C — une température stressante pour les Koi, qui requièrent entre 15 et 25°C. La profondeur crée un <strong>gradient thermique vertical</strong> : les poissons se réfugient dans les couches froides en fond de bassin. En dessous de 1,2 m, ce stratifié thermique n'existe plus — le bassin se réchauffe uniformément, avec des conséquences graves sur la santé des poissons.</p>
+    <p>La profondeur de 1,8 m n'est pas arbitraire. En été à Rabat, l'eau de surface peut dépasser 28°C — une température stressante pour les Koi, qui requièrent entre 15 et 25°C. La profondeur crée un <strong>gradient thermique vertical</strong> : les poissons se réfugient dans les couches froides en fond de bassin. En dessous de 1,2 m, ce stratifié thermique n'existe plus — le bassin se réchauffe uniformément, avec des conséquences graves sur la santé des poissons.</p>
 
-  <p>La circulation de l'eau suit un schéma en circuit fermé : deux prises de fond (bottom drains) évacuent vers le local technique, la pompe refoule vers le système de filtration, le retour s'effectue en cascade oxygénante depuis une hauteur de 60 cm. <strong>Débit minimum calculé : 2 500 litres/heure</strong>, soit 10% du volume par heure — la règle de base pour un bassin Koi bien conçu. La pompe retenue : 3 500 L/h en nominal, pour compenser les pertes de charge de la filtration.</p>
+    <p>La circulation de l'eau suit un schéma en circuit fermé : deux prises de fond (bottom drains) évacuent vers le local technique, la pompe refoule vers le système de filtration, le retour s'effectue en cascade oxygénante depuis une hauteur de 60 cm. <strong>Débit minimum calculé : 2 500 litres/heure</strong>, soit 10% du volume par heure — la règle de base pour un bassin Koi bien conçu.</p>
 
-  <p>Le skimmer de surface complète le système : positionné sous le vent dominant, il collecte les feuilles et débris avant qu'ils n'atteignent le fond et ne polluent l'eau. Le local technique (1,8 m² enterré, accès par trappe inox) centralise pompe, vannes, compteur horaire et système de niveau automatique.</p>
+    <blockquote class="pullquote pullquote--bordered">
+      Le vrai travail sur un bassin Koi se fait avant que le premier litre d'eau entre dans le bassin. La conception hydraulique et le dimensionnement de la filtration décident de tout ce qui va suivre.
+    </blockquote>
 
-  <div class="tech-note">
-    <div class="tech-note-label">— Données hydrauliques du projet</div>
-    <p>
-      <strong style="color: var(--text);">Volume total</strong> — 25 000 litres (25 m³). Profondeur max 1,8 m, profondeur min en berge 0,5 m. Fond en pente douce (2%) vers les bottom drains.<br/><br/>
-      <strong style="color: var(--text);">Pompe principale</strong> — OASE Aquamax Eco Premium 6000. Débit nominal 6 000 L/h, consommation 95 W, débit réel après pertes de charge : 3 400 L/h. Taux de circulation : 13,6%/heure, au-dessus du minimum requis de 10%/heure.<br/><br/>
-      <strong style="color: var(--text);">Bottom drains</strong> — 2 drains Ø110 mm, centrés dans chaque dépression du fond. Dôme à bulle d'air pour éviter le colmatage. Vanne de vidange indépendante sur chacun.<br/><br/>
-      <strong style="color: var(--text);">Skimmer</strong> — 1 skimmer de surface capacité 2 000 L/h, positionnement côté nord-est (sens des vents dominants à Rabat en été).
-    </p>
-  </div>
-
-  <!-- ── GALERIE 02 · Trio · eau, bassin, reflets ── -->
-  <div style="margin: 52px 0 8px;">
-    <div class="fig-label">— Eau, circulation, intégration</div>
-  </div>
-  <div class="fig-phases">
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1692098074691-cba29855482e?auto=format&fit=crop&w=700&q=82"
-          alt="Fontaine dans un parc — circulation hydraulique bassin"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Retour cascade · oxygénation · 60 cm</span>
-      </div>
-      <p class="fig-phase-tag">Retour · cascade oxygénante</p>
-      <p class="fig-caption" style="font-size:10.5px;">Le retour d'eau en cascade oxygène et crée le son caractéristique des jardins aquatiques japonais.</p>
+    <div class="note">
+      <span class="note__label">Données hydrauliques</span>
+      <strong>Volume total</strong> — 25 000 L (25 m³). Profondeur max 1,8 m, profondeur min en berge 0,5 m.<br/>
+      <strong>Pompe principale</strong> — OASE Aquamax Eco Premium 6000. Débit réel : 3 400 L/h. Taux de circulation : 13,6 %/h.<br/>
+      <strong>Bottom drains</strong> — 2 drains Ø110 mm, dôme à bulle d'air, vanne de vidange indépendante.<br/>
+      <strong>Skimmer</strong> — 1 skimmer de surface 2 000 L/h, côté nord-est (vents dominants).
     </div>
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1715756520262-88ea3d306514?auto=format&fit=crop&w=700&q=82"
-          alt="Plan d'eau calme avec reflets — bassin aquatique"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Surface · 25 m³ · reflets et transparence</span>
-      </div>
-      <p class="fig-phase-tag">Surface · transparence</p>
-      <p class="fig-caption" style="font-size:10.5px;">La transparence de l'eau est l'indicateur principal d'un écosystème en équilibre. Visibilité fond : 1,5 m.</p>
-    </div>
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1758465026909-d062b068f453?auto=format&fit=crop&w=700&q=82"
-          alt="Reflets dans l'eau — lac avec végétation en berge"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Berge végétalisée · transition eau/terre</span>
-      </div>
-      <p class="fig-phase-tag">Berge · végétation aquatique</p>
-      <p class="fig-caption" style="font-size:10.5px;">Les plantes de berge jouent un rôle épuratoire essentiel — filtration des nutriments, oxygénation, ombre partielle.</p>
-    </div>
-  </div>
-  <p class="fig-credit">Photos · Jacques Dillies / référence — Unsplash</p>
 
-  <!-- SECTION 02 -->
-  <div class="section-head">
-    <span class="section-num">02</span>
+    <!-- Galerie 02 : trio eau/circulation/berge -->
+    <div style="margin:2em 0">
+      <p class="eyebrow" style="margin-bottom:14px">— Eau, circulation, intégration</p>
+      <div class="gal gal--2">
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:4/3">
+            <img src="https://images.unsplash.com/photo-1692098074691-cba29855482e?auto=format&fit=crop&w=700&q=82"
+                 alt="Fontaine dans un parc — circulation hydraulique bassin"
+                 style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
+            <span class="figure__tag">Retour cascade · oxygénation</span>
+          </div>
+          <figcaption>Le retour d'eau en cascade oxygène et crée le son caractéristique des jardins aquatiques japonais.</figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:4/3">
+            <img src="https://images.unsplash.com/photo-1715756520262-88ea3d306514?auto=format&fit=crop&w=700&q=82"
+                 alt="Plan d'eau calme avec reflets — bassin aquatique"
+                 style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
+            <span class="figure__tag">Surface · transparence</span>
+          </div>
+          <figcaption>La transparence de l'eau est l'indicateur principal d'un écosystème en équilibre. Visibilité fond : 1,5 m.</figcaption>
+        </figure>
+      </div>
+    </div>
+
     <h2>Le système de filtration</h2>
-  </div>
 
-  <p>La filtration d'un bassin Koi n'est pas une option — c'est la colonne vertébrale du projet. Sans elle, l'eau se dégrade en quelques jours : les déjections des Koi produisent de l'ammoniaque (NH₃), directement toxique pour les poissons. Un bon système de filtration convertit cet ammoniaque en nitrates inoffensifs via un processus biologique. <strong>Ce cycle de l'azote est la clé de tout.</strong></p>
+    <p>La filtration d'un bassin Koi n'est pas une option — c'est la colonne vertébrale du projet. Sans elle, l'eau se dégrade en quelques jours : les déjections des Koi produisent de l'ammoniaque (NH₃), directement toxique pour les poissons. Un bon système de filtration convertit cet ammoniaque en nitrates inoffensifs via un processus biologique. <strong>Ce cycle de l'azote est la clé de tout.</strong></p>
 
-  <p>Le système retenu pour ce projet est une chaîne complète en trois étapes : filtration mécanique par tambour filtrant, filtration biologique par biofiltre à média, stérilisation UV. Chaque étape a un rôle spécifique, aucune ne peut remplacer une autre.</p>
+    <p>Le système retenu pour ce projet est une chaîne complète en trois étapes : filtration mécanique par tambour filtrant, filtration biologique par biofiltre à média, stérilisation UV.</p>
 
-  <div class="grid4">
-    <div class="g-item">
-      <span class="g-icon">⚙️</span>
-      <h3>Filtration mécanique — Tambour filtrant</h3>
-      <p>Un tambour rotatif à mailles 60 µm retient les particules solides (déjections, restes d'alimentation, algues) avant qu'elles n'atteignent le biofiltre. Auto-nettoyant par rétro-lavage : cycle toutes les 4 heures, durée 90 secondes, consommation d'eau 15 litres par cycle. Le tambour est le premier rempart — sans lui, le biofiltre colmate en quelques semaines.</p>
-      <span class="g-tag">Solides &gt; 60 µm</span>
+    <div class="grid4">
+      <div class="g-item">
+        <h3>Filtration mécanique — Tambour filtrant</h3>
+        <p>Un tambour rotatif à mailles 60 µm retient les particules solides avant qu'elles n'atteignent le biofiltre. Auto-nettoyant par rétro-lavage : cycle toutes les 4 heures, durée 90 secondes, consommation d'eau 15 L par cycle.</p>
+        <span class="g-tag">Solides &gt; 60 µm</span>
+      </div>
+      <div class="g-item">
+        <h3>Filtration biologique — Biofiltre</h3>
+        <p>Un réservoir de 1 000 litres rempli de média K5 (plastic moving bed) héberge les colonies bactériennes nitrifiantes. Les bactéries oxydent l'ammoniaque en nitrites, puis les nitrites en nitrates. Surface de colonisation du K5 : 800 m²/m³.</p>
+        <span class="g-tag">Cycle de l'azote</span>
+      </div>
+      <div class="g-item">
+        <h3>Stérilisation UV</h3>
+        <p>Un stérilisateur UV 75 W traite l'eau en sortie du biofiltre. Les UV détruisent les algues unicellulaires et les pathogènes en suspension. L'UV complète la filtration biologique — il ne peut la remplacer. Lampe à renouveler tous les 12 mois.</p>
+        <span class="g-tag">Algues + pathogènes</span>
+      </div>
+      <div class="g-item">
+        <h3>Cascade oxygénante</h3>
+        <p>Le retour s'effectue par une cascade à 60 cm de hauteur de chute, sur 80 cm de large en pierres d'Atlas. Deux fonctions : oxygénation (O₂ dissous minimum 7 mg/L) et brassage de surface. Débit cascade minimum : 1 200 L/h.</p>
+        <span class="g-tag">O₂ dissous &gt; 7 mg/L</span>
+      </div>
     </div>
-    <div class="g-item">
-      <span class="g-icon">🦠</span>
-      <h3>Filtration biologique — Biofiltre</h3>
-      <p>Un réservoir de 1 000 litres rempli de média K5 (plastic moving bed) héberge les colonies bactériennes nitrifiantes. Les bactéries Nitrosomonas oxydent l'ammoniaque (NH₃) en nitrites (NO₂), puis les Nitrobacter oxydent les nitrites en nitrates (NO₃). Surface de colonisation du média K5 : 800 m²/m³. Temps de cycle biologique à 20°C : 24 à 48 heures. Le biofiltre atteint son équilibre en 6 à 8 semaines après mise en eau — c'est le rodage.</p>
-      <span class="g-tag">Cycle de l'azote</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">💡</span>
-      <h3>Stérilisation UV</h3>
-      <p>Un stérilisateur UV 75 W traite l'eau en sortie du biofiltre. Les UV détruisent les algues unicellulaires responsables de l'eau verte, ainsi que les pathogènes en suspension. L'UV ne remplace pas la filtration biologique — il la complète. Sans biofiltre actif, l'UV seul est insuffisant. Lampe à remplacer tous les 12 mois même si elle émet encore (dégradation progressive de l'efficacité).</p>
-      <span class="g-tag">Algues + pathogènes</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🌊</span>
-      <h3>Cascade oxygénante</h3>
-      <p>Le retour d'eau s'effectue par une cascade à 60 cm de hauteur de chute, sur une surface de 80 cm de large en pierres naturelles d'Atlas. Cette cascade assure deux fonctions : l'oxygénation de l'eau (O₂ dissous minimum 7 mg/L requis pour les Koi) et le brassage de surface qui évite la stratification estivale. Débit cascade : 1 200 L/h minimum pour une oxygénation efficace.</p>
-      <span class="g-tag">O₂ dissous &gt; 7 mg/L</span>
-    </div>
-  </div>
 
-  <div class="pull-quote">
-    <p>Le vrai travail sur un bassin Koi se fait avant que le premier litre d'eau entre dans le bassin. La conception hydraulique et le dimensionnement de la filtration décident de tout ce qui va suivre.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
-
-  <!-- Schéma technique SVG — coupe étang Koi -->
-  <div class="visual">
-    <div class="visual-label">— Schéma technique · Coupe transversale · Étang Koi Rabat</div>
-    <svg viewBox="0 0 640 340" fill="none" xmlns="http://www.w3.org/2000/svg">
-
-      <!-- Sol / terrain -->
-      <path d="M 20 240 Q 60 245 120 242 Q 200 238 220 228 Q 260 210 320 205 Q 380 200 420 210 Q 462 222 500 238 Q 540 244 620 240 L 620 340 L 20 340 Z"
-        fill="rgba(139,115,85,0.12)" stroke="#8B7355" stroke-width="0.8" opacity="0.6"/>
-      <text x="322" y="295" text-anchor="middle" fill="#8B7355" font-size="8" font-family="Inter" opacity="0.45">Sol argileux · Rabat</text>
-
-      <!-- Bassin — forme en coupe -->
-      <path d="M 120 242 Q 140 242 160 244 Q 200 246 220 228 L 240 185 L 400 185 L 420 210 Q 460 242 500 238 Q 520 237 540 240"
-        stroke="#3A6B8A" stroke-width="1.4" fill="rgba(58,107,138,0.08)"/>
-      <!-- Fond du bassin -->
-      <line x1="240" y1="185" x2="400" y2="185" stroke="#3A6B8A" stroke-width="1.0" opacity="0.6"/>
-      <!-- Eau fill -->
-      <path d="M 160 244 Q 200 246 220 228 L 240 185 L 400 185 L 420 210 Q 450 232 500 238 Q 460 244 420 228 L 400 210 L 240 210 L 220 250 Q 200 260 160 256 Z"
-        fill="rgba(58,107,138,0.12)"/>
-      <!-- Surface eau -->
-      <line x1="152" y1="252" x2="528" y2="252" stroke="#3A6B8A" stroke-width="0.8" stroke-dasharray="none" opacity="0.5"/>
-      <text x="322" y="248" text-anchor="middle" fill="#3A6B8A" font-size="7.5" font-family="Inter" opacity="0.4">Niveau d'eau</text>
-
-      <!-- Silhouettes Koi dans la coupe -->
-      <ellipse cx="280" cy="225" rx="22" ry="6" fill="#9B6B9B" opacity="0.35" transform="rotate(-10, 280, 225)"/>
-      <ellipse cx="350" cy="210" rx="18" ry="5" fill="#9B6B9B" opacity="0.28" transform="rotate(5, 350, 210)"/>
-      <ellipse cx="390" cy="228" rx="16" ry="5" fill="#BACC23" opacity="0.25" transform="rotate(-5, 390, 228)"/>
-
-      <!-- Profondeur annotation -->
-      <line x1="240" y1="185" x2="220" y2="185" stroke="#BACC23" stroke-width="0.6" opacity="0.4"/>
-      <line x1="152" y1="252" x2="135" y2="252" stroke="#BACC23" stroke-width="0.6" opacity="0.4"/>
-      <line x1="128" y1="185" x2="128" y2="252" stroke="#BACC23" stroke-width="0.6" opacity="0.4"/>
-      <line x1="124" y1="185" x2="132" y2="185" stroke="#BACC23" stroke-width="0.6" opacity="0.4"/>
-      <line x1="124" y1="252" x2="132" y2="252" stroke="#BACC23" stroke-width="0.6" opacity="0.4"/>
-      <text x="116" y="222" text-anchor="middle" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.45" transform="rotate(-90, 116, 222)">1,8 m</text>
-
-      <!-- Bottom drain -->
-      <circle cx="320" cy="188" r="5" stroke="#BACC23" stroke-width="1.0" fill="rgba(186,204,35,0.08)" opacity="0.6"/>
-      <text x="320" y="180" text-anchor="middle" fill="#BACC23" font-size="6.5" font-family="Inter" opacity="0.5">Bottom drain</text>
-      <!-- Conduite fond -->
-      <line x1="320" y1="193" x2="320" y2="270" stroke="#BACC23" stroke-width="0.7" stroke-dasharray="3,3" opacity="0.35"/>
-
-      <!-- Skimmer surface -->
-      <rect x="145" y="246" width="14" height="10" rx="1" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.06)" opacity="0.55"/>
-      <text x="152" y="240" text-anchor="middle" fill="#BACC23" font-size="6.5" font-family="Inter" opacity="0.45">Skimmer</text>
-
-      <!-- Local technique -->
-      <rect x="36" y="264" width="70" height="44" rx="2" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.04)" opacity="0.6"/>
-      <text x="71" y="279" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">Local</text>
-      <text x="71" y="290" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.55">technique</text>
-
-      <!-- Pompe -->
-      <circle cx="58" cy="306" r="8" stroke="#BACC23" stroke-width="0.9" fill="rgba(186,204,35,0.06)" opacity="0.5"/>
-      <text x="58" y="322" text-anchor="middle" fill="#BACC23" font-size="6.5" font-family="Inter" opacity="0.4">Pompe</text>
-
-      <!-- Tambour filtrant -->
-      <rect x="128" y="270" width="50" height="36" rx="2" stroke="#9B6B9B" stroke-width="0.9" fill="rgba(155,107,155,0.06)" opacity="0.6"/>
-      <text x="153" y="284" text-anchor="middle" fill="#9B6B9B" font-size="6.5" font-family="Inter" opacity="0.55">Tambour</text>
-      <text x="153" y="295" text-anchor="middle" fill="#9B6B9B" font-size="6.5" font-family="Inter" opacity="0.5">filtrant</text>
-
-      <!-- Biofiltre -->
-      <rect x="196" y="265" width="58" height="42" rx="2" stroke="#5A7A3A" stroke-width="0.9" fill="rgba(90,122,58,0.07)" opacity="0.6"/>
-      <text x="225" y="281" text-anchor="middle" fill="#5A7A3A" font-size="6.5" font-family="Inter" opacity="0.55">Biofiltre</text>
-      <text x="225" y="292" text-anchor="middle" fill="#5A7A3A" font-size="6.5" font-family="Inter" opacity="0.5">K5 media</text>
-      <text x="225" y="301" text-anchor="middle" fill="#5A7A3A" font-size="5.5" font-family="Inter" opacity="0.4">1 000 L</text>
-
-      <!-- Stérilisateur UV -->
-      <rect x="272" y="270" width="40" height="32" rx="2" stroke="#BACC23" stroke-width="0.9" fill="rgba(186,204,35,0.05)" opacity="0.6"/>
-      <text x="292" y="283" text-anchor="middle" fill="#BACC23" font-size="6.5" font-family="Inter" opacity="0.55">Stéril.</text>
-      <text x="292" y="294" text-anchor="middle" fill="#BACC23" font-size="6.5" font-family="Inter" opacity="0.5">UV 75W</text>
-
-      <!-- Cascade retour -->
-      <path d="M 316" d="M 316 270 L 316 252 L 530 252" stroke="#3A6B8A" stroke-width="0.8" stroke-dasharray="4,3" fill="none" opacity="0.4"/>
-      <path d="M 525 230 Q 530 240 528 252" stroke="#3A6B8A" stroke-width="1.2" fill="none" opacity="0.5"/>
-      <!-- Cascade drops -->
-      <path d="M 525 210 L 522 225 M 530 212 L 528 226 M 535 214 L 532 228" stroke="#3A6B8A" stroke-width="0.8" opacity="0.35"/>
-      <text x="536" y="207" text-anchor="middle" fill="#3A6B8A" font-size="6.5" font-family="Inter" opacity="0.45">Cascade</text>
-      <text x="536" y="216" text-anchor="middle" fill="#3A6B8A" font-size="6.5" font-family="Inter" opacity="0.38">60 cm</text>
-
-      <!-- Plantes berge gauche -->
-      <line x1="155" y1="250" x2="152" y2="220" stroke="#5A7A3A" stroke-width="1.0" opacity="0.5"/>
-      <ellipse cx="152" cy="218" rx="5" ry="9" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.10)" opacity="0.55"/>
-      <line x1="162" y1="248" x2="160" y2="224" stroke="#5A7A3A" stroke-width="0.8" opacity="0.4"/>
-      <ellipse cx="160" cy="222" rx="4" ry="7" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.08)" opacity="0.45"/>
-
-      <!-- Plantes berge droite -->
-      <line x1="508" y1="238" x2="505" y2="208" stroke="#5A7A3A" stroke-width="1.0" opacity="0.5"/>
-      <ellipse cx="505" cy="206" rx="5" ry="9" stroke="#5A7A3A" stroke-width="0.7" fill="rgba(90,122,58,0.10)" opacity="0.5"/>
-
-      <!-- Flèche circuit ferme -->
-      <text x="322" y="334" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.35">Circuit fermé · Pompe → Tambour → Biofiltre → UV → Cascade → Bassin</text>
-
-      <!-- Indicateurs pH et O2 -->
-      <text x="462" y="176" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.4">pH 7,2–7,8</text>
-      <text x="462" y="187" fill="#3A6B8A" font-size="7" font-family="Inter" opacity="0.4">O₂ &gt; 7 mg/L</text>
-      <text x="462" y="198" fill="#9B6B9B" font-size="7" font-family="Inter" opacity="0.38">T° 15–25°C</text>
-    </svg>
-
-    <div class="schema-legende">
-      <div class="schema-item"><div class="schema-dot" style="background:#3A6B8A;"></div>Circuit eau</div>
-      <div class="schema-item"><div class="schema-dot" style="background:#9B6B9B;"></div>Filtration mécanique</div>
-      <div class="schema-item"><div class="schema-dot" style="background:#5A7A3A;"></div>Filtration biologique</div>
-      <div class="schema-item"><div class="schema-dot" style="background:#BACC23;"></div>Technique / UV</div>
-    </div>
-  </div>
-
-  <!-- SECTION 03 -->
-  <div class="section-head">
-    <span class="section-num">03</span>
     <h2>Les Koi et leur milieu</h2>
-  </div>
 
-  <p>Les Koi (Cyprinus rubrofuscus) sont des carpes ornementales sélectionnées depuis le XVIIe siècle au Japon pour la richesse de leurs coloris. Ce ne sont pas des poissons fragiles — dans un bassin bien conçu, ils vivent 20 à 30 ans et atteignent 60 à 80 cm. Ce sont des poissons sociaux, curieux, qui reconnaissent leur propriétaire et s'approchent pour être nourris. <strong>Ils ne tolèrent pas la médiocrité de leur environnement.</strong></p>
+    <p>Les Koi (Cyprinus rubrofuscus) sont des carpes ornementales sélectionnées depuis le XVIIe siècle au Japon pour la richesse de leurs coloris. Ce ne sont pas des poissons fragiles — dans un bassin bien conçu, ils vivent 20 à 30 ans et atteignent 60 à 80 cm. <strong>Ils ne tolèrent pas la médiocrité de leur environnement.</strong></p>
 
-  <p>Pour ce projet, nous avons retenu 12 Koi adultes en trois variétés complémentaires, sélectionnés chez un éleveur japonais certifié et acclimatés en bassin de quarantaine pendant 3 semaines avant introduction dans le bassin principal. La quarantaine n'est pas une précaution — c'est une obligation, pour détecter et traiter d'éventuels parasites avant contamination du bassin principal.</p>
-
-  <div class="tech-note">
-    <div class="tech-note-label">— Les variétés Koi du projet Rabat</div>
-    <p>
-      <strong style="color: var(--text);">Kohaku (4 sujets)</strong> — Fond blanc nacré, motifs rouge profond (Hi). Variété fondatrice, la plus appréciée. Taille adulte 55–65 cm. Ratio fond blanc/rouge détermine la valeur. Les Kohaku du projet sont issus d'une lignée Sensuke — reconnaissance internationale. Comportement calme, dominant.<br/><br/>
-      <strong style="color: var(--text);">Sanke / Taisho Sanshoku (4 sujets)</strong> — Fond blanc, motifs rouge et noir. Le noir (Sumi) est une tache, pas une rayure — distinction essentielle à la classification. Taille adulte 50–60 cm. Le Sumi évolue avec l'âge, parfois pendant des années — un Sanke n'est jamais "fini". Très actif.<br/><br/>
-      <strong style="color: var(--text);">Showa Sanshoku (4 sujets)</strong> — Fond noir dominant, motifs rouge et blanc. Contraste maximal — l'impact visuel dans un bassin est immédiat. Plus robuste génétiquement que le Kohaku. Taille adulte 55–70 cm. Les Showa aiment les zones profondes — leur présence confirme l'intérêt de la profondeur 1,8 m.
-    </p>
-  </div>
-
-  <p>La densité de peuplement retenue — 12 Koi pour 25 000 litres — représente un ratio de 2 083 litres par poisson. La règle standard est 1 000 litres/Koi adulte, nous avons pris le double. Ce confort de peuplement a deux conséquences directes : une charge azotée réduite sur la filtration (durée de vie du biofiltre allongée), et une croissance plus rapide des poissons (moins de compétition alimentaire, moins de stress).</p>
-
-  <p>L'alimentation est un point souvent négligé. Les Koi sont des omnivores opportunistes — en nature, ils fouillent les fonds à la recherche de larves, vers et végétaux. En bassin, ils dépendent entièrement de l'apport humain. <strong>Règle de base : nourrir à 1% du poids corporel par jour, en 2 repas</strong>, avec un aliment protéiné à 35-38% (saison active, eau > 15°C). En dessous de 12°C, la digestion des Koi ralentit radicalement — arrêt total de l'alimentation recommandé sous 10°C.</p>
-
-  <p>Concernant l'hivernage au Maroc : contrairement au nord de l'Europe, Rabat n'impose pas d'hivernage strict. La température de l'eau en plein hiver descend rarement sous 10-12°C dans un bassin de 1,8 m de profondeur. Les Koi ralentissent leur métabolisme sans entrer dans la torpeur complète. Le système de filtration continue de tourner — à débit réduit (50%), mais sans arrêt. <strong>Arrêter la filtration en hiver marocain serait une erreur.</strong> Le biofiltre s'effondre en 48 heures sans circulation — reconstruction de 6 à 8 semaines nécessaire au printemps.</p>
-
-  <!-- ── GALERIE 03 · Full-width 16:9 · plan d'eau mature ── -->
-  <div class="fig-single">
-    <div class="fig-label">— Le bassin finalisé</div>
-    <div class="fig-img ratio-16-9">
-      <img
-        src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1400&q=85"
-        alt="Plan d'eau calme et mature dans un jardin — étang Koi finalisé"
-        loading="lazy"
-      />
-      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Étang Koi · villa Rabat · bassin mature · 6 mois après mise en eau</span>
+    <div class="note">
+      <span class="note__label">Les variétés Koi du projet Rabat</span>
+      <strong>Kohaku (4 sujets)</strong> — Fond blanc nacré, motifs rouge profond (Hi). Variété fondatrice. Taille adulte 55–65 cm. Comportement calme, dominant.<br/><br/>
+      <strong>Sanke / Taisho Sanshoku (4 sujets)</strong> — Fond blanc, motifs rouge et noir. Le Sumi évolue avec l'âge — un Sanke n'est jamais "fini". Taille adulte 50–60 cm. Très actif.<br/><br/>
+      <strong>Showa Sanshoku (4 sujets)</strong> — Fond noir dominant, motifs rouge et blanc. Contraste maximal. Plus robuste génétiquement que le Kohaku. Taille adulte 55–70 cm. Les Showa aiment les zones profondes.
     </div>
-    <p class="fig-caption"><strong>Le bassin six mois après la mise en eau.</strong> L'équilibre biologique est atteint — eau cristalline, plantes de berge établies, Koi adultes en pleine santé. La transition eau/terre est assurée par les nymphéas en surface et les plantes de berge qui masquent partiellement les rives en géomembrane.</p>
-    <p class="fig-credit">Photo · référence — Unsplash</p>
-  </div>
 
-  <div class="pull-quote">
-    <p>Un bassin à Koi réussi, six mois après la mise en eau, c'est une eau qu'on ne voit plus. On voit les poissons, les reflets, les plantes. L'eau est là sans qu'on la remarque — c'est ça, un équilibre.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
+    <p>La densité de peuplement retenue — 12 Koi pour 25 000 litres — représente un ratio de 2 083 litres par poisson. La règle standard est 1 000 L/Koi adulte, nous avons pris le double. Ce confort de peuplement réduit la charge azotée sur la filtration et accélère la croissance des poissons.</p>
 
-  <!-- Herbier aquatique -->
-  <section class="herbier-section">
-    <p class="herbier-title">Herbier aquatique · Plantes du bassin et de berge · Rabat</p>
-    <div class="herbier-grid">
+    <p>Six mois après la mise en eau, le bilan est positif à tous les niveaux. L'équilibre biologique a été atteint en 7 semaines. Les 12 Koi présentent une croissance régulière, sans signe de stress. <strong>La transparence de l'eau est totale — le fond est visible à 1,5 m de profondeur.</strong> C'est le premier indicateur qu'un écosystème Koi est en ordre de marche.</p>
 
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Nymphaea_alba_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-157.jpg"
-               alt="Nymphaea alba — nénuphar blanc surface bassin" loading="lazy">
+    <!-- Figure bassin finalisé -->
+    <div style="margin:2em 0">
+      <figure class="figure">
+        <div class="figure__box" style="aspect-ratio:16/9">
+          <img src="https://images.unsplash.com/photo-1505118380757-91f5f5632de0?auto=format&fit=crop&w=1200&q=82"
+               alt="Plan d'eau calme et mature dans un jardin — étang Koi finalisé"
+               style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85) contrast(1.02)">
         </div>
-        <p class="herb-name">Nymphaea alba</p>
-        <p class="herb-common">Nénuphar blanc · Surface du bassin</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen, 1887</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Iris_germanica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-093.jpg"
-               alt="Iris pseudacorus — iris des marais berge" loading="lazy">
-        </div>
-        <p class="herb-name">Iris pseudacorus</p>
-        <p class="herb-common">Iris des marais · Berge</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mentha_aquatica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-158.jpg"
-               alt="Mentha aquatica — menthe aquatique berge" loading="lazy">
-        </div>
-        <p class="herb-name">Mentha aquatica</p>
-        <p class="herb-common">Menthe aquatique · Berge</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
-               alt="Myrtus communis — myrte transition eau/terre" loading="lazy">
-        </div>
-        <p class="herb-name">Myrtus communis</p>
-        <p class="herb-common">Myrte · Transition eau/terre</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
+        <figcaption>Le bassin six mois après la mise en eau — équilibre biologique atteint, eau cristalline, Koi adultes en pleine santé · Référence Unsplash</figcaption>
+      </figure>
     </div>
-  </section>
 
-  <p>Le rôle des plantes aquatiques ne se limite pas à l'esthétique. Les nymphéas couvrent environ 30% de la surface du bassin — cette ombre réduit le réchauffement de l'eau en été et limite la croissance des algues filamentaires par compétition sur les nutriments. Les iris de berge et la menthe aquatique jouent un rôle de filtration naturelle : leurs racines absorbent les nitrates en excès, complétant le cycle de l'azote initié par le biofiltre. Le myrte, planté en limite bassin/jardin, assure la transition visuelle eau/terre et masque partiellement les équipements techniques de berge.</p>
+    <blockquote class="pullquote pullquote--bordered">
+      Un bassin à Koi réussi, six mois après la mise en eau, c'est une eau qu'on ne voit plus. On voit les poissons, les reflets, les plantes. L'eau est là sans qu'on la remarque — c'est ça, un équilibre.
+    </blockquote>
 
-  <div class="tech-note">
-    <div class="tech-note-label">— Paramètres chimiques de l'eau · Valeurs de référence et résultats mesurés</div>
-    <p>
-      <strong style="color: var(--text);">pH</strong> — Optimal 7,2–7,8. Mesure à 3 mois : 7,45. En dehors de cette plage, les bactéries nitrifiantes du biofiltre voient leur activité diminuer fortement. Corriger avec bicarbonate de sodium (augmentation) ou acide citrique dilué (diminution).<br/><br/>
-      <strong style="color: var(--text);">Ammoniaque (NH₃)</strong> — Objectif : 0 mg/L. Mesure à 3 mois : 0,02 mg/L (traces, biofiltre actif). Au-dessus de 0,5 mg/L : urgence — réduction de l'alimentation, augmentation du brassage, vérification biofiltre.<br/><br/>
-      <strong style="color: var(--text);">Nitrites (NO₂)</strong> — Objectif : &lt; 0,1 mg/L. Mesure à 3 mois : 0,05 mg/L. Toxiques pour les Koi à partir de 0,3 mg/L. Indicateur de stress sur le biofiltre.<br/><br/>
-      <strong style="color: var(--text);">Nitrates (NO₃)</strong> — Objectif : &lt; 40 mg/L. Mesure à 3 mois : 18 mg/L. Contrôlés par les plantes aquatiques et les changements partiels d'eau (10% hebdomadaire).<br/><br/>
-      <strong style="color: var(--text);">O₂ dissous</strong> — Minimum 7 mg/L pour les Koi. Mesure à 3 mois : 8,2 mg/L. La cascade et le brassage de surface maintiennent ce niveau.
-    </p>
-  </div>
+    <!-- Herbier aquatique -->
+    <section class="herbier-section">
+      <p class="herbier-title">Herbier aquatique · Plantes du bassin et de berge · Rabat</p>
+      <div class="herbier-grid">
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/5b/Nymphaea_alba_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-157.jpg"
+                 alt="Nymphaea alba — nénuphar blanc surface bassin" loading="lazy">
+          </div>
+          <p class="herb-name">Nymphaea alba</p>
+          <p class="herb-common">Nénuphar blanc · Surface du bassin</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen, 1887</p>
+        </div>
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/21/Iris_germanica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-093.jpg"
+                 alt="Iris pseudacorus — iris des marais berge" loading="lazy">
+          </div>
+          <p class="herb-name">Iris pseudacorus</p>
+          <p class="herb-common">Iris des marais · Berge</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/4/44/Mentha_aquatica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-158.jpg"
+                 alt="Mentha aquatica — menthe aquatique berge" loading="lazy">
+          </div>
+          <p class="herb-name">Mentha aquatica</p>
+          <p class="herb-common">Menthe aquatique · Berge</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div class="herb-card">
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/06/Myrtus_communis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-191.jpg"
+                 alt="Myrtus communis — myrte transition eau/terre" loading="lazy">
+          </div>
+          <p class="herb-name">Myrtus communis</p>
+          <p class="herb-common">Myrte · Transition eau/terre</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
+        </div>
+      </div>
+    </section>
 
-  <p>Six mois après la mise en eau, le bilan de ce projet est positif à tous les niveaux. L'équilibre biologique a été atteint en 7 semaines — dans la fourchette haute, due à la période de mise en eau en décembre (basses températures ralentissant la colonisation bactérienne). Les 12 Koi présentent une croissance régulière, sans signe de stress, avec une alimentation active dès que la température dépasse 15°C. <strong>La transparence de l'eau est totale — le fond est visible à 1,5 m de profondeur.</strong> C'est le premier indicateur qu'un écosystème Koi est en ordre de marche.</p>
+    <p>Le rôle des plantes aquatiques ne se limite pas à l'esthétique. Les nymphéas couvrent environ 30% de la surface du bassin — cette ombre réduit le réchauffement de l'eau en été et limite la croissance des algues filamentaires. Les iris de berge et la menthe aquatique filtrent les nitrates en excès, complétant le cycle de l'azote initié par le biofiltre.</p>
 
-  <div class="signature">
-    <div class="sig-avatar">AB</div>
-    <div class="sig-text">
-      <h4>Adil Boumahdi</h4>
-      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
+  </div><!-- /wrap-narrow prose -->
+
+  <!-- FIN D'ARTICLE -->
+  <div class="article-foot">
+    <div class="author-bio">
+      <div class="author-bio__avatar">AB</div>
+      <div>
+        <div class="author-bio__name">Adil Boumahdi</div>
+        <div class="author-bio__role">Fondateur &amp; architecte paysagiste — ABA</div>
+        <div class="author-bio__cities">Rabat · Casablanca · Marrakech · Fès</div>
+      </div>
     </div>
-  </div>
 
-  <div class="cta">
-    <h3>Un projet aquatique,<br/><em>pensé comme un écosystème.</em></h3>
-    <p>Bassin à Koi, plan d'eau naturel, fontainerie — la même rigueur de conception, la même exigence hydraulique. Depuis l'atelier ABA.</p>
-    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
-  </div>
+    <div class="cta">
+      <div class="cta__rule"></div>
+      <h2 class="cta__head">Un étang qui vit vraiment.</h2>
+      <p class="cta__sub">Hydraulique, filtration biologique, espèces aquatiques — pensés ensemble dès le plan.</p>
+      <a href="../preview.html#contact" class="btn btn--brand btn--lg">Initier un projet →</a>
+    </div>
 
-  <div class="related">
-    <div class="related-label">— À lire aussi</div>
-    <div class="related-grid">
-      <a href="parc-merinide-de-la-lecture-du-site-a-l-inauguration.html" class="rel-card">
-        <span class="rel-tag">N° 04 · Projet ABA</span>
-        <h4>Parc Mérinide — de la lecture du site à l'inauguration</h4>
-      </a>
-      <a href="choisir-une-plante-endemique-pas-decorative.html" class="rel-card">
-        <span class="rel-tag">N° 03 · Végétal</span>
-        <h4>Choisir une plante endémique, pas décorative</h4>
-      </a>
+    <div class="related wrap-narrow">
+      <p class="eyebrow" style="margin-bottom:20px">— À lire aussi</p>
+      <div class="gal gal--2">
+        <a href="villa-des-oudayas-patio.html" style="display:block;padding:24px 20px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line);transition:border-color 0.2s var(--ease);" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+          <span style="font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);">Projet ABA</span>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:500;line-height:1.2;margin-top:8px;color:var(--ink);">Villa des Oudayas — le patio</div>
+        </a>
+        <a href="un-lac-artificiel-comment-ca-vit-vraiment.html" style="display:block;padding:24px 20px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line);transition:border-color 0.2s var(--ease);" onmouseover="this.style.borderColor='var(--accent)'" onmouseout="this.style.borderColor='var(--line)'">
+          <span style="font-family:var(--sans);font-size:10.5px;font-weight:700;letter-spacing:0.16em;text-transform:uppercase;color:var(--ink-faint);">Aquatique</span>
+          <div style="font-family:var(--serif-display);font-size:20px;font-weight:500;line-height:1.2;margin-top:8px;color:var(--ink);">Un lac artificiel : comment ça vit vraiment</div>
+        </a>
+      </div>
     </div>
   </div>
 
 </article>
 
-<footer>
-  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
-  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
-</footer>
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer__grid">
+    <div><div class="footer__mark">ABA <em>Paysage</em></div><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
+  </div>
+  <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
+</div></footer>
 
 <script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('aba-blog-theme', t);
-    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-    document.getElementById('btn-light').classList.toggle('active', t === 'light');
-  }
-  const saved = localStorage.getItem('aba-blog-theme');
-  if (saved) setTheme(saved);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
-
 </body>
 </html>

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -13,864 +13,562 @@
   <link rel="canonical" href="https://www.ab-landscapes.com/blog/choisir-une-plante-endemique-pas-decorative.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/journal.css" />
 
   <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    :root, [data-theme="dark"] {
-      --accent:        #BACC23;
-      --accent-dim:    rgba(186,204,35,0.35);
-      --bg:            #13130E;
-      --bg2:           #1B1B13;
-      --bg3:           #222218;
-      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
-      --text:          #F2EDE3;
-      --text-body:     #C8C4BA;
-      --text-muted:    rgba(242,237,227,0.40);
-      --border:        rgba(242,237,227,0.08);
-      --border2:       rgba(242,237,227,0.13);
-      --hero-grid-op:  0.035;
-      --hero-svg-op:   0.11;
-      --quote-mark-op: 0.10;
-      --toggle-bg:     #1B1B13;
-      --toggle-border: rgba(242,237,227,0.15);
-      --toggle-text:   rgba(242,237,227,0.55);
-      --toggle-active-bg:   #BACC23;
-      --toggle-active-text: #13130E;
-      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
+    /* Placeholders tonals — Botanique endémique */
+    :root {
+      --ph-a: #b6c0a8;
+      --ph-b: #8b9a7f;
+      --ph-c: #5f6e54;
     }
 
-    [data-theme="light"] {
-      --bg:            #FAF9F5;
-      --bg2:           #F2EDE4;
-      --bg3:           #E8E2D8;
-      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
-      --text:          #1A1A14;
-      --text-body:     #3A3A2E;
-      --text-muted:    rgba(26,26,20,0.45);
-      --border:        rgba(26,26,20,0.08);
-      --border2:       rgba(26,26,20,0.14);
-      --hero-grid-op:  0.04;
-      --hero-svg-op:   0.09;
-      --quote-mark-op: 0.18;
-      --toggle-bg:     #FAF9F5;
-      --toggle-border: rgba(26,26,20,0.18);
-      --toggle-text:   rgba(26,26,20,0.50);
-      --toggle-active-bg:   #1A1A14;
-      --toggle-active-text: #FAF9F5;
+    /* Tableau des végétaux */
+    .plant-table { width: 100%; border-collapse: collapse; margin: 2em 0; }
+    .plant-table thead tr { border-bottom: 2px solid var(--line); }
+    .plant-table th {
+      font-family: var(--sans); font-size: 10.5px; font-weight: 700;
+      letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-faint);
+      padding: 0 0 12px; text-align: left;
+    }
+    .plant-table th:last-child { text-align: right; }
+    .plant-table tbody tr { border-bottom: 1px solid var(--line-soft); }
+    .plant-table tbody tr:hover { background: var(--surface); }
+    .plant-table td { padding: 14px 0; vertical-align: baseline; }
+    .plant-name {
+      font-family: var(--serif-display); font-size: 18px; font-weight: 500; color: var(--ink);
+    }
+    .plant-latin {
+      font-family: var(--serif-text); font-size: 12px; font-style: italic; color: var(--ink-faint);
+      display: block; margin-top: 2px;
+    }
+    .plant-use {
+      font-family: var(--sans); font-size: 10.5px; font-weight: 600;
+      letter-spacing: 0.14em; text-transform: uppercase; color: var(--ink-faint);
+      text-align: right;
     }
 
-    html { font-size: 17px; scroll-behavior: smooth; }
-    body {
-      background: var(--bg); color: var(--text-body);
-      font-family: 'Inter', sans-serif; font-weight: 300;
-      line-height: 2.0; -webkit-font-smoothing: antialiased;
-      transition: var(--transition);
+    /* Schéma SVG */
+    .visual-block {
+      background: var(--surface); border: 1px solid var(--line-soft);
+      border-radius: var(--r-md); padding: 28px 28px 20px; margin: 2em 0;
+    }
+    .visual-label {
+      font-family: var(--sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint);
+      margin-bottom: 20px;
     }
 
-    .theme-toggle {
-      display: flex; align-items: center;
-      background: var(--toggle-bg); border: 1px solid var(--toggle-border);
-      border-radius: 2px; overflow: hidden; transition: var(--transition);
+    /* Note technique */
+    .tech-note {
+      background: var(--surface); border-left: 3px solid var(--accent);
+      border-radius: 0 var(--r-md) var(--r-md) 0;
+      padding: 20px 24px; margin: 2em 0;
     }
-    .theme-btn {
-      display: flex; align-items: center; gap: 6px; padding: 6px 14px;
-      font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.22em;
-      text-transform: uppercase; color: var(--toggle-text);
-      background: transparent; border: none; cursor: pointer;
-      transition: background 250ms, color 250ms; white-space: nowrap;
+    .tech-note .note__label {
+      font-family: var(--sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-faint);
+      margin-bottom: 12px; display: block;
     }
-    .theme-btn svg { flex-shrink: 0; }
-    .theme-btn.active { background: var(--toggle-active-bg); color: var(--toggle-active-text); }
-    .theme-divider { width: 1px; height: 20px; background: var(--toggle-border); flex-shrink: 0; }
-
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 56px; height: 60px;
-      background: var(--bg); border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px);
-      transition: var(--transition);
-    }
-    .nav-logo { font-family: 'Cormorant Garamond', serif; font-size: 17px; font-weight: 400; letter-spacing: 0.12em; color: var(--text); text-decoration: none; transition: color 380ms; }
-    .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-back { font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--text-muted); text-decoration: none; transition: color 200ms; }
-    .nav-back:hover { color: var(--accent); }
-    .nav-cta { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--bg); background: var(--accent); padding: 9px 22px; text-decoration: none; transition: opacity 200ms; }
-    .nav-cta:hover { opacity: 0.85; }
-
-    .hero {
-      min-height: 88vh; display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 56px 72px; position: relative; overflow: hidden;
-      background: var(--bg-hero); transition: background 380ms ease;
-    }
-    [data-theme="light"] .hero { background: var(--bg2); }
-    .hero-grid {
-      position: absolute; inset: 0; opacity: var(--hero-grid-op);
-      background-image: linear-gradient(var(--text) 1px, transparent 1px), linear-gradient(90deg, var(--text) 1px, transparent 1px);
-      background-size: 72px 72px; transition: opacity 380ms;
-    }
-    .hero-svg { position: absolute; right: -20px; top: 0; bottom: 0; width: 52%; opacity: var(--hero-svg-op); transition: opacity 380ms; }
-    .hero::after {
-      content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none; transition: var(--transition);
-    }
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-eyebrow { display: flex; align-items: center; gap: 14px; font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
-    .hero-meta-top { font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; transition: color 380ms; }
-    .hero-domain { display: inline-flex; align-items: center; gap: 7px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 24px; transition: color 380ms; }
-    .domain-dot { width: 6px; height: 6px; border-radius: 50%; background: #5A7A3A; flex-shrink: 0; }
-    .hero h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(40px, 5.5vw, 72px); font-weight: 300; line-height: 1.08; color: var(--text); margin-bottom: 28px; transition: color 380ms; }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-desc { font-size: 16px; line-height: 1.75; color: var(--text-muted); max-width: 500px; margin-bottom: 36px; transition: color 380ms; }
-    .hero-byline { display: flex; align-items: center; gap: 20px; font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted); transition: color 380ms; }
-    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
-
-    .article { max-width: 700px; margin: 0 auto; padding: 20px 40px 100px; }
-    .chapeau { font-family: 'Cormorant Garamond', serif; font-size: 23px; font-weight: 300; font-style: italic; line-height: 1.65; color: var(--text); padding-left: 28px; border-left: 2px solid var(--accent); margin-bottom: 56px; transition: color 380ms, border-color 380ms; }
-    p { font-size: 17px; line-height: 2.0; color: var(--text-body); margin-bottom: 28px; transition: color 380ms; }
-    p strong { color: var(--text); font-weight: 500; }
-
-    .divider { display: flex; align-items: center; gap: 20px; margin: 60px 0 44px; font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase; color: var(--text-muted); transition: color 380ms; }
-    .divider::before, .divider::after { content:''; flex:1; height:1px; background: var(--border2); transition: background 380ms; }
-
-    .section-head { display: flex; align-items: baseline; gap: 20px; margin: 64px 0 28px; }
-    .section-num { font-family: 'Cormorant Garamond', serif; font-size: 52px; font-weight: 300; color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0; }
-    .section-head h2 { font-family: 'Cormorant Garamond', serif; font-size: 29px; font-weight: 400; color: var(--text); line-height: 1.2; transition: color 380ms; }
-
-    .grid4 { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; margin: 44px 0; background: var(--border); transition: background 380ms; }
-    .g-item { background: var(--bg2); padding: 32px 28px; border-top: 2px solid transparent; transition: border-color 240ms, background 380ms; }
-    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
-    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-    .g-item h3 { font-family: 'Cormorant Garamond', serif; font-size: 20px; font-weight: 400; color: var(--text); margin-bottom: 10px; line-height: 1.2; transition: color 380ms; }
-    .g-item p { font-size: 14px !important; line-height: 1.8 !important; color: var(--text-muted) !important; margin: 0 !important; }
-    .g-tag { display: inline-block; margin-top: 12px; font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px; }
-
-    .pull-quote { margin: 60px 0; padding: 48px 52px; background: var(--bg3); border-top: 1px solid var(--accent); position: relative; transition: background 380ms; }
-    .pull-quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 140px; line-height: 0.75; color: var(--accent); opacity: var(--quote-mark-op); position: absolute; top: 24px; left: 36px; transition: opacity 380ms; }
-    .pull-quote p { font-family: 'Cormorant Garamond', serif; font-size: 26px !important; font-style: italic; font-weight: 300; line-height: 1.55 !important; color: var(--text) !important; margin: 0 !important; position: relative; z-index: 1; }
-    .pull-quote cite { display: block; margin-top: 18px; font-family: 'Inter', sans-serif; font-size: 10px; letter-spacing: 0.24em; text-transform: uppercase; color: var(--accent); font-style: normal; }
-
-    .visual { background: var(--bg2); border: 1px solid var(--border2); padding: 40px; margin: 60px 0; transition: background 380ms, border-color 380ms; }
-    .visual-label { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--accent); margin-bottom: 28px; }
-    .visual svg { width:100%; display:block; }
-
-    /* Liste végétaux avec puce verte */
-    .plant-list { margin: 32px 0; list-style: none; display: flex; flex-direction: column; gap: 0; border-top: 1px solid var(--border2); }
-    .plant-item { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 0; padding: 18px 0; border-bottom: 1px solid var(--border); align-items: baseline; transition: background 380ms; }
-    .plant-item:hover { background: var(--bg2); padding-left: 12px; padding-right: 12px; }
-    .plant-name { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; color: var(--text); transition: color 380ms; }
-    .plant-latin { font-size: 12px; color: var(--text-muted); font-style: italic; transition: color 380ms; }
-    .plant-use { font-size: 11px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--accent); text-align: right; }
-
-    .tech-note { margin: 44px 0; padding: 28px 32px; border-left: 2px solid var(--border2); background: var(--bg2); transition: background 380ms, border-color 380ms; }
-    .tech-note-label { font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase; color: var(--accent); margin-bottom: 12px; }
-    .tech-note p { font-size: 14px !important; line-height: 1.85 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    .signature { display: flex; align-items: center; gap: 20px; margin-top: 72px; padding-top: 36px; border-top: 1px solid var(--border2); transition: border-color 380ms; }
-    .sig-avatar { width: 52px; height: 52px; border-radius: 50%; background: var(--bg3); border: 1px solid var(--border2); display: flex; align-items: center; justify-content: center; font-family: 'Cormorant Garamond', serif; font-size: 19px; color: var(--accent); flex-shrink: 0; transition: background 380ms, border-color 380ms; }
-    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
-    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    .cta { margin-top: 80px; padding: 56px 52px; background: var(--bg3); border-top: 1px solid var(--accent); text-align: center; position: relative; transition: background 380ms; }
-    .cta::before { content: ''; position: absolute; top: -1px; left: 50%; transform: translateX(-50%); width: 80px; height: 2px; background: var(--accent); }
-    .cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 34px; font-weight: 300; color: var(--text); line-height: 1.2; margin-bottom: 16px; transition: color 380ms; }
-    .cta h3 em { font-style: italic; color: var(--accent); }
-    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
-    .cta-btn { display: inline-block; font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: #13130E; background: var(--accent); padding: 15px 40px; text-decoration: none; transition: opacity 200ms; }
-    .cta-btn:hover { opacity: 0.85; }
-
-    .related { margin-top: 56px; padding-top: 36px; border-top: 1px solid var(--border); transition: border-color 380ms; }
-    .related-label { font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase; color: var(--text-muted); margin-bottom: 20px; transition: color 380ms; }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
-    .rel-card { background: var(--bg2); padding: 28px 24px; border-top: 2px solid var(--border); text-decoration: none; color: var(--text); transition: border-color 200ms, background 380ms; display: block; }
-    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
-    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
-    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
-
-    footer { margin-top: 80px; padding: 32px 56px; border-top: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; transition: border-color 380ms; }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
-    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
-
-    /* ══════════════════════════════════════════
-       GALERIE DE RÉFÉRENCES
-    ══════════════════════════════════════════ */
-    .fig-label {
-      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-      font-family: 'Inter', sans-serif; font-weight: 400;
-    }
-    .fig-single { margin: 52px 0; }
-    .fig-strip {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 6px; margin: 52px 0;
-    }
-    .fig-portrait-pair {
-      display: grid; grid-template-columns: 2fr 1.4fr;
-      gap: 8px; margin: 52px 0;
-    }
-    .fig-stack { display: flex; flex-direction: column; gap: 8px; }
-    .fig-img {
-      position: relative; overflow: hidden;
-      background: var(--bg3);
-    }
-    .fig-img img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover;
-      filter: saturate(0.78) contrast(1.04) brightness(0.97);
-      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .fig-img:hover img { transform: scale(1.045); }
-    .ratio-21-9 { aspect-ratio: 21/9; }
-    .ratio-16-9 { aspect-ratio: 16/9; }
-    .ratio-4-3  { aspect-ratio: 4/3; }
-    .ratio-3-2  { aspect-ratio: 3/2; }
-    .ratio-2-3  { aspect-ratio: 2/3; }
-    .ratio-1-1  { aspect-ratio: 1/1; }
-    .fig-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
-      font-weight: 300; pointer-events: none;
-    }
-    .fig-caption {
-      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      font-weight: 300; line-height: 1.65; transition: color 380ms;
-    }
-    .fig-caption strong { color: var(--text-body); font-weight: 400; }
-    .fig-strip-caption {
-      margin-top: 8px; font-size: 9.5px; letter-spacing: 0.16em;
-      text-transform: uppercase; color: var(--text-muted);
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .fig-credit {
-      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); opacity: 0.40;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
+    .tech-note p {
+      font-family: var(--sans); font-size: 14.5px; line-height: 1.7;
+      color: var(--ink-soft); margin: 0;
     }
 
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 56px; }
-      .nav-back, .nav-cta { display: none; }
-      .hero { padding: 0 20px 52px; min-height: 70vh; }
-      .article { padding: 16px 20px 72px; }
-      .grid4 { grid-template-columns: 1fr; }
-      .related-grid { grid-template-columns: 1fr; }
-      .pull-quote { padding: 32px 24px; }
-      .pull-quote p { font-size: 20px !important; }
-      .cta { padding: 40px 24px; }
-      footer { padding: 24px 20px; }
-      .theme-btn span { display: none; }
-      .theme-btn { padding: 6px 10px; }
-      .plant-item { grid-template-columns: 1fr 1fr; }
-      .plant-use { display: none; }
-      .fig-strip { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .fig-portrait-pair { grid-template-columns: 1fr; }
-    }
-    @media (max-width: 480px) {
-      .fig-strip { grid-template-columns: 1fr; }
-      .herbier-grid { grid-template-columns: repeat(2, 1fr); gap: 8px; }
-    }
-
-    /* ══════════════════════════════════════════
-       HERBIER DE RÉFÉRENCE
-    ══════════════════════════════════════════ */
+    /* Herbier */
     .herbier-section {
-      margin: 60px 0;
-      padding: 36px 0 40px;
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-      transition: border-color 380ms;
+      margin: clamp(40px, 6vw, 72px) 0;
+      padding-block: clamp(32px, 4vw, 52px);
+      border-top: 1px solid var(--line-soft);
+      border-bottom: 1px solid var(--line-soft);
     }
     .herbier-header {
       display: flex; align-items: baseline;
-      justify-content: space-between;
-      flex-wrap: wrap; gap: 10px;
-      margin-bottom: 30px;
+      justify-content: space-between; flex-wrap: wrap;
+      gap: 10px; margin-bottom: 28px;
     }
     .herbier-title {
-      font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--accent); font-family: 'Inter', sans-serif; font-weight: 400;
+      font-family: var(--sans); font-size: 10px; font-weight: 700;
+      letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint);
     }
     .herbier-sub {
-      font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      opacity: 0.5; font-style: italic;
-      transition: color 380ms;
+      font-family: var(--sans); font-size: 10px; font-style: italic;
+      color: var(--ink-faint); opacity: 0.55;
     }
-    .herbier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .herb-card { display: flex; flex-direction: column; }
     .herb-plate {
-      position: relative; overflow: hidden;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      aspect-ratio: 3/4;
-      transition: border-color 380ms, background 380ms;
+      position: relative; overflow: hidden; border-radius: var(--r-md);
+      border: 1px solid var(--line-soft);
+      aspect-ratio: 3/4; background: var(--surface);
     }
     .herb-plate img {
       width: 100%; height: 100%;
       object-fit: cover; object-position: center top;
       display: block;
       filter: sepia(0.08) contrast(1.06) brightness(1.01);
-      transition: transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94), filter 380ms;
-    }
-    [data-theme="light"] .herb-plate img {
-      filter: sepia(0.05) contrast(1.04) brightness(1.00);
+      transition: transform 800ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
     }
     .herb-plate:hover img { transform: scale(1.04); }
     .herb-name {
-      margin-top: 12px;
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 15px; font-weight: 300;
-      color: var(--text); line-height: 1.25;
-      transition: color 380ms;
+      font-family: var(--serif-display); font-style: italic;
+      font-size: 15px; font-weight: 400;
+      color: var(--ink); line-height: 1.25; margin-top: 10px;
     }
     .herb-common {
-      font-family: 'Inter', sans-serif;
-      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-top: 4px;
+      font-family: var(--sans); font-size: 9px;
+      font-weight: 700; letter-spacing: 0.2em;
+      text-transform: uppercase; color: var(--ink-faint); margin-top: 4px;
     }
     .herb-source {
-      font-family: 'Inter', sans-serif;
-      font-size: 8.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); opacity: 0.40;
-      margin-top: 5px; line-height: 1.5;
-      transition: color 380ms;
+      font-family: var(--sans); font-size: 9px;
+      color: var(--ink-faint); opacity: 0.45;
+      margin-top: 4px; line-height: 1.5;
     }
-    @media (max-width: 768px) {
-      .herbier-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+    /* Grille 4 avantages */
+    .adv-grid {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 1px; margin: 2em 0;
+      background: var(--line-soft);
+      border-radius: var(--r-md); overflow: hidden;
+    }
+    .adv-item {
+      background: var(--surface); padding: 28px 24px;
+      border-top: 2px solid transparent;
+      transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+    }
+    .adv-item:hover { border-color: var(--accent); background: var(--surface-2); }
+    .adv-icon { font-size: 24px; margin-bottom: 12px; display: block; }
+    .adv-title {
+      font-family: var(--serif-display); font-size: 20px; font-weight: 500;
+      color: var(--ink); margin: 0 0 8px; line-height: 1.2;
+    }
+    .adv-body {
+      font-family: var(--sans); font-size: 14px; line-height: 1.75;
+      color: var(--ink-soft); margin: 0;
+    }
+    .adv-tag {
+      display: inline-block; margin-top: 10px;
+      font-family: var(--sans); font-size: 9px; font-weight: 700;
+      letter-spacing: 0.28em; text-transform: uppercase;
+      color: var(--accent-ink); border: 1px solid var(--line);
+      padding: 3px 8px; border-radius: 999px;
+    }
+
+    /* Photo credit */
+    .fig-credit {
+      font-family: var(--sans); font-size: 10px;
+      color: var(--ink-faint); opacity: 0.48; margin-top: 8px;
+    }
+
+    /* Portrait pair layout */
+    .portrait-pair {
+      display: grid; grid-template-columns: 2fr 1.4fr;
+      gap: clamp(12px, 2vw, 20px); align-items: start;
+      margin: clamp(28px, 4vw, 44px) 0;
+    }
+    .portrait-pair__stack { display: flex; flex-direction: column; gap: clamp(10px, 1.5vw, 16px); }
+    .fig-box {
+      position: relative; overflow: hidden; border-radius: var(--r-md);
+      border: 1px solid var(--line-soft);
+    }
+    .fig-box img {
+      width: 100%; height: 100%; display: block; object-fit: cover;
+      filter: saturate(0.82); transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .fig-box:hover img { transform: scale(1.04); }
+    .fig-overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 32px 12px 10px;
+      background: linear-gradient(to top, rgba(0,0,0,0.5), transparent);
+      font-family: var(--sans); font-size: 9px; font-weight: 600;
+      letter-spacing: 0.2em; text-transform: uppercase;
+      color: rgba(255,255,255,0.78); pointer-events: none;
+    }
+    .fig-caption {
+      font-family: var(--sans); font-size: 12px; color: var(--ink-faint);
+      line-height: 1.6; margin-top: 10px;
+    }
+    .fig-caption strong { color: var(--ink-soft); font-weight: 600; }
+
+    @media (max-width: 940px) {
+      .portrait-pair { grid-template-columns: 1fr; }
+      .adv-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .plant-table { font-size: 14px; }
+      .plant-use { display: none; }
     }
   </style>
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
-  <div class="nav-right">
-    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
-      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-        <span>Pierre</span>
-      </button>
-      <div class="theme-divider"></div>
-      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-        <span>Crème</span>
-      </button>
-    </div>
-    <a href="../blog.html" class="nav-back">← Journal</a>
-    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+<!-- MASTHEAD -->
+<header class="masthead"><div class="wrap masthead__bar">
+  <div class="masthead__left"><a href="../blog.html" class="aba-logo">
+    <svg class="aba-logo__icon" viewBox="0 0 30 34" fill="none"><rect x="1" y="1" width="28" height="32" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 25 L15 9 L22 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10.5 20 H19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
+  </a></div>
+  <div class="masthead__tools">
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
+    <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
   </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
-
-  <!-- SVG botanique : feuilles, tiges, réseau racinaire -->
-  <svg class="hero-svg" viewBox="0 0 700 640" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <!-- Tige principale -->
-    <path d="M 350 620 Q 348 520 352 440 Q 356 360 345 280 Q 336 210 350 140 Q 360 80 355 40" stroke="#5A7A3A" stroke-width="1.4" fill="none"/>
-
-    <!-- Feuille grande gauche N°1 -->
-    <path d="M 350 280 Q 280 240 230 200 Q 200 178 215 155 Q 240 130 280 158 Q 315 182 345 220 Z" stroke="#5A7A3A" stroke-width="0.9" fill="rgba(90,122,58,0.06)"/>
-    <path d="M 350 280 Q 290 250 240 176" stroke="#5A7A3A" stroke-width="0.5" stroke-dasharray="3,4" fill="none" opacity="0.5"/>
-
-    <!-- Feuille droite N°1 -->
-    <path d="M 350 310 Q 420 265 476 228 Q 508 208 498 184 Q 482 158 446 178 Q 410 200 375 248 Z" stroke="#5A7A3A" stroke-width="0.9" fill="rgba(90,122,58,0.05)"/>
-    <path d="M 350 310 Q 414 270 484 186" stroke="#5A7A3A" stroke-width="0.5" stroke-dasharray="3,4" fill="none" opacity="0.45"/>
-
-    <!-- Feuille gauche N°2 -->
-    <path d="M 348 380 Q 270 345 218 316 Q 185 298 192 272 Q 202 246 240 258 Q 278 272 318 308 Z" stroke="#5A7A3A" stroke-width="0.9" fill="rgba(90,122,58,0.07)"/>
-    <path d="M 348 380 Q 278 346 196 272" stroke="#5A7A3A" stroke-width="0.5" stroke-dasharray="3,4" fill="none" opacity="0.4"/>
-
-    <!-- Feuille droite N°2 grande -->
-    <path d="M 352 400 Q 448 362 508 330 Q 545 312 540 284 Q 532 256 494 270 Q 454 286 406 328 Z" stroke="#5A7A3A" stroke-width="0.9" fill="rgba(90,122,58,0.06)"/>
-    <path d="M 352 400 Q 448 360 536 284" stroke="#5A7A3A" stroke-width="0.5" stroke-dasharray="3,4" fill="none" opacity="0.38"/>
-
-    <!-- Petite feuille apicale gauche -->
-    <path d="M 350 170 Q 304 148 284 124 Q 268 106 278 94 Q 292 80 314 96 Q 336 112 348 142 Z" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.08)"/>
-
-    <!-- Petite feuille apicale droite -->
-    <path d="M 352 160 Q 396 136 418 110 Q 434 90 422 80 Q 408 68 388 86 Q 368 104 354 136 Z" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.07)"/>
-
-    <!-- Fleur / bourgeon terminal accent -->
-    <circle cx="354" cy="40" r="12" stroke="#BACC23" stroke-width="1.0" fill="rgba(186,204,35,0.08)"/>
-    <circle cx="354" cy="40" r="5"  stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.15)"/>
-    <line x1="354" y1="22" x2="354" y2="18" stroke="#BACC23" stroke-width="0.8" opacity="0.6"/>
-    <line x1="366" y1="28" x2="369" y2="25" stroke="#BACC23" stroke-width="0.8" opacity="0.6"/>
-    <line x1="342" y1="28" x2="339" y2="25" stroke="#BACC23" stroke-width="0.8" opacity="0.6"/>
-
-    <!-- Réseau racinaire profond -->
-    <path d="M 350 620 Q 330 590 310 570 Q 285 545 268 510 Q 252 478 260 455" stroke="#5A7A3A" stroke-width="0.7" fill="none" opacity="0.45"/>
-    <path d="M 350 620 Q 370 588 392 562 Q 418 533 430 498 Q 442 465 434 442" stroke="#5A7A3A" stroke-width="0.7" fill="none" opacity="0.4"/>
-    <path d="M 348 610 Q 318 590 295 575 Q 268 558 250 530 Q 234 508 240 485" stroke="#5A7A3A" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <path d="M 352 610 Q 385 588 408 570 Q 436 550 452 520 Q 468 494 460 468" stroke="#5A7A3A" stroke-width="0.5" fill="none" opacity="0.28"/>
-    <path d="M 346 615 Q 306 600 278 590 Q 248 578 228 555 Q 208 532 218 508" stroke="#5A7A3A" stroke-width="0.4" fill="none" opacity="0.2"/>
-    <path d="M 354 615 Q 396 598 422 586 Q 454 572 472 547 Q 492 520 480 494" stroke="#5A7A3A" stroke-width="0.4" fill="none" opacity="0.2"/>
-
-    <!-- Ligne du sol (horizon) -->
-    <line x1="160" y1="622" x2="560" y2="622" stroke="#8B7355" stroke-width="0.6" opacity="0.25"/>
-    <text x="580" y="626" fill="#8B7355" font-size="7.5" font-family="Inter" opacity="0.35">sol</text>
-
-    <!-- Annotations botaniques -->
-    <text x="175" y="155" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.55" font-style="italic">feuille composée</text>
-    <line x1="210" y1="158" x2="228" y2="162" stroke="#5A7A3A" stroke-width="0.5" opacity="0.4"/>
-
-    <text x="500" y="276" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.5" font-style="italic">nervures</text>
-
-    <text x="228" y="505" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.4" font-style="italic">racine pivotante</text>
-    <text x="430" y="494" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.35" font-style="italic">racines absorbantes</text>
-
-    <!-- Boussole discrète -->
-    <circle cx="624" cy="88" r="22" stroke="#BACC23" stroke-width="0.5" fill="none" opacity="0.35"/>
-    <text x="624" y="76" text-anchor="middle" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.35">N</text>
-    <polygon points="624,78 620,88 624,84 628,88" fill="#BACC23" opacity="0.35"/>
-
-    <!-- Quelques points de lumière sur feuilles -->
-    <circle cx="262" cy="185" r="1.8" fill="#BACC23" opacity="0.4"/>
-    <circle cx="468" cy="295" r="1.5" fill="#BACC23" opacity="0.35"/>
-    <circle cx="244" cy="318" r="1.5" fill="#BACC23" opacity="0.3"/>
-  </svg>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Journal de l'Atelier</div>
-    <div class="hero-domain"><span class="domain-dot"></span> Végétal · Plantation</div>
-    <div class="hero-meta-top">N° 03 · Expertise · Juillet 2026</div>
-    <h1>Plante endémique,<br/><em>pas décorative</em></h1>
-    <p class="hero-desc">Une espèce endémique ne demande pas à être sous perfusion. Elle appartient à ce sol, à ce vent, à ce ciel — et elle le prouve en tenant cent ans.</p>
-    <div class="hero-byline">
-      <span>Adil Boumahdi</span>
-      <div class="hero-byline-dot"></div>
-      <span>8 min de lecture</span>
-      <div class="hero-byline-dot"></div>
-      <span>Végétal · Plantation endémique</span>
-    </div>
-  </div>
-</section>
+</div></header>
+<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
 
 <!-- ARTICLE -->
-<article class="article">
+<article class="article fade-up">
 
-  <p class="chapeau">
-    Chaque année, des milliers de jardiniers marocains achètent des plantes venues d'ailleurs — jolies en magasin, épuisantes à entretenir. Arrosage quotidien, traitement fongique mensuel, remplacement tous les trois ans. Ce n'est pas un jardin. C'est une perfusion. Chez ABA, nous avons pris le contre-pied total de cette logique.
-  </p>
-
-  <p>Une plante endémique est une espèce qui a évolué pendant des millénaires dans une zone géographique précise. Elle s'est adaptée au sol local, au régime hydrique local, aux vents dominants, aux variations thermiques, aux insectes et aux oiseaux du territoire. <strong>Elle n'a pas besoin qu'on l'aide à survivre — parce qu'elle a déjà résolu tous ces problèmes seule.</strong></p>
-
-  <p>La différence avec une plante purement décorative est fondamentale. Une plante décorative a été sélectionnée, souvent hybridée, pour maximiser l'impact visuel : floraison abondante, feuillage spectaculaire, port architectural. Elle a été optimisée pour la pépinière et le catalogue — pas pour un sol argileux à 600 m d'altitude dans le Moyen-Atlas.</p>
-
-  <!-- ── GALERIE 01 · Film-strip · l'endémique dans son milieu ── -->
-  <div style="margin: 44px 0 0;">
-    <div class="fig-label">— L'endémique dans son milieu naturel</div>
-    <div class="fig-strip">
+  <!-- EN-TÊTE GALERIE : titre en colonne large, dek à droite -->
+  <header class="wrap" style="padding-top:clamp(28px,4vw,52px);padding-bottom:clamp(20px,3vw,36px)">
+    <span class="a-cat">
+      <span class="chip__dot" style="background:#8b9a7f"></span>
+      Botanique endémique
+    </span>
+    <div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:clamp(20px,3vw,48px);align-items:end;margin-top:12px">
+      <h1 class="a-title" style="font-size:clamp(34px,5vw,68px)">Plante endémique,<br><em>pas décorative</em></h1>
       <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1771784056984-88140713f9ae?auto=format&fit=crop&w=700&q=82"
-            alt="Oliviers sur versant aride — endémique méditerranéen sans irrigation"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Olivier sauvage · versant aride · zéro irrigation</span>
-        </div>
-        <p class="fig-strip-caption">Olea europaea</p>
-        <p class="fig-caption" style="font-size:10.5px;">L'olivier résiste 40 ans sans eau supplémentaire. Il a résolu le problème seul.</p>
-      </div>
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1764096535287-32774de348d2?auto=format&fit=crop&w=700&q=82"
-            alt="Mur de pierre avec végétation endémique — co-existence naturelle"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Pierre et végétal · co-évolution naturelle</span>
-        </div>
-        <p class="fig-strip-caption">Pierre locale + végétal endémique</p>
-        <p class="fig-caption" style="font-size:10.5px;">La plante endémique colonise spontanément le minéral local — aucune aide requise.</p>
-      </div>
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1773979687273-3e7c342d913e?auto=format&fit=crop&w=700&q=82"
-            alt="Arbre à floraison rose — espèce endémique en fleurs au printemps"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Floraison endémique · printemps · faune locale</span>
-        </div>
-        <p class="fig-strip-caption">Floraison printanière</p>
-        <p class="fig-caption" style="font-size:10.5px;">Chaque floraison endémique nourrit une chaîne trophique locale entière.</p>
+        <p class="a-dek" style="margin-bottom:14px">Une espèce endémique ne demande pas à être sous perfusion. Elle appartient à ce sol, à ce vent, à ce ciel — et elle le prouve en tenant cent ans.</p>
+        <div class="card__meta">Adil Boumahdi · Juil. 2026 · 8 min de lecture</div>
       </div>
     </div>
-    <p class="fig-credit">Photos · Drawchicken Studio / Yen Vu / Rancy Tan — Unsplash</p>
-  </div>
+  </header>
 
-  <div class="divider">Quatre raisons de choisir l'endémique</div>
-
-  <div class="grid4">
-    <div class="g-item">
-      <span class="g-icon">🌱</span>
-      <h3>Adaptation au sol</h3>
-      <p>Une espèce locale a co-évolué avec les micro-organismes de son sol. Son système racinaire sait exactement comment puiser l'eau disponible, quand aller chercher en profondeur et quand se contenter de l'humidité de surface. Aucun amendement nécessaire.</p>
-      <span class="g-tag">Autonomie</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">☀️</span>
-      <h3>Tolérance à la sécheresse</h3>
-      <p>Au Maroc, la sécheresse estivale n'est pas un accident climatique — c'est la norme depuis des siècles. Les espèces endémiques ont développé des stratégies précises : stomates fermés aux heures chaudes, feuilles cireuses, dormance estivale partielle.</p>
-      <span class="g-tag">Résilience</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🦋</span>
-      <h3>Faune locale associée</h3>
-      <p>Chaque espèce végétale endémique est liée à une chaîne trophique locale : insectes pollinisateurs indigènes, oiseaux nicheurs, reptiles insectivores. Une plante exotique, aussi belle soit-elle, est un désert biologique pour la faune autochtone.</p>
-      <span class="g-tag">Biodiversité</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">✂️</span>
-      <h3>Entretien minimal</h3>
-      <p>Une taille annuelle légère, un nettoyage saisonnier. Aucun traitement phytosanitaire, aucun arrosage une fois la plante établie (2 à 3 ans). Sur 10 ans, le coût d'entretien d'un jardin endémique est trois à cinq fois inférieur à celui d'un jardin exotique.</p>
-      <span class="g-tag">Économie</span>
+  <!-- §1 intro en prose étroite avec dropcap -->
+  <div class="wrap" style="margin-bottom:clamp(28px,4vw,52px)">
+    <div class="prose" style="max-width:62ch">
+      <p class="dropcap">Chaque année, des milliers de jardiniers marocains achètent des plantes venues d'ailleurs — jolies en magasin, épuisantes à entretenir. Arrosage quotidien, traitement fongique mensuel, remplacement tous les trois ans. Ce n'est pas un jardin. C'est une perfusion. Chez ABA, nous avons pris le contre-pied total de cette logique.</p>
     </div>
   </div>
 
-  <p>Cette approche n'est pas un choix militant — c'est un choix technique. <strong>Un jardin qui dure, qui résiste et qui vieillit bien est presque toujours un jardin qui plante local.</strong> Ce que l'écologie confirme depuis des décennies, l'expérience de terrain le valide chaque saison.</p>
+  <!-- GALERIE PRINCIPALE — L'endémique dans son milieu naturel -->
+  <div class="wrap gal gal--3" style="margin-bottom:clamp(20px,3vw,40px)">
 
-  <div class="pull-quote">
-    <p>Une plante exotique dans un jardin marocain, c'est un musicien qui joue dans une langue qu'il ne comprend pas. Il peut suivre les notes, mais il ne sentira jamais le rythme du sol.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
+    <figure class="figure">
+      <div class="figure__box" style="aspect-ratio:3/2;--ph-a:#b6c0a8;--ph-b:#8b9a7f;--ph-c:#5f6e54">
+        <img src="https://images.unsplash.com/photo-1771784056984-88140713f9ae?auto=format&fit=crop&w=800&q=82" alt="Oliviers sur versant aride — endémique méditerranéen sans irrigation" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+        <span class="figure__tag">Olea europaea</span>
+      </div>
+      <figcaption>Olivier sauvage · versant aride · zéro irrigation</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <div class="figure__box" style="aspect-ratio:3/2;--ph-a:#b6c0a8;--ph-b:#8b9a7f;--ph-c:#5f6e54">
+        <img src="https://images.unsplash.com/photo-1764096535287-32774de348d2?auto=format&fit=crop&w=800&q=82" alt="Mur de pierre avec végétation endémique — co-existence naturelle" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+        <span class="figure__tag">Pierre + végétal</span>
+      </div>
+      <figcaption>La plante endémique colonise spontanément le minéral local</figcaption>
+    </figure>
+
+    <figure class="figure">
+      <div class="figure__box" style="aspect-ratio:3/2;--ph-a:#b6c0a8;--ph-b:#8b9a7f;--ph-c:#5f6e54">
+        <img src="https://images.unsplash.com/photo-1773979687273-3e7c342d913e?auto=format&fit=crop&w=800&q=82" alt="Arbre à floraison rose — espèce endémique en fleurs au printemps" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+        <span class="figure__tag">Floraison printanière</span>
+      </div>
+      <figcaption>Chaque floraison endémique nourrit une chaîne trophique locale entière</figcaption>
+    </figure>
+
+  </div>
+  <div class="wrap"><p class="fig-credit">Photos · Drawchicken Studio / Yen Vu / Rancy Tan — Unsplash</p></div>
+
+  <!-- PROSE — §2 + §3 -->
+  <div class="wrap-narrow prose" style="padding-top:clamp(28px,4vw,52px)">
+
+    <p>Une plante endémique est une espèce qui a évolué pendant des millénaires dans une zone géographique précise. Elle s'est adaptée au sol local, au régime hydrique local, aux vents dominants, aux variations thermiques, aux insectes et aux oiseaux du territoire. <strong>Elle n'a pas besoin qu'on l'aide à survivre — parce qu'elle a déjà résolu tous ces problèmes seule.</strong></p>
+
+    <p>La différence avec une plante purement décorative est fondamentale. Une plante décorative a été sélectionnée, souvent hybridée, pour maximiser l'impact visuel : floraison abondante, feuillage spectaculaire, port architectural. Elle a été optimisée pour la pépinière et le catalogue — pas pour un sol argileux à 600 m d'altitude dans le Moyen-Atlas.</p>
+
   </div>
 
-  <div class="section-head">
-    <span class="section-num">02</span>
+  <!-- GRILLE AVANTAGES -->
+  <div class="wrap" style="padding-top:clamp(20px,3vw,40px);padding-bottom:clamp(20px,3vw,40px)">
+    <p class="eyebrow" style="margin-bottom:20px">Quatre raisons de choisir l'endémique</p>
+    <div class="adv-grid">
+      <div class="adv-item">
+        <span class="adv-icon">🌱</span>
+        <p class="adv-title">Adaptation au sol</p>
+        <p class="adv-body">Une espèce locale a co-évolué avec les micro-organismes de son sol. Son système racinaire sait exactement comment puiser l'eau disponible, quand aller chercher en profondeur et quand se contenter de l'humidité de surface. Aucun amendement nécessaire.</p>
+        <span class="adv-tag">Autonomie</span>
+      </div>
+      <div class="adv-item">
+        <span class="adv-icon">☀️</span>
+        <p class="adv-title">Tolérance à la sécheresse</p>
+        <p class="adv-body">Au Maroc, la sécheresse estivale n'est pas un accident climatique — c'est la norme depuis des siècles. Les espèces endémiques ont développé des stratégies précises : stomates fermés aux heures chaudes, feuilles cireuses, dormance estivale partielle.</p>
+        <span class="adv-tag">Résilience</span>
+      </div>
+      <div class="adv-item">
+        <span class="adv-icon">🦋</span>
+        <p class="adv-title">Faune locale associée</p>
+        <p class="adv-body">Chaque espèce végétale endémique est liée à une chaîne trophique locale : insectes pollinisateurs indigènes, oiseaux nicheurs, reptiles insectivores. Une plante exotique, aussi belle soit-elle, est un désert biologique pour la faune autochtone.</p>
+        <span class="adv-tag">Biodiversité</span>
+      </div>
+      <div class="adv-item">
+        <span class="adv-icon">✂️</span>
+        <p class="adv-title">Entretien minimal</p>
+        <p class="adv-body">Une taille annuelle légère, un nettoyage saisonnier. Aucun traitement phytosanitaire, aucun arrosage une fois la plante établie (2 à 3 ans). Sur 10 ans, le coût d'entretien d'un jardin endémique est trois à cinq fois inférieur à celui d'un jardin exotique.</p>
+        <span class="adv-tag">Économie</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- PROSE §4 + PULLQUOTE -->
+  <div class="wrap-narrow prose">
+
+    <p>Cette approche n'est pas un choix militant — c'est un choix technique. <strong>Un jardin qui dure, qui résiste et qui vieillit bien est presque toujours un jardin qui plante local.</strong> Ce que l'écologie confirme depuis des décennies, l'expérience de terrain le valide chaque saison.</p>
+
+    <blockquote class="pullquote pullquote--bordered">
+      Une plante exotique dans un jardin marocain, c'est un musicien qui joue dans une langue qu'il ne comprend pas. Il peut suivre les notes, mais il ne sentira jamais le rythme du sol.
+    </blockquote>
+    <p style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);margin-top:-0.5em;margin-bottom:1.5em">— Adil Boumahdi, fondateur ABA</p>
+
     <h2>Notre sélection pour le Maroc</h2>
+
+    <p>Voici une sélection des espèces endémiques et méditerranéennes que nous utilisons régulièrement dans nos projets — choisies pour leur cohérence avec les conditions marocaines, leur robustesse et leur valeur paysagère :</p>
+
   </div>
 
-  <p>Voici une sélection des espèces endémiques et méditerranéennes que nous utilisons régulièrement dans nos projets — choisies pour leur cohérence avec les conditions marocaines, leur robustesse et leur valeur paysagère :</p>
-
-  <ul class="plant-list">
-    <li class="plant-item">
-      <span class="plant-name">Arganier</span>
-      <span class="plant-latin">Argania spinosa</span>
-      <span class="plant-use">Structure · Ombre</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Olivier sauvage</span>
-      <span class="plant-latin">Olea europaea oleaster</span>
-      <span class="plant-use">Structure · Haie</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Romarin de Bosquet</span>
-      <span class="plant-latin">Salvia rosmarinus</span>
-      <span class="plant-use">Couvre-sol · Arôme</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Lavande du Maroc</span>
-      <span class="plant-latin">Lavandula maroccana</span>
-      <span class="plant-use">Massif · Pollinisateurs</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Euphorbe résineuse</span>
-      <span class="plant-latin">Euphorbia resinifera</span>
-      <span class="plant-use">Accent minéral</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Laurier-tin</span>
-      <span class="plant-latin">Viburnum tinus</span>
-      <span class="plant-use">Haie · Écran</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Caroubier</span>
-      <span class="plant-latin">Ceratonia siliqua</span>
-      <span class="plant-use">Ombre · Comestible</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Chêne-liège</span>
-      <span class="plant-latin">Quercus suber</span>
-      <span class="plant-use">Arbre · Long terme</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Pistachier de l'Atlas</span>
-      <span class="plant-latin">Pistacia atlantica</span>
-      <span class="plant-use">Structure · Ombre légère</span>
-    </li>
-    <li class="plant-item">
-      <span class="plant-name">Agapanthe africain</span>
-      <span class="plant-latin">Agapanthus africanus</span>
-      <span class="plant-use">Massif · Floraison</span>
-    </li>
-  </ul>
-
-  <div class="visual">
-    <div class="visual-label">— Schéma · Stratification végétale endémique</div>
-    <svg viewBox="0 0 620 260" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Sol -->
-      <rect x="0" y="220" width="620" height="40" fill="rgba(139,115,85,0.08)"/>
-      <line x1="0" y1="220" x2="620" y2="220" stroke="#8B7355" stroke-width="0.7" opacity="0.4"/>
-
-      <!-- Strate arborée — Arganier / Caroubier -->
-      <!-- Tronc -->
-      <line x1="110" y1="220" x2="110" y2="80" stroke="#5A7A3A" stroke-width="2.5"/>
-      <line x1="110" y1="150" x2="70" y2="110" stroke="#5A7A3A" stroke-width="1.2"/>
-      <line x1="110" y1="130" x2="148" y2="100" stroke="#5A7A3A" stroke-width="1.2"/>
-      <!-- Canopée -->
-      <ellipse cx="110" cy="68" rx="48" ry="32" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.08)"/>
-      <ellipse cx="74" cy="98" rx="26" ry="18" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.06)"/>
-      <ellipse cx="148" cy="88" rx="24" ry="17" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.06)"/>
-      <text x="110" y="22" text-anchor="middle" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.6">strate arborée</text>
-      <text x="110" y="32" text-anchor="middle" fill="#5A7A3A" font-size="7" font-family="Inter" opacity="0.45">Arganier · Caroubier</text>
-
-      <!-- Strate arbustive — Olivier / Laurier-tin -->
-      <line x1="310" y1="220" x2="310" y2="130" stroke="#5A7A3A" stroke-width="1.8"/>
-      <line x1="310" y1="165" x2="276" y2="138" stroke="#5A7A3A" stroke-width="1.0"/>
-      <line x1="310" y1="155" x2="342" y2="130" stroke="#5A7A3A" stroke-width="1.0"/>
-      <ellipse cx="310" cy="120" rx="36" ry="22" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.09)"/>
-      <ellipse cx="278" cy="128" rx="20" ry="14" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)"/>
-      <ellipse cx="342" cy="122" rx="18" ry="12" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)"/>
-      <text x="310" y="90" text-anchor="middle" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.6">strate arbustive</text>
-      <text x="310" y="100" text-anchor="middle" fill="#5A7A3A" font-size="7" font-family="Inter" opacity="0.45">Olivier · Laurier-tin</text>
-
-      <!-- Strate herbacée / couvre-sol — Romarin / Lavande -->
-      <ellipse cx="500" cy="210" rx="52" ry="16" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.10)"/>
-      <ellipse cx="475" cy="212" rx="28" ry="10" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.08)"/>
-      <ellipse cx="528" cy="213" rx="22" ry="9" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)"/>
-      <!-- Petites tiges -->
-      <line x1="490" y1="220" x2="490" y2="200" stroke="#5A7A3A" stroke-width="0.8"/>
-      <line x1="505" y1="220" x2="505" y2="202" stroke="#5A7A3A" stroke-width="0.8"/>
-      <line x1="518" y1="220" x2="518" y2="205" stroke="#5A7A3A" stroke-width="0.7"/>
-      <!-- Fleurs accent -->
-      <circle cx="490" cy="198" r="3" stroke="#BACC23" stroke-width="0.8" fill="rgba(186,204,35,0.3)"/>
-      <circle cx="505" cy="200" r="2.5" stroke="#BACC23" stroke-width="0.7" fill="rgba(186,204,35,0.25)"/>
-      <circle cx="518" cy="204" r="2" stroke="#BACC23" stroke-width="0.7" fill="rgba(186,204,35,0.2)"/>
-      <text x="500" y="182" text-anchor="middle" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.6">strate basse</text>
-      <text x="500" y="192" text-anchor="middle" fill="#5A7A3A" font-size="7" font-family="Inter" opacity="0.45">Romarin · Lavande</text>
-
-      <!-- Flèches de connexion écologique -->
-      <path d="M 158 90 Q 220 70 270 100" stroke="#BACC23" stroke-width="0.6" stroke-dasharray="3,5" fill="none" opacity="0.3"/>
-      <path d="M 346 122 Q 410 130 448 205" stroke="#BACC23" stroke-width="0.6" stroke-dasharray="3,5" fill="none" opacity="0.25"/>
-
-      <!-- Racines stylisées -->
-      <path d="M 110 220 Q 90 235 75 245 Q 60 252 50 240" stroke="#8B7355" stroke-width="0.6" fill="none" opacity="0.35"/>
-      <path d="M 110 220 Q 128 232 140 248 Q 154 258 165 248" stroke="#8B7355" stroke-width="0.6" fill="none" opacity="0.3"/>
-      <path d="M 310 220 Q 292 234 278 244" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.28"/>
-      <path d="M 310 220 Q 328 232 342 244" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.25"/>
-
-      <!-- Légende -->
-      <line x1="30" y1="248" x2="42" y2="248" stroke="#5A7A3A" stroke-width="1.5"/>
-      <text x="46" y="252" fill="#5A7A3A" font-size="7.5" font-family="Inter" opacity="0.55">Végétal endémique</text>
-      <line x1="160" y1="248" x2="172" y2="248" stroke="#BACC23" stroke-width="1.0" stroke-dasharray="3,3"/>
-      <text x="176" y="252" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.5">Lien écologique</text>
-      <line x1="290" y1="248" x2="302" y2="248" stroke="#8B7355" stroke-width="1.0"/>
-      <text x="306" y="252" fill="#8B7355" font-size="7.5" font-family="Inter" opacity="0.45">Système racinaire</text>
-    </svg>
+  <!-- TABLEAU VÉGÉTAUX -->
+  <div class="wrap" style="padding-bottom:clamp(20px,3vw,40px)">
+    <table class="plant-table">
+      <thead><tr>
+        <th>Espèce</th>
+        <th></th>
+        <th>Usage</th>
+      </tr></thead>
+      <tbody>
+        <tr><td><span class="plant-name">Arganier</span><span class="plant-latin">Argania spinosa</span></td><td></td><td class="plant-use">Structure · Ombre</td></tr>
+        <tr><td><span class="plant-name">Olivier sauvage</span><span class="plant-latin">Olea europaea oleaster</span></td><td></td><td class="plant-use">Structure · Haie</td></tr>
+        <tr><td><span class="plant-name">Romarin de Bosquet</span><span class="plant-latin">Salvia rosmarinus</span></td><td></td><td class="plant-use">Couvre-sol · Arôme</td></tr>
+        <tr><td><span class="plant-name">Lavande du Maroc</span><span class="plant-latin">Lavandula maroccana</span></td><td></td><td class="plant-use">Massif · Pollinisateurs</td></tr>
+        <tr><td><span class="plant-name">Euphorbe résineuse</span><span class="plant-latin">Euphorbia resinifera</span></td><td></td><td class="plant-use">Accent minéral</td></tr>
+        <tr><td><span class="plant-name">Laurier-tin</span><span class="plant-latin">Viburnum tinus</span></td><td></td><td class="plant-use">Haie · Écran</td></tr>
+        <tr><td><span class="plant-name">Caroubier</span><span class="plant-latin">Ceratonia siliqua</span></td><td></td><td class="plant-use">Ombre · Comestible</td></tr>
+        <tr><td><span class="plant-name">Chêne-liège</span><span class="plant-latin">Quercus suber</span></td><td></td><td class="plant-use">Arbre · Long terme</td></tr>
+        <tr><td><span class="plant-name">Pistachier de l'Atlas</span><span class="plant-latin">Pistacia atlantica</span></td><td></td><td class="plant-use">Structure · Ombre légère</td></tr>
+        <tr><td><span class="plant-name">Agapanthe africain</span><span class="plant-latin">Agapanthus africanus</span></td><td></td><td class="plant-use">Massif · Floraison</td></tr>
+      </tbody>
+    </table>
   </div>
 
-  <!-- ── HERBIER DE RÉFÉRENCE · Planches botaniques 19e siècle · Domaine public ── -->
-  <div class="herbier-section">
-    <div class="herbier-header">
-      <span class="herbier-title">— Herbier de référence · planches botaniques</span>
-      <span class="herbier-sub">19e siècle · Köhler, Redouté, Thome · Domaine public · Wikimedia Commons</span>
-    </div>
-    <div class="herbier-grid">
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/9/99/Olea_europaea%2C_Koehler_1887.jpg"
-            alt="Olea europaea — planche botanique Köhler 1887, détail rameau feuilles olives"
-            loading="lazy"
-          />
-        </div>
-        <p class="herb-name">Olea europaea</p>
-        <p class="herb-common">Olivier</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen · 1887<br/>Franz Eugen Köhler · Domaine public</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/0/00/Rosmarinus_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-258.jpg"
-            alt="Rosmarinus officinalis — planche botanique Köhler Medizinal-Pflanzen"
-            loading="lazy"
-          />
-        </div>
-        <p class="herb-name">Rosmarinus officinalis</p>
-        <p class="herb-common">Romarin</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen · 1887<br/>Franz Eugen Köhler · Domaine public</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/2/24/Pistacia_lentiscus_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-110.jpg"
-            alt="Pistacia lentiscus — lentisque, planche botanique Köhler Medizinal-Pflanzen"
-            loading="lazy"
-          />
-        </div>
-        <p class="herb-name">Pistacia lentiscus</p>
-        <p class="herb-common">Lentisque · Mastic</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen · 1884<br/>Franz Eugen Köhler · Domaine public</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img
-            src="https://upload.wikimedia.org/wikipedia/commons/1/1c/21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg"
-            alt="Arbutus unedo — arbousier, illustration Pierre-Joseph Redouté, peintre botanique de la cour"
-            loading="lazy"
-          />
-        </div>
-        <p class="herb-name">Arbutus unedo</p>
-        <p class="herb-common">Arbousier</p>
-        <p class="herb-source">Pierre-Joseph Redouté · c.1820<br/>Peintre botanique de la cour · Domaine public</p>
-      </div>
-
+  <!-- SCHÉMA SVG Stratification végétale -->
+  <div class="wrap">
+    <div class="visual-block">
+      <div class="visual-label">— Schéma · Stratification végétale endémique</div>
+      <svg viewBox="0 0 620 260" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+        <rect x="0" y="220" width="620" height="40" fill="rgba(139,115,85,0.08)"/>
+        <line x1="0" y1="220" x2="620" y2="220" stroke="#8B7355" stroke-width="0.7" opacity="0.4"/>
+        <line x1="110" y1="220" x2="110" y2="80" stroke="#5A7A3A" stroke-width="2.5"/>
+        <line x1="110" y1="150" x2="70" y2="110" stroke="#5A7A3A" stroke-width="1.2"/>
+        <line x1="110" y1="130" x2="148" y2="100" stroke="#5A7A3A" stroke-width="1.2"/>
+        <ellipse cx="110" cy="68" rx="48" ry="32" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.08)"/>
+        <ellipse cx="74" cy="98" rx="26" ry="18" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.06)"/>
+        <ellipse cx="148" cy="88" rx="24" ry="17" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.06)"/>
+        <text x="110" y="22" text-anchor="middle" fill="#5A7A3A" font-size="7.5" font-family="Hanken Grotesk, sans-serif" opacity="0.6">strate arborée</text>
+        <text x="110" y="32" text-anchor="middle" fill="#5A7A3A" font-size="7" font-family="Hanken Grotesk, sans-serif" opacity="0.45">Arganier · Caroubier</text>
+        <line x1="310" y1="220" x2="310" y2="130" stroke="#5A7A3A" stroke-width="1.8"/>
+        <line x1="310" y1="165" x2="276" y2="138" stroke="#5A7A3A" stroke-width="1.0"/>
+        <line x1="310" y1="155" x2="342" y2="130" stroke="#5A7A3A" stroke-width="1.0"/>
+        <ellipse cx="310" cy="120" rx="36" ry="22" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.09)"/>
+        <ellipse cx="278" cy="128" rx="20" ry="14" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)"/>
+        <ellipse cx="342" cy="122" rx="18" ry="12" stroke="#5A7A3A" stroke-width="0.6" fill="rgba(90,122,58,0.07)"/>
+        <text x="310" y="90" text-anchor="middle" fill="#5A7A3A" font-size="7.5" font-family="Hanken Grotesk, sans-serif" opacity="0.6">strate arbustive</text>
+        <text x="310" y="100" text-anchor="middle" fill="#5A7A3A" font-size="7" font-family="Hanken Grotesk, sans-serif" opacity="0.45">Olivier · Laurier-tin</text>
+        <ellipse cx="500" cy="210" rx="52" ry="16" stroke="#5A7A3A" stroke-width="0.8" fill="rgba(90,122,58,0.10)"/>
+        <line x1="490" y1="220" x2="490" y2="200" stroke="#5A7A3A" stroke-width="0.8"/>
+        <line x1="505" y1="220" x2="505" y2="202" stroke="#5A7A3A" stroke-width="0.8"/>
+        <line x1="518" y1="220" x2="518" y2="205" stroke="#5A7A3A" stroke-width="0.7"/>
+        <circle cx="490" cy="198" r="3" stroke="#8b9a7f" stroke-width="0.8" fill="rgba(139,154,127,0.3)"/>
+        <circle cx="505" cy="200" r="2.5" stroke="#8b9a7f" stroke-width="0.7" fill="rgba(139,154,127,0.25)"/>
+        <circle cx="518" cy="204" r="2" stroke="#8b9a7f" stroke-width="0.7" fill="rgba(139,154,127,0.2)"/>
+        <text x="500" y="182" text-anchor="middle" fill="#5A7A3A" font-size="7.5" font-family="Hanken Grotesk, sans-serif" opacity="0.6">strate basse</text>
+        <text x="500" y="192" text-anchor="middle" fill="#5A7A3A" font-size="7" font-family="Hanken Grotesk, sans-serif" opacity="0.45">Romarin · Lavande</text>
+        <path d="M 158 90 Q 220 70 270 100" stroke="#8b9a7f" stroke-width="0.6" stroke-dasharray="3,5" fill="none" opacity="0.3"/>
+        <path d="M 346 122 Q 410 130 448 205" stroke="#8b9a7f" stroke-width="0.6" stroke-dasharray="3,5" fill="none" opacity="0.25"/>
+        <line x1="30" y1="248" x2="42" y2="248" stroke="#5A7A3A" stroke-width="1.5"/>
+        <text x="46" y="252" fill="#5A7A3A" font-size="7.5" font-family="Hanken Grotesk, sans-serif" opacity="0.55">Végétal endémique</text>
+        <line x1="160" y1="248" x2="172" y2="248" stroke="#8b9a7f" stroke-width="1.0" stroke-dasharray="3,3"/>
+        <text x="176" y="252" fill="#5A7A3A" font-size="7.5" font-family="Hanken Grotesk, sans-serif" opacity="0.5">Lien écologique</text>
+        <line x1="290" y1="248" x2="302" y2="248" stroke="#8B7355" stroke-width="1.0"/>
+        <text x="306" y="252" fill="#8B7355" font-size="7.5" font-family="Hanken Grotesk, sans-serif" opacity="0.45">Système racinaire</text>
+      </svg>
     </div>
   </div>
 
-  <!-- ── GALERIE 02 · Portrait + duo empilé · le végétal en place ── -->
-  <div style="margin: 52px 0 8px;">
-    <div class="fig-label">— La plante endémique dans le projet</div>
-  </div>
-  <div class="fig-portrait-pair">
-    <div>
-      <div class="fig-img ratio-2-3">
-        <img
-          src="https://images.unsplash.com/photo-1745057305694-dce726cfcf37?auto=format&fit=crop&w=700&q=82"
-          alt="Escalier en pierre avec grand arbres — végétation installée en hauteur"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Végétation installée · 5 ans · structure verticale</span>
+  <!-- HERBIER DE RÉFÉRENCE -->
+  <div class="wrap">
+    <div class="herbier-section">
+      <div class="herbier-header">
+        <span class="herbier-title">— Herbier de référence · planches botaniques</span>
+        <span class="herbier-sub">19e siècle · Köhler, Redouté · Domaine public · Wikimedia Commons</span>
       </div>
-      <p class="fig-caption"><strong>La verticalité vient avec le temps.</strong> Une plantation endémique dense et structurée prend entre 3 et 7 ans pour révéler sa stature. Le résultat est sans comparaison avec tout ce qu'une pépinière peut vendre.</p>
+      <div class="gal gal--3" style="grid-template-columns:repeat(4,1fr)">
+
+        <div>
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/9/99/Olea_europaea%2C_Koehler_1887.jpg" alt="Olea europaea — planche botanique Köhler 1887" loading="lazy" />
+          </div>
+          <p class="herb-name">Olea europaea</p>
+          <p class="herb-common">Olivier</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen · 1887<br>Franz Eugen Köhler · Domaine public</p>
+        </div>
+
+        <div>
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Rosmarinus_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-258.jpg" alt="Rosmarinus officinalis — planche botanique Köhler" loading="lazy" />
+          </div>
+          <p class="herb-name">Rosmarinus officinalis</p>
+          <p class="herb-common">Romarin</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen · 1887<br>Franz Eugen Köhler · Domaine public</p>
+        </div>
+
+        <div>
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/2/24/Pistacia_lentiscus_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-110.jpg" alt="Pistacia lentiscus — lentisque, planche botanique Köhler" loading="lazy" />
+          </div>
+          <p class="herb-name">Pistacia lentiscus</p>
+          <p class="herb-common">Lentisque · Mastic</p>
+          <p class="herb-source">Köhler's Medizinal-Pflanzen · 1884<br>Franz Eugen Köhler · Domaine public</p>
+        </div>
+
+        <div>
+          <div class="herb-plate">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/1/1c/21_Arbutus_unedo_par_Pierre-Joseph_Redout%C3%A9.jpeg" alt="Arbutus unedo — arbousier, illustration Redouté" loading="lazy" />
+          </div>
+          <p class="herb-name">Arbutus unedo</p>
+          <p class="herb-common">Arbousier</p>
+          <p class="herb-source">Pierre-Joseph Redouté · c.1820<br>Peintre botanique de la cour · Domaine public</p>
+        </div>
+
+      </div>
     </div>
-    <div class="fig-stack">
+  </div>
+
+  <!-- GALERIE 02 — portrait pair : la plante en projet -->
+  <div class="wrap" style="padding-bottom:clamp(16px,2vw,32px)">
+    <p class="eyebrow" style="margin-bottom:20px">— La plante endémique dans le projet</p>
+    <div class="portrait-pair">
       <div>
-        <div class="fig-img ratio-1-1">
-          <img
-            src="https://images.unsplash.com/photo-1770460192475-08e7ea9299d3?auto=format&fit=crop&w=600&q=82"
-            alt="Jardin avec allées en pierre et végétation méditerranéenne"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Allées pierre + strates végétales</span>
+        <div class="fig-box" style="aspect-ratio:2/3">
+          <img src="https://images.unsplash.com/photo-1745057305694-dce726cfcf37?auto=format&fit=crop&w=700&q=82" alt="Escalier en pierre avec grands arbres — végétation installée en hauteur" loading="lazy" />
+          <span class="fig-overlay">Végétation installée · 5 ans · structure verticale</span>
         </div>
-        <p class="fig-caption" style="font-size:10.5px;"><strong>Trois strates superposées</strong> — arboré, arbustif, herbacé — créent un écosystème autonome.</p>
+        <p class="fig-caption"><strong>La verticalité vient avec le temps.</strong> Une plantation endémique dense et structurée prend entre 3 et 7 ans pour révéler sa stature. Le résultat est sans comparaison avec tout ce qu'une pépinière peut vendre.</p>
       </div>
-      <div>
-        <div class="fig-img ratio-1-1">
-          <img
-            src="https://images.unsplash.com/photo-1557868363-e58c250144cf?auto=format&fit=crop&w=600&q=82"
-            alt="Allée bordée d'arbres — intégration végétale dans espace extérieur"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Canopée fermée · ombre naturelle</span>
+      <div class="portrait-pair__stack">
+        <div>
+          <div class="fig-box" style="aspect-ratio:1/1">
+            <img src="https://images.unsplash.com/photo-1770460192475-08e7ea9299d3?auto=format&fit=crop&w=600&q=82" alt="Jardin avec allées en pierre et végétation méditerranéenne" loading="lazy" />
+            <span class="fig-overlay">Allées pierre + strates végétales</span>
+          </div>
+          <p class="fig-caption"><strong>Trois strates superposées</strong> — arboré, arbustif, herbacé — créent un écosystème autonome.</p>
         </div>
-        <p class="fig-caption" style="font-size:10.5px;"><strong>La canopée se ferme</strong> en 5 à 8 ans — créant une ombre naturelle qui réduit l'arrosage de 30%.</p>
+        <div>
+          <div class="fig-box" style="aspect-ratio:1/1">
+            <img src="https://images.unsplash.com/photo-1557868363-e58c250144cf?auto=format&fit=crop&w=600&q=82" alt="Allée bordée d'arbres — intégration végétale dans espace extérieur" loading="lazy" />
+            <span class="fig-overlay">Canopée fermée · ombre naturelle</span>
+          </div>
+          <p class="fig-caption"><strong>La canopée se ferme</strong> en 5 à 8 ans — créant une ombre naturelle qui réduit l'arrosage de 30 %.</p>
+        </div>
       </div>
     </div>
+    <p class="fig-credit">Photos · Kelly Cristine / George / Tom Wheatley — Unsplash</p>
   </div>
-  <p class="fig-credit">Photos · Kelly Cristine / George / Tom Wheatley — Unsplash</p>
 
-  <div class="section-head">
-    <span class="section-num">03</span>
+  <!-- PROSE FINALE : §5, §6, note technique, §7, pullquote, §8 -->
+  <div class="wrap-narrow prose" style="padding-top:clamp(32px,4vw,56px)">
+
     <h2>La règle des trois ans</h2>
-  </div>
 
-  <p>La seule contrainte réelle d'une plantation endémique, c'est les trois premières années. L'établissement d'un système racinaire profond prend du temps — et pendant cette période, un arrosage d'accompagnement est nécessaire, surtout les premiers étés. C'est l'investissement initial. Après, la plante se prend en charge.</p>
+    <p>La seule contrainte réelle d'une plantation endémique, c'est les trois premières années. L'établissement d'un système racinaire profond prend du temps — et pendant cette période, un arrosage d'accompagnement est nécessaire, surtout les premiers étés. C'est l'investissement initial. Après, la plante se prend en charge.</p>
 
-  <p>Nous l'appelons la <strong>règle des trois ans</strong> : trois étés avec un arrosage léger en profondeur une à deux fois par semaine selon les espèces, puis sevrage progressif. Au bout de la troisième année, une plante endémique correctement établie dans son milieu naturel ne demande plus d'arrosage supplémentaire — même pendant les étés les plus secs du Maroc.</p>
+    <p>Nous l'appelons la <strong>règle des trois ans</strong> : trois étés avec un arrosage léger en profondeur une à deux fois par semaine selon les espèces, puis sevrage progressif. Au bout de la troisième année, une plante endémique correctement établie dans son milieu naturel ne demande plus d'arrosage supplémentaire — même pendant les étés les plus secs du Maroc.</p>
 
-  <div class="tech-note">
-    <div class="tech-note-label">— Note technique · Protocole d'établissement ABA</div>
-    <p>
-      <strong style="color: var(--text);">Plantation : automne ou début printemps</strong> — jamais en plein été. La chaleur estivale stresse inutilement une plante dont le système racinaire n'est pas encore établi.
-      <br/><br/>
-      <strong style="color: var(--text);">Préparation du sol</strong> — aucun engrais chimique. Un amendement organique (compost local, fumier composté) pour les premières semaines, puis la plante prend le relais en développant ses propres associations mycorhiziennes.
-      <br/><br/>
-      <strong style="color: var(--text);">Arrosage d'établissement</strong> — profond et espacé plutôt que superficiel et fréquent. Forcer la plante à chercher l'eau en profondeur développe un enracinement solide. Un arrosage superficiel quotidien produit des racines courtes et une dépendance permanente.
-      <br/><br/>
-      <strong style="color: var(--text);">Paillage</strong> — couche de 8 à 10 cm de matière organique au pied de chaque plant. Conserve l'humidité, régule la température du sol, enrichit progressivement la terre par décomposition.
-    </p>
-  </div>
-
-  <p>Ce protocole simple transforme radicalement le résultat à long terme. <strong>Un jardin planté selon ces principes, dix ans plus tard, est plus dense, plus stable et plus beau qu'au premier jour</strong> — et il ne coûte presque rien à entretenir. C'est l'exact inverse d'un jardin d'apparat planté trop vite avec des espèces inadaptées.</p>
-
-  <!-- ── GALERIE 03 · Pleine largeur · le jardin abouti ── -->
-  <div class="fig-single" style="margin: 44px 0 8px;">
-    <div class="fig-img ratio-16-9">
-      <img
-        src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1400&q=85"
-        alt="Allée bordée d'arbres et mur de pierre — jardin endémique mature"
-        loading="lazy"
-      />
-      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Jardin endémique mature · allée · mur calcaire · canopée fermée</span>
+    <div class="tech-note">
+      <span class="note__label">— Note technique · Protocole d'établissement ABA</span>
+      <p>
+        <strong>Plantation : automne ou début printemps</strong> — jamais en plein été. La chaleur estivale stresse inutilement une plante dont le système racinaire n'est pas encore établi.
+        <br><br>
+        <strong>Préparation du sol</strong> — aucun engrais chimique. Un amendement organique (compost local, fumier composté) pour les premières semaines, puis la plante prend le relais en développant ses propres associations mycorhiziennes.
+        <br><br>
+        <strong>Arrosage d'établissement</strong> — profond et espacé plutôt que superficiel et fréquent. Forcer la plante à chercher l'eau en profondeur développe un enracinement solide. Un arrosage superficiel quotidien produit des racines courtes et une dépendance permanente.
+        <br><br>
+        <strong>Paillage</strong> — couche de 8 à 10 cm de matière organique au pied de chaque plant. Conserve l'humidité, régule la température du sol, enrichit progressivement la terre par décomposition.
+      </p>
     </div>
-    <p class="fig-caption"><strong>Ce que devient un jardin endémique après dix ans.</strong> Dense, structuré, ombragé. La végétation locale n'a pas besoin d'être gérée — elle se règle seule sur le territoire dont elle est issue.</p>
+
+    <p>Ce protocole simple transforme radicalement le résultat à long terme. <strong>Un jardin planté selon ces principes, dix ans plus tard, est plus dense, plus stable et plus beau qu'au premier jour</strong> — et il ne coûte presque rien à entretenir. C'est l'exact inverse d'un jardin d'apparat planté trop vite avec des espèces inadaptées.</p>
+
+  </div>
+
+  <!-- GALERIE 03 — pleine largeur, jardin abouti -->
+  <div class="wrap" style="padding-top:clamp(20px,3vw,40px);padding-bottom:clamp(16px,2vw,28px)">
+    <div class="fig-box" style="aspect-ratio:16/9">
+      <img src="https://images.unsplash.com/photo-1777701312543-7c70b2b51a83?auto=format&fit=crop&w=1400&q=85" alt="Allée bordée d'arbres et mur de pierre — jardin endémique mature" loading="lazy" />
+      <span class="fig-overlay" style="font-size:9.5px;letter-spacing:0.16em">Jardin endémique mature · allée · mur calcaire · canopée fermée</span>
+    </div>
+    <p class="fig-caption" style="max-width:64ch"><strong>Ce que devient un jardin endémique après dix ans.</strong> Dense, structuré, ombragé. La végétation locale n'a pas besoin d'être gérée — elle se règle seule sur le territoire dont elle est issue.</p>
     <p class="fig-credit">Photo · Miguel Ángel Sanz — Unsplash</p>
   </div>
 
-  <div class="pull-quote">
-    <p>On ne plante pas pour cette saison. On plante pour ce que le jardin sera dans vingt ans. Et dans vingt ans, seul le vivant qui appartient vraiment à ce lieu sera encore là pour le prouver.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
+  <!-- PROSE CONCLUSIVE + PULLQUOTE FINAL -->
+  <div class="wrap-narrow prose" style="padding-top:clamp(24px,3vw,44px)">
 
-  <p>La beauté d'un jardin endémique est une beauté qui s'approfondit avec le temps. La première année, c'est discret. La troisième, c'est solide. La dixième, c'est un paysage — dense, structuré, habité, cohérent avec le territoire dont il est issu. Aucun jardin exotique sous perfusion ne parvient à ce résultat, parce que l'exotisme cosmétique ne vieillit jamais bien.</p>
+    <blockquote class="pullquote pullquote--bordered">
+      On ne plante pas pour cette saison. On plante pour ce que le jardin sera dans vingt ans. Et dans vingt ans, seul le vivant qui appartient vraiment à ce lieu sera encore là pour le prouver.
+    </blockquote>
+    <p style="font-family:var(--sans);font-size:12px;color:var(--ink-faint);margin-top:-0.5em;margin-bottom:1.5em">— Adil Boumahdi, fondateur ABA</p>
 
-  <div class="signature">
-    <div class="sig-avatar">AB</div>
-    <div class="sig-text">
-      <h4>Adil Boumahdi</h4>
-      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
-    </div>
-  </div>
+    <p>La beauté d'un jardin endémique est une beauté qui s'approfondit avec le temps. La première année, c'est discret. La troisième, c'est solide. La dixième, c'est un paysage — dense, structuré, habité, cohérent avec le territoire dont il est issu. Aucun jardin exotique sous perfusion ne parvient à ce résultat, parce que l'exotisme cosmétique ne vieillit jamais bien.</p>
 
-  <div class="cta">
-    <h3>Un jardin qui<br/><em>appartient à son lieu.</em></h3>
-    <p>Sélection végétale endémique, plantation raisonnée, suivi pluriannuel. Des jardins qui grandissent et résistent — depuis l'atelier ABA.</p>
-    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
-  </div>
-
-  <div class="related">
-    <div class="related-label">— À lire aussi</div>
-    <div class="related-grid">
-      <a href="lire-un-terrain-avant-de-le-toucher.html" class="rel-card">
-        <span class="rel-tag">N° 01 · Conception</span>
-        <h4>Lire un terrain avant de le toucher</h4>
-      </a>
-      <a href="la-pierre-seche-pourquoi-elle-dure-300-ans.html" class="rel-card">
-        <span class="rel-tag">N° 02 · Minéral</span>
-        <h4>La pierre sèche : pourquoi elle dure 300 ans</h4>
-      </a>
-    </div>
   </div>
 
 </article>
 
-<footer>
-  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
-  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
-</footer>
+<!-- FIN D'ARTICLE -->
+<div class="wrap article-foot">
+  <div class="author-bio"><div class="author-bio__avatar">AB</div><div>
+    <div class="author-bio__name">Adil Boumahdi</div>
+    <div class="author-bio__role">Fondateur &amp; architecte paysagiste — ABA</div>
+    <div class="author-bio__cities">Rabat · Casablanca · Marrakech · Fès</div>
+  </div></div>
+  <div class="cta"><div class="cta__rule"></div>
+    <p class="cta__head">Votre jardin mérite <em>des plantes chez elles.</em></p>
+    <p class="cta__sub">Une palette endémique, belle et sobre en eau — adaptée au sol, à l'exposition, au vent.</p>
+    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+  </div>
+</div>
+
+<!-- RELATED -->
+<section class="wrap related"><div class="section-head" style="margin:0 0 26px"><h2>À lire ensuite</h2></div>
+  <div class="grid grid--edit">
+    <article class="card card--md col-6" style="cursor:pointer" onclick="location.href='florilege-du-sec.html'">
+      <div class="card__media"><figure class="figure"><div class="figure__box" style="--ph-a:#b6c0a8;--ph-b:#8b9a7f;--ph-c:#5f6e54"><span class="figure__tag">Botanique</span></div></figure></div>
+      <div class="card__cat"><span class="chip__dot" style="background:#8b9a7f"></span>Botanique endémique</div>
+      <h3 class="card__title">Florilège du sec : douze plantes du Maroc</h3>
+      <div class="card__meta"><span>Nadia Berrada</span><span class="dotsep"></span><span>5 min</span></div>
+    </article>
+    <article class="card card--md col-6" style="cursor:pointer" onclick="location.href='xeropaysage-luxe-sobre.html'">
+      <div class="card__media"><figure class="figure"><div class="figure__box" style="--ph-a:#d7cba8;--ph-b:#bda77c;--ph-c:#94804f"><span class="figure__tag">Climat</span></div></figure></div>
+      <div class="card__cat"><span class="chip__dot" style="background:#bda77c"></span>Climat &amp; Eau</div>
+      <h3 class="card__title">Xéropaysage : le luxe de la sobriété</h3>
+      <div class="card__meta"><span>Adil Boumahdi</span><span class="dotsep"></span><span>6 min</span></div>
+    </article>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer__grid">
+    <div><div class="footer__mark">ABA <em>Paysage</em></div><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
+  </div>
+  <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
+</div></footer>
 
 <script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('aba-blog-theme', t);
-    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-    document.getElementById('btn-light').classList.toggle('active', t === 'light');
-  }
-  const saved = localStorage.getItem('aba-blog-theme');
-  if (saved) setTheme(saved);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
 
 </body>

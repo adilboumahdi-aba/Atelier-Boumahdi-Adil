@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -7,1159 +7,294 @@
   <meta name="description" content="Pierre naturelle, bois, béton, gravier — le revêtement extérieur n'est pas décoratif, il est structurant. Un mauvais choix coûte 5× plus cher à terme. Notre guide complet pour décider sur 30 ans." />
   <meta name="keywords" content="revêtements extérieurs, dallage pierre naturelle, terrasse bois ipé, béton architectonique, gravier stabilisé, aménagement paysager, ABA paysage Maroc" />
   <meta property="og:title" content="Revêtements extérieurs : choisir un sol pour 30 ans — ABA" />
-  <meta property="og:description" content="Pierre, bois, béton ou gravier — le sol extérieur n'est pas une décoration, c'est une décision à 30 ans. Ce qu'on voit, ce qu'on ressent, ce qu'on paie vraiment." />
+  <meta property="og:description" content="Pierre, bois, béton ou gravier — le sol extérieur n'est pas une décoration, c'est une décision à 30 ans." />
   <meta property="og:image" content="https://www.ab-landscapes.com/assets/og-cover.jpg" />
   <meta property="og:url" content="https://www.ab-landscapes.com/blog/revetements-exterieurs-choisir-un-sol-pour-30-ans.html" />
   <link rel="canonical" href="https://www.ab-landscapes.com/blog/revetements-exterieurs-choisir-un-sol-pour-30-ans.html" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ══════════════════════════════════════════
-       TOKENS — deux thèmes, une seule structure
-    ══════════════════════════════════════════ */
-
-    /* THÈME D — Pierre chaude (défaut) */
-    :root, [data-theme="dark"] {
-      --accent:        #BACC23;
-      --accent-dim:    rgba(186,204,35,0.35);
-
-      --bg:            #13130E;
-      --bg2:           #1B1B13;
-      --bg3:           #222218;
-      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
-
-      --text:          #F2EDE3;
-      --text-body:     #C8C4BA;
-      --text-muted:    rgba(242,237,227,0.40);
-      --border:        rgba(242,237,227,0.08);
-      --border2:       rgba(242,237,227,0.13);
-
-      --hero-grid-op:  0.035;
-      --hero-svg-op:   0.10;
-      --quote-mark-op: 0.10;
-
-      --toggle-bg:     #1B1B13;
-      --toggle-border: rgba(242,237,227,0.15);
-      --toggle-text:   rgba(242,237,227,0.55);
-      --toggle-active-bg:   #BACC23;
-      --toggle-active-text: #13130E;
-
-      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
-    }
-
-    /* THÈME B — Crème lumineuse */
-    [data-theme="light"] {
-      --bg:            #FAF9F5;
-      --bg2:           #F2EDE4;
-      --bg3:           #E8E2D8;
-      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
-
-      --text:          #1A1A14;
-      --text-body:     #3A3A2E;
-      --text-muted:    rgba(26,26,20,0.45);
-      --border:        rgba(26,26,20,0.08);
-      --border2:       rgba(26,26,20,0.14);
-
-      --hero-grid-op:  0.04;
-      --hero-svg-op:   0.08;
-      --quote-mark-op: 0.18;
-
-      --toggle-bg:     #FAF9F5;
-      --toggle-border: rgba(26,26,20,0.18);
-      --toggle-text:   rgba(26,26,20,0.50);
-      --toggle-active-bg:   #1A1A14;
-      --toggle-active-text: #FAF9F5;
-    }
-
-    /* ══════════════════════════════════════════
-       BASE
-    ══════════════════════════════════════════ */
-    html { font-size: 17px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text-body);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      line-height: 2.0;
-      -webkit-font-smoothing: antialiased;
-      transition: var(--transition);
-    }
-
-    /* ══════════════════════════════════════════
-       TOGGLE THÈME
-    ══════════════════════════════════════════ */
-    .theme-toggle {
-      display: flex; align-items: center;
-      background: var(--toggle-bg);
-      border: 1px solid var(--toggle-border);
-      border-radius: 2px;
-      overflow: hidden;
-      transition: var(--transition);
-    }
-    .theme-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 6px 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--toggle-text);
-      background: transparent; border: none; cursor: pointer;
-      transition: background 250ms, color 250ms;
-      white-space: nowrap;
-    }
-    .theme-btn svg { flex-shrink: 0; }
-    .theme-btn.active {
-      background: var(--toggle-active-bg);
-      color: var(--toggle-active-text);
-    }
-    .theme-divider {
-      width: 1px; height: 20px;
-      background: var(--toggle-border);
-      flex-shrink: 0;
-    }
-
-    /* ══════════════════════════════════════════
-       NAV
-    ══════════════════════════════════════════ */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 56px; height: 60px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: var(--transition);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px; font-weight: 400; letter-spacing: 0.12em;
-      color: var(--text); text-decoration: none;
-      transition: color 380ms;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-back {
-      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none; transition: color 200ms;
-    }
-    .nav-back:hover { color: var(--accent); }
-    .nav-cta {
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--bg); background: var(--accent);
-      padding: 9px 22px; text-decoration: none; transition: opacity 200ms;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-
-    /* ══════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════ */
-    .hero {
-      min-height: 88vh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 56px 72px;
-      position: relative; overflow: hidden;
-      background: var(--bg-hero);
-      transition: background 380ms ease;
-    }
-    [data-theme="light"] .hero {
-      background: var(--bg2);
-    }
-    .hero-grid {
-      position: absolute; inset: 0;
-      opacity: var(--hero-grid-op);
-      background-image:
-        linear-gradient(var(--text) 1px, transparent 1px),
-        linear-gradient(90deg, var(--text) 1px, transparent 1px);
-      background-size: 72px 72px;
-      transition: opacity 380ms;
-    }
-    .hero-svg {
-      position: absolute; right: -20px; top: 0; bottom: 0;
-      width: 52%; opacity: var(--hero-svg-op);
-      transition: opacity 380ms;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none; transition: var(--transition);
-    }
-
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 14px;
-      font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px;
-    }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
-    .hero-meta-top {
-      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
-    }
-    .hero-domain {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      transition: color 380ms;
-    }
-    .domain-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #BACC23; flex-shrink: 0;
-    }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 5.5vw, 72px);
-      font-weight: 300; line-height: 1.08;
-      color: var(--text); margin-bottom: 28px;
-      transition: color 380ms;
-    }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-desc {
-      font-size: 16px; line-height: 1.75;
-      color: var(--text-muted); max-width: 500px;
-      margin-bottom: 36px; transition: color 380ms;
-    }
-    .hero-byline {
-      display: flex; align-items: center; gap: 20px;
-      font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted);
-      transition: color 380ms;
-    }
-    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
-
-    /* ══════════════════════════════════════════
-       ARTICLE BODY
-    ══════════════════════════════════════════ */
-    .article {
-      max-width: 700px; margin: 0 auto;
-      padding: 20px 40px 100px;
-    }
-
-    .chapeau {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 23px; font-weight: 300; font-style: italic;
-      line-height: 1.65; color: var(--text);
-      padding-left: 28px; border-left: 2px solid var(--accent);
-      margin-bottom: 56px;
-      transition: color 380ms, border-color 380ms;
-    }
-
-    p {
-      font-size: 17px; line-height: 2.0;
-      color: var(--text-body); margin-bottom: 28px;
-      transition: color 380ms;
-    }
-    p strong { color: var(--text); font-weight: 500; }
-
-    .divider {
-      display: flex; align-items: center; gap: 20px;
-      margin: 60px 0 44px;
-      font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--text-muted); transition: color 380ms;
-    }
-    .divider::before, .divider::after {
-      content:''; flex:1; height:1px;
-      background: var(--border2); transition: background 380ms;
-    }
-
-    .section-head {
-      display: flex; align-items: baseline; gap: 20px;
-      margin: 64px 0 28px;
-    }
-    .section-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 52px; font-weight: 300;
-      color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0;
-    }
-    .section-head h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 29px; font-weight: 400;
-      color: var(--text); line-height: 1.2; transition: color 380ms;
-    }
-
-    /* Grille 4 cartes */
-    .grid4 {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; margin: 44px 0;
-      background: var(--border); transition: background 380ms;
-    }
-    .g-item {
-      background: var(--bg2); padding: 32px 28px;
-      border-top: 2px solid transparent;
-      transition: border-color 240ms, background 380ms;
-    }
-    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
-    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-    .g-item h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 400;
-      color: var(--text); margin-bottom: 10px; line-height: 1.2;
-      transition: color 380ms;
-    }
-    .g-item p {
-      font-size: 14px !important; line-height: 1.8 !important;
-      color: var(--text-muted) !important; margin: 0 !important;
-    }
-    .g-tag {
-      display: inline-block; margin-top: 12px;
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px;
-    }
-
-    /* Tableau comparatif matériaux */
-    .mat-table {
-      width: 100%; border-collapse: collapse;
-      margin: 44px 0; font-size: 13px;
-    }
-    .mat-table thead tr {
-      border-bottom: 1px solid var(--accent);
-    }
-    .mat-table th {
-      font-family: 'Inter', sans-serif; font-weight: 400;
-      font-size: 9px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--accent); padding: 12px 14px; text-align: left;
-      transition: color 380ms;
-    }
-    .mat-table td {
-      padding: 16px 14px; vertical-align: top;
-      border-bottom: 1px solid var(--border);
-      color: var(--text-muted); font-size: 13px; line-height: 1.6;
-      transition: color 380ms, border-color 380ms;
-    }
-    .mat-table tr:hover td { background: var(--bg2); transition: background 200ms; }
-    .mat-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px; font-weight: 400; color: var(--text);
-      line-height: 1.2; transition: color 380ms;
-    }
-    .mat-score {
-      display: inline-block;
-      font-size: 9px; letter-spacing: 0.2em; padding: 2px 7px;
-      border: 1px solid var(--accent-dim); color: var(--accent);
-    }
-    .mat-score.high { background: rgba(186,204,35,0.08); }
-    .mat-score.med  { background: transparent; color: var(--text-muted); border-color: var(--border2); }
-    .mat-score.low  { background: transparent; color: rgba(200,100,80,0.7); border-color: rgba(200,100,80,0.3); }
-
-    /* Pull quote */
-    .pull-quote {
-      margin: 60px 0; padding: 48px 52px;
-      background: var(--bg3);
-      border-top: 1px solid var(--accent);
-      position: relative; transition: background 380ms;
-    }
-    .pull-quote::before {
-      content: '"';
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 140px; line-height: 0.75;
-      color: var(--accent); opacity: var(--quote-mark-op);
-      position: absolute; top: 24px; left: 36px;
-      transition: opacity 380ms;
-    }
-    .pull-quote p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px !important; font-style: italic;
-      font-weight: 300; line-height: 1.55 !important;
-      color: var(--text) !important;
-      margin: 0 !important; position: relative; z-index: 1;
-    }
-    .pull-quote cite {
-      display: block; margin-top: 18px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--accent);
-      font-style: normal;
-    }
-
-    /* Schéma */
-    .visual {
-      background: var(--bg2); border: 1px solid var(--border2);
-      padding: 40px; margin: 60px 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .visual-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px;
-    }
-    .visual svg { width:100%; display:block; }
-
-    /* Note technique */
-    .tech-note {
-      margin: 44px 0; padding: 28px 32px;
-      border-left: 2px solid var(--border2);
-      background: var(--bg2);
-      transition: background 380ms, border-color 380ms;
-    }
-    .tech-note-label {
-      font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .tech-note p {
-      font-size: 14px !important; line-height: 1.85 !important;
-      color: var(--text-muted) !important; margin: 0 !important;
-    }
-
-    /* Signature */
-    .signature {
-      display: flex; align-items: center; gap: 20px;
-      margin-top: 72px; padding-top: 36px;
-      border-top: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .sig-avatar {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--bg3); border: 1px solid var(--border2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px; color: var(--accent); flex-shrink: 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
-    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    /* CTA */
-    .cta {
-      margin-top: 80px; padding: 56px 52px;
-      background: var(--bg3); border-top: 1px solid var(--accent);
-      text-align: center; position: relative;
-      transition: background 380ms;
-    }
-    .cta::before {
-      content: ''; position: absolute;
-      top: -1px; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 2px; background: var(--accent);
-    }
-    .cta h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px; font-weight: 300;
-      color: var(--text); line-height: 1.2; margin-bottom: 16px;
-      transition: color 380ms;
-    }
-    .cta h3 em { font-style: italic; color: var(--accent); }
-    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
-    .cta-btn {
-      display: inline-block;
-      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: #13130E; background: var(--accent);
-      padding: 15px 40px; text-decoration: none; transition: opacity 200ms;
-    }
-    .cta-btn:hover { opacity: 0.85; }
-
-    /* Articles suivants */
-    .related {
-      margin-top: 56px; padding-top: 36px;
-      border-top: 1px solid var(--border); transition: border-color 380ms;
-    }
-    .related-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
-    }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
-    .rel-card {
-      background: var(--bg2); padding: 28px 24px;
-      border-top: 2px solid var(--border);
-      text-decoration: none; color: var(--text);
-      transition: border-color 200ms, background 380ms; display: block;
-    }
-    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
-    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
-    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
-
-    /* Footer */
-    footer {
-      margin-top: 80px; padding: 32px 56px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px; transition: border-color 380ms;
-    }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
-    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
-
-    /* ══════════════════════════════════════════
-       GALERIE DE RÉFÉRENCES
-    ══════════════════════════════════════════ */
-    .fig-label {
-      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-      font-family: 'Inter', sans-serif; font-weight: 400;
-    }
-    .fig-duo {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin: 52px 0;
-    }
-    /* Galerie asymétrique 60/40 */
-    .fig-asymduo {
-      display: grid; grid-template-columns: 3fr 2fr;
-      gap: 12px; margin: 52px 0;
-    }
-    .fig-trio {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px; margin: 18px 0 50px;
-    }
-    .fig-single { margin: 52px 0; }
-    /* Galerie cinématique 21:9 */
-    .fig-cine { margin: 52px 0; }
-    .fig-img {
-      position: relative; overflow: hidden;
-      background: var(--bg3);
-    }
-    .fig-img img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover;
-      filter: saturate(0.78) contrast(1.04) brightness(0.97);
-      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .fig-img:hover img { transform: scale(1.045); }
-    .ratio-4-3  { aspect-ratio: 4/3; }
-    .ratio-3-2  { aspect-ratio: 3/2; }
-    .ratio-16-9 { aspect-ratio: 16/9; }
-    .ratio-21-9 { aspect-ratio: 21/9; }
-    .fig-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
-      font-weight: 300; pointer-events: none;
-    }
-    .fig-caption {
-      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      font-weight: 300; line-height: 1.65;
-      transition: color 380ms;
-    }
-    .fig-caption strong { color: var(--text-body); font-weight: 400; }
-    .fig-mat-label {
-      margin-top: 9px; font-size: 9.5px; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--text-muted);
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .fig-credit {
-      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); opacity: 0.40;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    /* ══════════════════════════════════════════
-       PLANCHES HERBIER
-    ══════════════════════════════════════════ */
-    .herbier-section {
-      margin: 60px 0; padding: 36px 0 40px;
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .herbier-title {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .herbier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .herb-card { display: flex; flex-direction: column; }
-    .herb-plate {
-      aspect-ratio: 3/4; overflow: hidden;
-      border: 1px solid var(--border); background: var(--bg2);
-      margin-bottom: 10px;
-      transition: border-color 380ms, background 380ms;
-    }
-    .herb-plate img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: top center;
-      filter: sepia(0.08) contrast(1.06) brightness(1.01);
-      transition: transform 800ms ease;
-    }
-    .herb-plate:hover img { transform: scale(1.04); }
-    .herb-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 14px; font-weight: 400;
-      color: var(--text); margin-bottom: 3px; line-height: 1.3;
-      transition: color 380ms;
-    }
-    .herb-common {
-      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-    .herb-source {
-      font-size: 8.5px; color: var(--text-muted); opacity: 0.55;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    @media (max-width: 600px) { .herbier-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-    /* ══════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════ */
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 56px; }
-      .nav-back { display: none; }
-      .nav-cta { display: none; }
-      .hero { padding: 0 20px 52px; min-height: 70vh; }
-      .article { padding: 16px 20px 72px; }
-      .grid4 { grid-template-columns: 1fr; }
-      .fig-duo, .fig-asymduo { grid-template-columns: 1fr; gap: 20px; }
-      .fig-trio { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .related-grid { grid-template-columns: 1fr; }
-      .pull-quote { padding: 32px 24px; }
-      .pull-quote p { font-size: 20px !important; }
-      .cta { padding: 40px 24px; }
-      footer { padding: 24px 20px; }
-      .theme-btn span { display: none; }
-      .theme-btn { padding: 6px 10px; }
-      .mat-table { font-size: 11px; }
-      .mat-table th, .mat-table td { padding: 10px 8px; }
-    }
-    @media (max-width: 480px) {
-      .fig-trio { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/journal.css" />
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
-  <div class="nav-right">
-
-    <!-- TOGGLE THÈME -->
-    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
-      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-        <span>Pierre</span>
-      </button>
-      <div class="theme-divider"></div>
-      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <span>Crème</span>
-      </button>
-    </div>
-
-    <a href="../blog.html" class="nav-back">← Journal</a>
-    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+<!-- MASTHEAD -->
+<header class="masthead"><div class="wrap masthead__bar">
+  <div class="masthead__left"><a href="../blog.html" class="aba-logo">
+    <svg class="aba-logo__icon" viewBox="0 0 30 34" fill="none"><rect x="1" y="1" width="28" height="32" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 25 L15 9 L22 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10.5 20 H19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+    <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
+  </a></div>
+  <div class="masthead__tools">
+    <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
+    <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
   </div>
-</nav>
+</div></header>
+<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
+<!-- ARTICLE DOUBLE-PAGE -->
+<article class="article fade-up">
 
-  <!-- SVG décoratif : grille de dalles, appareil de sol, joints décalés -->
-  <svg class="hero-svg" viewBox="0 0 700 600" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" style="opacity: var(--hero-svg-op);">
-
-    <!-- Rangée 1 — bas, appareil courant -->
-    <rect x="80"  y="500" width="140" height="54" rx="1" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="226" y="500" width="96"  height="54" rx="1" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="328" y="500" width="120" height="54" rx="1" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="454" y="500" width="100" height="54" rx="1" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="560" y="500" width="76"  height="54" rx="1" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-
-    <!-- Rangée 2 — joints décalés -->
-    <rect x="80"  y="442" width="62"  height="54" rx="1" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="148" y="442" width="130" height="54" rx="1" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="284" y="442" width="102" height="54" rx="1" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="392" y="442" width="128" height="54" rx="1" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="526" y="442" width="110" height="54" rx="1" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-
-    <!-- Rangée 3 -->
-    <rect x="80"  y="384" width="118" height="54" rx="1" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="204" y="384" width="88"  height="54" rx="1" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="298" y="384" width="132" height="54" rx="1" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="436" y="384" width="96"  height="54" rx="1" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="538" y="384" width="98"  height="54" rx="1" stroke="#8B7355" stroke-width="0.6" fill="none"/>
-
-    <!-- Rangée 4 -->
-    <rect x="80"  y="326" width="74"  height="54" rx="1" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="160" y="326" width="116" height="54" rx="1" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="282" y="326" width="100" height="54" rx="1" stroke="#8B7355" stroke-width="0.6" fill="none"/>
-    <rect x="388" y="326" width="120" height="54" rx="1" stroke="#8B7355" stroke-width="0.6" fill="none"/>
-    <rect x="514" y="326" width="122" height="54" rx="1" stroke="#8B7355" stroke-width="0.5" fill="none"/>
-
-    <!-- Rangée 5 — s'estompe -->
-    <rect x="80"  y="268" width="130" height="54" rx="1" stroke="#8B7355" stroke-width="0.6" fill="none" opacity="0.65"/>
-    <rect x="216" y="268" width="90"  height="54" rx="1" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.6"/>
-    <rect x="312" y="268" width="114" height="54" rx="1" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.5"/>
-    <rect x="432" y="268" width="104" height="54" rx="1" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.45"/>
-    <rect x="542" y="268" width="94"  height="54" rx="1" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.4"/>
-
-    <!-- Rangée 6 -->
-    <rect x="80"  y="210" width="106" height="54" rx="1" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.38"/>
-    <rect x="192" y="210" width="138" height="54" rx="1" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.32"/>
-    <rect x="336" y="210" width="90"  height="54" rx="1" stroke="#8B7355" stroke-width="0.3" fill="none" opacity="0.27"/>
-    <rect x="432" y="210" width="118" height="54" rx="1" stroke="#8B7355" stroke-width="0.3" fill="none" opacity="0.22"/>
-    <rect x="556" y="210" width="80"  height="54" rx="1" stroke="#8B7355" stroke-width="0.2" fill="none" opacity="0.18"/>
-
-    <!-- Rangée 7 — très atténuée -->
-    <rect x="80"  y="152" width="120" height="54" rx="1" stroke="#8B7355" stroke-width="0.3" fill="none" opacity="0.16"/>
-    <rect x="206" y="152" width="100" height="54" rx="1" stroke="#8B7355" stroke-width="0.2" fill="none" opacity="0.13"/>
-    <rect x="312" y="152" width="130" height="54" rx="1" stroke="#8B7355" stroke-width="0.2" fill="none" opacity="0.10"/>
-    <rect x="448" y="152" width="110" height="54" rx="1" stroke="#8B7355" stroke-width="0.15" fill="none" opacity="0.08"/>
-
-    <!-- Rangée 8 — fantôme -->
-    <rect x="80"  y="94"  width="144" height="54" rx="1" stroke="#8B7355" stroke-width="0.2" fill="none" opacity="0.07"/>
-    <rect x="230" y="94"  width="108" height="54" rx="1" stroke="#8B7355" stroke-width="0.15" fill="none" opacity="0.05"/>
-    <rect x="344" y="94"  width="126" height="54" rx="1" stroke="#8B7355" stroke-width="0.1"  fill="none" opacity="0.04"/>
-
-    <!-- Accent BACC23 — dalles sélectionnées -->
-    <rect x="226" y="500" width="96"  height="54" rx="1" stroke="#BACC23" stroke-width="1.3" fill="rgba(186,204,35,0.05)"/>
-    <rect x="148" y="442" width="130" height="54" rx="1" stroke="#BACC23" stroke-width="1.1" fill="rgba(186,204,35,0.04)"/>
-    <rect x="298" y="384" width="132" height="54" rx="1" stroke="#BACC23" stroke-width="1.0" fill="rgba(186,204,35,0.04)"/>
-    <rect x="160" y="326" width="116" height="54" rx="1" stroke="#BACC23" stroke-width="0.9" fill="rgba(186,204,35,0.03)"/>
-
-    <!-- Hachures joints — ligne de niveau pour la perspective -->
-    <line x1="80" y1="442" x2="636" y2="442" stroke="#BACC23" stroke-width="0.4" stroke-dasharray="4,8" opacity="0.25"/>
-    <line x1="80" y1="384" x2="636" y2="384" stroke="#8B7355" stroke-width="0.3" stroke-dasharray="3,10" opacity="0.18"/>
-
-    <!-- Repère d'axe (discret) -->
-    <circle cx="610" cy="100" r="24" stroke="#BACC23" stroke-width="0.5" fill="none" opacity="0.3"/>
-    <text x="610" y="87" text-anchor="middle" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.35">N</text>
-    <polygon points="610,89 606.5,100 610,97 613.5,100" fill="#BACC23" opacity="0.35"/>
-  </svg>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Journal de l'Atelier</div>
-    <div class="hero-domain"><span class="domain-dot"></span> Conception · Sol extérieur</div>
-    <div class="hero-meta-top">N° 06 · Expertise · Octobre 2026</div>
-    <h1>Revêtements extérieurs :<br/><em>choisir un sol pour 30 ans</em></h1>
-    <p class="hero-desc">Pierre naturelle, bois, béton, gravier — le sol extérieur n'est pas une décoration, c'est une décision sur trois décennies. Critères de durabilité, de confort et de budget réel.</p>
-    <div class="hero-byline">
-      <span>Adil Boumahdi</span>
-      <div class="hero-byline-dot"></div>
+  <!-- Header centré -->
+  <header class="wrap" style="text-align:center;padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(20px,3vw,36px)">
+    <div style="display:flex;justify-content:center;margin-bottom:6px">
+      <span class="a-cat"><span class="chip__dot" style="background:#9c7d63"></span>Matières &amp; Métiers</span>
+    </div>
+    <h1 class="a-title" style="font-size:clamp(36px,5.5vw,72px);max-width:20ch;margin:10px auto 16px">Revêtements extérieurs : choisir un sol pour 30 ans</h1>
+    <p class="a-dek" style="max-width:40ch;margin:0 auto;font-size:clamp(17px,1.4vw,21px)">Pierre naturelle, bois, béton, gravier — le sol extérieur n'est pas une décoration, c'est une décision sur trois décennies. Critères de durabilité, de confort et de budget réel.</p>
+    <div class="a-byline" style="justify-content:center;margin-top:14px">
+      <b>Adil Boumahdi</b>
+      <span class="dotsep"></span>
+      <span>Oct. 2026</span>
+      <span class="dotsep"></span>
       <span>8 min de lecture</span>
-      <div class="hero-byline-dot"></div>
-      <span>Conception · Aménagement extérieur</span>
     </div>
-  </div>
-</section>
+  </header>
 
-<!-- ARTICLE -->
-<article class="article">
-
-  <p class="chapeau">
-    Le premier matériau qu'on ressent dans un jardin n'est pas la haie ni le bassin — c'est le sol sous les pieds. Sa texture, sa température, son bruit sous les semelles. Et pourtant, c'est souvent le choix le plus bâclé d'un aménagement. Un mauvais revêtement extérieur ne coûte pas seulement de l'argent à remplacer : il dénature l'espace, il fatigue le regard, il oblige à repenser l'irrigation, les seuils, les transitions.
-  </p>
-
-  <p>Nous refusons la formule du catalogue : "choisissez votre carrelage selon vos goûts". La réalité d'un sol extérieur est beaucoup plus sérieuse que cela. <strong>Un dallage calcaire bien posé tient 40 à 60 ans sans intervention majeure.</strong> Un béton architectonique mal drainé commence à souffrir à partir de la troisième saison humide. Le bois ipé, si vanté, demande un entretien annuel rigoureux sous peine de grisonnement irréversible dès la cinquième année.</p>
-
-  <p>Chez ABA, nous raisonnons en coût total sur dix ans, vingt ans, trente ans — pas en tarif au mètre carré au moment de la commande. Ce guide est notre méthode.</p>
-
-  <!-- ── GALERIE 01 · Cinématique 21:9 — après l'introduction ── -->
-  <div class="fig-cine">
-    <div class="fig-label">— Sol extérieur · terrasse pierre naturelle et végétation intégrée</div>
-    <div class="fig-img ratio-21-9">
-      <img
-        src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=85"
-        alt="Terrasse en pierre naturelle avec végétation intégrée — perspective cinématique"
-        loading="lazy"
-      />
-      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Terrasse pierre naturelle · transition intérieur-extérieur · végétation intégrée</span>
-    </div>
-    <p class="fig-caption"><strong>La terrasse comme prolongement</strong> — Le sol extérieur commence là où finit le carrelage intérieur. La continuité de matière, de niveau et de teinte transforme un espace fragmenté en une seule séquence spatiale.</p>
-    <p class="fig-credit">Photo · Unsplash</p>
+  <!-- Bannière cinématique pleine largeur -->
+  <div class="wrap" style="margin-bottom:clamp(32px,4vw,56px)">
+    <figure class="figure">
+      <div class="figure__box" style="aspect-ratio:21/9;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d?auto=format&fit=crop&w=1600&q=85" alt="Terrasse en pierre naturelle avec végétation intégrée — perspective cinématique" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82) contrast(1.04)" />
+        <span class="figure__tag">Terrasse pierre naturelle · transition intérieur-extérieur</span>
+      </div>
+      <figcaption><strong>La terrasse comme prolongement</strong> — Le sol extérieur commence là où finit le carrelage intérieur. La continuité de matière, de niveau et de teinte transforme un espace fragmenté en une seule séquence spatiale.</figcaption>
+    </figure>
   </div>
 
-  <div class="divider">La durée comme critère premier</div>
+  <!-- Corps double-page -->
+  <div class="wrap spread-body prose">
 
-  <div class="section-head">
-    <span class="section-num">01</span>
+    <p class="dropcap">Le premier matériau qu'on ressent dans un jardin n'est pas la haie ni le bassin — c'est le sol sous les pieds. Sa texture, sa température, son bruit sous les semelles. Et pourtant, c'est souvent le choix le plus bâclé d'un aménagement. Un mauvais revêtement extérieur ne coûte pas seulement de l'argent à remplacer : il dénature l'espace, il fatigue le regard, il oblige à repenser l'irrigation, les seuils, les transitions.</p>
+
+    <p>Nous refusons la formule du catalogue : "choisissez votre carrelage selon vos goûts". La réalité d'un sol extérieur est beaucoup plus sérieuse que cela. <strong>Un dallage calcaire bien posé tient 40 à 60 ans sans intervention majeure.</strong> Un béton architectonique mal drainé commence à souffrir à partir de la troisième saison humide. Le bois ipé, si vanté, demande un entretien annuel rigoureux sous peine de grisonnement irréversible dès la cinquième année.</p>
+
+    <p>Chez ABA, nous raisonnons en coût total sur dix ans, vingt ans, trente ans — pas en tarif au mètre carré au moment de la commande. Ce guide est notre méthode.</p>
+
     <h2>Pierre naturelle — la norme de durabilité</h2>
-  </div>
 
-  <p>Il n'y a pas de supériorité de principe à utiliser de la pierre naturelle. Il y a une réalité physique : la pierre naturelle est un matériau formé sous des millions d'années de pression et de chaleur. Sa densité, sa dureté et sa résistance aux cycles thermiques n'ont aucun équivalent industriel au même prix sur 30 ans.</p>
+    <p>Il n'y a pas de supériorité de principe à utiliser de la pierre naturelle. Il y a une réalité physique : la pierre naturelle est un matériau formé sous des millions d'années de pression et de chaleur. Sa densité, sa dureté et sa résistance aux cycles thermiques n'ont aucun équivalent industriel au même prix sur 30 ans.</p>
 
-  <p>Les trois familles que nous utilisons en revêtement de sol extérieur sont :</p>
+    <aside class="note spread-span" style="margin:1.2em 0">
+      <span class="note__label">Pierres naturelles ABA</span>
+      <p><strong>Le calcaire</strong> — c'est notre choix par défaut pour les terrasses résidentielles exposées au soleil. Durée de vie estimée : 40 à 60 ans sans réfection. Son coefficient de dilatation thermique est faible, il ne chauffe pas excessivement en été. Format courant : dalles sciées 40×60, 60×60, ou opus incertum.</p>
+      <p style="margin-top:0.7em"><strong>Le basalte</strong> — réservé aux zones de circulation intense, aux abords de plans d'eau, et aux espaces contemporains où le contraste noir-végétation est recherché. Sa densité extrême (2 900 kg/m³) le rend pratiquement indestructible, mais son coefficient d'absorption thermique est élevé : une terrasse entièrement en basalte sombre peut atteindre 55°C en plein été marocain.</p>
+      <p style="margin-top:0.7em"><strong>L'ardoise et le schiste</strong> — moins répandus mais très efficaces dans les compositions mixtes pierre/végétal. Leur feuilletage naturel crée des surfaces légèrement irrégulières qui améliorent l'accroche et l'absorption des eaux de pluie. Durée : 30 à 50 ans.</p>
+    </aside>
 
-  <div class="tech-note">
-    <div class="tech-note-label">— Matériaux · Pierres naturelles ABA</div>
-    <p>
-      <strong style="color: var(--text);">Le calcaire</strong> — c'est notre choix par défaut pour les terrasses résidentielles exposées au soleil. Durée de vie estimée : 40 à 60 ans sans réfection. Son coefficient de dilatation thermique est faible, il ne chauffe pas excessivement en été (contrairement au béton gris), et il se grave avec le temps d'une patine minérale irremplaçable. Attention à la porosité : certains calcaires nécessitent un traitement hydrofuge à la pose. Format courant : dalles sciées 40×60, 60×60, ou opus incertum pour les espaces plus libres.
-      <br/><br/>
-      <strong style="color: var(--text);">Le basalte</strong> — réservé aux zones de circulation intense, aux abords de plans d'eau, et aux espaces contemporains où le contraste noir-végétation est recherché. Sa densité extrême (2 900 kg/m³) le rend pratiquement indestructible, mais son coefficient d'absorption thermique est élevé : une terrasse entièrement en basalte sombre peut atteindre 55°C en plein été marocain. À doser avec la végétation.
-      <br/><br/>
-      <strong style="color: var(--text);">L'ardoise et le schiste</strong> — moins répandus mais très efficaces dans les compositions mixtes pierre/végétal. Leur feuilletage naturel crée des surfaces légèrement irrégulières qui améliorent l'accroche et l'absorption des eaux de pluie. Durée : 30 à 50 ans. Limite : fragiles aux impacts ponctuels sur les zones minces.
-    </p>
-  </div>
+    <p>La question de la pose est aussi importante que le matériau lui-même. <strong>Une dalle calcaire posée sur lit de sable stabilisé, avec joints drainants, sera encore utilisable dans 50 ans.</strong> La même dalle scellée au mortier sur une chape béton sans drainage préalable commencera à se décoller ou à se fissurer dès le premier cycle de gel sévère ou de sécheresse prolongée.</p>
 
-  <p>La question de la pose est aussi importante que le matériau lui-même. <strong>Une dalle calcaire posée sur lit de sable stabilisé, avec joints drainants, sera encore utilisable dans 50 ans.</strong> La même dalle scellée au mortier sur une chape béton sans drainage préalable commencera à se décoller ou à se fissurer dès le premier cycle de gel sévère ou de sécheresse prolongée.</p>
+    <p>Nous préconisons systématiquement la pose flottante sur lit de sable (20 à 30 mm) avec sous-couche drainante et joints de 8 à 12 mm remplis au sable stabilisé. Ce système laisse la dalle respirer, absorbe les mouvements du sol et peut être repris pièce par pièce en cas de remplacement ponctuel.</p>
 
-  <p>Nous préconisons systématiquement la pose flottante sur lit de sable (20 à 30 mm) avec sous-couche drainante et joints de 8 à 12 mm remplis au sable stabilisé — et non au mortier. Ce système laisse la dalle respirer, absorbe les mouvements du sol et peut être repris pièce par pièce en cas de remplacement ponctuel.</p>
-
-  <!-- ── GALERIE 02 · Trio 3 colonnes — après section 01 ── -->
-  <div style="margin: 48px 0 0;">
-    <div class="fig-label">— Revêtements de référence · pierre, bois, gravier</div>
-    <div class="fig-trio">
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=82"
-            alt="Dallage en pierre naturelle — terrasse extérieure, ton beige chaud"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Pierre naturelle · calcaire</span>
+    <!-- Galerie trio pleine largeur -->
+    <figure class="figure spread-span" style="margin:1.8em 0">
+      <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:10px">
+        <div>
+          <div class="figure__box" style="aspect-ratio:3/2;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?auto=format&fit=crop&w=600&q=82" alt="Dallage en pierre naturelle — terrasse extérieure" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+            <span class="figure__tag">Pierre naturelle</span>
+          </div>
+          <p style="font-family:var(--sans);font-size:11.5px;color:var(--ink-faint);margin-top:8px">Pierre naturelle — 40-60 ans. Entretien minimal.</p>
         </div>
-        <p class="fig-mat-label">Pierre naturelle</p>
-        <p class="fig-caption" style="font-size:10.5px;">Durée de vie 40-60 ans. Entretien minimal. La norme de durabilité pour toute terrasse premium.</p>
-      </div>
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=82"
-            alt="Deck bois extérieur — lames ipé ou bambou, finition contemporaine"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Bois · deck extérieur</span>
+        <div>
+          <div class="figure__box" style="aspect-ratio:3/2;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?auto=format&fit=crop&w=600&q=82" alt="Deck bois extérieur — lames ipé" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+            <span class="figure__tag">Bois · deck</span>
+          </div>
+          <p style="font-family:var(--sans);font-size:11.5px;color:var(--ink-faint);margin-top:8px">Bois (ipé / bambou) — 15-25 ans avec entretien annuel.</p>
         </div>
-        <p class="fig-mat-label">Bois (ipé / bambou)</p>
-        <p class="fig-caption" style="font-size:10.5px;">Durée 15-25 ans avec entretien annuel. Confort thermique excellent. Demande une rigueur d'entretien.</p>
-      </div>
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=82"
-            alt="Gravier stabilisé et allée de jardin — perméable, naturel"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Gravier stabilisé</span>
+        <div>
+          <div class="figure__box" style="aspect-ratio:3/2;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=600&q=82" alt="Gravier stabilisé et allée de jardin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+            <span class="figure__tag">Gravier stabilisé</span>
+          </div>
+          <p style="font-family:var(--sans);font-size:11.5px;color:var(--ink-faint);margin-top:8px">Gravier stabilisé — drainage excellent. Budget faible.</p>
         </div>
-        <p class="fig-mat-label">Gravier stabilisé</p>
-        <p class="fig-caption" style="font-size:10.5px;">Budget faible, drainage excellent. Idéal pour allées et espaces secondaires. Entretien modéré.</p>
       </div>
-    </div>
-    <p class="fig-credit">Photos · Unsplash</p>
-  </div>
+    </figure>
 
-  <div class="section-head">
-    <span class="section-num">02</span>
     <h2>Bois, béton, gravier — les alternatives</h2>
-  </div>
 
-  <p>La pierre naturelle n'est pas toujours la bonne réponse. Certains projets appellent des solutions différentes — par budget, par usage, par ambiance recherchée ou par contrainte technique. Voici notre lecture honnête des alternatives.</p>
+    <p>La pierre naturelle n'est pas toujours la bonne réponse. Certains projets appellent des solutions différentes — par budget, par usage, par ambiance recherchée ou par contrainte technique. Voici notre lecture honnête des alternatives.</p>
 
-  <div class="grid4">
-    <div class="g-item">
-      <span class="g-icon">🪵</span>
-      <h3>Bois : confort contre exigence</h3>
-      <p>L'ipé et le bambou extérieur sont les meilleurs bois pour la durée — 20 à 25 ans en plein air avec un entretien annuel à l'huile de teck. Le confort tactile et thermique est inégalé : le bois reste frais l'été, doux l'hiver. Limite absolue : sans entretien, le grisonnement survient dès la 4e-5e année, et il est définitif. À réserver aux terrasses couvertes ou aux maîtres d'ouvrage disposés à l'entretien rituel.</p>
-      <span class="g-tag">20-25 ans · entretien annuel</span>
+    <p><strong>Bois : confort contre exigence.</strong> L'ipé et le bambou extérieur sont les meilleurs bois pour la durée — 20 à 25 ans en plein air avec un entretien annuel à l'huile de teck. Le confort tactile et thermique est inégalé : le bois reste frais l'été, doux l'hiver. Limite absolue : sans entretien, le grisonnement survient dès la 4e-5e année, et il est définitif.</p>
+
+    <p><strong>Béton architectonique.</strong> Le béton désactivé, poli ou matricé offre des possibilités formelles considérables et un budget initial modéré. Sa principale limite : il emmagasine et restitue la chaleur — une grande surface de béton sombre peut rendre une terrasse inutilisable en juillet entre 11h et 17h. Durée réelle : 25 à 35 ans, mais avec des reprises de joints et de surface dès la deuxième décennie si le drainage n'est pas irréprochable.</p>
+
+    <p><strong>Gravier stabilisé.</strong> C'est la surface la plus perméable, la plus économique et la plus adaptée aux allées secondaires, aux zones de plantation extensive et aux espaces où la végétation doit prendre le dessus. Le gravier stabilisé à la résine permet une surface ferme et praticable tout en restant drainant. Durée : 15 à 25 ans.</p>
+
+    <p><strong>Tout-venant et pavés enherbés.</strong> Les dalles-gazon sont notre solution préférée pour les zones de stationnement ou les espaces à usage occasionnel. Elles combinent la résistance mécanique d'un revêtement dur avec la perméabilité et la fraîcheur du végétal. La réponse la plus écologique pour les surfaces carrossables.</p>
+
+    <!-- Tableau comparatif -->
+    <div class="spread-span" style="margin:1.8em 0;overflow-x:auto">
+      <p class="eyebrow" style="margin-bottom:1em">Tableau comparatif · 5 revêtements · critères clés</p>
+      <table style="width:100%;border-collapse:collapse;font-size:13px;font-family:var(--sans)">
+        <thead>
+          <tr style="border-bottom:2px solid var(--accent)">
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-faint)">Matériau</th>
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-faint)">Durée de vie</th>
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-faint)">Entretien</th>
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-faint)">Chaleur été</th>
+            <th style="text-align:left;padding:10px 12px;font-size:10px;letter-spacing:0.2em;text-transform:uppercase;color:var(--ink-faint)">Drainage</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr style="border-bottom:1px solid var(--line-soft)">
+            <td style="padding:14px 12px;font-family:var(--serif-display);font-size:16px;font-weight:500">Pierre calcaire</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">40–60 ans</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Nul</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Faible</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Excellent</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line-soft)">
+            <td style="padding:14px 12px;font-family:var(--serif-display);font-size:16px;font-weight:500">Basalte</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">50+ ans</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Nul</td>
+            <td style="padding:14px 12px;color:#b84a2a">Élevée</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Excellent</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line-soft)">
+            <td style="padding:14px 12px;font-family:var(--serif-display);font-size:16px;font-weight:500">Bois ipé</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">20–25 ans</td>
+            <td style="padding:14px 12px;color:#b84a2a">Annuel</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Très faible</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Moyen</td>
+          </tr>
+          <tr style="border-bottom:1px solid var(--line-soft)">
+            <td style="padding:14px 12px;font-family:var(--serif-display);font-size:16px;font-weight:500">Béton architectonique</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">25–35 ans</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Décennal</td>
+            <td style="padding:14px 12px;color:#b84a2a">Élevée</td>
+            <td style="padding:14px 12px;color:#b84a2a">Faible</td>
+          </tr>
+          <tr>
+            <td style="padding:14px 12px;font-family:var(--serif-display);font-size:16px;font-weight:500">Gravier stabilisé</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">15–25 ans</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Saisonnier</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Faible</td>
+            <td style="padding:14px 12px;color:var(--ink-soft)">Maximal</td>
+          </tr>
+        </tbody>
+      </table>
     </div>
-    <div class="g-item">
-      <span class="g-icon">🏗️</span>
-      <h3>Béton architectonique</h3>
-      <p>Le béton désactivé, poli ou matricé offre des possibilités formelles considérables et un budget initial modéré. Sa principale limite : il emmagasine et restitue la chaleur — une grande surface de béton sombre peut rendre une terrasse inutilisable en juillet entre 11h et 17h. Durée réelle : 25 à 35 ans, mais avec des reprises de joints et de surface dès la deuxième décennie si le drainage n'est pas irréprochable.</p>
-      <span class="g-tag">25-35 ans · drainage critique</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🪨</span>
-      <h3>Gravier stabilisé</h3>
-      <p>C'est la surface la plus perméable, la plus économique et la plus adaptée aux allées secondaires, aux zones de plantation extensive et aux espaces où la végétation doit prendre le dessus. Le gravier stabilisé à la résine (grave-résine) permet une surface ferme et praticable en fauteuil roulant tout en restant drainant. Durée : 15 à 25 ans. Limite : inconfort au talon et difficulté d'entretien feuilles mortes.</p>
-      <span class="g-tag">15-25 ans · drainage maximal</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🌿</span>
-      <h3>Tout-venant et pavés enherbés</h3>
-      <p>Les dalles-gazon (pavés ajourés engazonnés) sont notre solution préférée pour les zones de stationnement ou les espaces à usage occasionnel. Elles combinent la résistance mécanique d'un revêtement dur avec la perméabilité et la fraîcheur du végétal. Peu adaptées aux zones de piétinement intensif, elles restent la réponse la plus écologique pour les surfaces carrossables.</p>
-      <span class="g-tag">20-30 ans · compatible végétal</span>
-    </div>
-  </div>
 
-  <p>Le vrai critère n'est pas le coût au m² à la pose. <strong>Sur 20 ans, un dallage calcaire à 120 €/m² revient moins cher qu'un deck bois à 80 €/m² nécessitant 3 traitements et une reprise de lames.</strong> La comptabilité exacte doit intégrer la main d'œuvre d'entretien, les remplacements partiels, l'imperméabilisation et l'impact sur l'irrigation environnante.</p>
+    <p>Le vrai critère n'est pas le coût au m² à la pose. <strong>Sur 20 ans, un dallage calcaire à 120 €/m² revient moins cher qu'un deck bois à 80 €/m² nécessitant 3 traitements et une reprise de lames.</strong> La comptabilité exacte doit intégrer la main d'œuvre d'entretien, les remplacements partiels, l'imperméabilisation et l'impact sur l'irrigation environnante.</p>
 
-  <!-- Tableau comparatif -->
-  <div class="visual">
-    <div class="visual-label">— Tableau comparatif · 5 revêtements · critères clés</div>
-    <table class="mat-table">
-      <thead>
-        <tr>
-          <th>Matériau</th>
-          <th>Durée de vie</th>
-          <th>Entretien</th>
-          <th>Chaleur été</th>
-          <th>Drainage</th>
-          <th>Budget 20 ans</th>
-        </tr>
-      </thead>
-      <tbody>
-        <tr>
-          <td><span class="mat-name">Pierre calcaire</span></td>
-          <td><span class="mat-score high">40-60 ans</span></td>
-          <td><span class="mat-score high">Nul</span></td>
-          <td><span class="mat-score high">Faible</span></td>
-          <td><span class="mat-score high">Excellent</span></td>
-          <td><span class="mat-score high">Bas</span></td>
-        </tr>
-        <tr>
-          <td><span class="mat-name">Basalte</span></td>
-          <td><span class="mat-score high">50+ ans</span></td>
-          <td><span class="mat-score high">Nul</span></td>
-          <td><span class="mat-score low">Élevée</span></td>
-          <td><span class="mat-score high">Excellent</span></td>
-          <td><span class="mat-score med">Moyen</span></td>
-        </tr>
-        <tr>
-          <td><span class="mat-name">Bois ipé</span></td>
-          <td><span class="mat-score med">20-25 ans</span></td>
-          <td><span class="mat-score low">Annuel</span></td>
-          <td><span class="mat-score high">Très faible</span></td>
-          <td><span class="mat-score med">Moyen</span></td>
-          <td><span class="mat-score low">Élevé</span></td>
-        </tr>
-        <tr>
-          <td><span class="mat-name">Béton architectonique</span></td>
-          <td><span class="mat-score med">25-35 ans</span></td>
-          <td><span class="mat-score med">Décennal</span></td>
-          <td><span class="mat-score low">Élevée</span></td>
-          <td><span class="mat-score low">Faible</span></td>
-          <td><span class="mat-score med">Moyen</span></td>
-        </tr>
-        <tr>
-          <td><span class="mat-name">Gravier stabilisé</span></td>
-          <td><span class="mat-score med">15-25 ans</span></td>
-          <td><span class="mat-score med">Saisonnier</span></td>
-          <td><span class="mat-score high">Faible</span></td>
-          <td><span class="mat-score high">Maximal</span></td>
-          <td><span class="mat-score high">Très bas</span></td>
-        </tr>
-      </tbody>
-    </table>
-  </div>
-
-  <div class="section-head">
-    <span class="section-num">03</span>
     <h2>Concevoir la transition intérieur-extérieur</h2>
-  </div>
 
-  <p>C'est la question que presque personne ne pose lors de la conception d'un sol extérieur — et c'est pourtant la plus importante. <strong>La transition entre le carrelage intérieur et le revêtement extérieur est le joint structurant de tout le projet.</strong> Mal traitée, elle brise visuellement et physiquement la continuité de l'espace.</p>
+    <p>C'est la question que presque personne ne pose lors de la conception d'un sol extérieur — et c'est pourtant la plus importante. <strong>La transition entre le carrelage intérieur et le revêtement extérieur est le joint structurant de tout le projet.</strong> Mal traitée, elle brise visuellement et physiquement la continuité de l'espace.</p>
 
-  <p>Trois paramètres définissent la qualité d'une transition intérieur-extérieur :</p>
+    <p><strong>Le niveau.</strong> Le sol extérieur doit être abaissé de 10 à 15 mm par rapport au sol intérieur. Cette légère décote permet l'évacuation des eaux, protège le seuil de la remontée capillaire, et reste imperceptible visuellement. Un sol extérieur au même niveau que l'intérieur, c'est l'inondation garantie lors des pluies soudaines.</p>
 
-  <p><strong>Le niveau.</strong> Le sol extérieur doit être abaissé de 10 à 15 mm par rapport au sol intérieur — jamais plus, jamais moins. Cette légère décote permet l'évacuation des eaux, protège le seuil de la remontée capillaire, et reste imperceptible visuellement. Un sol extérieur au même niveau que l'intérieur, c'est l'inondation garantie lors des pluies soudaines.</p>
+    <p><strong>La continuité de teinte.</strong> Il n'est pas nécessaire d'utiliser le même matériau à l'intérieur et à l'extérieur. Mais la famille de couleurs doit rester cohérente. Un carrelage intérieur beige crème appelle un calcaire champagne ou une pierre dorée à l'extérieur.</p>
 
-  <p><strong>La continuité de teinte.</strong> Il n'est pas nécessaire d'utiliser le même matériau à l'intérieur et à l'extérieur — cela est souvent impossible pour des raisons techniques (adhérence, gel). Mais la famille de couleurs doit rester cohérente. Un carrelage intérieur beige crème appelle un calcaire champagne ou une pierre dorée à l'extérieur, non un béton gris anthracite.</p>
+    <p><strong>Le seuil comme objet.</strong> Dans les projets les plus aboutis, le seuil n'est pas une simple barre de finition métallique. C'est une ligne de pierre taillée, une bande de basalte contrastant, une rainure drainante habillée de grès. Le seuil dessine physiquement la limite entre deux mondes — il mérite d'être pensé comme un élément à part entière.</p>
 
-  <p><strong>Le seuil comme objet.</strong> Dans les projets les plus aboutis, le seuil n'est pas une simple barre de finition métallique. C'est une ligne de pierre taillée, une bande de basalte contrastant, une rainure drainante habillée de grès. Le seuil dessine physiquement la limite entre deux mondes — il mérite d'être pensé comme un élément à part entière.</p>
-
-  <!-- ── GALERIE 03 · Asymduo 60/40 — avant pull-quote finale ── -->
-  <div class="fig-asymduo" style="margin-top: 52px;">
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1680089606451-fa249c95eaa6?auto=format&fit=crop&w=900&q=85"
-          alt="Transition intérieur-extérieur — continuité de matière et de niveau"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Transition · continuité de matière</span>
-      </div>
-      <p class="fig-caption"><strong>La limite comme articulation</strong> — Le passage entre intérieur et extérieur ne doit pas se voir comme une rupture, mais comme une ligne de composition. La même famille de pierre, deux finitions différentes.</p>
-    </div>
-    <div>
-      <div class="fig-img" style="aspect-ratio: 3/4; height: 100%;">
-        <img
-          src="https://images.unsplash.com/photo-1525159873586-29425110f608?auto=format&fit=crop&w=600&q=85"
-          alt="Détail de seuil en pierre naturelle et végétation de bordure"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Seuil · détail de finition</span>
-      </div>
-      <p class="fig-caption"><strong>Le seuil comme objet</strong> — Une bande de basalte, une lèvre de calcaire taillé, une rainure drainante. Le seuil est la première signature d'un projet bien pensé.</p>
-    </div>
-  </div>
-  <p class="fig-credit">Photos · Unsplash</p>
-
-  <p>La relation entre le revêtement et la végétation est le dernier paramètre souvent négligé. <strong>Un sol minéral crée un microenvironnement qui influe directement sur les plantes de proximité.</strong> Le calcaire clair réfléchit la lumière et réchauffe les pieds des massifs adjacents — idéal pour les aromatiques méditerranéens. Le basalte sombre crée de l'ombre de sol et retient l'humidité — favorable aux fougères et aux graminées. Le gravier stabilisé laisse passer l'eau et la lumière — parfait pour les couvre-sol vivaces et les plantes de rocaille.</p>
-
-  <!-- ── PLANCHES HERBIER · Plantes couvre-sol et bordures ── -->
-  <section class="herbier-section">
-    <p class="herbier-title">Plantes couvre-sol & bordures · Espèces associées aux revêtements extérieurs</p>
-    <div class="herbier-grid">
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Thymus_vulgaris_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-138.jpg"
-               alt="Thymus serpyllum — thym serpolet, couvre-sol entre dalles" loading="lazy">
+    <!-- Galerie asymétrique -->
+    <div class="spread-span" style="display:grid;grid-template-columns:3fr 2fr;gap:12px;margin:1.8em 0">
+      <figure class="figure">
+        <div class="figure__box" style="aspect-ratio:4/3;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+          <img src="https://images.unsplash.com/photo-1680089606451-fa249c95eaa6?auto=format&fit=crop&w=900&q=85" alt="Transition intérieur-extérieur — continuité de matière et de niveau" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+          <span class="figure__tag">Transition · continuité de matière</span>
         </div>
-        <p class="herb-name">Thymus serpyllum</p>
-        <p class="herb-common">Thym serpolet · Entre-dalles aromatique</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Lavandula_vera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-152.jpg"
-               alt="Lavandula vera — lavande, bordure de terrasse" loading="lazy">
+        <figcaption><strong>La limite comme articulation</strong> — Le passage entre intérieur et extérieur ne doit pas se voir comme une rupture, mais comme une ligne de composition.</figcaption>
+      </figure>
+      <figure class="figure">
+        <div class="figure__box" style="aspect-ratio:3/4;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+          <img src="https://images.unsplash.com/photo-1525159873586-29425110f608?auto=format&fit=crop&w=600&q=85" alt="Détail de seuil en pierre naturelle et végétation de bordure" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.82)" />
+          <span class="figure__tag">Seuil · détail</span>
         </div>
-        <p class="herb-name">Lavandula vera</p>
-        <p class="herb-common">Lavande · Bordure de terrasse</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Rosmarinus_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-258.jpg"
-               alt="Rosmarinus officinalis — romarin, haie basse de bordure" loading="lazy">
-        </div>
-        <p class="herb-name">Rosmarinus officinalis</p>
-        <p class="herb-common">Romarin · Haie basse de lisière</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Sedum_telephium_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-245.jpg"
-               alt="Sedum telephium — orpin, entre-dalles et rocaille" loading="lazy">
-        </div>
-        <p class="herb-name">Sedum telephium</p>
-        <p class="herb-common">Orpin · Entre-dalles &amp; rocaille</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
+        <figcaption><strong>Le seuil comme objet</strong> — Une bande de basalte, une lèvre de calcaire taillé, une rainure drainante. Le seuil est la première signature d'un projet bien pensé.</figcaption>
+      </figure>
     </div>
-  </section>
 
-  <!-- SCHÉMA TECHNIQUE -->
-  <div class="visual">
-    <div class="visual-label">— Coupe technique · Revêtement extérieur — stratigraphy complète</div>
-    <svg viewBox="0 0 620 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <p>La relation entre le revêtement et la végétation est le dernier paramètre souvent négligé. <strong>Un sol minéral crée un microenvironnement qui influe directement sur les plantes de proximité.</strong> Le calcaire clair réfléchit la lumière et réchauffe les pieds des massifs adjacents — idéal pour les aromatiques méditerranéens. Le basalte sombre crée de l'ombre de sol et retient l'humidité — favorable aux fougères et aux graminées.</p>
 
-      <!-- Surface : dalles -->
-      <rect x="60" y="40" width="500" height="44" rx="1" fill="rgba(139,115,85,0.12)" stroke="#8B7355" stroke-width="1.0"/>
-      <!-- Joints entre dalles -->
-      <line x1="188" y1="40" x2="188" y2="84" stroke="#BACC23" stroke-width="1.5" opacity="0.6"/>
-      <line x1="316" y1="40" x2="316" y2="84" stroke="#BACC23" stroke-width="1.5" opacity="0.6"/>
-      <line x1="444" y1="40" x2="444" y2="84" stroke="#BACC23" stroke-width="1.5" opacity="0.6"/>
-      <text x="310" y="66" text-anchor="middle" fill="#8B7355" font-size="9" font-family="Inter" opacity="0.75">Dallage (calcaire, basalte, schiste)</text>
-
-      <!-- Lit de sable -->
-      <rect x="60" y="88" width="500" height="30" rx="0" fill="rgba(186,204,35,0.06)" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="4,3"/>
-      <!-- Petits points sable -->
-      <circle cx="120" cy="103" r="1.5" fill="#BACC23" opacity="0.4"/>
-      <circle cx="160" cy="99"  r="1.2" fill="#BACC23" opacity="0.35"/>
-      <circle cx="200" cy="106" r="1.5" fill="#BACC23" opacity="0.4"/>
-      <circle cx="240" cy="100" r="1.2" fill="#BACC23" opacity="0.35"/>
-      <circle cx="280" cy="105" r="1.5" fill="#BACC23" opacity="0.4"/>
-      <circle cx="320" cy="99"  r="1.2" fill="#BACC23" opacity="0.35"/>
-      <circle cx="360" cy="103" r="1.5" fill="#BACC23" opacity="0.4"/>
-      <circle cx="400" cy="100" r="1.2" fill="#BACC23" opacity="0.35"/>
-      <circle cx="440" cy="106" r="1.5" fill="#BACC23" opacity="0.4"/>
-      <circle cx="480" cy="101" r="1.2" fill="#BACC23" opacity="0.35"/>
-      <text x="310" y="108" text-anchor="middle" fill="#BACC23" font-size="8.5" font-family="Inter" opacity="0.7">Lit de sable stabilisé · 20-30 mm</text>
-
-      <!-- Sous-couche géotextile -->
-      <rect x="60" y="122" width="500" height="18" rx="0" fill="rgba(100,150,200,0.07)" stroke="rgba(100,150,200,0.4)" stroke-width="0.7" stroke-dasharray="6,2"/>
-      <text x="310" y="135" text-anchor="middle" fill="rgba(100,150,200,0.65)" font-size="8" font-family="Inter">Géotextile anti-remontée · non tissé 150 g/m²</text>
-
-      <!-- Couche drainante -->
-      <rect x="60" y="144" width="500" height="46" rx="0" fill="rgba(139,115,85,0.07)" stroke="#8B7355" stroke-width="0.7"/>
-      <!-- Graviers drainage -->
-      <ellipse cx="110" cy="162" rx="9"  ry="6"  fill="rgba(139,115,85,0.18)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="150" cy="167" rx="11" ry="7"  fill="rgba(139,115,85,0.15)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="195" cy="160" rx="8"  ry="5"  fill="rgba(139,115,85,0.18)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="235" cy="165" rx="12" ry="7"  fill="rgba(139,115,85,0.15)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="278" cy="159" rx="9"  ry="6"  fill="rgba(139,115,85,0.18)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="318" cy="164" rx="10" ry="6"  fill="rgba(139,115,85,0.15)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="358" cy="160" rx="8"  ry="5"  fill="rgba(139,115,85,0.18)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="400" cy="165" rx="11" ry="7"  fill="rgba(139,115,85,0.15)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="442" cy="160" rx="9"  ry="6"  fill="rgba(139,115,85,0.18)" stroke="#8B7355" stroke-width="0.6"/>
-      <ellipse cx="485" cy="164" rx="10" ry="6"  fill="rgba(139,115,85,0.15)" stroke="#8B7355" stroke-width="0.6"/>
-      <text x="310" y="182" text-anchor="middle" fill="#8B7355" font-size="8.5" font-family="Inter" opacity="0.65">Couche drainante · graviers lavés ∅ 8-15 mm · 80-120 mm</text>
-
-      <!-- Sol en place -->
-      <rect x="60" y="194" width="500" height="64" rx="0" fill="rgba(100,80,60,0.09)" stroke="#8B7355" stroke-width="0.6" opacity="0.6"/>
-      <text x="310" y="232" text-anchor="middle" fill="#8B7355" font-size="8.5" font-family="Inter" opacity="0.5">Sol en place · compacté · pente min. 1,5%</text>
-
-      <!-- Flèche pente -->
-      <line x1="60" y1="260" x2="560" y2="277" stroke="#BACC23" stroke-width="0.8" stroke-dasharray="5,4" opacity="0.5"/>
-      <polygon points="560,273 556,280 564,280" fill="#BACC23" opacity="0.5"/>
-      <text x="310" y="298" text-anchor="middle" fill="#BACC23" font-size="8" font-family="Inter" opacity="0.55">Pente d'évacuation 1.5% minimum vers collecteur</text>
-
-      <!-- Collecteur drainage latéral -->
-      <rect x="22" y="185" width="34" height="72" rx="2" fill="rgba(85,153,255,0.06)" stroke="rgba(85,153,255,0.4)" stroke-width="0.8"/>
-      <text x="39" y="212" text-anchor="middle" fill="rgba(85,153,255,0.6)" font-size="7" font-family="Inter" transform="rotate(-90, 39, 222)">drain</text>
-      <!-- Flèches eau -->
-      <path d="M 100 144 Q 80 165 50 195" stroke="rgba(85,153,255,0.45)" stroke-width="0.8" stroke-dasharray="3,4" fill="none"/>
-      <path d="M 200 144 Q 170 165 80 195" stroke="rgba(85,153,255,0.35)" stroke-width="0.8" stroke-dasharray="3,4" fill="none"/>
-
-      <!-- Légende -->
-      <rect x="420" y="205" width="10" height="7" fill="rgba(186,204,35,0.12)" stroke="#BACC23" stroke-width="0.8"/>
-      <text x="435" y="213" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.7">Sable / sable stabilisé</text>
-      <rect x="420" y="220" width="10" height="7" fill="rgba(139,115,85,0.18)" stroke="#8B7355" stroke-width="0.6"/>
-      <text x="435" y="228" fill="#8B7355" font-size="7.5" font-family="Inter" opacity="0.6">Drains / graviers</text>
-      <rect x="420" y="235" width="10" height="4" fill="rgba(100,150,200,0.15)" stroke="rgba(100,150,200,0.4)" stroke-width="0.6" stroke-dasharray="4,2"/>
-      <text x="435" y="241" fill="rgba(100,150,200,0.6)" font-size="7.5" font-family="Inter">Géotextile</text>
-    </svg>
-  </div>
-
-  <div class="pull-quote">
-    <p>Un revêtement extérieur n'est pas décoratif. Il est structurant. Il définit la température ressentie, l'adhérence sous la pluie, la durée de vie des plantations adjacentes. Un mauvais choix coûte cinq fois plus cher à terme que le différentiel initial de prix au m².</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
-
-  <p>Le choix d'un revêtement extérieur engage un projet sur 30 ans minimum. Il est, à ce titre, une décision architecturale — pas commerciale. Nous refusons de traiter cette question comme un catalogue de finitions. Chaque site a une géologie, une exposition, une végétation, un usage. La réponse juste naît de cette lecture, pas d'un showroom.</p>
-
-  <div class="signature">
-    <div class="sig-avatar">AB</div>
-    <div class="sig-text">
-      <h4>Adil Boumahdi</h4>
-      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
+    <!-- Herbier plantes couvre-sol -->
+    <div class="spread-span" style="margin:1.8em 0;padding-block:1.6em;border-top:1px solid var(--line);border-bottom:1px solid var(--line)">
+      <p class="eyebrow" style="margin-bottom:1.2em">Plantes couvre-sol &amp; bordures · Espèces associées aux revêtements extérieurs</p>
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px">
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:3/4;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/a/a3/Thymus_vulgaris_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-138.jpg" alt="Thymus serpyllum — thym serpolet, couvre-sol entre dalles" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:sepia(0.08) contrast(1.06)" />
+          </div>
+          <figcaption><em>Thymus serpyllum</em><br><span style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-ink)">Entre-dalles aromatique</span><br><span style="opacity:0.5;font-size:10px">Köhler's Medizinal-Pflanzen</span></figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:3/4;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/f/fc/Lavandula_vera_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-152.jpg" alt="Lavandula vera — lavande, bordure de terrasse" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:sepia(0.08) contrast(1.06)" />
+          </div>
+          <figcaption><em>Lavandula vera</em><br><span style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-ink)">Bordure de terrasse</span><br><span style="opacity:0.5;font-size:10px">Köhler's Medizinal-Pflanzen</span></figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:3/4;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/0/00/Rosmarinus_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-258.jpg" alt="Rosmarinus officinalis — romarin, haie basse de bordure" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:sepia(0.08) contrast(1.06)" />
+          </div>
+          <figcaption><em>Rosmarinus officinalis</em><br><span style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-ink)">Haie basse de lisière</span><br><span style="opacity:0.5;font-size:10px">Köhler's Medizinal-Pflanzen</span></figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="aspect-ratio:3/4;--ph-a:#c2a892;--ph-b:#9c7d63;--ph-c:#6e5340;">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Sedum_telephium_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-245.jpg" alt="Sedum telephium — orpin, entre-dalles et rocaille" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;display:block;filter:sepia(0.08) contrast(1.06)" />
+          </div>
+          <figcaption><em>Sedum telephium</em><br><span style="font-size:10px;text-transform:uppercase;letter-spacing:0.12em;color:var(--accent-ink)">Entre-dalles &amp; rocaille</span><br><span style="opacity:0.5;font-size:10px">Köhler's Medizinal-Pflanzen</span></figcaption>
+        </figure>
+      </div>
     </div>
-  </div>
 
-  <div class="cta">
-    <h3>Un sol pensé<br/><em>pour trois décennies.</em></h3>
-    <p>Pierre naturelle, drainage maîtrisé, transition soignée — un revêtement extérieur qui vieillit dans le sens du jardin, pas contre lui.</p>
-    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
-  </div>
+    <p class="pullquote pullquote--bordered spread-span">Un revêtement extérieur n'est pas décoratif. Il est structurant. Il définit la température ressentie, l'adhérence sous la pluie, la durée de vie des plantations adjacentes. Un mauvais choix coûte cinq fois plus cher à terme que le différentiel initial de prix au m².</p>
 
-  <div class="related">
-    <div class="related-label">— Articles en lien</div>
-    <div class="related-grid">
-      <a href="lire-un-terrain-avant-de-le-toucher.html" class="rel-card">
-        <span class="rel-tag">N° 01 · Conception</span>
-        <h4>Lire un terrain avant de le toucher</h4>
-      </a>
-      <a href="la-pierre-seche-pourquoi-elle-dure-300-ans.html" class="rel-card">
-        <span class="rel-tag">N° 02 · Minéral</span>
-        <h4>La pierre sèche : pourquoi elle dure 300 ans</h4>
-      </a>
+    <p>Le choix d'un revêtement extérieur engage un projet sur 30 ans minimum. Il est, à ce titre, une décision architecturale — pas commerciale. Nous refusons de traiter cette question comme un catalogue de finitions. Chaque site a une géologie, une exposition, une végétation, un usage. La réponse juste naît de cette lecture, pas d'un showroom.</p>
+
+  </div><!-- end spread-body -->
+
+  <!-- Fin d'article -->
+  <div class="article-foot wrap-narrow">
+    <div class="author-bio">
+      <div class="author-bio__avatar">AB</div>
+      <div>
+        <div class="author-bio__name">Adil Boumahdi</div>
+        <div class="author-bio__role">Fondateur &amp; architecte paysagiste — ABA</div>
+        <div class="author-bio__cities">Rabat · Casablanca · Marrakech · Fès</div>
+      </div>
+    </div>
+
+    <div class="cta">
+      <div class="cta__rule"></div>
+      <p class="cta__head">Votre projet mérite <em>la matière juste.</em></p>
+      <p class="cta__sub">Pierre, bois, béton — choisis pour durer 30 ans. Chaque projet ABA commence par la lecture du sol, de l'exposition et de l'usage avant de choisir le matériau.</p>
+      <a href="../preview.html#contact" class="btn btn--brand btn--lg">Initier un projet</a>
+    </div>
+
+    <!-- Articles liés -->
+    <div class="related">
+      <p class="eyebrow" style="margin-bottom:1.4em">À lire aussi</p>
+      <div class="gal gal--2">
+        <a href="tadelakt-zellige-lumiere.html" style="display:block;padding:24px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line-soft)">
+          <span class="a-cat" style="font-size:11px;margin-bottom:8px;display:block"><span class="chip__dot" style="background:#9c7d63"></span>Matières &amp; Métiers</span>
+          <p style="font-family:var(--serif-display);font-size:20px;font-weight:500;line-height:1.15;margin:0">Tadelakt, zellige, lumière</p>
+        </a>
+        <a href="lire-un-terrain-avant-de-le-toucher.html" style="display:block;padding:24px;background:var(--surface);border-radius:var(--r-md);border:1px solid var(--line-soft)">
+          <span class="a-cat" style="font-size:11px;margin-bottom:8px;display:block"><span class="chip__dot" style="background:#9c7d63"></span>Conception</span>
+          <p style="font-family:var(--serif-display);font-size:20px;font-weight:500;line-height:1.15;margin:0">Lire un terrain avant de le toucher</p>
+        </a>
+      </div>
     </div>
   </div>
 
 </article>
 
-<footer>
-  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
-  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
-</footer>
+<!-- FOOTER -->
+<footer class="footer"><div class="wrap">
+  <div class="footer__grid">
+    <div><div class="footer__mark">ABA <em>Paysage</em></div><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
+  </div>
+  <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
+</div></footer>
 
 <script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('aba-blog-theme', t);
-    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-    document.getElementById('btn-light').classList.toggle('active', t === 'light');
-  }
-  // Restore saved preference
-  const saved = localStorage.getItem('aba-blog-theme');
-  if (saved) setTheme(saved);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
-
 </body>
 </html>

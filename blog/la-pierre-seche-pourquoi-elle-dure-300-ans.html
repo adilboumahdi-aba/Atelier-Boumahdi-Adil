@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="fr" data-theme="dark">
+<html lang="fr" data-theme="light">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>La pierre sèche : pourquoi elle dure 300 ans — ABA Paysage</title>
+  <meta charset="UTF-8" /><meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>La pierre sèche : pourquoi elle dure 300 ans — Journal ABA</title>
   <meta name="description" content="Aucun liant, aucun mortier — la pierre sèche dure trois siècles grâce à la seule physique de l'assemblage. Ce que cette technique ancestrale dit d'un territoire et d'un savoir-faire." />
   <meta name="keywords" content="pierre sèche Maroc, mur pierre sèche, aménagement paysager, muret jardins, terrasses pierre naturelle, ABA paysage" />
   <meta property="og:title" content="La pierre sèche : pourquoi elle dure 300 ans — ABA" />
@@ -11,1022 +10,306 @@
   <meta property="og:image" content="https://www.ab-landscapes.com/assets/og-cover.jpg" />
   <meta property="og:url" content="https://www.ab-landscapes.com/blog/la-pierre-seche-pourquoi-elle-dure-300-ans.html" />
   <link rel="canonical" href="https://www.ab-landscapes.com/blog/la-pierre-seche-pourquoi-elle-dure-300-ans.html" />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
-
-  <style>
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-
-    /* ══════════════════════════════════════════
-       TOKENS — deux thèmes, une seule structure
-    ══════════════════════════════════════════ */
-
-    /* THÈME D — Pierre chaude (défaut) */
-    :root, [data-theme="dark"] {
-      --accent:        #BACC23;
-      --accent-dim:    rgba(186,204,35,0.35);
-
-      --bg:            #13130E;
-      --bg2:           #1B1B13;
-      --bg3:           #222218;
-      --bg-hero:       linear-gradient(160deg, #0D0D0A 0%, #111109 45%, #13130E 100%);
-
-      --text:          #F2EDE3;
-      --text-body:     #C8C4BA;
-      --text-muted:    rgba(242,237,227,0.40);
-      --border:        rgba(242,237,227,0.08);
-      --border2:       rgba(242,237,227,0.13);
-
-      --hero-grid-op:  0.035;
-      --hero-svg-op:   0.10;
-      --quote-mark-op: 0.10;
-
-      --toggle-bg:     #1B1B13;
-      --toggle-border: rgba(242,237,227,0.15);
-      --toggle-text:   rgba(242,237,227,0.55);
-      --toggle-active-bg:   #BACC23;
-      --toggle-active-text: #13130E;
-
-      --transition: background 380ms ease, color 380ms ease, border-color 380ms ease;
-    }
-
-    /* THÈME B — Crème lumineuse */
-    [data-theme="light"] {
-      --bg:            #FAF9F5;
-      --bg2:           #F2EDE4;
-      --bg3:           #E8E2D8;
-      --bg-hero:       linear-gradient(160deg, #F5F3EC 0%, #FAF9F5 100%);
-
-      --text:          #1A1A14;
-      --text-body:     #3A3A2E;
-      --text-muted:    rgba(26,26,20,0.45);
-      --border:        rgba(26,26,20,0.08);
-      --border2:       rgba(26,26,20,0.14);
-
-      --hero-grid-op:  0.04;
-      --hero-svg-op:   0.08;
-      --quote-mark-op: 0.18;
-
-      --toggle-bg:     #FAF9F5;
-      --toggle-border: rgba(26,26,20,0.18);
-      --toggle-text:   rgba(26,26,20,0.50);
-      --toggle-active-bg:   #1A1A14;
-      --toggle-active-text: #FAF9F5;
-    }
-
-    /* ══════════════════════════════════════════
-       BASE
-    ══════════════════════════════════════════ */
-    html { font-size: 17px; scroll-behavior: smooth; }
-
-    body {
-      background: var(--bg);
-      color: var(--text-body);
-      font-family: 'Inter', sans-serif;
-      font-weight: 300;
-      line-height: 2.0;
-      -webkit-font-smoothing: antialiased;
-      transition: var(--transition);
-    }
-
-    /* ══════════════════════════════════════════
-       TOGGLE THÈME
-    ══════════════════════════════════════════ */
-    .theme-toggle {
-      display: flex; align-items: center;
-      background: var(--toggle-bg);
-      border: 1px solid var(--toggle-border);
-      border-radius: 2px;
-      overflow: hidden;
-      transition: var(--transition);
-    }
-    .theme-btn {
-      display: flex; align-items: center; gap: 6px;
-      padding: 6px 14px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--toggle-text);
-      background: transparent; border: none; cursor: pointer;
-      transition: background 250ms, color 250ms;
-      white-space: nowrap;
-    }
-    .theme-btn svg { flex-shrink: 0; }
-    .theme-btn.active {
-      background: var(--toggle-active-bg);
-      color: var(--toggle-active-text);
-    }
-    .theme-divider {
-      width: 1px; height: 20px;
-      background: var(--toggle-border);
-      flex-shrink: 0;
-    }
-
-    /* ══════════════════════════════════════════
-       NAV
-    ══════════════════════════════════════════ */
-    nav {
-      position: sticky; top: 0; z-index: 100;
-      display: flex; align-items: center; justify-content: space-between;
-      padding: 0 56px; height: 60px;
-      background: var(--bg);
-      border-bottom: 1px solid var(--border);
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      transition: var(--transition);
-    }
-    .nav-logo {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 17px; font-weight: 400; letter-spacing: 0.12em;
-      color: var(--text); text-decoration: none;
-      transition: color 380ms;
-    }
-    .nav-logo span { color: var(--accent); }
-    .nav-right { display: flex; align-items: center; gap: 20px; }
-    .nav-back {
-      font-size: 10px; letter-spacing: 0.25em; text-transform: uppercase;
-      color: var(--text-muted); text-decoration: none; transition: color 200ms;
-    }
-    .nav-back:hover { color: var(--accent); }
-    .nav-cta {
-      font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
-      color: var(--bg); background: var(--accent);
-      padding: 9px 22px; text-decoration: none; transition: opacity 200ms;
-    }
-    .nav-cta:hover { opacity: 0.85; }
-
-    /* ══════════════════════════════════════════
-       HERO
-    ══════════════════════════════════════════ */
-    .hero {
-      min-height: 88vh;
-      display: flex; flex-direction: column; justify-content: flex-end;
-      padding: 0 56px 72px;
-      position: relative; overflow: hidden;
-      background: var(--bg-hero);
-      transition: background 380ms ease;
-    }
-    [data-theme="light"] .hero {
-      background: var(--bg2);
-    }
-    .hero-grid {
-      position: absolute; inset: 0;
-      opacity: var(--hero-grid-op);
-      background-image:
-        linear-gradient(var(--text) 1px, transparent 1px),
-        linear-gradient(90deg, var(--text) 1px, transparent 1px);
-      background-size: 72px 72px;
-      transition: opacity 380ms;
-    }
-    .hero-svg {
-      position: absolute; right: -20px; top: 0; bottom: 0;
-      width: 52%; opacity: var(--hero-svg-op);
-      transition: opacity 380ms;
-    }
-    .hero::after {
-      content: '';
-      position: absolute; bottom: 0; left: 0; right: 0; height: 220px;
-      background: linear-gradient(to bottom, transparent, var(--bg));
-      pointer-events: none; transition: var(--transition);
-    }
-
-    .hero-content { position: relative; z-index: 2; max-width: 680px; }
-    .hero-eyebrow {
-      display: flex; align-items: center; gap: 14px;
-      font-size: 10px; letter-spacing: 0.42em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px;
-    }
-    .hero-eyebrow::before { content:''; width:28px; height:1px; background:var(--accent); }
-    .hero-meta-top {
-      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
-    }
-    /* Badge domaine minéral */
-    .hero-domain {
-      display: inline-flex; align-items: center; gap: 7px;
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      transition: color 380ms;
-    }
-    .domain-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #8B7355; flex-shrink: 0;
-    }
-    .hero h1 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: clamp(40px, 5.5vw, 72px);
-      font-weight: 300; line-height: 1.08;
-      color: var(--text); margin-bottom: 28px;
-      transition: color 380ms;
-    }
-    .hero h1 em { font-style: italic; color: var(--accent); }
-    .hero-desc {
-      font-size: 16px; line-height: 1.75;
-      color: var(--text-muted); max-width: 500px;
-      margin-bottom: 36px; transition: color 380ms;
-    }
-    .hero-byline {
-      display: flex; align-items: center; gap: 20px;
-      font-size: 11px; letter-spacing: 0.12em; color: var(--text-muted);
-      transition: color 380ms;
-    }
-    .hero-byline-dot { width:3px; height:3px; border-radius:50%; background:var(--accent); flex-shrink:0; }
-
-    /* ══════════════════════════════════════════
-       ARTICLE BODY
-    ══════════════════════════════════════════ */
-    .article {
-      max-width: 700px; margin: 0 auto;
-      padding: 20px 40px 100px;
-    }
-
-    .chapeau {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 23px; font-weight: 300; font-style: italic;
-      line-height: 1.65; color: var(--text);
-      padding-left: 28px; border-left: 2px solid var(--accent);
-      margin-bottom: 56px;
-      transition: color 380ms, border-color 380ms;
-    }
-
-    p {
-      font-size: 17px; line-height: 2.0;
-      color: var(--text-body); margin-bottom: 28px;
-      transition: color 380ms;
-    }
-    p strong { color: var(--text); font-weight: 500; }
-
-    .divider {
-      display: flex; align-items: center; gap: 20px;
-      margin: 60px 0 44px;
-      font-size: 9px; letter-spacing: 0.4em; text-transform: uppercase;
-      color: var(--text-muted); transition: color 380ms;
-    }
-    .divider::before, .divider::after {
-      content:''; flex:1; height:1px;
-      background: var(--border2); transition: background 380ms;
-    }
-
-    .section-head {
-      display: flex; align-items: baseline; gap: 20px;
-      margin: 64px 0 28px;
-    }
-    .section-num {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 52px; font-weight: 300;
-      color: var(--accent); opacity: 0.3; line-height: 1; flex-shrink: 0;
-    }
-    .section-head h2 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 29px; font-weight: 400;
-      color: var(--text); line-height: 1.2; transition: color 380ms;
-    }
-
-    /* Grille 4 cartes */
-    .grid4 {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 1px; margin: 44px 0;
-      background: var(--border); transition: background 380ms;
-    }
-    .g-item {
-      background: var(--bg2); padding: 32px 28px;
-      border-top: 2px solid transparent;
-      transition: border-color 240ms, background 380ms;
-    }
-    .g-item:hover { border-color: var(--accent); background: var(--bg3); }
-    .g-icon { font-size: 26px; margin-bottom: 14px; display: block; }
-    .g-item h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 20px; font-weight: 400;
-      color: var(--text); margin-bottom: 10px; line-height: 1.2;
-      transition: color 380ms;
-    }
-    .g-item p {
-      font-size: 14px !important; line-height: 1.8 !important;
-      color: var(--text-muted) !important; margin: 0 !important;
-    }
-    .g-tag {
-      display: inline-block; margin-top: 12px;
-      font-size: 9px; letter-spacing: 0.32em; text-transform: uppercase;
-      color: var(--accent); border: 1px solid var(--accent-dim); padding: 3px 8px;
-    }
-
-    /* Pull quote */
-    .pull-quote {
-      margin: 60px 0; padding: 48px 52px;
-      background: var(--bg3);
-      border-top: 1px solid var(--accent);
-      position: relative; transition: background 380ms;
-    }
-    .pull-quote::before {
-      content: '"';
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 140px; line-height: 0.75;
-      color: var(--accent); opacity: var(--quote-mark-op);
-      position: absolute; top: 24px; left: 36px;
-      transition: opacity 380ms;
-    }
-    .pull-quote p {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 26px !important; font-style: italic;
-      font-weight: 300; line-height: 1.55 !important;
-      color: var(--text) !important;
-      margin: 0 !important; position: relative; z-index: 1;
-    }
-    .pull-quote cite {
-      display: block; margin-top: 18px;
-      font-family: 'Inter', sans-serif;
-      font-size: 10px; letter-spacing: 0.24em;
-      text-transform: uppercase; color: var(--accent);
-      font-style: normal;
-    }
-
-    /* Schéma */
-    .visual {
-      background: var(--bg2); border: 1px solid var(--border2);
-      padding: 40px; margin: 60px 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .visual-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 28px;
-    }
-    .visual svg { width:100%; display:block; }
-
-    /* Note technique */
-    .tech-note {
-      margin: 44px 0; padding: 28px 32px;
-      border-left: 2px solid var(--border2);
-      background: var(--bg2);
-      transition: background 380ms, border-color 380ms;
-    }
-    .tech-note-label {
-      font-size: 9px; letter-spacing: 0.36em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 12px;
-    }
-    .tech-note p {
-      font-size: 14px !important; line-height: 1.85 !important;
-      color: var(--text-muted) !important; margin: 0 !important;
-    }
-
-    /* Signature */
-    .signature {
-      display: flex; align-items: center; gap: 20px;
-      margin-top: 72px; padding-top: 36px;
-      border-top: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .sig-avatar {
-      width: 52px; height: 52px; border-radius: 50%;
-      background: var(--bg3); border: 1px solid var(--border2);
-      display: flex; align-items: center; justify-content: center;
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 19px; color: var(--accent); flex-shrink: 0;
-      transition: background 380ms, border-color 380ms;
-    }
-    .sig-text h4 { font-size: 14px; font-weight: 400; color: var(--text); margin-bottom: 3px; transition: color 380ms; }
-    .sig-text p { font-size: 12px !important; line-height: 1.4 !important; color: var(--text-muted) !important; margin: 0 !important; }
-
-    /* CTA */
-    .cta {
-      margin-top: 80px; padding: 56px 52px;
-      background: var(--bg3); border-top: 1px solid var(--accent);
-      text-align: center; position: relative;
-      transition: background 380ms;
-    }
-    .cta::before {
-      content: ''; position: absolute;
-      top: -1px; left: 50%; transform: translateX(-50%);
-      width: 80px; height: 2px; background: var(--accent);
-    }
-    .cta h3 {
-      font-family: 'Cormorant Garamond', serif;
-      font-size: 34px; font-weight: 300;
-      color: var(--text); line-height: 1.2; margin-bottom: 16px;
-      transition: color 380ms;
-    }
-    .cta h3 em { font-style: italic; color: var(--accent); }
-    .cta > p { font-size: 14px !important; color: var(--text-muted) !important; margin-bottom: 32px !important; max-width: 380px; margin-left: auto !important; margin-right: auto !important; }
-    .cta-btn {
-      display: inline-block;
-      font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
-      color: #13130E; background: var(--accent);
-      padding: 15px 40px; text-decoration: none; transition: opacity 200ms;
-    }
-    .cta-btn:hover { opacity: 0.85; }
-
-    /* Articles suivants */
-    .related {
-      margin-top: 56px; padding-top: 36px;
-      border-top: 1px solid var(--border); transition: border-color 380ms;
-    }
-    .related-label {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 20px; transition: color 380ms;
-    }
-    .related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 1px; background: var(--border); transition: background 380ms; }
-    .rel-card {
-      background: var(--bg2); padding: 28px 24px;
-      border-top: 2px solid var(--border);
-      text-decoration: none; color: var(--text);
-      transition: border-color 200ms, background 380ms; display: block;
-    }
-    .rel-card:hover { border-color: var(--accent); background: var(--bg3); }
-    .rel-tag { font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: var(--accent); margin-bottom: 8px; display: block; }
-    .rel-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 18px; font-weight: 400; line-height: 1.3; }
-
-    /* Footer */
-    footer {
-      margin-top: 80px; padding: 32px 56px;
-      border-top: 1px solid var(--border);
-      display: flex; justify-content: space-between; align-items: center;
-      flex-wrap: wrap; gap: 12px; transition: border-color 380ms;
-    }
-    .footer-logo { font-family: 'Cormorant Garamond', serif; font-size: 15px; color: var(--text-muted); letter-spacing: 0.1em; transition: color 380ms; }
-    .footer-copy { font-size: 11px; color: var(--text-muted); opacity: 0.5; transition: color 380ms; }
-
-    /* ══════════════════════════════════════════
-       GALERIE DE RÉFÉRENCES
-    ══════════════════════════════════════════ */
-    .fig-label {
-      font-size: 9px; letter-spacing: 0.26em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 18px;
-      font-family: 'Inter', sans-serif; font-weight: 400;
-    }
-    .fig-duo {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 12px; margin: 52px 0;
-    }
-    .fig-trio {
-      display: grid; grid-template-columns: 1fr 1fr 1fr;
-      gap: 8px; margin: 18px 0 50px;
-    }
-    .fig-single { margin: 52px 0; }
-    .fig-img {
-      position: relative; overflow: hidden;
-      background: var(--bg3);
-    }
-    .fig-img img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover;
-      filter: saturate(0.78) contrast(1.04) brightness(0.97);
-      transition: transform 900ms cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    }
-    .fig-img:hover img { transform: scale(1.045); }
-    .ratio-4-3  { aspect-ratio: 4/3; }
-    .ratio-3-2  { aspect-ratio: 3/2; }
-    .ratio-16-9 { aspect-ratio: 16/9; }
-    .fig-overlay {
-      position: absolute; bottom: 0; left: 0; right: 0;
-      padding: 36px 14px 12px;
-      background: linear-gradient(to top, rgba(0,0,0,0.55), transparent);
-      font-size: 9px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: rgba(255,255,255,0.72); font-family: 'Inter', sans-serif;
-      font-weight: 300; pointer-events: none;
-    }
-    .fig-caption {
-      margin-top: 11px; font-size: 11.5px; letter-spacing: 0.04em;
-      color: var(--text-muted); font-family: 'Inter', sans-serif;
-      font-weight: 300; line-height: 1.65;
-      transition: color 380ms;
-    }
-    .fig-caption strong { color: var(--text-body); font-weight: 400; }
-    .fig-mat-label {
-      margin-top: 9px; font-size: 9.5px; letter-spacing: 0.18em;
-      text-transform: uppercase; color: var(--text-muted);
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .fig-credit {
-      margin-top: 8px; font-size: 9px; letter-spacing: 0.08em;
-      color: var(--text-muted); opacity: 0.40;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    /* ══════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════ */
-    /* ══════════════════════════════════════════
-       PLANCHES DE RÉFÉRENCE
-    ══════════════════════════════════════════ */
-    .herbier-section {
-      margin: 60px 0; padding: 36px 0 40px;
-      border-top: 1px solid var(--border2);
-      border-bottom: 1px solid var(--border2);
-      transition: border-color 380ms;
-    }
-    .herbier-title {
-      font-size: 9px; letter-spacing: 0.38em; text-transform: uppercase;
-      color: var(--text-muted); margin-bottom: 24px;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-    .herbier-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 12px;
-    }
-    .herb-card { display: flex; flex-direction: column; }
-    .herb-plate {
-      aspect-ratio: 3/4; overflow: hidden;
-      border: 1px solid var(--border); background: var(--bg2);
-      margin-bottom: 10px;
-      transition: border-color 380ms, background 380ms;
-    }
-    .herb-plate img {
-      width: 100%; height: 100%; display: block;
-      object-fit: cover; object-position: top center;
-      filter: sepia(0.08) contrast(1.06) brightness(1.01);
-      transition: transform 800ms ease;
-    }
-    .herb-plate:hover img { transform: scale(1.04); }
-    .herb-name {
-      font-family: 'Cormorant Garamond', serif;
-      font-style: italic; font-size: 14px; font-weight: 400;
-      color: var(--text); margin-bottom: 3px; line-height: 1.3;
-      transition: color 380ms;
-    }
-    .herb-common {
-      font-size: 8.5px; letter-spacing: 0.2em; text-transform: uppercase;
-      color: var(--accent); margin-bottom: 4px;
-      font-family: 'Inter', sans-serif;
-    }
-    .herb-source {
-      font-size: 8.5px; color: var(--text-muted); opacity: 0.55;
-      font-family: 'Inter', sans-serif; transition: color 380ms;
-    }
-
-    @media (max-width: 600px) { .herbier-grid { grid-template-columns: 1fr 1fr; gap: 10px; } }
-
-    @media (max-width: 768px) {
-      nav { padding: 0 20px; height: 56px; }
-      .nav-back { display: none; }
-      .nav-cta { display: none; }
-      .hero { padding: 0 20px 52px; min-height: 70vh; }
-      .article { padding: 16px 20px 72px; }
-      .grid4 { grid-template-columns: 1fr; }
-      .fig-duo { grid-template-columns: 1fr; gap: 20px; }
-      .fig-trio { grid-template-columns: 1fr 1fr; gap: 10px; }
-      .related-grid { grid-template-columns: 1fr; }
-      .pull-quote { padding: 32px 24px; }
-      .pull-quote p { font-size: 20px !important; }
-      .cta { padding: 40px 24px; }
-      footer { padding: 24px 20px; }
-      .theme-btn span { display: none; }
-      .theme-btn { padding: 6px 10px; }
-    }
-    @media (max-width: 480px) {
-      .fig-trio { grid-template-columns: 1fr; }
-    }
-  </style>
+  <link rel="preconnect" href="https://fonts.googleapis.com" /><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/journal.css" />
 </head>
 <body>
 
-<!-- NAV -->
-<nav>
-  <a href="../preview.html" class="nav-logo">ABA <span>·</span> Atelier Boumahdi</a>
-  <div class="nav-right">
-
-    <!-- TOGGLE THÈME -->
-    <div class="theme-toggle" role="group" aria-label="Thème de lecture">
-      <button class="theme-btn active" id="btn-dark" onclick="setTheme('dark')" title="Mode sombre">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
-        </svg>
-        <span>Pierre</span>
-      </button>
-      <div class="theme-divider"></div>
-      <button class="theme-btn" id="btn-light" onclick="setTheme('light')" title="Mode clair">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="12" cy="12" r="5"/>
-          <line x1="12" y1="1" x2="12" y2="3"/>
-          <line x1="12" y1="21" x2="12" y2="23"/>
-          <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
-          <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
-          <line x1="1" y1="12" x2="3" y2="12"/>
-          <line x1="21" y1="12" x2="23" y2="12"/>
-          <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
-          <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
-        </svg>
-        <span>Crème</span>
-      </button>
+<header class="masthead">
+  <div class="wrap masthead__bar">
+    <div class="masthead__left">
+      <a href="../blog.html" class="aba-logo">
+        <svg class="aba-logo__icon" viewBox="0 0 30 34" fill="none"><rect x="1" y="1" width="28" height="32" rx="2" stroke="currentColor" stroke-width="1.6" fill="none"/><path d="M8 25 L15 9 L22 25" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" fill="none"/><path d="M10.5 20 H19.5" stroke="currentColor" stroke-width="1.4" stroke-linecap="round"/></svg>
+        <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
+      </a>
     </div>
-
-    <a href="../blog.html" class="nav-back">← Journal</a>
-    <a href="../preview.html#contact" class="nav-cta">Initier un projet</a>
+    <div class="masthead__tools">
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+    </div>
   </div>
-</nav>
+</header>
+<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
 
-<!-- HERO -->
-<section class="hero">
-  <div class="hero-grid"></div>
+<article class="article fade-up">
+  <header class="wrap" style="padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(24px,3vw,40px)">
+    <span class="a-cat"><span class="chip__dot" style="background:#95897a"></span>Hardscape</span>
+    <h1 class="a-title" style="font-size:clamp(38px,6.5vw,84px);max-width:18ch">La pierre sèche : pourquoi elle dure 300 ans</h1>
+    <p class="a-dek" style="font-size:clamp(19px,1.8vw,24px);max-width:48ch;margin-top:18px">Aucun liant, aucun mortier — la pierre sèche dure trois siècles par la seule physique de l'assemblage, et elle le fait mieux que le béton.</p>
+  </header>
 
-  <!-- SVG décoratif : appareil de pierres, joints croisés -->
-  <svg class="hero-svg" viewBox="0 0 700 620" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice">
-    <!-- Rangées de pierres stylisées -->
-    <rect x="80" y="480" width="118" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="204" y="480" width="92" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="302" y="480" width="130" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="438" y="480" width="104" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="548" y="480" width="88" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
+  <div class="wrap aside-grid">
+    <div class="aside-col">
+      <div class="aside-meta">
+        <div><span class="aside-meta__k">Par</span><span class="aside-meta__v">Adil Boumahdi</span></div>
+        <div><span class="aside-meta__k">Date</span><span class="aside-meta__v">Juin 2026</span></div>
+        <div><span class="aside-meta__k">Lecture</span><span class="aside-meta__v">7 min</span></div>
+        <div><span class="aside-meta__k">N°</span><span class="aside-meta__v">02 · Expertise</span></div>
+      </div>
 
-    <rect x="116" y="438" width="104" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="80" y="438" width="32" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="226" y="438" width="126" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="358" y="438" width="96" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="460" y="438" width="120" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="586" y="438" width="50" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none"/>
+      <aside class="note" style="margin-top:28px">
+        <span class="note__label">Pourquoi elle dure</span>
+        La physique de l'appui, le drainage naturel, le mouvement thermique absorbé, la vie dans les joints — quatre raisons pour lesquelles un mur sans ciment traverse les siècles.
+      </aside>
 
-    <rect x="80" y="396" width="140" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="226" y="396" width="88" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="320" y="396" width="116" height="38" rx="2" stroke="#8B7355" stroke-width="0.9" fill="none"/>
-    <rect x="442" y="396" width="98" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="546" y="396" width="90" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none"/>
+      <aside class="note" style="margin-top:16px">
+        <span class="note__label">La physique de l'appui</span>
+        Chaque pierre repose sur deux du rang inférieur. Les joints verticaux sont décalés. Les forces de compression se répartissent en éventail vers les fondations — comme dans une voûte romaine. Il n'y a rien à rompre d'un coup.
+        <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.55">Appareillage</span>
+      </aside>
 
-    <rect x="100" y="354" width="96" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="80" y="354" width="16" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none"/>
-    <rect x="202" y="354" width="134" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="342" y="354" width="102" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="450" y="354" width="88" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="544" y="354" width="92" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none"/>
+      <aside class="note" style="margin-top:16px">
+        <span class="note__label">La gestion de l'eau</span>
+        Un mur en béton bloque l'eau — la pression hydrostatique finit par l'éclater. La pierre sèche laisse l'eau traverser librement entre les joints. Elle draine. La terre derrière ne gonfle jamais.
+        <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.55">Drainage naturel</span>
+      </aside>
 
-    <rect x="80" y="312" width="122" height="38" rx="2" stroke="#8B7355" stroke-width="0.8" fill="none"/>
-    <rect x="208" y="312" width="98" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="312" y="312" width="128" height="38" rx="2" stroke="#8B7355" stroke-width="0.7" fill="none"/>
-    <rect x="446" y="312" width="80" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none"/>
-    <rect x="532" y="312" width="104" height="38" rx="2" stroke="#8B7355" stroke-width="0.5" fill="none"/>
+      <aside class="note" style="margin-top:16px">
+        <span class="note__label">Le mouvement thermique</span>
+        Le béton fissure parce qu'il est rigide. La pierre sèche est un assemblage articulé : quand la température monte ou que la terre bouge, les pierres s'ajustent imperceptiblement, sans rompre.
+        <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.55">Résilience</span>
+      </aside>
 
-    <!-- Rangées plus légères vers le haut -->
-    <rect x="80"  y="270" width="108" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none" opacity="0.7"/>
-    <rect x="194" y="270" width="144" height="38" rx="2" stroke="#8B7355" stroke-width="0.6" fill="none" opacity="0.7"/>
-    <rect x="344" y="270" width="96"  height="38" rx="2" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.6"/>
-    <rect x="446" y="270" width="120" height="38" rx="2" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.6"/>
-
-    <rect x="80"  y="228" width="130" height="38" rx="2" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.5"/>
-    <rect x="216" y="228" width="100" height="38" rx="2" stroke="#8B7355" stroke-width="0.5" fill="none" opacity="0.5"/>
-    <rect x="322" y="228" width="112" height="38" rx="2" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.45"/>
-    <rect x="440" y="228" width="90"  height="38" rx="2" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.4"/>
-    <rect x="536" y="228" width="100" height="38" rx="2" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.35"/>
-
-    <rect x="80"  y="186" width="116" height="38" rx="2" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.35"/>
-    <rect x="202" y="186" width="128" height="38" rx="2" stroke="#8B7355" stroke-width="0.4" fill="none" opacity="0.3"/>
-    <rect x="336" y="186" width="92"  height="38" rx="2" stroke="#8B7355" stroke-width="0.3" fill="none" opacity="0.25"/>
-    <rect x="434" y="186" width="110" height="38" rx="2" stroke="#8B7355" stroke-width="0.3" fill="none" opacity="0.2"/>
-
-    <rect x="80"  y="144" width="142" height="38" rx="2" stroke="#8B7355" stroke-width="0.3" fill="none" opacity="0.2"/>
-    <rect x="228" y="144" width="106" height="38" rx="2" stroke="#8B7355" stroke-width="0.2" fill="none" opacity="0.15"/>
-    <rect x="340" y="144" width="120" height="38" rx="2" stroke="#8B7355" stroke-width="0.2" fill="none" opacity="0.12"/>
-
-    <!-- Accent BACC23 sur quelques pierres clés -->
-    <rect x="302" y="480" width="130" height="38" rx="2" stroke="#BACC23" stroke-width="1.2" fill="rgba(186,204,35,0.04)"/>
-    <rect x="116" y="438" width="104" height="38" rx="2" stroke="#BACC23" stroke-width="1.0" fill="rgba(186,204,35,0.03)"/>
-    <rect x="80"  y="396" width="140" height="38" rx="2" stroke="#BACC23" stroke-width="1.0" fill="rgba(186,204,35,0.03)"/>
-
-    <!-- Rose des vents légère -->
-    <circle cx="610" cy="100" r="26" stroke="#BACC23" stroke-width="0.6" fill="none" opacity="0.4"/>
-    <text x="610" y="86" text-anchor="middle" fill="#BACC23" font-size="8" font-family="Inter" opacity="0.4">N</text>
-    <polygon points="610,88 606,100 610,96 614,100" fill="#BACC23" opacity="0.4"/>
-  </svg>
-
-  <div class="hero-content">
-    <div class="hero-eyebrow">Journal de l'Atelier</div>
-    <div class="hero-domain"><span class="domain-dot"></span> Minéral · Aménagement</div>
-    <div class="hero-meta-top">N° 02 · Expertise · Juin 2026</div>
-    <h1>La pierre sèche :<br/><em>trois siècles sans ciment</em></h1>
-    <p class="hero-desc">Aucun liant, aucun mortier, aucune colle. La pierre sèche dure 300 ans par la seule physique de l'assemblage — et elle le fait mieux que le béton.</p>
-    <div class="hero-byline">
-      <span>Adil Boumahdi</span>
-      <div class="hero-byline-dot"></div>
-      <span>7 min de lecture</span>
-      <div class="hero-byline-dot"></div>
-      <span>Minéral · Aménagement extérieur</span>
+      <aside class="note" style="margin-top:16px">
+        <span class="note__label">La vie dans les joints</span>
+        Les interstices abritent mousses, lichens, petits reptiles, insectes auxiliaires. Ce n'est pas une imperfection — c'est un écosystème actif qui consolide biologiquement l'ouvrage et intègre le mur dans le paysage.
+        <span style="display:inline-block;margin-top:8px;font-size:9px;letter-spacing:0.28em;text-transform:uppercase;opacity:0.55">Biodiversité</span>
+      </aside>
     </div>
+
+    <div class="aside-main prose">
+
+      <p class="dropcap">Il n'y a pas de mortier. Pas un gramme de ciment, pas une trace de colle. Et pourtant, les murs en pierre sèche que vous voyez aux flancs des collines du Maroc, de la Provence ou de l'Atlas ont traversé trois, quatre, parfois cinq siècles — sans restauration majeure. Comprendre pourquoi, c'est comprendre ce que construire vraiment signifie.</p>
+
+      <p>La pierre sèche est une technique de construction qui consiste à assembler des blocs de pierre bruts ou taillés <strong>uniquement par gravité, friction et imbrication</strong> — sans aucun liant. Elle n'est pas seulement ancienne. Elle est, à bien des égards, supérieure aux techniques modernes pour tout ce qui touche aux ouvrages extérieurs soumis aux cycles gel-dégel, aux charges hydrauliques et au mouvement des terres.</p>
+
+      <p>Chez ABA, nous l'utilisons chaque fois que le site s'y prête : terrasses en pente, murets de soutènement, escaliers extérieurs, emmarchements de jardins. Non par nostalgie. Parce que c'est la solution la plus honnête, la plus durable et — paradoxalement — la plus cohérente avec les exigences d'un jardin premium qui doit vieillir sans trahir.</p>
+
+      <!-- Galerie 01 · Appareillage & vie des joints -->
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:2.5em 0 1em">
+        <figure class="figure">
+          <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1697497710118-0d5cb5a7094a?auto=format&fit=crop&w=800&q=82" alt="Mur en pierre sèche — appareillage croisé, joints décalés" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85)"><span class="figure__tag">Appareillage croisé</span></div>
+          <figcaption><strong>La logique du joint décalé</strong> — Chaque pierre repose sur deux du rang inférieur. Aucun joint vertical ne se superpose : les forces de compression se répartissent en éventail.</figcaption>
+        </figure>
+        <figure class="figure">
+          <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;aspect-ratio:4/3"><img src="https://images.unsplash.com/photo-1761837861663-4f15911466a7?auto=format&fit=crop&w=800&q=82" alt="Joints de pierre sèche colonisés par la mousse — consolidation biologique" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85)"><span class="figure__tag">Consolidation biologique</span></div>
+          <figcaption><strong>Le vieillissement comme renforcement</strong> — Mousses et lichens augmentent mécaniquement l'accroche entre les blocs. Ce n'est pas de la dégradation. C'est de la consolidation vivante.</figcaption>
+        </figure>
+      </div>
+      <p style="font-size:10px;letter-spacing:0.08em;opacity:0.4;margin-bottom:2em">Photos · Joe Halinar / Brian Cockley — Unsplash</p>
+
+      <p>Cette résilience intrinsèque explique un chiffre contre-intuitif : <strong>le coût d'entretien sur 30 ans d'un mur en pierre sèche bien construit est nul</strong>. Un mur en béton armé, lui, commence à demander des interventions — injection de résines, reprise d'enduit, traitement des fissures — dès la deuxième décennie.</p>
+
+      <blockquote class="pullquote pullquote--bordered">La pierre sèche ne résiste pas aux forces — elle les redistribue. C'est sa philosophie : céder un peu pour ne jamais rompre. Un principe que le béton, dans son arrogance, refuse d'apprendre.</blockquote>
+
+      <h2>Les pierres que nous utilisons au Maroc</h2>
+
+      <p>Toutes les pierres ne se valent pas pour la construction sèche. La qualité d'un mur dépend d'abord du choix du matériau — sa dureté, sa stratification naturelle, sa capacité à être débité en tranches régulières.</p>
+
+      <p>Au Maroc, nous travaillons principalement avec <strong>trois matériaux</strong> selon la région et l'usage :</p>
+
+      <aside class="note" style="margin:1.5em 0 2em">
+        <span class="note__label">Matériaux · Sélection ABA</span>
+        <p style="margin:0 0 12px"><strong>Le calcaire de l'Atlas</strong> — extrait en dalles naturelles dans les carrières du Moyen-Atlas, il est notre premier choix pour les terrasses et murets de soutènement. Sa stratification régulière facilite un appareillage précis. Sa couleur ocre dorée vieillit remarquablement.</p>
+        <p style="margin:0 0 12px"><strong>La pierre de taille de Fès (Khettara)</strong> — utilisée dans la médina depuis le IXe siècle, ce calcaire local à grain fin s'utilise en assise de finition pour les détails visibles : emmarchements, bordures de bassin, lisières de terrasse.</p>
+        <p style="margin:0"><strong>Le basalte volcanique</strong> — plus difficile à travailler mais extrêmement dur, il est réservé aux zones à fort trafic et aux abords de plans d'eau. Sa teinte anthracite presque noire crée un contraste fort avec la végétation verte.</p>
+      </aside>
+
+      <!-- Galerie 02 · Les 3 matériaux -->
+      <div style="margin:2em 0 0.5em">
+        <p style="font-size:9px;letter-spacing:0.26em;text-transform:uppercase;opacity:0.5;margin-bottom:14px">— Sélection matériaux · références visuelles ABA</p>
+        <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:8px">
+          <figure class="figure">
+            <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;aspect-ratio:3/2"><img src="https://images.unsplash.com/photo-1761637823587-1e81a9c63ee2?auto=format&fit=crop&w=600&q=82" alt="Calcaire de l'Atlas — pierre de soutènement, tons ocre dorés" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85)"><span class="figure__tag">Calcaire · Moyen-Atlas</span></div>
+            <figcaption style="font-size:10px"><strong>Calcaire de l'Atlas</strong><br>Tons ocre dorés, stratification naturelle régulière. Premier choix pour terrasses et murets.</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;aspect-ratio:3/2"><img src="https://images.unsplash.com/photo-1774975787267-c46000e68cbc?auto=format&fit=crop&w=600&q=82" alt="Pierre de taille calcaire fin — assises de finition, bordures de bassin" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85)"><span class="figure__tag">Calcaire fin · Fès</span></div>
+            <figcaption style="font-size:10px"><strong>Pierre de Fès (Khettara)</strong><br>Grain fin, utilisé depuis le IXe siècle. Réservé aux assises visibles et emmarchements.</figcaption>
+          </figure>
+          <figure class="figure">
+            <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;aspect-ratio:3/2"><img src="https://images.unsplash.com/photo-1504672281656-e4981d70414b?auto=format&fit=crop&w=600&q=82" alt="Basalte volcanique — teinte anthracite, zones à fort trafic" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85)"><span class="figure__tag">Basalte · zones de trafic</span></div>
+            <figcaption style="font-size:10px"><strong>Basalte volcanique</strong><br>Teinte anthracite, extrêmement dur. Abords de plans d'eau et zones de passage intense.</figcaption>
+          </figure>
+        </div>
+        <p style="font-size:10px;letter-spacing:0.08em;opacity:0.4;margin-bottom:2em">Photos · Sergej Karpow / Hiroko Nishimura / Lou Batier — Unsplash</p>
+      </div>
+
+      <!-- Schéma SVG coupe technique -->
+      <figure class="figure" style="margin:2.5em 0">
+        <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;padding:32px;">
+          <p style="font-size:9px;letter-spacing:0.38em;text-transform:uppercase;color:var(--ph-b);margin-bottom:20px;font-family:inherit">— Coupe technique · Mur de soutènement en pierre sèche</p>
+          <svg viewBox="0 0 620 280" fill="none" xmlns="http://www.w3.org/2000/svg" style="width:100%;display:block">
+            <!-- Terrain derrière le mur -->
+            <path d="M 0 40 Q 80 30 160 60 Q 220 80 280 55 L 280 280 L 0 280 Z" fill="rgba(139,115,85,0.07)"/>
+            <text x="60" y="95" fill="#8B7355" font-size="8" font-family="inherit" opacity="0.6">remblai</text>
+
+            <!-- Corps du mur — pierres de parement -->
+            <rect x="280" y="80" width="44" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
+            <rect x="324" y="80" width="36" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.06)"/>
+            <rect x="360" y="80" width="50" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
+
+            <rect x="280" y="104" width="38" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.07)"/>
+            <rect x="318" y="104" width="52" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.09)"/>
+            <rect x="370" y="104" width="40" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.06)"/>
+
+            <rect x="280" y="128" width="48" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
+            <rect x="328" y="128" width="34" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.07)"/>
+            <rect x="362" y="128" width="48" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.06)"/>
+
+            <rect x="278" y="152" width="54" height="24" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.09)"/>
+            <rect x="332" y="152" width="40" height="24" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.08)"/>
+            <rect x="372" y="152" width="38" height="24" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.07)"/>
+
+            <rect x="274" y="178" width="60" height="26" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.10)"/>
+            <rect x="334" y="178" width="44" height="26" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.09)"/>
+            <rect x="378" y="178" width="32" height="26" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
+
+            <!-- Pierres de boutisse (traversantes — en accent) -->
+            <rect x="280" y="128" width="90" height="22" rx="1" stroke="#95897a" stroke-width="1.2" fill="rgba(149,137,122,0.08)"/>
+            <text x="325" y="143" text-anchor="middle" fill="#95897a" font-size="7" font-family="inherit" opacity="0.8">boutisse</text>
+            <rect x="278" y="178" width="128" height="26" rx="1" stroke="#95897a" stroke-width="1.2" fill="rgba(149,137,122,0.08)"/>
+            <text x="342" y="195" text-anchor="middle" fill="#95897a" font-size="7" font-family="inherit" opacity="0.8">boutisse</text>
+
+            <!-- Drainage à la base -->
+            <path d="M 220 240 Q 240 235 260 242 Q 270 246 280 238" stroke="#5599ff" stroke-width="0.9" stroke-dasharray="3,4" fill="none" opacity="0.5"/>
+            <circle cx="230" cy="252" r="3" fill="rgba(85,153,255,0.4)"/>
+            <circle cx="246" cy="248" r="2.5" fill="rgba(85,153,255,0.35)"/>
+            <circle cx="258" cy="255" r="2" fill="rgba(85,153,255,0.3)"/>
+            <text x="222" y="270" fill="#5599ff" font-size="7.5" font-family="inherit" opacity="0.55">drainage naturel</text>
+
+            <!-- Fondation -->
+            <rect x="268" y="208" width="154" height="30" rx="1" stroke="#8B7355" stroke-width="1.2" fill="rgba(139,115,85,0.12)"/>
+            <text x="345" y="228" text-anchor="middle" fill="#8B7355" font-size="8" font-family="inherit" opacity="0.55">assise de fondation</text>
+
+            <!-- Sol à l'avant -->
+            <path d="M 410 176 Q 440 172 470 178 Q 510 186 560 174 L 600 174 L 600 280 L 410 280 Z" fill="rgba(139,115,85,0.05)" stroke="#8B7355" stroke-width="0.5" opacity="0.4"/>
+            <text x="490" y="210" fill="#8B7355" font-size="8" font-family="inherit" opacity="0.5">sol extérieur</text>
+
+            <!-- Flèche inclinaison -->
+            <line x1="430" y1="80" x2="430" y2="210" stroke="#95897a" stroke-width="0.7" stroke-dasharray="3,5" opacity="0.5"/>
+            <text x="435" y="150" fill="#95897a" font-size="7.5" font-family="inherit" opacity="0.7">fruit ≈ 5%</text>
+
+            <!-- Légende -->
+            <rect x="470" y="30" width="10" height="7" rx="1" stroke="#95897a" stroke-width="1" fill="rgba(149,137,122,0.08)"/>
+            <text x="485" y="38" fill="#95897a" font-size="7.5" font-family="inherit" opacity="0.8">Pierre boutisse (traversante)</text>
+            <rect x="470" y="46" width="10" height="7" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
+            <text x="485" y="54" fill="#8B7355" font-size="7.5" font-family="inherit" opacity="0.6">Pierre de parement</text>
+          </svg>
+        </div>
+        <figcaption>Coupe schématique d'un mur de soutènement en pierre sèche — boutisses traversantes, fruit de 5 %, drainage naturel à la base.</figcaption>
+      </figure>
+
+      <!-- Planches · Flore de la pierre sèche -->
+      <h2>La flore de la pierre sèche</h2>
+
+      <p>Les espèces qui colonisent les joints ne sont pas des intrus. Elles participent activement à la consolidation de l'ouvrage — leurs rhizomes et filaments mycéliens cimentent biologiquement ce que le calcaire fait mécaniquement.</p>
+
+      <div style="display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin:2em 0 2.5em">
+        <div style="display:flex;flex-direction:column">
+          <div style="aspect-ratio:3/4;overflow:hidden;border:1px solid var(--c-rule,rgba(0,0,0,0.1));margin-bottom:10px">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Parietaria_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-212.jpg" alt="Parietaria officinalis — plante des murs" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(0.08) contrast(1.06) brightness(1.01)">
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;margin-bottom:3px;line-height:1.3">Parietaria officinalis</p>
+          <p style="font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-bottom:4px">Pariétaire · Plante des murs</p>
+          <p style="font-size:8.5px;opacity:0.4">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <div style="aspect-ratio:3/4;overflow:hidden;border:1px solid var(--c-rule,rgba(0,0,0,0.1));margin-bottom:10px">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Valeriana_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-263.jpg" alt="Valeriana officinalis — colonise les failles rocheuses" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(0.08) contrast(1.06) brightness(1.01)">
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;margin-bottom:3px;line-height:1.3">Valeriana officinalis</p>
+          <p style="font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-bottom:4px">Valériane · Failles &amp; pierriers</p>
+          <p style="font-size:8.5px;opacity:0.4">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <div style="aspect-ratio:3/4;overflow:hidden;border:1px solid var(--c-rule,rgba(0,0,0,0.1));margin-bottom:10px">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Sedum_telephium_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-245.jpg" alt="Sedum telephium — orpin des rochers et murs secs" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(0.08) contrast(1.06) brightness(1.01)">
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;margin-bottom:3px;line-height:1.3">Sedum telephium</p>
+          <p style="font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-bottom:4px">Orpin · Joints &amp; rochers secs</p>
+          <p style="font-size:8.5px;opacity:0.4">Köhler's Medizinal-Pflanzen</p>
+        </div>
+        <div style="display:flex;flex-direction:column">
+          <div style="aspect-ratio:3/4;overflow:hidden;border:1px solid var(--c-rule,rgba(0,0,0,0.1));margin-bottom:10px">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Ficus_carica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-058.jpg" alt="Ficus carica — figuier des vieux murs et fissures" loading="lazy" style="width:100%;height:100%;object-fit:cover;object-position:top center;filter:sepia(0.08) contrast(1.06) brightness(1.01)">
+          </div>
+          <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:14px;margin-bottom:3px;line-height:1.3">Ficus carica</p>
+          <p style="font-size:8.5px;letter-spacing:0.2em;text-transform:uppercase;opacity:0.6;margin-bottom:4px">Figuier · Fissures de vieux murs</p>
+          <p style="font-size:8.5px;opacity:0.4">Köhler's Medizinal-Pflanzen, 1887</p>
+        </div>
+      </div>
+
+      <h2>Ce que cette technique dit d'un jardin</h2>
+
+      <p>Choisir la pierre sèche pour un jardin privé ou un aménagement public, c'est prendre une position. C'est dire que <strong>le matériau a une mémoire</strong>, que l'ouvrage n'est pas neutre, qu'il appartient à une géographie et à une culture constructive précises.</p>
+
+      <p>Au Maroc, la pierre sèche est partout dans les territoires ruraux — les terrasses agricoles de l'Anti-Atlas, les seguias de pierre qui distribuaient l'eau depuis le XIe siècle, les enclos pastoraux des hautes plaines. C'est une technique qui a structuré les paysages marocains bien avant que le béton n'existe. La réutiliser dans nos projets, c'est puiser dans ce répertoire local.</p>
+
+      <p>Elle est aussi, concrètement, la seule technique de soutènement qui <strong>améliore avec le temps</strong>. Les mousses qui colonisent les joints augmentent l'accroche entre les pierres. Les racines des plantes qui s'installent dans les interstices consolident mécaniquement la structure. Le vieillissement d'un mur en pierre sèche est un processus de renforcement, pas de dégradation.</p>
+
+      <!-- Galerie 03 · Réalisation · plein format -->
+      <figure class="figure" style="margin:2.5em 0">
+        <div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557;aspect-ratio:16/9"><img src="https://images.unsplash.com/photo-1761928299635-14d606d1a7aa?auto=format&fit=crop&w=1400&q=85" alt="Jardin avec mur en pierre sèche et végétation fleurie — intégration paysagère" loading="lazy" style="width:100%;height:100%;object-fit:cover;display:block;filter:saturate(0.85)"><span class="figure__tag">Intégration végétale · pierre locale</span></div>
+        <figcaption><strong>L'intégration comme principe</strong> — Le mur ne divise pas l'espace, il l'articule. La végétation ne cache pas la pierre, elle l'habite. C'est la logique d'un aménagement qui vieillit dans le sens du paysage, pas contre lui. <span style="opacity:0.4;font-size:10px">Photo · Mohamed B. — Unsplash</span></figcaption>
+      </figure>
+
+      <blockquote class="pullquote pullquote--bordered">Dans cinquante ans, le mur en béton armé sera fissuré, carbonaté, rouillé. Le mur en pierre sèche sera plus beau et plus solide que le jour de sa pose. C'est tout ce qu'il y a à savoir sur la durabilité.</blockquote>
+
+      <p>Nous ne l'utilisons pas pour tout — certains projets exigent des solutions différentes. Mais quand le contexte s'y prête, quand la pente doit être tenue, quand une terrasse doit prendre forme, quand un escalier doit descendre dans le jardin — la pierre sèche est presque toujours notre première réponse. Parce que dans cent ans, quand personne ne saura plus qui a construit ce mur, le mur, lui, sera encore là.</p>
+
+    </div>
+  </div>
+</article>
+
+<div class="wrap article-foot">
+  <div class="author-bio">
+    <div class="author-bio__avatar">AB</div>
+    <div>
+      <div class="author-bio__name">Adil Boumahdi</div>
+      <div class="author-bio__role">Fondateur &amp; architecte paysagiste — ABA</div>
+      <div class="author-bio__cities">Rabat · Casablanca · Marrakech · Fès</div>
+    </div>
+  </div>
+  <div class="cta">
+    <div class="cta__rule"></div>
+    <p class="cta__head">Un jardin qui <em>dure vraiment.</em></p>
+    <p class="cta__sub">La pierre sèche, le végétal endémique, l'eau bien gérée — trois engagements pour des espaces extérieurs qui traversent les générations.</p>
+    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+  </div>
+</div>
+
+<section class="wrap related">
+  <div class="section-head" style="margin:0 0 26px"><h2>À lire ensuite</h2></div>
+  <div class="grid grid--edit">
+    <article class="card card--md col-6" style="cursor:pointer" onclick="location.href='lire-un-terrain-avant-de-le-toucher.html'">
+      <div class="card__media"><figure class="figure"><div class="figure__box" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460"><span class="figure__tag">Carnet</span></div></figure></div>
+      <div class="card__cat"><span class="chip__dot" style="background:#6e7d88"></span>Carnet de chantier</div>
+      <h3 class="card__title">Lire un terrain avant de le toucher</h3>
+      <div class="card__meta"><span>Adil Boumahdi</span><span class="dotsep"></span><span>8 min</span></div>
+    </article>
+    <article class="card card--md col-6" style="cursor:pointer" onclick="location.href='art-pierre-seche.html'">
+      <div class="card__media"><figure class="figure"><div class="figure__box" style="--ph-a:#b9b2a3;--ph-b:#95897a;--ph-c:#6f6557"><span class="figure__tag">Hardscape</span></div></figure></div>
+      <div class="card__cat"><span class="chip__dot" style="background:#95897a"></span>Hardscape</div>
+      <h3 class="card__title">Tailler le paysage : l'art de la pierre sèche</h3>
+      <div class="card__meta"><span>Yassine El Fassi</span><span class="dotsep"></span><span>6 min</span></div>
+    </article>
   </div>
 </section>
 
-<!-- ARTICLE -->
-<article class="article">
-
-  <p class="chapeau">
-    Il n'y a pas de mortier. Pas un gramme de ciment, pas une trace de colle. Et pourtant, les murs en pierre sèche que vous voyez aux flancs des collines du Maroc, de la Provence ou de l'Atlas ont traversé trois, quatre, parfois cinq siècles — sans restauration majeure. Comprendre pourquoi, c'est comprendre ce que construire vraiment signifie.
-  </p>
-
-  <p>La pierre sèche est une technique de construction qui consiste à assembler des blocs de pierre bruts ou taillés <strong>uniquement par gravité, friction et imbrication</strong> — sans aucun liant. Elle n'est pas seulement ancienne. Elle est, à bien des égards, supérieure aux techniques modernes pour tout ce qui touche aux ouvrages extérieurs soumis aux cycles gel-dégel, aux charges hydrauliques et au mouvement des terres.</p>
-
-  <p>Chez ABA, nous l'utilisons chaque fois que le site s'y prête : terrasses en pente, murets de soutènement, escaliers extérieurs, emmarchements de jardins. Non par nostalgie. Parce que c'est la solution la plus honnête, la plus durable et — paradoxalement — la plus cohérente avec les exigences d'un jardin premium qui doit vieillir sans trahir.</p>
-
-  <!-- ── GALERIE 01 · Appareillage & vie des joints ── -->
-  <div class="fig-duo">
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1697497710118-0d5cb5a7094a?auto=format&fit=crop&w=800&q=82"
-          alt="Mur en pierre sèche — appareillage croisé, joints décalés"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Appareillage croisé · joints décalés</span>
-      </div>
-      <p class="fig-caption"><strong>La logique du joint décalé</strong> — Chaque pierre repose sur deux du rang inférieur. Aucun joint vertical ne se superpose : les forces de compression se répartissent en éventail. Aucun liant, aucune faiblesse ponctuelle.</p>
-    </div>
-    <div>
-      <div class="fig-img ratio-4-3">
-        <img
-          src="https://images.unsplash.com/photo-1761837861663-4f15911466a7?auto=format&fit=crop&w=800&q=82"
-          alt="Joints de pierre sèche colonisés par la mousse — consolidation biologique"
-          loading="lazy"
-        />
-        <span class="fig-overlay">Joints colonisés · consolidation biologique</span>
-      </div>
-      <p class="fig-caption"><strong>Le vieillissement comme renforcement</strong> — Mousses et lichens augmentent mécaniquement l'accroche entre les blocs. Ce n'est pas de la dégradation. C'est de la consolidation vivante.</p>
-    </div>
+<footer class="footer"><div class="wrap">
+  <div class="footer__grid">
+    <div><div class="footer__mark">ABA <em>Paysage</em></div><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
-  <p class="fig-credit">Photos · Joe Halinar / Brian Cockley — Unsplash</p>
-
-  <div class="divider">Pourquoi elle dure</div>
-
-  <div class="grid4">
-    <div class="g-item">
-      <span class="g-icon">⚖️</span>
-      <h3>La physique de l'appui</h3>
-      <p>Chaque pierre repose sur les deux pierres du rang inférieur. Chaque joint vertical est décalé. Les forces de compression se répartissent en éventail vers les fondations — exactement comme dans une voûte romaine. Il n'y a rien à rompre d'un coup.</p>
-      <span class="g-tag">Appareillage</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">💧</span>
-      <h3>La gestion de l'eau</h3>
-      <p>Un mur en béton bloque l'eau derrière lui — la pression hydrostatique finit par le faire éclater. La pierre sèche laisse l'eau traverser librement entre les joints. Elle ne retient pas, elle draine. La terre derrière ne gonfle jamais.</p>
-      <span class="g-tag">Drainage naturel</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🌡️</span>
-      <h3>Le mouvement thermique</h3>
-      <p>Le béton fissure parce qu'il est rigide et que la chaleur le dilate. La pierre sèche, elle, est un assemblage articulé. Quand la température monte ou quand la terre bouge légèrement, les pierres s'ajustent imperceptiblement, sans rompre.</p>
-      <span class="g-tag">Résilience</span>
-    </div>
-    <div class="g-item">
-      <span class="g-icon">🌱</span>
-      <h3>La vie dans les joints</h3>
-      <p>Les interstices entre les pierres abritent mousses, lichens, petits reptiles, insectes auxiliaires. Ce n'est pas une imperfection. C'est un écosystème actif qui consolide biologiquement l'ouvrage et intègre le mur dans le paysage.</p>
-      <span class="g-tag">Biodiversité</span>
-    </div>
-  </div>
-
-  <p>Cette résilience intrinsèque explique un chiffre contre-intuitif : <strong>le coût d'entretien sur 30 ans d'un mur en pierre sèche bien construit est nul</strong>. Un mur en béton armé, lui, commence à demander des interventions — injection de résines, reprise d'enduit, traitement des fissures — dès la deuxième décennie.</p>
-
-  <div class="pull-quote">
-    <p>La pierre sèche ne résiste pas aux forces — elle les redistribue. C'est sa philosophie : céder un peu pour ne jamais rompre. Un principe que le béton, dans son arrogance, refuse d'apprendre.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
-
-  <div class="section-head">
-    <span class="section-num">02</span>
-    <h2>Les pierres que nous utilisons au Maroc</h2>
-  </div>
-
-  <p>Toutes les pierres ne se valent pas pour la construction sèche. La qualité d'un mur dépend d'abord du choix du matériau — sa dureté, sa stratification naturelle, sa capacité à être débité en tranches régulières.</p>
-
-  <p>Au Maroc, nous travaillons principalement avec <strong>trois matériaux</strong> selon la région et l'usage :</p>
-
-  <div class="tech-note">
-    <div class="tech-note-label">— Matériaux · Sélection ABA</div>
-    <p>
-      <strong style="color: var(--text);">Le calcaire de l'Atlas</strong> — extrait en dalles naturelles dans les carrières du Moyen-Atlas, il est notre premier choix pour les terrasses et murets de soutènement. Sa stratification régulière facilite un appareillage précis. Sa couleur ocre dorée vieillit remarquablement.
-      <br/><br/>
-      <strong style="color: var(--text);">La pierre de taille de Fès (Khettara)</strong> — utilisée dans la médina depuis le IXe siècle, ce calcaire local à grain fin s'utilise en assise de finition pour les détails visibles : emmarchements, bordures de bassin, lisières de terrasse.
-      <br/><br/>
-      <strong style="color: var(--text);">Le basalte volcanique</strong> — plus difficile à travailler mais extrêmement dur, il est réservé aux zones à fort trafic et aux abords de plans d'eau. Sa teinte anthracite presque noire crée un contraste fort avec la végétation verte.
-    </p>
-  </div>
-
-  <!-- ── GALERIE 02 · Les 3 matériaux ── -->
-  <div style="margin: 48px 0 0;">
-    <div class="fig-label">— Sélection matériaux · références visuelles ABA</div>
-    <div class="fig-trio">
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1761637823587-1e81a9c63ee2?auto=format&fit=crop&w=600&q=82"
-            alt="Calcaire de l'Atlas — pierre de soutènement, tons ocre dorés"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Calcaire · Moyen-Atlas</span>
-        </div>
-        <p class="fig-mat-label">Calcaire de l'Atlas</p>
-        <p class="fig-caption" style="font-size:10.5px;">Tons ocre dorés, stratification naturelle régulière. Premier choix pour terrasses et murets.</p>
-      </div>
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1774975787267-c46000e68cbc?auto=format&fit=crop&w=600&q=82"
-            alt="Pierre de taille calcaire fin — assises de finition, bordures de bassin"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Calcaire fin · Fès</span>
-        </div>
-        <p class="fig-mat-label">Pierre de Fès (Khettara)</p>
-        <p class="fig-caption" style="font-size:10.5px;">Grain fin, utilisé depuis le IXe siècle. Réservé aux assises visibles et emmarchements.</p>
-      </div>
-      <div>
-        <div class="fig-img ratio-3-2">
-          <img
-            src="https://images.unsplash.com/photo-1504672281656-e4981d70414b?auto=format&fit=crop&w=600&q=82"
-            alt="Basalte volcanique — teinte anthracite, zones à fort trafic"
-            loading="lazy"
-          />
-          <span class="fig-overlay">Basalte · zones de trafic</span>
-        </div>
-        <p class="fig-mat-label">Basalte volcanique</p>
-        <p class="fig-caption" style="font-size:10.5px;">Teinte anthracite, extrêmement dur. Abords de plans d'eau et zones de passage intense.</p>
-      </div>
-    </div>
-    <p class="fig-credit">Photos · Sergej Karpow / Hiroko Nishimura / Lou Batier — Unsplash</p>
-  </div>
-
-  <div class="visual">
-    <div class="visual-label">— Coupe technique · Mur de soutènement en pierre sèche</div>
-    <svg viewBox="0 0 620 280" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <!-- Terrain derrière le mur -->
-      <path d="M 0 40 Q 80 30 160 60 Q 220 80 280 55 L 280 280 L 0 280 Z" fill="rgba(139,115,85,0.07)"/>
-      <text x="60" y="95" fill="#8B7355" font-size="8" font-family="Inter" opacity="0.6">remblai</text>
-
-      <!-- Corps du mur — pierres de parement -->
-      <rect x="280" y="80" width="44" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
-      <rect x="324" y="80" width="36" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.06)"/>
-      <rect x="360" y="80" width="50" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
-
-      <rect x="280" y="104" width="38" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.07)"/>
-      <rect x="318" y="104" width="52" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.09)"/>
-      <rect x="370" y="104" width="40" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.06)"/>
-
-      <rect x="280" y="128" width="48" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
-      <rect x="328" y="128" width="34" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.07)"/>
-      <rect x="362" y="128" width="48" height="22" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.06)"/>
-
-      <rect x="278" y="152" width="54" height="24" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.09)"/>
-      <rect x="332" y="152" width="40" height="24" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.08)"/>
-      <rect x="372" y="152" width="38" height="24" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.07)"/>
-
-      <rect x="274" y="178" width="60" height="26" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.10)"/>
-      <rect x="334" y="178" width="44" height="26" rx="1" stroke="#8B7355" stroke-width="1.0" fill="rgba(139,115,85,0.09)"/>
-      <rect x="378" y="178" width="32" height="26" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
-
-      <!-- Pierres de boutisse (traversantes — en accent) -->
-      <rect x="280" y="128" width="90" height="22" rx="1" stroke="#BACC23" stroke-width="1.2" fill="rgba(186,204,35,0.05)"/>
-      <text x="325" y="143" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.7">boutisse</text>
-      <rect x="278" y="178" width="128" height="26" rx="1" stroke="#BACC23" stroke-width="1.2" fill="rgba(186,204,35,0.05)"/>
-      <text x="342" y="195" text-anchor="middle" fill="#BACC23" font-size="7" font-family="Inter" opacity="0.7">boutisse</text>
-
-      <!-- Drainage à la base -->
-      <path d="M 220 240 Q 240 235 260 242 Q 270 246 280 238" stroke="#5599ff" stroke-width="0.9" stroke-dasharray="3,4" fill="none" opacity="0.5"/>
-      <circle cx="230" cy="252" r="3" fill="rgba(85,153,255,0.4)"/>
-      <circle cx="246" cy="248" r="2.5" fill="rgba(85,153,255,0.35)"/>
-      <circle cx="258" cy="255" r="2" fill="rgba(85,153,255,0.3)"/>
-      <text x="222" y="270" fill="#5599ff" font-size="7.5" font-family="Inter" opacity="0.55">drainage naturel</text>
-
-      <!-- Fondation -->
-      <rect x="268" y="208" width="154" height="30" rx="1" stroke="#8B7355" stroke-width="1.2" fill="rgba(139,115,85,0.12)"/>
-      <text x="345" y="228" text-anchor="middle" fill="#8B7355" font-size="8" font-family="Inter" opacity="0.55">assise de fondation</text>
-
-      <!-- Sol à l'avant -->
-      <path d="M 410 176 Q 440 172 470 178 Q 510 186 560 174 L 600 174 L 600 280 L 410 280 Z" fill="rgba(139,115,85,0.05)" stroke="#8B7355" stroke-width="0.5" opacity="0.4"/>
-      <text x="490" y="210" fill="#8B7355" font-size="8" font-family="Inter" opacity="0.5">sol extérieur</text>
-
-      <!-- Flèche inclinaison -->
-      <line x1="430" y1="80" x2="430" y2="210" stroke="#BACC23" stroke-width="0.7" stroke-dasharray="3,5" opacity="0.4"/>
-      <text x="435" y="150" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.55">fruit ≈ 5%</text>
-
-      <!-- Légende -->
-      <rect x="470" y="30" width="10" height="7" rx="1" stroke="#BACC23" stroke-width="1" fill="rgba(186,204,35,0.06)"/>
-      <text x="485" y="38" fill="#BACC23" font-size="7.5" font-family="Inter" opacity="0.7">Pierre boutisse (traversante)</text>
-      <rect x="470" y="46" width="10" height="7" rx="1" stroke="#8B7355" stroke-width="0.9" fill="rgba(139,115,85,0.08)"/>
-      <text x="485" y="54" fill="#8B7355" font-size="7.5" font-family="Inter" opacity="0.6">Pierre de parement</text>
-    </svg>
-  </div>
-
-  <!-- ── PLANCHES · Flore de la pierre sèche ── -->
-  <section class="herbier-section">
-    <p class="herbier-title">Flore de la pierre sèche · Espèces consolidantes</p>
-    <div class="herbier-grid">
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/8/82/Parietaria_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-212.jpg"
-               alt="Parietaria officinalis — plante des murs" loading="lazy">
-        </div>
-        <p class="herb-name">Parietaria officinalis</p>
-        <p class="herb-common">Pariétaire · Plante des murs</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/3/36/Valeriana_officinalis_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-263.jpg"
-               alt="Valeriana officinalis — colonise les failles rocheuses" loading="lazy">
-        </div>
-        <p class="herb-name">Valeriana officinalis</p>
-        <p class="herb-common">Valériane · Failles &amp; pierriers</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/c/cc/Sedum_telephium_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-245.jpg"
-               alt="Sedum telephium — orpin des rochers et murs secs" loading="lazy">
-        </div>
-        <p class="herb-name">Sedum telephium</p>
-        <p class="herb-common">Orpin · Joints &amp; rochers secs</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen</p>
-      </div>
-
-      <div class="herb-card">
-        <div class="herb-plate">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/6/6b/Ficus_carica_-_K%C3%B6hler%E2%80%93s_Medizinal-Pflanzen-058.jpg"
-               alt="Ficus carica — figuier des vieux murs et fissures" loading="lazy">
-        </div>
-        <p class="herb-name">Ficus carica</p>
-        <p class="herb-common">Figuier · Fissures de vieux murs</p>
-        <p class="herb-source">Köhler's Medizinal-Pflanzen, 1887</p>
-      </div>
-
-    </div>
-  </section>
-
-  <div class="section-head">
-    <span class="section-num">03</span>
-    <h2>Ce que cette technique dit d'un jardin</h2>
-  </div>
-
-  <p>Choisir la pierre sèche pour un jardin privé ou un aménagement public, c'est prendre une position. C'est dire que <strong>le matériau a une mémoire</strong>, que l'ouvrage n'est pas neutre, qu'il appartient à une géographie et à une culture constructive précises.</p>
-
-  <p>Au Maroc, la pierre sèche est partout dans les territoires ruraux — les terrasses agricoles de l'Anti-Atlas, les seguias de pierre qui distribuaient l'eau depuis le XIe siècle, les enclos pastoraux des hautes plaines. C'est une technique qui a structuré les paysages marocains bien avant que le béton n'existe. La réutiliser dans nos projets, c'est puiser dans ce répertoire local.</p>
-
-  <p>Elle est aussi, concrètement, la seule technique de soutènement qui <strong>améliore avec le temps</strong>. Les mousses qui colonisent les joints augmentent l'accroche entre les pierres. Les racines des plantes qui s'installent dans les interstices consolident mécaniquement la structure. Le vieillissement d'un mur en pierre sèche est un processus de renforcement, pas de dégradation.</p>
-
-  <!-- ── GALERIE 03 · Réalisation · plein format ── -->
-  <div class="fig-single">
-    <div class="fig-img ratio-16-9">
-      <img
-        src="https://images.unsplash.com/photo-1761928299635-14d606d1a7aa?auto=format&fit=crop&w=1400&q=85"
-        alt="Jardin avec mur en pierre sèche et végétation fleurie — intégration paysagère"
-        loading="lazy"
-      />
-      <span class="fig-overlay" style="font-size:9.5px; letter-spacing:0.16em;">Intégration végétale · mur en pierre locale · séquence herbacée-arbustive</span>
-    </div>
-    <p class="fig-caption"><strong>L'intégration comme principe</strong> — Le mur ne divise pas l'espace, il l'articule. La végétation ne cache pas la pierre, elle l'habite. C'est la logique d'un aménagement qui vieillit dans le sens du paysage, pas contre lui.</p>
-    <p class="fig-credit">Photo · Mohamed B. — Unsplash</p>
-  </div>
-
-  <div class="pull-quote">
-    <p>Dans cinquante ans, le mur en béton armé sera fissuré, carbonaté, rouillé. Le mur en pierre sèche sera plus beau et plus solide que le jour de sa pose. C'est tout ce qu'il y a à savoir sur la durabilité.</p>
-    <cite>— Adil Boumahdi, fondateur ABA</cite>
-  </div>
-
-  <p>Nous ne l'utilisons pas pour tout — certains projets exigent des solutions différentes. Mais quand le contexte s'y prête, quand la pente doit être tenue, quand une terrasse doit prendre forme, quand un escalier doit descendre dans le jardin — la pierre sèche est presque toujours notre première réponse. Parce que dans cent ans, quand personne ne saura plus qui a construit ce mur, le mur, lui, sera encore là.</p>
-
-  <div class="signature">
-    <div class="sig-avatar">AB</div>
-    <div class="sig-text">
-      <h4>Adil Boumahdi</h4>
-      <p>Fondateur & architecte paysagiste — ABA<br/>Rabat · Casablanca · Marrakech · Fès</p>
-    </div>
-  </div>
-
-  <div class="cta">
-    <h3>Un jardin qui<br/><em>dure vraiment.</em></h3>
-    <p>La pierre sèche, le végétal endémique, l'eau bien gérée — trois engagements pour des espaces extérieurs qui traversent les générations.</p>
-    <a href="../preview.html#contact" class="cta-btn">Initier un projet →</a>
-  </div>
-
-  <div class="related">
-    <div class="related-label">— Articles suivants</div>
-    <div class="related-grid">
-      <a href="lire-un-terrain-avant-de-le-toucher.html" class="rel-card">
-        <span class="rel-tag">N° 01 · Conception</span>
-        <h4>Lire un terrain avant de le toucher</h4>
-      </a>
-      <a href="#" class="rel-card">
-        <span class="rel-tag">N° 03 · Végétal</span>
-        <h4>Choisir une plante endémique, pas décorative</h4>
-      </a>
-    </div>
-  </div>
-
-</article>
-
-<footer>
-  <div class="footer-logo">ABA — Atelier Boumahdi Adil</div>
-  <div class="footer-copy">© 2026 — ab-landscapes.com</div>
-</footer>
+  <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span><span>© 2026 — ab-landscapes.com</span></div>
+</div></footer>
 
 <script>
-  function setTheme(t) {
-    document.documentElement.setAttribute('data-theme', t);
-    localStorage.setItem('aba-blog-theme', t);
-    document.getElementById('btn-dark').classList.toggle('active', t === 'dark');
-    document.getElementById('btn-light').classList.toggle('active', t === 'light');
-  }
-  // Restore saved preference
-  const saved = localStorage.getItem('aba-blog-theme');
-  if (saved) setTheme(saved);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
-
 </body>
 </html>
