@@ -1,4 +1,12 @@
 User-agent: *
 Allow: /
 
+Disallow: /portfolio-accent-options.html
+Disallow: /portfolio-design-options.html
+Disallow: /prototype-option-a.html
+Disallow: /prototype-projet.html
+Disallow: /variant-b.html
+Disallow: /blog/blog-variant-d.html
+Disallow: /blog/blog-variants.html
+
 Sitemap: https://www.ab-landscapes.com/sitemap.xml

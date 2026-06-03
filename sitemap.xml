@@ -2,10 +2,10 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:xhtml="http://www.w3.org/1999/xhtml">
 
-  <!-- Page principale — FR (défaut) -->
+  <!-- Page principale -->
   <url>
     <loc>https://www.ab-landscapes.com/</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>1.0</priority>
     <xhtml:link rel="alternate" hreflang="fr" href="https://www.ab-landscapes.com/"/>
@@ -14,12 +14,161 @@
     <xhtml:link rel="alternate" hreflang="x-default" href="https://www.ab-landscapes.com/"/>
   </url>
 
+  <!-- Journal / Blog index -->
+  <url>
+    <loc>https://www.ab-landscapes.com/blog.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
   <!-- Portfolio -->
   <url>
     <loc>https://www.ab-landscapes.com/portfolio.html</loc>
-    <lastmod>2026-05-09</lastmod>
+    <lastmod>2026-06-03</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
+  </url>
+
+  <!-- Articles du Journal ABA -->
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/arrosage-automatique-programmer-l-eau-comme-un-agronome.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/art-pierre-seche.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/choisir-une-plante-endemique-pas-decorative.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/eau-ecrite-dans-la-pierre.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/eclairage-exterieur-composer-avec-la-nuit.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/etang-rabat-hydraulique-filtre-biologique-koi.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/florilege-du-sec.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/jeu-mineral.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/l-entretien-signe-ce-que-jardiner-vraiment-veut-dire.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/la-pierre-seche-pourquoi-elle-dure-300-ans.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/lire-un-terrain-avant-de-le-toucher.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/nuit-au-jardin.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/ombre-sous-l-olivier.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/parc-merinide-de-la-lecture-du-site-a-l-inauguration.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/revetements-exterieurs-choisir-un-sol-pour-30-ans.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/riad-jardin-clos.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/tadelakt-zellige-lumiere.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/un-lac-artificiel-comment-ca-vit-vraiment.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/villa-des-oudayas-patio.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>https://www.ab-landscapes.com/blog/xeropaysage-luxe-sobre.html</loc>
+    <lastmod>2026-06-03</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
   </url>
 
 </urlset>
