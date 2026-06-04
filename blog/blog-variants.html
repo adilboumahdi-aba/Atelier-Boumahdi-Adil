@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABA Blog — Choix de thème</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Inter:wght@300;400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    :root {
+      --accent: #BACC23;
+      --dark-bg: #0D0D0B;
+      --light-bg: #FAF9F5;
+      --cream-bg: #F2EDE4;
+    }
+    body { font-family: 'Inter', sans-serif; background: #111; color: #fff; }
+
+    /* ── SELECTOR BAR ── */
+    .selector {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 999;
+      background: rgba(13,13,11,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 0 48px; height: 64px;
+    }
+    .selector-logo {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 16px; letter-spacing: 0.15em; color: #fff;
+    }
+    .selector-logo span { color: var(--accent); }
+    .selector-label {
+      font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+      color: rgba(255,255,255,0.4);
+    }
+    .selector-tabs { display: flex; gap: 4px; }
+    .tab-btn {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      padding: 8px 20px; cursor: pointer; border: 1px solid transparent;
+      background: transparent; color: rgba(255,255,255,0.4);
+      transition: all 200ms; font-family: 'Inter', sans-serif;
+    }
+    .tab-btn.active {
+      color: var(--dark-bg); background: var(--accent);
+      border-color: var(--accent);
+    }
+    .tab-btn:not(.active):hover {
+      color: #fff; border-color: rgba(255,255,255,0.2);
+    }
+
+    /* ── PANELS ── */
+    .panels { padding-top: 64px; }
+    .panel { display: none; }
+    .panel.active { display: block; }
+
+    /* ── VARIANT LABEL BADGE ── */
+    .variant-badge {
+      position: fixed; bottom: 32px; right: 32px; z-index: 998;
+      padding: 12px 24px;
+      font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase;
+      background: var(--accent); color: #0D0D0B;
+      font-family: 'Inter', sans-serif;
+      pointer-events: none;
+    }
+
+    /* ══════════════════════════════════════
+       VARIANT A — FULL DARK (current)
+    ══════════════════════════════════════ */
+    .va { background: #0D0D0B; color: #E8E4DC; }
+
+    .va-nav {
+      position: sticky; top: 64px; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(13,13,11,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .va-nav-back { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(232,228,220,0.4); }
+    .va-nav-cta {
+      font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase;
+      background: #BACC23; color: #0D0D0B; padding: 8px 20px;
+    }
+
+    .va-hero {
+      min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px 48px 64px; position: relative; overflow: hidden;
+    }
+    .va-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1a1a12 0%, #0D0D0B 60%, #0a120a 100%);
+    }
+    .va-hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(232,228,220,1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,228,220,1) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .va-hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .va-tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: #BACC23; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .va-tag::before { content: ''; width: 32px; height: 1px; background: #BACC23; display: block; }
+    .va-issue { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(232,228,220,0.4); margin-bottom: 16px; }
+    .va-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; color: #E8E4DC; }
+    .va-h1 em { font-style: italic; color: #BACC23; }
+    .va-desc { font-size: 15px; color: rgba(232,228,220,0.55); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+    .va-meta { display: flex; gap: 24px; font-size: 11px; color: rgba(232,228,220,0.4); letter-spacing: 0.1em; }
+
+    .va-body { max-width: 720px; margin: 0 auto; padding: 64px 48px 80px; }
+    .va-chapeau {
+      font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic;
+      font-weight: 300; line-height: 1.6; color: #E8E4DC;
+      border-left: 2px solid #BACC23; padding-left: 24px; margin-bottom: 48px;
+    }
+    .va-p { font-size: 16px; line-height: 1.9; color: rgba(232,228,220,0.8); margin-bottom: 24px; }
+    .va-section-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(232,228,220,0.3); text-align: center; margin: 48px 0 32px; display: flex; align-items: center; gap: 16px; }
+    .va-section-label::before, .va-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(255,255,255,0.08); }
+    .va-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 48px; }
+    .va-card { background: #141410; padding: 28px; border-top: 2px solid transparent; transition: border-color 200ms; }
+    .va-card:hover { border-color: #BACC23; }
+    .va-card-icon { font-size: 24px; margin-bottom: 12px; }
+    .va-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; margin-bottom: 10px; color: #E8E4DC; }
+    .va-card p { font-size: 13px; line-height: 1.7; color: rgba(232,228,220,0.5); }
+    .va-card-tag { display: inline-block; margin-top: 10px; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #BACC23; border: 1px solid #BACC23; padding: 2px 7px; }
+    .va-quote { background: #141410; border-top: 1px solid #BACC23; padding: 36px 40px; margin: 48px 0; position: relative; }
+    .va-quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 100px; color: #BACC23; opacity: 0.12; position: absolute; top: 10px; left: 24px; line-height: 0.8; }
+    .va-quote p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; font-weight: 300; color: #E8E4DC; line-height: 1.5; position: relative; z-index: 1; }
+    .va-quote cite { display: block; margin-top: 12px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #BACC23; font-style: normal; }
+    .va-cta { background: #141410; border: 1px solid rgba(255,255,255,0.08); padding: 48px; text-align: center; border-top: 2px solid #BACC23; margin-top: 64px; }
+    .va-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; margin-bottom: 12px; color: #E8E4DC; }
+    .va-cta h3 em { font-style: italic; color: #BACC23; }
+    .va-cta p { font-size: 14px; color: rgba(232,228,220,0.4); margin-bottom: 24px; }
+    .va-cta-btn { display: inline-block; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; background: #BACC23; color: #0D0D0B; padding: 14px 36px; }
+
+    /* ══════════════════════════════════════
+       VARIANT B — FULL LIGHT
+    ══════════════════════════════════════ */
+    .vb { background: #FAF9F5; color: #1A1A14; }
+
+    .vb-nav {
+      position: sticky; top: 64px; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(250,249,245,0.97); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(26,26,20,0.08);
+    }
+    .vb-nav-back { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(26,26,20,0.4); }
+    .vb-nav-cta { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; background: #0D0D0B; color: #FAF9F5; padding: 8px 20px; }
+
+    .vb-hero {
+      min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px 48px 64px; position: relative; overflow: hidden;
+      background: #FAF9F5;
+    }
+    .vb-hero-deco {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 50%;
+      background: #F2EDE4;
+    }
+    .vb-hero-line {
+      position: absolute; top: 0; bottom: 0; left: 50%;
+      width: 1px; background: rgba(26,26,20,0.08);
+    }
+    .vb-hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .vb-tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: #7a8a10; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .vb-tag::before { content: ''; width: 32px; height: 1px; background: #BACC23; display: block; }
+    .vb-issue { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(26,26,20,0.35); margin-bottom: 16px; }
+    .vb-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; color: #1A1A14; }
+    .vb-h1 em { font-style: italic; color: #7a8a10; }
+    .vb-desc { font-size: 15px; color: rgba(26,26,20,0.55); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+    .vb-meta { display: flex; gap: 24px; font-size: 11px; color: rgba(26,26,20,0.4); letter-spacing: 0.1em; }
+
+    .vb-body { max-width: 720px; margin: 0 auto; padding: 64px 48px 80px; background: #FAF9F5; }
+    .vb-chapeau {
+      font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic;
+      font-weight: 300; line-height: 1.6; color: #1A1A14;
+      border-left: 2px solid #BACC23; padding-left: 24px; margin-bottom: 48px;
+    }
+    .vb-p { font-size: 16px; line-height: 1.9; color: rgba(26,26,20,0.75); margin-bottom: 24px; }
+    .vb-p strong { color: #1A1A14; }
+    .vb-section-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(26,26,20,0.3); text-align: center; margin: 48px 0 32px; display: flex; align-items: center; gap: 16px; }
+    .vb-section-label::before, .vb-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(26,26,20,0.1); }
+    .vb-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 48px; }
+    .vb-card { background: #F2EDE4; padding: 28px; border-top: 2px solid transparent; transition: border-color 200ms; }
+    .vb-card:hover { border-color: #BACC23; }
+    .vb-card-icon { font-size: 24px; margin-bottom: 12px; }
+    .vb-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; margin-bottom: 10px; color: #1A1A14; }
+    .vb-card p { font-size: 13px; line-height: 1.7; color: rgba(26,26,20,0.55); }
+    .vb-card-tag { display: inline-block; margin-top: 10px; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #7a8a10; border: 1px solid #BACC23; padding: 2px 7px; }
+    .vb-quote { background: #F2EDE4; border-top: 1px solid #BACC23; padding: 36px 40px; margin: 48px 0; position: relative; }
+    .vb-quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 100px; color: #BACC23; opacity: 0.25; position: absolute; top: 10px; left: 24px; line-height: 0.8; }
+    .vb-quote p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; font-weight: 300; color: #1A1A14; line-height: 1.5; position: relative; z-index: 1; }
+    .vb-quote cite { display: block; margin-top: 12px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #7a8a10; font-style: normal; }
+    .vb-cta { background: #0D0D0B; padding: 48px; text-align: center; border-top: 2px solid #BACC23; margin-top: 64px; }
+    .vb-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; margin-bottom: 12px; color: #E8E4DC; }
+    .vb-cta h3 em { font-style: italic; color: #BACC23; }
+    .vb-cta p { font-size: 14px; color: rgba(232,228,220,0.4); margin-bottom: 24px; }
+    .vb-cta-btn { display: inline-block; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; background: #BACC23; color: #0D0D0B; padding: 14px 36px; }
+
+    /* ══════════════════════════════════════
+       VARIANT C — HYBRID (dark hero + light body)
+    ══════════════════════════════════════ */
+    .vc { background: #0D0D0B; }
+
+    .vc-nav {
+      position: sticky; top: 64px; z-index: 10;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 16px 48px;
+      background: rgba(13,13,11,0.95); backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+    }
+    .vc-nav-back { font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(232,228,220,0.4); }
+    .vc-nav-cta { font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; background: #BACC23; color: #0D0D0B; padding: 8px 20px; }
+
+    /* Hero — dark comme site principal */
+    .vc-hero {
+      min-height: 70vh; display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 80px 48px 64px; position: relative; overflow: hidden;
+      color: #E8E4DC;
+    }
+    .vc-hero-bg {
+      position: absolute; inset: 0;
+      background: linear-gradient(135deg, #1a1a12 0%, #0D0D0B 60%, #0a120a 100%);
+    }
+    .vc-hero-grid {
+      position: absolute; inset: 0; opacity: 0.04;
+      background-image: linear-gradient(rgba(232,228,220,1) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(232,228,220,1) 1px, transparent 1px);
+      background-size: 80px 80px;
+    }
+    .vc-hero-svg {
+      position: absolute; right: 0; top: 0; bottom: 0; width: 50%; opacity: 0.1;
+    }
+    .vc-hero-content { position: relative; z-index: 2; max-width: 640px; }
+    .vc-tag { font-size: 10px; letter-spacing: 0.4em; text-transform: uppercase; color: #BACC23; margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+    .vc-tag::before { content: ''; width: 32px; height: 1px; background: #BACC23; display: block; }
+    .vc-issue { font-size: 10px; letter-spacing: 0.3em; text-transform: uppercase; color: rgba(232,228,220,0.4); margin-bottom: 16px; }
+    .vc-h1 { font-family: 'Cormorant Garamond', serif; font-size: clamp(36px, 5vw, 64px); font-weight: 300; line-height: 1.1; margin-bottom: 24px; color: #E8E4DC; }
+    .vc-h1 em { font-style: italic; color: #BACC23; }
+    .vc-desc { font-size: 15px; color: rgba(232,228,220,0.55); max-width: 480px; line-height: 1.7; margin-bottom: 32px; }
+    .vc-meta { display: flex; gap: 24px; font-size: 11px; color: rgba(232,228,220,0.4); letter-spacing: 0.1em; }
+
+    /* Transition hero → body */
+    .vc-transition {
+      height: 80px;
+      background: linear-gradient(to bottom, #0D0D0B, #FAF9F5);
+    }
+
+    /* Body — clair, lisible */
+    .vc-body { max-width: 720px; margin: 0 auto; padding: 0 48px 80px; background: #FAF9F5; }
+    .vc-body-wrap { background: #FAF9F5; padding-bottom: 80px; }
+    .vc-chapeau {
+      font-family: 'Cormorant Garamond', serif; font-size: 21px; font-style: italic;
+      font-weight: 300; line-height: 1.6; color: #1A1A14;
+      border-left: 2px solid #BACC23; padding-left: 24px;
+      margin: 0 auto 48px; max-width: 720px; padding-top: 0;
+    }
+    .vc-body-inner { max-width: 720px; margin: 0 auto; padding: 0 48px; }
+    .vc-p { font-size: 16px; line-height: 1.9; color: rgba(26,26,20,0.75); margin-bottom: 24px; }
+    .vc-p strong { color: #1A1A14; }
+    .vc-section-label { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(26,26,20,0.3); text-align: center; margin: 48px 0 32px; display: flex; align-items: center; gap: 16px; }
+    .vc-section-label::before, .vc-section-label::after { content: ''; flex: 1; height: 1px; background: rgba(26,26,20,0.1); }
+    .vc-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; margin-bottom: 48px; }
+    .vc-card { background: #F2EDE4; padding: 28px; border-top: 2px solid transparent; transition: border-color 200ms; }
+    .vc-card:hover { border-color: #BACC23; }
+    .vc-card-icon { font-size: 24px; margin-bottom: 12px; }
+    .vc-card h3 { font-family: 'Cormorant Garamond', serif; font-size: 19px; margin-bottom: 10px; color: #1A1A14; }
+    .vc-card p { font-size: 13px; line-height: 1.7; color: rgba(26,26,20,0.55); }
+    .vc-card-tag { display: inline-block; margin-top: 10px; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #7a8a10; border: 1px solid #BACC23; padding: 2px 7px; }
+    .vc-quote { background: #F2EDE4; border-top: 1px solid #BACC23; border-left: none; padding: 36px 40px; margin: 48px 0; position: relative; }
+    .vc-quote::before { content: '"'; font-family: 'Cormorant Garamond', serif; font-size: 100px; color: #BACC23; opacity: 0.2; position: absolute; top: 10px; left: 24px; line-height: 0.8; }
+    .vc-quote p { font-family: 'Cormorant Garamond', serif; font-size: 22px; font-style: italic; font-weight: 300; color: #1A1A14; line-height: 1.5; position: relative; z-index: 1; }
+    .vc-quote cite { display: block; margin-top: 12px; font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: #7a8a10; font-style: normal; }
+
+    /* CTA — dark pour fermer l'article */
+    .vc-cta-wrap { background: #0D0D0B; }
+    .vc-cta-transition { height: 60px; background: linear-gradient(to bottom, #FAF9F5, #0D0D0B); }
+    .vc-cta { padding: 48px; text-align: center; border-top: 2px solid #BACC23; }
+    .vc-cta h3 { font-family: 'Cormorant Garamond', serif; font-size: 30px; font-weight: 300; margin-bottom: 12px; color: #E8E4DC; }
+    .vc-cta h3 em { font-style: italic; color: #BACC23; }
+    .vc-cta p { font-size: 14px; color: rgba(232,228,220,0.4); margin-bottom: 24px; }
+    .vc-cta-btn { display: inline-block; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; background: #BACC23; color: #0D0D0B; padding: 14px 36px; }
+    .vc-related { background: #0D0D0B; padding: 0 48px 64px; max-width: 720px; margin: 0 auto; }
+    .vc-related-title { font-size: 10px; letter-spacing: 0.35em; text-transform: uppercase; color: rgba(232,228,220,0.3); margin-bottom: 20px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.07); }
+    .vc-related-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+    .vc-related-card { background: #141410; padding: 24px; border-top: 2px solid rgba(255,255,255,0.07); }
+    .vc-related-card span { display: block; font-size: 9px; letter-spacing: 0.3em; text-transform: uppercase; color: #BACC23; margin-bottom: 8px; }
+    .vc-related-card h4 { font-family: 'Cormorant Garamond', serif; font-size: 17px; color: #E8E4DC; }
+  </style>
+</head>
+<body>
+
+<!-- SELECTOR BAR -->
+<div class="selector">
+  <div class="selector-logo">ABA <span>·</span> Blog — Choix du thème</div>
+  <div class="selector-label">Sélectionne une variante</div>
+  <div class="selector-tabs">
+    <button class="tab-btn active" onclick="show('a')">A — Fond noir</button>
+    <button class="tab-btn" onclick="show('b')">B — Fond clair</button>
+    <button class="tab-btn" onclick="show('c')">C — Hybride ★</button>
+  </div>
+</div>
+
+<div class="panels">
+
+  <!-- ══ VARIANT A ══ -->
+  <div id="panel-a" class="panel active va">
+    <div class="va-nav">
+      <span class="va-nav-back">← Journal de l'Atelier</span>
+      <span class="va-nav-cta">Initier un projet</span>
+    </div>
+    <div class="va-hero">
+      <div class="va-hero-bg"></div>
+      <div class="va-hero-grid"></div>
+      <div class="va-hero-content">
+        <div class="va-tag">Journal de l'Atelier</div>
+        <div class="va-issue">N° 01 · Expertise · Mai 2026</div>
+        <h1 class="va-h1">Lire un terrain<br/><em>avant de le toucher</em></h1>
+        <p class="va-desc">La première discipline du paysagiste — et la plus sous-estimée.</p>
+        <div class="va-meta"><span>Adil Boumahdi</span><span>·</span><span>8 min de lecture</span><span>·</span><span>Conception · Étude de site</span></div>
+      </div>
+    </div>
+    <div class="va-body">
+      <p class="va-chapeau">Avant qu'un plan soit dessiné, avant qu'un seul matériau soit choisi, avant même la première réunion client — nous marchons. Nous lisons. Nous écoutons ce que le terrain a à dire.</p>
+      <p class="va-p">Un espace extérieur n'est pas une page blanche. Il a une mémoire géologique, une exposition au soleil qui change d'heure en heure, des vents dominants qui sculptent imperceptiblement la végétation, un sol dont la composition déterminera si vos plantations prospèrent ou survivent péniblement.</p>
+      <p class="va-p">Chez ABA, l'étude de site n'est pas une formalité administrative. C'est la fondation sur laquelle repose <strong>l'intégralité des décisions qui suivront</strong> — choix des espèces, positionnement des structures minérales, conception du réseau d'irrigation.</p>
+      <div class="va-section-label">Les quatre lectures du terrain</div>
+      <div class="va-grid">
+        <div class="va-card"><div class="va-card-icon">🪨</div><h3>Le sol</h3><p>Sa texture, son pH, sa capacité de drainage. Un sol argileux retient l'eau. Un sol sableux la laisse filer. Chaque décision de plantation commence ici.</p><span class="va-card-tag">Fondation</span></div>
+        <div class="va-card"><div class="va-card-icon">☀️</div><h3>L'ensoleillement</h3><p>Les zones d'ombre portée à différentes heures et en différentes saisons. Ce que vous voyez à 10h en mars n'a rien à voir avec 15h en juillet.</p><span class="va-card-tag">Orientation</span></div>
+        <div class="va-card"><div class="va-card-icon">💨</div><h3>Le vent</h3><p>Au Maroc, le chergui dessèche. Le vent marin charge en sel. Identifier les vents dominants d'un site, c'est concevoir des coupe-vents là où ils sont utiles.</p><span class="va-card-tag">Résilience</span></div>
+        <div class="va-card"><div class="va-card-icon">📐</div><h3>La topographie</h3><p>Les pentes orientent les eaux de ruissellement. Une terrasse mal positionnée devient un point de stagnation. Nous lisons le relief avant d'y tracer quoi que ce soit.</p><span class="va-card-tag">Hydraulique</span></div>
+      </div>
+      <div class="va-quote">
+        <p>Un extérieur bien conçu commence sous les pieds, pas sur l'écran. La richesse d'un projet paysager tient d'abord à la qualité de l'écoute qui le précède.</p>
+        <cite>— Adil Boumahdi, fondateur ABA</cite>
+      </div>
+      <p class="va-p">Cette lecture préalable transforme les contraintes du site en éléments de composition. Ce que d'autres voient comme des problèmes, nous les lisons comme des partis pris potentiels. <strong>Un jardin conçu à partir de son site, pas contre lui.</strong></p>
+      <div class="va-cta">
+        <h3>Votre projet mérite<br/><em>une lecture attentive.</em></h3>
+        <p>Première consultation offerte. Nous étudions chaque demande sous 72h.</p>
+        <div class="va-cta-btn">Initier un projet →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ VARIANT B ══ -->
+  <div id="panel-b" class="panel vb">
+    <div class="vb-nav">
+      <span class="vb-nav-back">← Journal de l'Atelier</span>
+      <span class="vb-nav-cta">Initier un projet</span>
+    </div>
+    <div class="vb-hero">
+      <div class="vb-hero-deco"></div>
+      <div class="vb-hero-line"></div>
+      <div class="vb-hero-content">
+        <div class="vb-tag">Journal de l'Atelier</div>
+        <div class="vb-issue">N° 01 · Expertise · Mai 2026</div>
+        <h1 class="vb-h1">Lire un terrain<br/><em>avant de le toucher</em></h1>
+        <p class="vb-desc">La première discipline du paysagiste — et la plus sous-estimée.</p>
+        <div class="vb-meta"><span>Adil Boumahdi</span><span>·</span><span>8 min de lecture</span><span>·</span><span>Conception · Étude de site</span></div>
+      </div>
+    </div>
+    <div class="vb-body">
+      <p class="vb-chapeau">Avant qu'un plan soit dessiné, avant qu'un seul matériau soit choisi, avant même la première réunion client — nous marchons. Nous lisons. Nous écoutons ce que le terrain a à dire.</p>
+      <p class="vb-p">Un espace extérieur n'est pas une page blanche. Il a une mémoire géologique, une exposition au soleil qui change d'heure en heure, des vents dominants qui sculptent imperceptiblement la végétation, un sol dont la composition déterminera si vos plantations prospèrent ou survivent péniblement.</p>
+      <p class="vb-p">Chez ABA, l'étude de site n'est pas une formalité administrative. C'est la fondation sur laquelle repose <strong>l'intégralité des décisions qui suivront</strong> — choix des espèces, positionnement des structures minérales, conception du réseau d'irrigation.</p>
+      <div class="vb-section-label">Les quatre lectures du terrain</div>
+      <div class="vb-grid">
+        <div class="vb-card"><div class="vb-card-icon">🪨</div><h3>Le sol</h3><p>Sa texture, son pH, sa capacité de drainage. Un sol argileux retient l'eau. Un sol sableux la laisse filer. Chaque décision de plantation commence ici.</p><span class="vb-card-tag">Fondation</span></div>
+        <div class="vb-card"><div class="vb-card-icon">☀️</div><h3>L'ensoleillement</h3><p>Les zones d'ombre portée à différentes heures et en différentes saisons. Ce que vous voyez à 10h en mars n'a rien à voir avec 15h en juillet.</p><span class="vb-card-tag">Orientation</span></div>
+        <div class="vb-card"><div class="vb-card-icon">💨</div><h3>Le vent</h3><p>Au Maroc, le chergui dessèche. Le vent marin charge en sel. Identifier les vents dominants d'un site, c'est concevoir des coupe-vents là où ils sont utiles.</p><span class="vb-card-tag">Résilience</span></div>
+        <div class="vb-card"><div class="vb-card-icon">📐</div><h3>La topographie</h3><p>Les pentes orientent les eaux de ruissellement. Une terrasse mal positionnée devient un point de stagnation. Nous lisons le relief avant d'y tracer quoi que ce soit.</p><span class="vb-card-tag">Hydraulique</span></div>
+      </div>
+      <div class="vb-quote">
+        <p>Un extérieur bien conçu commence sous les pieds, pas sur l'écran. La richesse d'un projet paysager tient d'abord à la qualité de l'écoute qui le précède.</p>
+        <cite>— Adil Boumahdi, fondateur ABA</cite>
+      </div>
+      <p class="vb-p">Cette lecture préalable transforme les contraintes du site en éléments de composition. Ce que d'autres voient comme des problèmes, nous les lisons comme des partis pris potentiels. <strong>Un jardin conçu à partir de son site, pas contre lui.</strong></p>
+      <div class="vb-cta">
+        <h3>Votre projet mérite<br/><em>une lecture attentive.</em></h3>
+        <p>Première consultation offerte. Nous étudions chaque demande sous 72h.</p>
+        <div class="vb-cta-btn">Initier un projet →</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ══ VARIANT C — HYBRID ══ -->
+  <div id="panel-c" class="panel vc">
+    <div class="vc-nav">
+      <span class="vc-nav-back">← Journal de l'Atelier</span>
+      <span class="vc-nav-cta">Initier un projet</span>
+    </div>
+    <!-- Dark hero -->
+    <div class="vc-hero">
+      <div class="vc-hero-bg"></div>
+      <div class="vc-hero-grid"></div>
+      <svg class="vc-hero-svg" viewBox="0 0 600 500" fill="none">
+        <ellipse cx="400" cy="280" rx="320" ry="180" stroke="#BACC23" stroke-width="0.8" fill="none"/>
+        <ellipse cx="400" cy="280" rx="240" ry="130" stroke="#BACC23" stroke-width="0.8" fill="none"/>
+        <ellipse cx="400" cy="280" rx="160" ry="85" stroke="#BACC23" stroke-width="0.8" fill="none"/>
+        <ellipse cx="400" cy="280" rx="85" ry="44" stroke="#BACC23" stroke-width="1.2" fill="none"/>
+        <circle cx="100" cy="80" r="32" stroke="#BACC23" stroke-width="0.6" fill="none"/>
+        <line x1="100" y1="40" x2="100" y2="24" stroke="#BACC23" stroke-width="0.6"/>
+        <line x1="100" y1="120" x2="100" y2="136" stroke="#BACC23" stroke-width="0.6"/>
+        <line x1="60" y1="80" x2="44" y2="80" stroke="#BACC23" stroke-width="0.6"/>
+        <line x1="140" y1="80" x2="156" y2="80" stroke="#BACC23" stroke-width="0.6"/>
+      </svg>
+      <div class="vc-hero-content">
+        <div class="vc-tag">Journal de l'Atelier</div>
+        <div class="vc-issue">N° 01 · Expertise · Mai 2026</div>
+        <h1 class="vc-h1">Lire un terrain<br/><em>avant de le toucher</em></h1>
+        <p class="vc-desc">La première discipline du paysagiste — et la plus sous-estimée.</p>
+        <div class="vc-meta"><span>Adil Boumahdi</span><span>·</span><span>8 min de lecture</span><span>·</span><span>Conception · Étude de site</span></div>
+      </div>
+    </div>
+    <!-- Transition -->
+    <div class="vc-transition"></div>
+    <!-- Light body -->
+    <div class="vc-body-wrap">
+      <div class="vc-body-inner">
+        <p class="vc-chapeau" style="padding-top:0; margin-top: 0;">Avant qu'un plan soit dessiné, avant qu'un seul matériau soit choisi, avant même la première réunion client — nous marchons. Nous lisons. Nous écoutons ce que le terrain a à dire.</p>
+        <p class="vc-p">Un espace extérieur n'est pas une page blanche. Il a une mémoire géologique, une exposition au soleil qui change d'heure en heure, des vents dominants qui sculptent imperceptiblement la végétation, un sol dont la composition déterminera si vos plantations prospèrent ou survivent péniblement.</p>
+        <p class="vc-p">Chez ABA, l'étude de site n'est pas une formalité administrative. C'est la fondation sur laquelle repose <strong>l'intégralité des décisions qui suivront</strong> — choix des espèces, positionnement des structures minérales, conception du réseau d'irrigation.</p>
+        <div class="vc-section-label">Les quatre lectures du terrain</div>
+        <div class="vc-grid">
+          <div class="vc-card"><div class="vc-card-icon">🪨</div><h3>Le sol</h3><p>Sa texture, son pH, sa capacité de drainage. Un sol argileux retient l'eau. Un sol sableux la laisse filer. Chaque décision de plantation commence ici.</p><span class="vc-card-tag">Fondation</span></div>
+          <div class="vc-card"><div class="vc-card-icon">☀️</div><h3>L'ensoleillement</h3><p>Les zones d'ombre portée à différentes heures et en différentes saisons. Ce que vous voyez à 10h en mars n'a rien à voir avec 15h en juillet.</p><span class="vc-card-tag">Orientation</span></div>
+          <div class="vc-card"><div class="vc-card-icon">💨</div><h3>Le vent</h3><p>Au Maroc, le chergui dessèche. Le vent marin charge en sel. Identifier les vents dominants d'un site, c'est concevoir des coupe-vents là où ils sont utiles.</p><span class="vc-card-tag">Résilience</span></div>
+          <div class="vc-card"><div class="vc-card-icon">📐</div><h3>La topographie</h3><p>Les pentes orientent les eaux de ruissellement. Une terrasse mal positionnée devient un point de stagnation. Nous lisons le relief avant d'y tracer quoi que ce soit.</p><span class="vc-card-tag">Hydraulique</span></div>
+        </div>
+        <div class="vc-quote">
+          <p>Un extérieur bien conçu commence sous les pieds, pas sur l'écran. La richesse d'un projet paysager tient d'abord à la qualité de l'écoute qui le précède.</p>
+          <cite>— Adil Boumahdi, fondateur ABA</cite>
+        </div>
+        <p class="vc-p">Cette lecture préalable transforme les contraintes du site en éléments de composition. Ce que d'autres voient comme des problèmes, nous les lisons comme des partis pris potentiels. <strong>Un jardin conçu à partir de son site, pas contre lui.</strong></p>
+      </div>
+      <!-- Back to dark for CTA -->
+      <div class="vc-cta-transition"></div>
+      <div class="vc-cta-wrap">
+        <div style="max-width:720px; margin: 0 auto; padding: 0 48px;">
+          <div class="vc-cta">
+            <h3>Votre projet mérite<br/><em>une lecture attentive.</em></h3>
+            <p>Première consultation offerte. Nous étudions chaque demande sous 72h.</p>
+            <div class="vc-cta-btn">Initier un projet →</div>
+          </div>
+          <div class="vc-related">
+            <div class="vc-related-title">— Articles suivants</div>
+            <div class="vc-related-grid">
+              <div class="vc-related-card"><span>N° 02 · Minéral</span><h4>La pierre sèche : pourquoi elle dure 300 ans</h4></div>
+              <div class="vc-related-card"><span>N° 03 · Végétal</span><h4>Choisir une plante endémique, pas décorative</h4></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</div>
+
+<!-- Badge variante -->
+<div class="variant-badge" id="badge">A — Fond noir intégral</div>
+
+<script>
+  const labels = {
+    a: 'A — Fond noir intégral',
+    b: 'B — Fond clair intégral',
+    c: 'C — Hybride : hero sombre + lecture claire ★'
+  };
+  function show(v) {
+    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    document.getElementById('panel-' + v).classList.add('active');
+    document.querySelectorAll('.tab-btn')[['a','b','c'].indexOf(v)].classList.add('active');
+    document.getElementById('badge').textContent = labels[v];
+    window.scrollTo(0, 0);
+  }
+</script>
+</body>
+</html>
