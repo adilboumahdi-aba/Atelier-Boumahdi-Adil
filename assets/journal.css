@@ -140,6 +140,10 @@ body {
 /* Logo ABA (vectoriel, adaptatif) */
 .aba-logo { display: inline-flex; align-items: center; gap: 11px; flex: 0 0 auto; }
 .aba-logo__icon { width: 30px; height: 34px; color: var(--green); flex: 0 0 auto; }
+/* PNG logo : thème clair → multiply efface le fond blanc, marques noires restent */
+.aba-logo__img { width: 32px; height: auto; flex: 0 0 auto; mix-blend-mode: multiply; display: block; }
+/* Thème sombre : invert + screen → marques blanches sur fond sombre */
+[data-theme="dark"] .aba-logo__img { filter: invert(1); mix-blend-mode: screen; }
 .aba-logo__txt { display: flex; flex-direction: column; gap: 3px; line-height: 1; }
 .aba-logo__aba {
   font-family: var(--sans); font-weight: 600; font-size: 15px;
