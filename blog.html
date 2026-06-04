@@ -82,9 +82,9 @@
     <div class="masthead__tools">
       <!-- Langue -->
       <div class="seg" role="group" aria-label="Langue">
-        <button aria-pressed="true" onclick="setLang('fr')">FR</button>
-        <button aria-pressed="false" onclick="setLang('en')">EN</button>
-        <button aria-pressed="false" onclick="setLang('es')">ES</button>
+        <button aria-pressed="true" data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button aria-pressed="false" data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button aria-pressed="false" data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
       </div>
 
       <!-- Thème -->
@@ -110,7 +110,7 @@
   <!-- Navigation catégories -->
   <nav class="catnav wrap" aria-label="Catégories">
     <div class="catnav__scroll">
-      <button class="chip" aria-pressed="true" data-cat="all">Tout le journal</button>
+      <button class="chip" aria-pressed="true" data-cat="all" data-i18n="allJournal">Tout le journal</button>
       <button class="chip" aria-pressed="false" data-cat="hardscape">
         <span class="chip__dot" style="background:#95897a"></span>Hardscape
       </button>
@@ -152,9 +152,9 @@
 <section class="wrap hero" data-section="hero">
 
   <div class="journal-kicker">
-    <span class="eyebrow accent">Le journal de l'atelier</span>
+    <span class="eyebrow accent" data-i18n="heroKicker">Le journal de l'atelier</span>
     <hr class="hr" />
-    <span class="eyebrow">Numéro 01 — Été 2026</span>
+    <span class="eyebrow" data-i18n="issueLabel">Numéro 01 — Été 2026</span>
   </div>
 
   <div class="hero__grid">
@@ -191,7 +191,7 @@
 ═══════════════════════════════════════ -->
 <section class="wrap" data-section="featured">
   <div class="section-head">
-    <h2>À la une</h2>
+    <h2 data-i18n="featured">À la une</h2>
     <span class="count">02</span>
   </div>
   <div class="grid grid--edit">
@@ -232,7 +232,7 @@
 ═══════════════════════════════════════ -->
 <section class="wrap" data-section="lectures">
   <div class="section-head">
-    <h2>Lectures</h2>
+    <h2 data-i18n="lectures">Lectures</h2>
     <span class="count">05</span>
   </div>
   <div class="grid grid--edit">
@@ -315,7 +315,7 @@
 ═══════════════════════════════════════ -->
 <section class="wrap" id="sommaire">
   <div class="section-head">
-    <h2>Dans ce numéro</h2>
+    <h2 data-i18n="inIssue">Dans ce numéro</h2>
     <span class="count" id="art-count">22</span>
   </div>
   <div class="row" id="contents-list">
@@ -508,7 +508,7 @@
         <ul>
           <li><a href="preview.html">Site ABA</a></li>
           <li><a href="preview.html#projets">Projets</a></li>
-          <li><a href="preview.html#contact">Initier un projet</a></li>
+          <li><a href="preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li>
           <li><a href="preview.html#contact">Contact</a></li>
         </ul>
       </div>
@@ -583,5 +583,7 @@ document.querySelectorAll('.card').forEach(card => {
 });
 </script>
 
+
+<script src="assets/i18n.js"></script>
 </body>
 </html>

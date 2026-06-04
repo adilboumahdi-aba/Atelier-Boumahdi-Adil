@@ -25,22 +25,27 @@
       </a>
     </div>
     <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
       <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
     </div>
   </div>
 </header>
 
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <article class="article fade-up">
   <header class="wrap-narrow" style="text-align:center;padding-top:clamp(16px,3vw,36px)">
     <div style="display:flex;justify-content:center;margin-bottom:6px">
       <span class="a-cat"><span class="chip__dot" style="background:#7e9070"></span>Softscape</span>
     </div>
-    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px">Jardiner l'ombre sous l'olivier</h1>
-    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 4px">Le sous-bois sec existe : ce qui pousse là où la lumière est avare.</p>
+    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px" data-fr="Jardiner l'ombre sous l'olivier" data-en="Gardening the shade beneath the olive" data-es="Jardinear la sombra bajo el olivo">Jardiner l'ombre sous l'olivier</h1>
+    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 4px" data-fr="Le sous-bois sec existe : ce qui pousse là où la lumière est avare." data-en="The dry understorey exists: what grows where light is scarce." data-es="El sotobosque seco existe: lo que crece donde la luz escasea.">Le sous-bois sec existe : ce qui pousse là où la lumière est avare.</p>
     <div class="a-byline" style="justify-content:center">
       <span>Par <b>Nadia Berrada</b></span><span class="dotsep"></span><span>23 avr. 2026</span><span class="dotsep"></span><span>4 min de lecture</span>
     </div>
@@ -72,7 +77,7 @@
     <div class="cta__rule"></div>
     <p class="cta__head">Votre jardin mérite <em>une ombre vivante.</em></p>
     <p class="cta__sub">Des plantations pensées pour le climat, pas contre lui.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -103,7 +108,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
@@ -113,5 +118,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

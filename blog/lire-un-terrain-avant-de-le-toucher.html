@@ -30,6 +30,11 @@
       </a>
     </div>
     <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
       <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
           <circle cx="12" cy="12" r="5"/>
@@ -37,19 +42,19 @@
           <line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/>
         </svg>
       </button>
-      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
     </div>
   </div>
 </header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <!-- ARTICLE ASIDE -->
 <article class="article fade-up">
   <header class="wrap" style="padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(24px,3vw,40px)">
     <span class="a-cat"><span class="chip__dot" style="background:#6e7d88"></span>Carnet de chantier</span>
-    <h1 class="a-title" style="font-size:clamp(38px,6.5vw,84px);max-width:16ch">Lire un terrain avant de le toucher</h1>
-    <p class="a-dek" style="font-size:clamp(19px,1.8vw,24px);max-width:44ch;margin-top:18px">La première discipline du paysagiste — et la plus sous-estimée. Ce que nous analysons avant qu'une seule pierre soit posée.</p>
+    <h1 class="a-title" style="font-size:clamp(38px,6.5vw,84px);max-width:16ch" data-fr="Lire un terrain avant de le toucher" data-en="Reading a site before touching it" data-es="Leer un terreno antes de tocarlo">Lire un terrain avant de le toucher</h1>
+    <p class="a-dek" style="font-size:clamp(19px,1.8vw,24px);max-width:44ch;margin-top:18px" data-fr="La première discipline du paysagiste — et la plus sous-estimée." data-en="The landscape architect's first discipline — and the most underestimated." data-es="La primera disciplina del arquitecto paisajista — y la más subestimada.">La première discipline du paysagiste — et la plus sous-estimée.</p>
   </header>
 
   <div class="wrap aside-grid">
@@ -302,7 +307,7 @@
     <div class="cta__rule"></div>
     <p class="cta__head">Votre terrain mérite <em>une lecture attentive.</em></p>
     <p class="cta__sub">Première consultation offerte. Nous étudions chaque demande sous 72h et n'engageons qu'un nombre limité de projets par an.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -335,7 +340,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#projets">Projets</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#projets">Projets</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span><span>© 2026 — ab-landscapes.com</span></div>
@@ -345,5 +350,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

@@ -25,19 +25,24 @@
       </a>
     </div>
     <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
       <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
     </div>
   </div>
 </header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <article class="article fade-up">
   <header class="wrap" style="padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(24px,3vw,40px)">
     <span class="a-cat"><span class="chip__dot" style="background:#8b9a7f"></span>Botanique endémique</span>
-    <h1 class="a-title" style="font-size:clamp(32px,5vw,72px);max-width:24ch">L'arganier en aménagement paysager : usages, contraintes, potentiel</h1>
-    <p class="a-dek" style="font-size:clamp(17px,1.6vw,22px);max-width:54ch;margin-top:18px"><em>Argania spinosa</em> est l'arbre le plus endémique du Maroc. Planté en paysagisme, il exige du temps et une connaissance précise de ses contraintes — en échange d'une présence que rien d'autre ne remplace.</p>
+    <h1 class="a-title" style="font-size:clamp(32px,5vw,72px);max-width:24ch" data-fr="L'arganier en aménagement paysager : usages, contraintes, potentiel" data-en="The argan tree in landscape design: uses, constraints, potential" data-es="El argán en el diseño paisajístico: usos, limitaciones, potencial">L'arganier en aménagement paysager : usages, contraintes, potentiel</h1>
+    <p class="a-dek" style="font-size:clamp(17px,1.6vw,22px);max-width:54ch;margin-top:18px" data-fr="Endémique, résistant à la sécheresse, à la croissance lente : l'arganier impose sa loi, et c'est sa force." data-en="Endemic, drought-resistant, slow-growing: the argan tree sets its own rules, and that is its strength." data-es="Endémico, resistente a la sequía, de crecimiento lento: el argán impone sus reglas, y esa es su fuerza.">Endémique, résistant à la sécheresse, à la croissance lente : l'arganier impose sa loi, et c'est sa force.</p>
   </header>
 
   <div class="wrap aside-grid">
@@ -157,7 +162,7 @@
     <div class="cta__rule"></div>
     <p class="cta__head">Un jardin qui <em>vit avec son territoire.</em></p>
     <p class="cta__sub">La palette endémique, l'arganier comme structure, l'eau gérée au minimum — un aménagement construit pour les décennies, pas pour la saison.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -188,7 +193,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span><span>© 2026 — ab-landscapes.com</span></div>
@@ -198,5 +203,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

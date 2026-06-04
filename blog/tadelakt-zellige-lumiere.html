@@ -25,20 +25,25 @@
       </a>
     </div>
     <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
       <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
     </div>
   </div>
 </header>
 
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <article class="article fade-up">
   <header class="wrap" style="padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(20px,3vw,36px);text-align:center">
     <div style="display:flex;justify-content:center;margin-bottom:6px"><span class="a-cat"><span class="chip__dot" style="background:#9c7d63"></span>Matières &amp; Métiers</span></div>
-    <h1 class="a-title" style="font-size:clamp(36px,5.5vw,72px);max-width:20ch;margin:10px auto 16px">Tadelakt &amp; zellige : la matière comme lumière</h1>
-    <p class="a-dek" style="max-width:40ch;margin:0 auto;font-size:clamp(19px,1.7vw,23px)">Deux savoir-faire marocains où la surface ne recouvre pas le mur — elle le rend lumineux.</p>
+    <h1 class="a-title" style="font-size:clamp(36px,5.5vw,72px);max-width:20ch;margin:10px auto 16px" data-fr="Tadelakt & zellige : la matière comme lumière" data-en="Tadelakt & zellige: matter as light" data-es="Tadelakt y zellige: la materia como luz">Tadelakt & zellige : la matière comme lumière</h1>
+    <p class="a-dek" style="max-width:40ch;margin:0 auto;font-size:clamp(19px,1.7vw,23px)" data-fr="Deux savoir-faire marocains où la surface ne recouvre pas le mur — elle le rend lumineux." data-en="Two Moroccan crafts where the surface does not cover the wall — it makes it luminous." data-es="Dos saberes marroquíes donde la superficie no recubre el muro: lo vuelve luminoso.">Deux savoir-faire marocains où la surface ne recouvre pas le mur — elle le rend lumineux.</p>
     <div class="a-byline" style="justify-content:center;margin-top:14px">
       <span>Par <b>Atelier ABA</b></span><span class="dotsep"></span><span>7 mai 2026</span><span class="dotsep"></span><span>8 min de lecture</span>
     </div>
@@ -77,7 +82,7 @@
     <div class="cta__rule"></div>
     <p class="cta__head">Votre projet mérite <em>la matière juste.</em></p>
     <p class="cta__sub">Tadelakt, zellige, pierre locale — choisis dès la conception, pas en fin de chantier.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -108,7 +113,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span><span>© 2026</span></div>
@@ -118,5 +123,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

@@ -25,20 +25,25 @@
     <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
   </a></div>
   <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
     <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div></header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <!-- HERO IMMERSIF -->
 <div class="imm-hero" style="--ph-a:#9db9c4;--ph-b:#6d96a3;--ph-c:#3f6e7a;">
   <div class="imm-hero__scrim"></div>
   <div class="wrap imm-hero__inner">
     <span class="a-cat" style="color:#e9c98f"><span class="chip__dot" style="background:#6d96a3;box-shadow:0 0 0 3px rgba(255,255,255,0.18)"></span>Waterscape</span>
-    <h1 class="a-title imm-hero__title">Un lac artificiel, comment ça vit vraiment</h1>
-    <p class="a-dek imm-hero__dek">pH, O₂ dissous, cycle de l'azote, filtration biologique : la science derrière la beauté d'un plan d'eau.</p>
+    <h1 class="a-title imm-hero__title" data-fr="Un lac artificiel, comment ça vit vraiment" data-en="An artificial lake: how it really lives" data-es="Un lago artificial, cómo vive realmente">Un lac artificiel, comment ça vit vraiment</h1>
+    <p class="a-dek imm-hero__dek" data-fr="pH, O₂ dissous, cycle de l'azote, filtration biologique : la science derrière la beauté d'un plan d'eau." data-en="pH, dissolved O₂, nitrogen cycle, biological filtration: the science behind the beauty of a water feature." data-es="pH, O₂ disuelto, ciclo del nitrógeno, filtración biológica: la ciencia detrás de la belleza de un espejo de agua.">pH, O₂ dissous, cycle de l'azote, filtration biologique : la science derrière la beauté d'un plan d'eau.</p>
     <div class="imm-hero__meta"><span>Par Adil Boumahdi</span><span class="dotsep"></span><span>Sept. 2026</span><span class="dotsep"></span><span>9 min de lecture</span></div>
   </div>
 </div>
@@ -210,7 +215,7 @@
       <div class="cta__rule"></div>
       <p class="cta__head">Votre jardin mérite <em>une eau qui respire.</em></p>
       <p class="cta__sub">Nous dessinons l'eau dès le plan. De la conception du bilan hydrique à la mise en eau, chaque plan d'eau ABA est conçu pour s'auto-réguler.</p>
-      <a href="../preview.html#contact" class="btn btn--brand btn--lg">Initier un projet</a>
+      <a href="../preview.html#contact" class="btn btn--brand btn--lg" data-i18n="initiateProject">Initier un projet</a>
     </div>
 
     <!-- Articles liés -->
@@ -242,7 +247,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
@@ -252,5 +257,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

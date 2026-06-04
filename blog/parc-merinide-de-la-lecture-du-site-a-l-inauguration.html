@@ -25,12 +25,17 @@
     <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
   </a></div>
   <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
     <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div></header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <!-- ARTICLE IMMERSIF -->
 <article class="article fade-up">
@@ -40,8 +45,8 @@
     <div class="imm-hero__scrim"></div>
     <div class="wrap imm-hero__inner">
       <span class="a-cat" style="color:#e9c98f"><span class="chip__dot" style="background:#6e7d88;box-shadow:0 0 0 3px rgba(255,255,255,0.18)"></span>Carnet de chantier</span>
-      <h1 class="a-title imm-hero__title">Parc Mérinide — de la lecture du site à l'inauguration</h1>
-      <p class="a-dek imm-hero__dek">5 hectares, un lac de 5 000 m², une flore endémique. Le workflow complet d'un projet public patrimonial.</p>
+      <h1 class="a-title imm-hero__title" data-fr="Parc Mérinide — de la lecture du site à l'inauguration" data-en="Mérinide Park — from site analysis to inauguration" data-es="Parque Mérinide — del análisis del sitio a la inauguración">Parc Mérinide — de la lecture du site à l'inauguration</h1>
+      <p class="a-dek imm-hero__dek" data-fr="5 hectares, un lac de 5 000 m², une flore endémique. Le workflow complet d'un projet public patrimonial." data-en="5 hectares, a 5,000 m² lake, endemic flora. The complete workflow of a heritage public project." data-es="5 hectáreas, un lago de 5 000 m², flora endémica. El proceso completo de un proyecto público patrimonial.">5 hectares, un lac de 5 000 m², une flore endémique. Le workflow complet d'un projet public patrimonial.</p>
       <div class="imm-hero__meta">
         <span>Par Adil Boumahdi</span><span class="dotsep"></span><span>Août 2026</span><span class="dotsep"></span><span>10 min de lecture</span>
       </div>
@@ -361,7 +366,7 @@
   <div class="cta"><div class="cta__rule"></div>
     <p class="cta__head">Votre projet mérite <em>un atelier exigeant.</em></p>
     <p class="cta__sub">De l'esquisse à la dernière pierre — diagnostic, conception, chantier, inauguration.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -393,7 +398,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
@@ -404,5 +409,7 @@ function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-t
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
 
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

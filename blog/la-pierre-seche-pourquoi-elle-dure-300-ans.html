@@ -25,19 +25,24 @@
       </a>
     </div>
     <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
       <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+      <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
     </div>
   </div>
 </header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <article class="article fade-up">
   <header class="wrap" style="padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(24px,3vw,40px)">
     <span class="a-cat"><span class="chip__dot" style="background:#95897a"></span>Hardscape</span>
-    <h1 class="a-title" style="font-size:clamp(38px,6.5vw,84px);max-width:18ch">La pierre sèche : pourquoi elle dure 300 ans</h1>
-    <p class="a-dek" style="font-size:clamp(19px,1.8vw,24px);max-width:48ch;margin-top:18px">Aucun liant, aucun mortier — la pierre sèche dure trois siècles par la seule physique de l'assemblage, et elle le fait mieux que le béton.</p>
+    <h1 class="a-title" style="font-size:clamp(38px,6.5vw,84px);max-width:18ch" data-fr="La pierre sèche : pourquoi elle dure 300 ans" data-en="Dry stone: why it lasts 300 years" data-es="La piedra seca: por qué dura 300 años">La pierre sèche : pourquoi elle dure 300 ans</h1>
+    <p class="a-dek" style="font-size:clamp(19px,1.8vw,24px);max-width:48ch;margin-top:18px" data-fr="Aucun liant, aucun mortier — la pierre sèche dure trois siècles par la seule physique de l'assemblage." data-en="No binder, no mortar — dry stone lasts three centuries through the sheer physics of assembly." data-es="Sin aglomerante, sin mortero — la piedra seca dura tres siglos por la pura física del ensamblaje.">Aucun liant, aucun mortier — la pierre sèche dure trois siècles par la seule physique de l'assemblage.</p>
   </header>
 
   <div class="wrap aside-grid">
@@ -277,7 +282,7 @@
     <div class="cta__rule"></div>
     <p class="cta__head">Un jardin qui <em>dure vraiment.</em></p>
     <p class="cta__sub">La pierre sèche, le végétal endémique, l'eau bien gérée — trois engagements pour des espaces extérieurs qui traversent les générations.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -308,7 +313,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span><span>© 2026 — ab-landscapes.com</span></div>
@@ -318,5 +323,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

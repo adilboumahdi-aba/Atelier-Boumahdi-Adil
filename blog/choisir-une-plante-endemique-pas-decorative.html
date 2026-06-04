@@ -210,12 +210,17 @@
     <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
   </a></div>
   <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
     <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div></header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <!-- ARTICLE -->
 <article class="article fade-up">
@@ -227,9 +232,9 @@
       Botanique endémique
     </span>
     <div style="display:grid;grid-template-columns:1.2fr 0.8fr;gap:clamp(20px,3vw,48px);align-items:end;margin-top:12px">
-      <h1 class="a-title" style="font-size:clamp(34px,5vw,68px)">Plante endémique,<br><em>pas décorative</em></h1>
+      <h1 class="a-title" style="font-size:clamp(34px,5vw,68px)" data-fr="Choisir une plante endémique, pas décorative" data-en="Choosing an endemic plant, not a decorative one" data-es="Elegir una planta endémica, no decorativa">Choisir une plante endémique, pas décorative</h1>
       <div>
-        <p class="a-dek" style="margin-bottom:14px">Une espèce endémique ne demande pas à être sous perfusion. Elle appartient à ce sol, à ce vent, à ce ciel — et elle le prouve en tenant cent ans.</p>
+        <p class="a-dek" style="margin-bottom:14px" data-fr="Pourquoi la plante locale résiste mieux, coûte moins et vieillit plus gracieusement." data-en="Why the local plant resists better, costs less and ages more gracefully." data-es="Por qué la planta local resiste mejor, cuesta menos y envejece más graciosamente.">Pourquoi la plante locale résiste mieux, coûte moins et vieillit plus gracieusement.</p>
         <div class="card__meta">Adil Boumahdi · Juil. 2026 · 8 min de lecture</div>
       </div>
     </div>
@@ -535,7 +540,7 @@
   <div class="cta"><div class="cta__rule"></div>
     <p class="cta__head">Votre jardin mérite <em>des plantes chez elles.</em></p>
     <p class="cta__sub">Une palette endémique, belle et sobre en eau — adaptée au sol, à l'exposition, au vent.</p>
-    <a href="../preview.html#contact" class="btn btn--lg">Initier un projet</a>
+    <a href="../preview.html#contact" class="btn btn--lg" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div>
 
@@ -567,7 +572,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
@@ -578,5 +583,7 @@ function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-t
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
 
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

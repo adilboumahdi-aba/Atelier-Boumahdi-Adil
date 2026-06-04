@@ -87,12 +87,17 @@
     <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
   </a></div>
   <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
     <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div></header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <!-- ARTICLE -->
 <article class="article fade-up" style="--ph-a:#9ba6ad;--ph-b:#6e7d88;--ph-c:#455460">
@@ -102,8 +107,8 @@
     <div style="display:flex;justify-content:center;margin-bottom:6px">
       <span class="a-cat"><span class="chip__dot"></span>Carnet de chantier</span>
     </div>
-    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px">L'étang de Rabat — hydraulique, filtre biologique et Koi</h1>
-    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 18px">25 m³, 1,8 m de profondeur, 12 Koi adultes.</p>
+    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px" data-fr="L'étang de Rabat — hydraulique, filtre biologique et Koi" data-en="The Rabat pond — hydraulics, biological filter and Koi" data-es="El estanque de Rabat — hidráulica, filtro biológico y Koi">L'étang de Rabat — hydraulique, filtre biologique et Koi</h1>
+    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 18px" data-fr="25 m³, 1,8 m de profondeur, 12 Koi adultes. Un système hydraulique complet." data-en="25 m³, 1.8 m depth, 12 adult Koi. A complete hydraulic system." data-es="25 m³, 1,8 m de profundidad, 12 Koi adultos. Un sistema hidráulico completo.">25 m³, 1,8 m de profondeur, 12 Koi adultes. Un système hydraulique complet.</p>
     <div class="a-byline" style="justify-content:center"><span>Par <b>Adil Boumahdi</b></span><span class="dotsep"></span><span>Déc. 2026</span><span class="dotsep"></span><span>10 min de lecture</span></div>
   </header>
 
@@ -335,7 +340,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
@@ -345,5 +350,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

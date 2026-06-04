@@ -25,12 +25,17 @@
     <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi Adil</span></div>
   </a></div>
   <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
     <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg></button>
-    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px">Initier un projet</a>
+    <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
   </div>
 </div></header>
-<div class="wrap backbar"><a href="../blog.html" class="back-link">← Retour au sommaire</a></div>
+<div class="wrap backbar"><a href="../blog.html" class="back-link" data-i18n="backToJournal">← Retour au sommaire</a></div>
 
 <!-- ARTICLE ASYMÉTRIQUE -->
 <article class="article fade-up">
@@ -38,8 +43,8 @@
   <!-- En-tête avant la grille -->
   <header class="wrap-narrow" style="padding-top:clamp(8px,2vw,28px);padding-bottom:clamp(20px,3vw,40px)">
     <span class="a-cat"><span class="chip__dot" style="background:#6d96a3"></span>Waterscape</span>
-    <h1 class="a-title" style="font-size:clamp(36px,5.5vw,72px);margin-top:12px;margin-bottom:16px">L'arrosage automatique : programmer l'eau comme un agronome</h1>
-    <p class="a-dek" style="font-size:clamp(17px,1.4vw,21px);margin-top:12px">Secteurs indépendants, sondes d'humidité, sevrage progressif. Un réseau d'irrigation professionnel ne fait pas que distribuer l'eau — il apprend à en distribuer de moins en moins.</p>
+    <h1 class="a-title" style="font-size:clamp(36px,5.5vw,72px);margin-top:12px;margin-bottom:16px" data-fr="L'arrosage automatique : programmer l'eau comme un agronome" data-en="Irrigation systems: programming water like an agronomist" data-es="El riego automático: programar el agua como un agrónomo">L'arrosage automatique : programmer l'eau comme un agronome</h1>
+    <p class="a-dek" style="font-size:clamp(17px,1.4vw,21px);margin-top:12px" data-fr="Secteurs, capteurs d'humidité, sevrage progressif : l'irrigation pensée pour disparaître." data-en="Zones, moisture sensors, progressive weaning: irrigation designed to disappear." data-es="Sectores, sensores de humedad, reducción progresiva: el riego pensado para desaparecer.">Secteurs, capteurs d'humidité, sevrage progressif : l'irrigation pensée pour disparaître.</p>
     <div class="a-byline" style="margin-top:14px">
       <b>Adil Boumahdi</b>
       <span class="dotsep"></span>
@@ -338,7 +343,7 @@
       <div class="cta__rule"></div>
       <p class="cta__head">Votre jardin mérite <em>une eau programmée.</em></p>
       <p class="cta__sub">Un système bien conçu se rend progressivement inutile. Chaque réseau ABA est conçu avec un plan de sevrage progressif intégré.</p>
-      <a href="../preview.html#contact" class="btn btn--brand btn--lg">Initier un projet</a>
+      <a href="../preview.html#contact" class="btn btn--brand btn--lg" data-i18n="initiateProject">Initier un projet</a>
     </div>
 
     <!-- Articles liés -->
@@ -369,7 +374,7 @@
           <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
         </div>
       </a><p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc.</p></div>
-    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact">Initier un projet</a></li></ul></div>
+    <div><h4>L'atelier</h4><ul><li><a href="../preview.html">Site ABA</a></li><li><a href="../preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li></ul></div>
     <div><h4>Journal</h4><ul><li><a href="../blog.html">Tous les articles</a></li></ul></div>
   </div>
   <div class="footer__base"><span>ABA — Atelier Boumahdi Adil · Rabat</span><span>© 2026</span></div>
@@ -379,5 +384,7 @@
 function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
 (function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
 </script>
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>

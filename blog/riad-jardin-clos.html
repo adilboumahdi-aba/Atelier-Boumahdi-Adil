@@ -47,6 +47,11 @@
 
       <!-- Outils -->
       <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
         <div class="seg" role="group" aria-label="Thème de lecture">
           <button id="btn-dark" onclick="setTheme('dark')" aria-pressed="true">
             <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
@@ -59,8 +64,8 @@
           <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
           Journal
         </a>
-        <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px">← Journal</a>
-        <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px;">Initier un projet</a>
+        <a href="../blog.html" class="btn-ghost" style="font-size:11px;padding:10px 16px" data-i18n="journalBtn">← Journal</a>
+        <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px;" data-i18n="initiateProject">Initier un projet</a>
       </div>
 
     </div>
@@ -95,13 +100,9 @@
       </span>
     </div>
 
-    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px">
-      Le riad, archétype du jardin clos
-    </h1>
+    <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px" data-fr="Le riad, archétype du jardin clos" data-en="The riad, archetype of the enclosed garden" data-es="El riad, arquetipo del jardín cerrado">Le riad, archétype du jardin clos</h1>
 
-    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 24px">
-      Du paradis perse au patio de Fès&nbsp;: une généalogie du jardin que l'on habite par le centre.
-    </p>
+    <p class="a-dek" style="font-size:clamp(19px,1.7vw,23px);max-width:32ch;margin:0 auto 24px" data-fr="Du paradis perse au patio de Fès : une généalogie du jardin que l'on habite par le centre." data-en="From the Persian paradise to the Fès patio: a genealogy of the garden one inhabits from its centre." data-es="Del paraíso persa al patio de Fez: una genealogía del jardín que se habita desde el centro.">Du paradis perse au patio de Fès : une généalogie du jardin que l'on habite par le centre.</p>
 
     <div class="a-byline" style="justify-content:center">
       <span>Par <b>Salma Othmani</b></span>
@@ -334,5 +335,7 @@
   })();
 </script>
 
+
+<script src="../assets/i18n.js"></script>
 </body>
 </html>
