@@ -1,6 +1,6 @@
 # ABA Paysage — Onboarding Claude Code
 > Fichier de mémoire projet. Lis ce fichier en premier à chaque nouvelle session.
-> Dernière mise à jour automatique : 2026-06-05 13:44
+> Dernière mise à jour automatique : 2026-06-05 13:53
 
 ---
 
@@ -28,7 +28,7 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : 4f80219 — Auto-memory — MAJ ONBOARDING + mémoire session 2026-06-05 13:43 (36 seconds ago)
+- Dernier commit : cf51d75 — T1 ✅ — Mentions légales + Confidentialité (24 seconds ago)
 - Fichiers en attente : 18
 
 ### Stack
@@ -194,19 +194,3 @@ Fichiers mémoire : `MEMOIRE-SESSION-[date-heure].md` (un par session active)
 ---
 
 *Source de vérité du projet ABA. Mise à jour automatique toutes les 30 min.*
-
----
-
-## 13. INFORMATIONS LÉGALES INTERNES (NE PAS PUBLIER)
-
-**Dénomination** : ABA SARL AU
-**Activité** : Entreprise de paysage — Architecte Paysagiste & Agronome — CAP Agréé
-**Adresse** : 20 Rue Aguelmame Sidi Ali, Agdal, Rabat
-**Téléphone** : 0661 920 316 | Fax : 05 37 68 26 56
-**Email** : contact@ab-landscapes.com
-**Responsable** : Adil Boumahdi
-**RC** : 165659 | **Patente** : 25713696 | **IF** : 53574503
-**CNSS** : 4817763 | **ICE** : 003208303000020
-**Banque** : Attijariwafa Bank — 007 810 000177700000127703
-
-*Sur le site : afficher uniquement ABA SARL AU + adresse + tél + email + responsable. Pas de données fiscales (pratique courante au Maroc).*
