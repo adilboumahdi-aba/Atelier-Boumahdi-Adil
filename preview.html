@@ -227,10 +227,6 @@
     body.tweaked [data-card="1"] { border-radius: var(--radius) !important; overflow: hidden; }
     /* ── Fix overflow horizontal mobile ── */
     html, body { max-width: 100%; overflow-x: hidden; }
-    @media (max-width: 640px) {
-      /* Masquer le texte "A B A — ATELIER..." sur mobile : garder juste le logo mark */
-      header .leading-tight { display: none !important; }
-    }
 
     /* Buttons */
     body.tweaked .tw-btn,
@@ -1005,11 +1001,11 @@ function Nav({ scrollY, accent }) {
             <AbaMark stroke={accent} strokeWidth={22} drawProgress={1} />
           </div>
           <div className="leading-tight text-left">
-            <div style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 600, letterSpacing: "0.22em", fontSize: 12 }}>
-              A B A — ATELIER BOUMAHDI ADIL
+            <div style={{ fontFamily: "'Montserrat', sans-serif", fontWeight: 700, letterSpacing: "0.28em", fontSize: 13 }}>
+              A B A
             </div>
-            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 10, letterSpacing: "0.3em", opacity: 0.65 }}>
-              {t.sub}
+            <div style={{ fontFamily: "'Inter', sans-serif", fontSize: 9, letterSpacing: "0.12em", opacity: 0.75, textTransform: "uppercase", whiteSpace: "nowrap" }}>
+              Atelier Boumahdi Adil
             </div>
           </div>
         </button>
