@@ -3,83 +3,28 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Mentions légales — ABA Paysage</title>
-  <meta name="description" content="Mentions légales et politique de confidentialité du site AB-Landscapes.com — ABA SARL AU, Rabat, Maroc." />
+  <title data-fr="Mentions légales — ABA Paysage" data-en="Legal notice — ABA Paysage" data-es="Aviso legal — ABA Paysage">Mentions légales — ABA Paysage</title>
+  <meta name="description" content="Mentions légales et politique de confidentialité — ABA SARL AU, Rabat, Maroc." />
   <meta name="robots" content="noindex, follow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/journal.css" />
-  <script src="assets/i18n.js" defer></script>
   <style>
-    .legal-wrap {
-      max-width: 780px;
-      margin: 0 auto;
-      padding: clamp(40px, 6vw, 80px) clamp(20px, 4vw, 40px);
-    }
-    .legal-wrap h1 {
-      font-family: var(--serif-display);
-      font-size: clamp(32px, 4vw, 52px);
-      font-weight: 400;
-      color: var(--ink);
-      margin: 0 0 clamp(32px, 4vw, 52px);
-      line-height: 1.1;
-    }
+    .legal-wrap { max-width: 780px; margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(20px,4vw,40px); }
+    .legal-wrap h1 { font-family: var(--serif-display); font-size: clamp(32px,4vw,52px); font-weight: 400; color: var(--ink); margin: 0 0 clamp(32px,4vw,52px); line-height: 1.1; }
     .legal-wrap h1 em { font-style: italic; }
-    .legal-section {
-      border-top: 1px solid var(--line);
-      padding-top: clamp(28px, 3vw, 40px);
-      margin-bottom: clamp(28px, 3vw, 40px);
-    }
-    .legal-section h2 {
-      font-family: var(--sans);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.22em;
-      text-transform: uppercase;
-      color: var(--ink-faint);
-      margin: 0 0 20px;
-    }
-    .legal-section p {
-      font-family: var(--serif-body);
-      font-size: 17px;
-      line-height: 1.7;
-      color: var(--ink-soft);
-      margin: 0 0 14px;
-    }
+    .legal-section { border-top: 1px solid var(--line); padding-top: clamp(28px,3vw,40px); margin-bottom: clamp(28px,3vw,40px); }
+    .legal-section h2 { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 20px; }
+    .legal-section p { font-family: var(--serif-body); font-size: 17px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 14px; }
     .legal-section p:last-child { margin-bottom: 0; }
-    .legal-section a {
-      color: var(--accent-ink);
-      text-decoration: none;
-      border-bottom: 1px solid currentColor;
-    }
+    .legal-section a { color: var(--accent-ink); text-decoration: none; border-bottom: 1px solid currentColor; }
     .legal-section a:hover { opacity: 0.7; }
-    .legal-block {
-      background: var(--surface);
-      border: 1px solid var(--line-soft);
-      padding: 20px 24px;
-      margin: 16px 0;
-    }
-    .legal-block strong {
-      font-family: var(--sans);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--ink);
-      display: block;
-      margin-bottom: 6px;
-    }
-    .legal-block p {
-      font-size: 15px;
-      margin: 0;
-    }
-    .legal-date {
-      font-family: var(--sans);
-      font-size: 12px;
-      color: var(--ink-faint);
-      margin-top: clamp(40px, 5vw, 64px);
-      padding-top: 20px;
-      border-top: 1px solid var(--line-soft);
-    }
+    .legal-block { background: var(--surface); border: 1px solid var(--line-soft); padding: 20px 24px; margin: 16px 0; }
+    .legal-block strong { font-family: var(--sans); font-size: 13px; font-weight: 600; color: var(--ink); display: block; margin-bottom: 6px; }
+    .legal-block p { font-size: 15px; margin: 0; }
+    code { font-family: monospace; font-size: 13px; background: var(--bg-2); padding: 1px 5px; border-radius: 3px; }
+    .legal-date { font-family: var(--sans); font-size: 12px; color: var(--ink-faint); margin-top: clamp(40px,5vw,64px); padding-top: 20px; border-top: 1px solid var(--line-soft); }
   </style>
 </head>
 <body>
@@ -111,146 +56,151 @@
 </header>
 
 <div class="wrap backbar">
-  <a href="preview.html" class="back-link">← Retour au site ABA</a>
+  <a href="preview.html" class="back-link" data-i18n="backToSite">← Retour au site ABA</a>
 </div>
 
-<!-- CONTENU LÉGAL -->
+<!-- CONTENU TRILINGUE -->
 <main class="legal-wrap">
 
-  <h1>Mentions légales <em>&</em><br>Confidentialité</h1>
+  <!-- TITRE -->
+  <h1 data-fr="Mentions légales &amp; Confidentialité" data-en="Legal notice &amp; Privacy" data-es="Aviso legal &amp; Privacidad">
+    Mentions légales <em>&</em><br>Confidentialité
+  </h1>
 
   <!-- 1. ÉDITEUR -->
   <div class="legal-section">
-    <h2>Éditeur du site</h2>
+    <h2 data-fr="Éditeur du site" data-en="Website publisher" data-es="Editor del sitio">Éditeur du site</h2>
     <div class="legal-block">
       <strong>ABA SARL AU</strong>
       <p>
-        Entreprise de paysage — Architecte Paysagiste &amp; Agronome — CAP Agréé<br>
+        <span data-lang-block="fr">Entreprise de paysage — Architecte Paysagiste &amp; Agronome — CAP Agréé<br>
         20 Rue Aguelmame Sidi Ali, Agdal — Rabat, Maroc<br>
-        Tél : <a href="tel:+212661920316">+212 661 920 316</a><br>
-        Email : <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a>
+        Tél : <a href="tel:+212661920316">+212 661 920 316</a> · Email : <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a></span>
+        <span data-lang-block="en" style="display:none">Landscape company — Landscape Architect &amp; Agronomist — Accredited CAP<br>
+        20 Rue Aguelmame Sidi Ali, Agdal — Rabat, Morocco<br>
+        Tel: <a href="tel:+212661920316">+212 661 920 316</a> · Email: <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a></span>
+        <span data-lang-block="es" style="display:none">Empresa de paisajismo — Arquitecto Paisajista &amp; Agrónomo — CAP Certificado<br>
+        20 Rue Aguelmame Sidi Ali, Agdal — Rabat, Marruecos<br>
+        Tel: <a href="tel:+212661920316">+212 661 920 316</a> · Email: <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a></span>
       </p>
     </div>
-    <p><strong style="font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink)">Responsable de publication</strong><br>
-    Adil Boumahdi — Architecte Paysagiste &amp; Agronome, CAP Agréé</p>
+    <p>
+      <strong style="font-family:var(--sans);font-size:13px;font-weight:600;color:var(--ink)" data-fr="Responsable de publication" data-en="Publication manager" data-es="Responsable de publicación">Responsable de publication</strong><br>
+      <span data-lang-block="fr">Adil Boumahdi — Architecte Paysagiste &amp; Agronome, CAP Agréé</span>
+      <span data-lang-block="en" style="display:none">Adil Boumahdi — Landscape Architect &amp; Agronomist, Accredited CAP</span>
+      <span data-lang-block="es" style="display:none">Adil Boumahdi — Arquitecto Paisajista &amp; Agrónomo, CAP Certificado</span>
+    </p>
   </div>
 
   <!-- 2. HÉBERGEMENT -->
   <div class="legal-section">
-    <h2>Hébergement</h2>
+    <h2 data-fr="Hébergement" data-en="Hosting" data-es="Alojamiento">Hébergement</h2>
     <div class="legal-block">
       <strong>GitHub Pages — Microsoft Corporation</strong>
-      <p>
-        88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, États-Unis<br>
-        <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a>
-      </p>
+      <p>88 Colin P. Kelly Jr. Street, San Francisco, CA 94107, USA · <a href="https://pages.github.com" target="_blank" rel="noopener">pages.github.com</a></p>
     </div>
   </div>
 
   <!-- 3. PROPRIÉTÉ INTELLECTUELLE -->
   <div class="legal-section">
-    <h2>Propriété intellectuelle</h2>
-    <p>
-      L'ensemble du contenu de ce site — textes, articles, compositions, photographies,
-      illustrations botaniques et éléments graphiques — est la propriété exclusive
-      d'<strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">ABA SARL AU</strong>
-      ou de ses auteurs respectifs, et est protégé par le droit d'auteur applicable au Maroc.
-    </p>
-    <p>
-      Toute reproduction, représentation ou diffusion, totale ou partielle,
-      sans l'autorisation écrite préalable d'ABA est strictement interdite.
-    </p>
-    <p>
-      Les illustrations botaniques issues de Köhler's Medizinal-Pflanzen (1887)
-      et des planches de Redouté (c. 1820) sont dans le domaine public.
-    </p>
-    <p>
-      Les photographies de référence sont issues d'<a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a>
-      (licence Unsplash gratuite).
-    </p>
+    <h2 data-fr="Propriété intellectuelle" data-en="Intellectual property" data-es="Propiedad intelectual">Propriété intellectuelle</h2>
+    <div data-lang-block="fr">
+      <p>L'ensemble du contenu de ce site — textes, articles, compositions, photographies, illustrations botaniques et éléments graphiques — est la propriété exclusive d'<strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">ABA SARL AU</strong> ou de ses auteurs respectifs, et est protégé par le droit d'auteur.</p>
+      <p>Toute reproduction, représentation ou diffusion, totale ou partielle, sans l'autorisation écrite préalable d'ABA est strictement interdite.</p>
+      <p>Les illustrations botaniques issues de Köhler's Medizinal-Pflanzen (1887) et des planches de Redouté (c. 1820) sont dans le domaine public. Les photographies de référence sont issues d'<a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a> (licence Unsplash gratuite).</p>
+    </div>
+    <div data-lang-block="en" style="display:none">
+      <p>All content on this site — texts, articles, compositions, photographs, botanical illustrations and graphic elements — is the exclusive property of <strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">ABA SARL AU</strong> or its respective authors, and is protected by copyright.</p>
+      <p>Any reproduction, representation or distribution, in whole or in part, without the prior written consent of ABA is strictly prohibited.</p>
+      <p>Botanical illustrations from Köhler's Medizinal-Pflanzen (1887) and Redouté plates (c. 1820) are in the public domain. Reference photographs are from <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a> (free Unsplash licence).</p>
+    </div>
+    <div data-lang-block="es" style="display:none">
+      <p>Todo el contenido de este sitio — textos, artículos, composiciones, fotografías, ilustraciones botánicas y elementos gráficos — es propiedad exclusiva de <strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">ABA SARL AU</strong> o de sus respectivos autores, y está protegido por derechos de autor.</p>
+      <p>Cualquier reproducción, representación o difusión, total o parcial, sin autorización escrita previa de ABA, está estrictamente prohibida.</p>
+      <p>Las ilustraciones botánicas de Köhler's Medizinal-Pflanzen (1887) y las láminas de Redouté (c. 1820) son de dominio público. Las fotografías de referencia proceden de <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a> (licencia Unsplash gratuita).</p>
+    </div>
   </div>
 
   <!-- 4. DONNÉES PERSONNELLES -->
-  <div class="legal-section">
-    <h2>Données personnelles</h2>
-    <p>
-      Ce site collecte des données personnelles uniquement via deux formulaires volontaires :
-    </p>
+  <div class="legal-section" id="confidentialite">
+    <h2 data-fr="Données personnelles" data-en="Personal data" data-es="Datos personales">Données personnelles</h2>
+
+    <div data-lang-block="fr">
+      <p>Ce site collecte des données personnelles uniquement via deux formulaires volontaires :</p>
+    </div>
+    <div data-lang-block="en" style="display:none">
+      <p>This site collects personal data only through two voluntary forms:</p>
+    </div>
+    <div data-lang-block="es" style="display:none">
+      <p>Este sitio recopila datos personales únicamente a través de dos formularios voluntarios:</p>
+    </div>
 
     <div class="legal-block" style="margin-bottom:12px">
-      <strong>Formulaire de contact</strong>
+      <strong data-fr="Formulaire de contact" data-en="Contact form" data-es="Formulario de contacto">Formulaire de contact</strong>
       <p>
-        Traité par <a href="https://web3forms.com" target="_blank" rel="noopener">Web3Forms</a>.
-        Les données saisies (nom, email, message) sont transmises directement à
-        <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a>
-        et ne sont pas conservées par un tiers.
+        <span data-lang-block="fr">Traité par <a href="https://web3forms.com" target="_blank" rel="noopener">Web3Forms</a>. Les données saisies (nom, email, message) sont transmises à <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a> et ne sont pas conservées par un tiers.</span>
+        <span data-lang-block="en" style="display:none">Processed by <a href="https://web3forms.com" target="_blank" rel="noopener">Web3Forms</a>. Data entered (name, email, message) is sent to <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a> and is not retained by any third party.</span>
+        <span data-lang-block="es" style="display:none">Procesado por <a href="https://web3forms.com" target="_blank" rel="noopener">Web3Forms</a>. Los datos introducidos (nombre, email, mensaje) se envían a <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a> y no son conservados por terceros.</span>
       </p>
     </div>
 
     <div class="legal-block">
-      <strong>Newsletter — Journal de l'Atelier</strong>
+      <strong data-fr="Newsletter — Journal de l'Atelier" data-en="Newsletter — The Studio Journal" data-es="Newsletter — El Diario del Taller">Newsletter — Journal de l'Atelier</strong>
       <p>
-        Gérée par <a href="https://www.brevo.com" target="_blank" rel="noopener">Brevo (Sendinblue)</a>.
-        En vous inscrivant, vous acceptez de recevoir les publications du Journal ABA.
-        Vous pouvez vous désinscrire à tout moment via le lien présent dans chaque email.
+        <span data-lang-block="fr">Gérée par <a href="https://www.brevo.com" target="_blank" rel="noopener">Brevo</a>. En vous inscrivant, vous acceptez de recevoir les publications du Journal ABA. Désabonnement possible à tout moment via le lien dans chaque email.</span>
+        <span data-lang-block="en" style="display:none">Managed by <a href="https://www.brevo.com" target="_blank" rel="noopener">Brevo</a>. By subscribing, you agree to receive ABA Journal publications. You may unsubscribe at any time via the link in each email.</span>
+        <span data-lang-block="es" style="display:none">Gestionada por <a href="https://www.brevo.com" target="_blank" rel="noopener">Brevo</a>. Al suscribirse, acepta recibir las publicaciones del Diario ABA. Puede darse de baja en cualquier momento mediante el enlace en cada email.</span>
       </p>
     </div>
 
-    <p style="margin-top:20px">
-      Conformément à la réglementation en vigueur, vous disposez d'un droit d'accès,
-      de rectification et de suppression de vos données.
-      Pour exercer ces droits, contactez :
-      <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a>
+    <p>
+      <span data-lang-block="fr">Pour exercer vos droits d'accès, rectification ou suppression de données, contactez : <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a></span>
+      <span data-lang-block="en" style="display:none">To exercise your rights of access, rectification or deletion of data, contact: <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a></span>
+      <span data-lang-block="es" style="display:none">Para ejercer sus derechos de acceso, rectificación o eliminación de datos, contacte: <a href="mailto:contact@ab-landscapes.com">contact@ab-landscapes.com</a></span>
     </p>
   </div>
 
   <!-- 5. COOKIES -->
   <div class="legal-section">
-    <h2>Cookies &amp; stockage local</h2>
-    <p>
-      Ce site n'utilise <strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">aucun cookie tiers</strong>
-      à des fins publicitaires ou de suivi.
-    </p>
-    <p>
-      Seul le stockage local du navigateur (<em>localStorage</em>) est utilisé
-      pour mémoriser vos préférences de navigation :
-    </p>
+    <h2 data-fr="Cookies &amp; stockage local" data-en="Cookies &amp; local storage" data-es="Cookies y almacenamiento local">Cookies &amp; stockage local</h2>
+    <div data-lang-block="fr">
+      <p>Ce site n'utilise <strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">aucun cookie tiers</strong> à des fins publicitaires ou de suivi. Seul le stockage local du navigateur (<em>localStorage</em>) est utilisé :</p>
+    </div>
+    <div data-lang-block="en" style="display:none">
+      <p>This site uses <strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">no third-party cookies</strong> for advertising or tracking. Only browser local storage (<em>localStorage</em>) is used:</p>
+    </div>
+    <div data-lang-block="es" style="display:none">
+      <p>Este sitio no utiliza <strong style="font-family:var(--sans);font-size:inherit;font-weight:600;color:var(--ink)">ninguna cookie de terceros</strong> con fines publicitarios o de seguimiento. Solo se utiliza el almacenamiento local del navegador (<em>localStorage</em>):</p>
+    </div>
     <div class="legal-block">
-      <strong>Préférences mémorisées localement</strong>
+      <strong data-fr="Préférences mémorisées localement" data-en="Locally stored preferences" data-es="Preferencias almacenadas localmente">Préférences mémorisées localement</strong>
       <p>
-        — Langue choisie (FR / EN / ES) — clé <code style="font-family:monospace;font-size:13px;background:var(--bg-2);padding:1px 5px;border-radius:3px">aba-lang</code><br>
-        — Thème d'affichage (clair / sombre) — clé <code style="font-family:monospace;font-size:13px;background:var(--bg-2);padding:1px 5px;border-radius:3px">aba-journal-theme</code>
+        <span data-lang-block="fr">— Langue choisie (FR/EN/ES) — clé <code>aba-lang</code><br>— Thème (clair/sombre) — clé <code>aba-journal-theme</code></span>
+        <span data-lang-block="en" style="display:none">— Selected language (FR/EN/ES) — key <code>aba-lang</code><br>— Display theme (light/dark) — key <code>aba-journal-theme</code></span>
+        <span data-lang-block="es" style="display:none">— Idioma seleccionado (FR/EN/ES) — clave <code>aba-lang</code><br>— Tema (claro/oscuro) — clave <code>aba-journal-theme</code></span>
       </p>
     </div>
     <p>
-      Ces données restent sur votre appareil et ne sont transmises à aucun serveur.
-      Elles peuvent être effacées à tout moment depuis les paramètres de votre navigateur.
+      <span data-lang-block="fr">Ces données restent sur votre appareil et ne sont transmises à aucun serveur. Elles peuvent être effacées depuis les paramètres de votre navigateur.</span>
+      <span data-lang-block="en" style="display:none">This data remains on your device and is not transmitted to any server. It can be cleared from your browser settings.</span>
+      <span data-lang-block="es" style="display:none">Estos datos permanecen en su dispositivo y no se transmiten a ningún servidor. Pueden eliminarse desde la configuración de su navegador.</span>
     </p>
   </div>
 
-  <!-- 6. LIENS EXTERNES -->
+  <!-- 6. MODIFICATION -->
   <div class="legal-section">
-    <h2>Liens externes</h2>
+    <h2 data-fr="Modification des mentions" data-en="Updates to this notice" data-es="Modificación del aviso">Modification des mentions</h2>
     <p>
-      Ce site peut contenir des liens vers des sites tiers (Unsplash, Wikimedia Commons,
-      GitHub, etc.). ABA n'est pas responsable du contenu de ces sites et n'exerce
-      aucun contrôle sur leur politique de confidentialité.
-    </p>
-  </div>
-
-  <!-- 7. MODIFICATION -->
-  <div class="legal-section">
-    <h2>Modification des présentes mentions</h2>
-    <p>
-      ABA se réserve le droit de modifier les présentes mentions légales à tout moment.
-      La version en vigueur est celle accessible à l'adresse
-      <a href="https://www.ab-landscapes.com/mentions-legales.html">ab-landscapes.com/mentions-legales.html</a>.
+      <span data-lang-block="fr">ABA se réserve le droit de modifier les présentes mentions à tout moment. La version en vigueur est celle accessible à l'adresse <a href="https://www.ab-landscapes.com/mentions-legales.html">ab-landscapes.com/mentions-legales.html</a>.</span>
+      <span data-lang-block="en" style="display:none">ABA reserves the right to modify this notice at any time. The current version is available at <a href="https://www.ab-landscapes.com/mentions-legales.html">ab-landscapes.com/mentions-legales.html</a>.</span>
+      <span data-lang-block="es" style="display:none">ABA se reserva el derecho de modificar este aviso en cualquier momento. La versión vigente está disponible en <a href="https://www.ab-landscapes.com/mentions-legales.html">ab-landscapes.com/mentions-legales.html</a>.</span>
     </p>
   </div>
 
   <p class="legal-date">
-    © 2026 ABA SARL AU — Tous droits réservés.<br>
-    Dernière mise à jour : juin 2026
+    <span data-lang-block="fr">© 2026 ABA SARL AU — Tous droits réservés · Dernière mise à jour : juin 2026</span>
+    <span data-lang-block="en" style="display:none">© 2026 ABA SARL AU — All rights reserved · Last updated: June 2026</span>
+    <span data-lang-block="es" style="display:none">© 2026 ABA SARL AU — Todos los derechos reservados · Última actualización: junio 2026</span>
   </p>
 
 </main>
@@ -261,41 +211,44 @@
     <div class="footer__grid">
       <div>
         <div class="footer__mark">ABA <em>Paysage</em></div>
-        <p class="footer__tag">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p>
+        <p class="footer__tag" data-i18n="footerTagline">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p>
       </div>
       <div>
-        <h4>L'atelier</h4>
+        <h4 data-i18n="footerStudio">L'atelier</h4>
         <ul>
-          <li><a href="preview.html">Site ABA</a></li>
-          <li><a href="preview.html#contact">Initier un projet</a></li>
+          <li><a href="preview.html" data-fr="Site ABA" data-en="ABA website" data-es="Sitio ABA">Site ABA</a></li>
+          <li><a href="preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li>
         </ul>
       </div>
       <div>
-        <h4>Journal</h4>
+        <h4 data-i18n="footerJournal">Journal</h4>
         <ul>
-          <li><a href="blog.html">Tous les articles</a></li>
-          <li><a href="mentions-legales.html">Mentions légales</a></li>
+          <li><a href="blog.html" data-i18n="footerAllArt">Tous les articles</a></li>
+          <li><a href="mentions-legales.html" data-fr="Mentions légales" data-en="Legal notice" data-es="Aviso legal">Mentions légales</a></li>
         </ul>
       </div>
     </div>
     <div class="footer__base">
-      <span>ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span>
-      <span>© 2026 — <a href="mentions-legales.html" style="color:inherit;border-bottom:1px solid currentColor">Mentions légales</a></span>
+      <span data-i18n="footerRights">ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span>
+      <span>© 2026 — <a href="mentions-legales.html" style="color:inherit;border-bottom:1px solid currentColor;text-decoration:none" data-fr="Mentions légales" data-en="Legal notice" data-es="Aviso legal">Mentions légales</a></span>
     </div>
   </div>
 </footer>
 
+<script src="assets/i18n.js"></script>
 <script>
-function toggleTheme() {
-  const h = document.documentElement;
-  const n = h.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-  h.setAttribute('data-theme', n);
-  localStorage.setItem('aba-journal-theme', n);
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
+
+// Ajouter backToSite au dictionnaire i18n
+if(window.setLang){
+  var _orig=window.setLang;
+  window.setLang=function(lang){
+    _orig(lang);
+    var back=document.querySelector('[data-i18n="backToSite"]');
+    if(back){var t={fr:'← Retour au site ABA',en:'← Back to ABA website',es:'← Volver al sitio ABA'};if(t[lang])back.textContent=t[lang];}
+  };
 }
-(function() {
-  const s = localStorage.getItem('aba-journal-theme') || 'light';
-  document.documentElement.setAttribute('data-theme', s);
-})();
 </script>
 
 </body>

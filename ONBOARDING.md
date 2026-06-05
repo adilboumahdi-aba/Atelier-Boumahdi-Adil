@@ -194,3 +194,24 @@ Fichiers mémoire : `MEMOIRE-SESSION-[date-heure].md` (un par session active)
 ---
 
 *Source de vérité du projet ABA. Mise à jour automatique toutes les 30 min.*
+
+---
+
+## ⚠️ RÈGLE ABSOLUE — TRADUCTION INTÉGRALE FR/EN/ES
+
+**L'INTÉGRALITÉ du site doit être traduite en FR, EN et ES.**
+
+Cela inclut SANS EXCEPTION :
+- Tous les articles du journal (corps, titres, deks, pull quotes, notes, figcaptions)
+- Toutes les pages statiques (mentions légales, 404, portfolio, accueil)
+- Tous les éléments de navigation (masthead, footer, backbar, boutons)
+- Tous les textes futurs créés sur le site
+- Toute nouvelle page, section ou composant ajouté
+
+**Méthode technique obligatoire :**
+- Éléments UI : `data-i18n="key"` + dictionnaire dans `assets/i18n.js`
+- Titres/deks : `data-fr="..." data-en="..." data-es="..."`
+- Corps de texte : blocs `data-lang-block="fr/en/es"`
+- Sélecteur FR/EN/ES présent sur CHAQUE page
+
+**Cette règle s'applique à chaque tâche, chaque agent, chaque session, chaque compte.**
