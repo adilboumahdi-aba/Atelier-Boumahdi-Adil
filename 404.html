@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Page introuvable — ABA Paysage</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/journal.css" />
+  <style>
+    .e404 {
+      min-height: 80vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: clamp(40px, 8vw, 100px) clamp(20px, 4vw, 48px);
+    }
+    .e404__num {
+      font-family: var(--serif-display);
+      font-size: clamp(100px, 18vw, 220px);
+      font-weight: 300;
+      line-height: 0.85;
+      color: var(--line);
+      letter-spacing: -0.04em;
+      user-select: none;
+      margin-bottom: clamp(24px, 4vw, 40px);
+    }
+    .e404__title {
+      font-family: var(--serif-display);
+      font-size: clamp(22px, 3vw, 36px);
+      font-weight: 400;
+      color: var(--ink);
+      margin: 0 0 16px;
+    }
+    .e404__title em { font-style: italic; }
+    .e404__sub {
+      font-family: var(--sans);
+      font-size: 15px;
+      color: var(--ink-faint);
+      max-width: 40ch;
+      line-height: 1.6;
+      margin: 0 0 clamp(28px, 4vw, 44px);
+    }
+    .e404__actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .e404__divider {
+      width: 1px;
+      height: 60px;
+      background: var(--line);
+      margin: clamp(32px, 4vw, 52px) auto clamp(28px, 3vw, 44px);
+    }
+    .e404__suggestions {
+      display: flex;
+      gap: clamp(12px, 2vw, 24px);
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .e404__chip {
+      font-family: var(--sans);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      text-decoration: none;
+      border: 1px solid var(--line);
+      padding: 10px 18px;
+      border-radius: 999px;
+      transition: all 0.2s;
+    }
+    .e404__chip:hover {
+      border-color: var(--accent-ink);
+      color: var(--accent-ink);
+    }
+  </style>
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap masthead__bar">
+    <div class="masthead__left">
+      <a href="/preview.html" class="aba-logo" title="ABA — Retour à l'accueil">
+        <img class="aba-logo__img" src="/assets/aba-logo.png" alt="ABA">
+        <div class="aba-logo__txt">
+          <span class="aba-logo__aba">ABA</span>
+          <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
+        </div>
+      </a>
+    </div>
+    <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+      </button>
+      <a href="/preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
+    </div>
+  </div>
+</header>
+
+<!-- 404 CONTENT -->
+<main class="e404">
+  <div class="e404__num" aria-hidden="true">404</div>
+
+  <h1 class="e404__title"
+    data-fr="Cette page n'existe <em>pas</em>."
+    data-en="This page does <em>not</em> exist."
+    data-es="Esta página no <em>existe</em>.">
+    Cette page n'existe <em>pas</em>.
+  </h1>
+
+  <p class="e404__sub"
+    data-fr="Elle a peut-être été déplacée, supprimée, ou l'adresse a été saisie incorrectement."
+    data-en="It may have been moved, deleted, or the address was entered incorrectly."
+    data-es="Es posible que se haya movido, eliminado o que la dirección se haya introducido incorrectamente.">
+    Elle a peut-être été déplacée, supprimée, ou l'adresse a été saisie incorrectement.
+  </p>
+
+  <div class="e404__actions">
+    <a href="/preview.html" class="btn btn--lg"
+      data-fr="Retour à l'accueil"
+      data-en="Back to home"
+      data-es="Volver al inicio">
+      Retour à l'accueil
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="width:14px;height:14px;margin-left:6px"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+    </a>
+    <a href="/blog.html" class="btn-ghost"
+      data-fr="Lire le Journal"
+      data-en="Read the Journal"
+      data-es="Leer el Diario">
+      Lire le Journal
+    </a>
+  </div>
+
+  <div class="e404__divider" aria-hidden="true"></div>
+
+  <p style="font-family:var(--sans);font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 16px"
+    data-fr="Peut-être cherchez-vous"
+    data-en="Perhaps you are looking for"
+    data-es="Quizás busca">
+    Peut-être cherchez-vous
+  </p>
+
+  <div class="e404__suggestions">
+    <a href="/preview.html#projets" class="e404__chip"
+      data-fr="Projets"
+      data-en="Projects"
+      data-es="Proyectos">Projets</a>
+    <a href="/preview.html#contact" class="e404__chip"
+      data-fr="Contact"
+      data-en="Contact"
+      data-es="Contacto">Contact</a>
+    <a href="/blog.html" class="e404__chip"
+      data-fr="Journal"
+      data-en="Journal"
+      data-es="Diario">Journal</a>
+    <a href="/portfolio.html" class="e404__chip"
+      data-fr="Portfolio"
+      data-en="Portfolio"
+      data-es="Portfolio">Portfolio</a>
+    <a href="/mentions-legales.html" class="e404__chip"
+      data-fr="Mentions légales"
+      data-en="Legal"
+      data-es="Legal">Mentions légales</a>
+  </div>
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__mark">ABA <em>Paysage</em></div>
+        <p class="footer__tag" data-i18n="footerTagline">Carnet d'idées et de matières d'un atelier de paysage au Maroc — taillé dans la pierre, écrit par l'eau, validé par le climat.</p>
+      </div>
+      <div>
+        <h4 data-i18n="footerStudio">L'atelier</h4>
+        <ul>
+          <li><a href="/preview.html" data-fr="Site ABA" data-en="ABA website" data-es="Sitio ABA">Site ABA</a></li>
+          <li><a href="/preview.html#contact" data-i18n="initiateProject">Initier un projet</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 data-i18n="footerJournal">Journal</h4>
+        <ul>
+          <li><a href="/blog.html" data-i18n="footerAllArt">Tous les articles</a></li>
+          <li><a href="/mentions-legales.html" data-fr="Mentions légales" data-en="Legal notice" data-es="Aviso legal">Mentions légales</a></li>
+          <li><a href="/conditions-generales.html" data-fr="Conditions générales" data-en="Terms" data-es="Condiciones generales">Conditions générales</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span data-i18n="footerRights">ABA — Atelier Boumahdi Adil · Rabat · Casablanca · Marrakech · Fès</span>
+      <span>© 2026 — <a href="/mentions-legales.html" style="color:inherit;border-bottom:1px solid currentColor;text-decoration:none" data-fr="Mentions légales" data-en="Legal notice" data-es="Aviso legal">Mentions légales</a></span>
+    </div>
+  </div>
+</footer>
+
+<script src="/assets/i18n.js"></script>
+<script>
+function toggleTheme(){const h=document.documentElement,n=h.getAttribute('data-theme')==='dark'?'light':'dark';h.setAttribute('data-theme',n);localStorage.setItem('aba-journal-theme',n);}
+(function(){const s=localStorage.getItem('aba-journal-theme')||'light';document.documentElement.setAttribute('data-theme',s);})();
+
+// Traduire les éléments data-fr/en/es sur h1 (innerHTML pour le <em>)
+var _o=window.setLang;
+window.setLang=function(l){
+  _o(l);
+  document.querySelectorAll('[data-fr]').forEach(function(el){
+    var raw=el.getAttribute('data-'+l)||el.getAttribute('data-fr');
+    if(raw && raw.includes('<em>')){el.innerHTML=raw;}
+  });
+};
+</script>
+</body>
+</html>
