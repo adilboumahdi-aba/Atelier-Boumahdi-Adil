@@ -2437,8 +2437,14 @@ function Footer({ accent }) {
           style={{ fontFamily: "'Inter', sans-serif" }}>
           <div>{t.footer?.copyright || "© 2026 — ABA sarl au — Atelier Boumahdi Adil"}</div>
           <div className="flex gap-6">
-            <a href="mentions-legales.html" style={{color:"inherit",borderBottom:"1px solid rgba(255,255,255,0.3)",textDecoration:"none"}}>{t.footer?.legal || "Mentions légales"}</a>
-            <a href="mentions-legales.html#confidentialite" style={{color:"inherit",borderBottom:"1px solid rgba(255,255,255,0.3)",textDecoration:"none"}}>{t.footer?.privacy || "Confidentialité"}</a>
+            <a href="mentions-legales.html" style={{color:"rgba(255,255,255,0.6)",textDecoration:"underline",textUnderlineOffset:"3px",cursor:"pointer",pointerEvents:"auto"}}
+              onMouseEnter={e=>e.target.style.color="rgba(255,255,255,0.9)"}
+              onMouseLeave={e=>e.target.style.color="rgba(255,255,255,0.6)"}
+            >{t.footer?.legal || "Mentions légales"}</a>
+            <a href="mentions-legales.html#confidentialite" style={{color:"rgba(255,255,255,0.6)",textDecoration:"underline",textUnderlineOffset:"3px",cursor:"pointer",pointerEvents:"auto"}}
+              onMouseEnter={e=>e.target.style.color="rgba(255,255,255,0.9)"}
+              onMouseLeave={e=>e.target.style.color="rgba(255,255,255,0.6)"}
+            >{t.footer?.privacy || "Confidentialité"}</a>
             <span>33°58'N · 6°51'W</span>
           </div>
         </div>
