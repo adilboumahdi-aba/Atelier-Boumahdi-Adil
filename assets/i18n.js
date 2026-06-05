@@ -170,3 +170,17 @@
     setLang(saved);
   }
 })();
+
+/* ── Blocs de contenu trilingues ──
+   Usage : <div data-lang-block="fr">...</div>
+            <div data-lang-block="en" style="display:none">...</div>
+            <div data-lang-block="es" style="display:none">...</div>
+   setLang() affiche le bon bloc et masque les autres.
+──────────────────────────────────── */
+var _origSetLang = window.setLang;
+window.setLang = function(lang) {
+  _origSetLang(lang);
+  document.querySelectorAll('[data-lang-block]').forEach(function(el) {
+    el.style.display = el.getAttribute('data-lang-block') === lang ? '' : 'none';
+  });
+};
