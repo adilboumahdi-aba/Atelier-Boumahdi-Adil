@@ -148,7 +148,14 @@
     /* Éléments data-fr / data-en / data-es (titres, deks) */
     document.querySelectorAll('[data-fr]').forEach(function (el) {
       var text = el.getAttribute('data-' + lang) || el.getAttribute('data-fr');
-      if (text) el.textContent = text;
+      if (text) {
+        /* Utiliser innerHTML si le contenu contient des balises HTML */
+        if (text.indexOf('<') !== -1) {
+          el.innerHTML = text;
+        } else {
+          el.textContent = text;
+        }
+      }
     });
 
     /* Placeholders */

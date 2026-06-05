@@ -229,6 +229,14 @@ window.setLang=function(l){
     if(raw && raw.includes('<em>')){el.innerHTML=raw;}
   });
 };
+// Fix init : appliquer innerHTML immédiatement pour les balises em
+(function(){
+  var l=localStorage.getItem('aba-lang')||'fr';
+  document.querySelectorAll('[data-fr]').forEach(function(el){
+    var raw=el.getAttribute('data-'+l)||el.getAttribute('data-fr');
+    if(raw && raw.includes('<em>')){el.innerHTML=raw;}
+  });
+})();
 </script>
 </body>
 </html>

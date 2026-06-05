@@ -603,4 +603,6 @@ body {
 }
 @media (max-width: 1080px) {
   .masthead__bar { gap: 12px 16px; }
+  /* Masquer "← Journal" sur mobile — le backbar "← Retour" suffit */
+  .btn-ghost { display: none !important; }
 }
