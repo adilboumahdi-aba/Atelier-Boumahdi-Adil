@@ -225,6 +225,12 @@
     /* Card radius — Tailwind rounded-* utilities are overridden via specific selector when tweaked */
     body.tweaked .tw-card,
     body.tweaked [data-card="1"] { border-radius: var(--radius) !important; overflow: hidden; }
+    /* ── Fix overflow horizontal mobile ── */
+    html, body { max-width: 100%; overflow-x: hidden; }
+    @media (max-width: 640px) {
+      /* Masquer le texte "A B A — ATELIER..." sur mobile : garder juste le logo mark */
+      header .leading-tight { display: none !important; }
+    }
 
     /* Buttons */
     body.tweaked .tw-btn,
