@@ -73,7 +73,15 @@
 
   /* ── Helpers ── */
   function getLang() {
-    return localStorage.getItem('aba-lang') || 'fr';
+    /* 1. Langue choisie par le visiteur */
+    var stored = localStorage.getItem('aba-lang');
+    if (stored && ['fr','en','es'].indexOf(stored) !== -1) return stored;
+    /* 2. Langue du navigateur */
+    var nav = (navigator.language || navigator.userLanguage || 'fr').toLowerCase();
+    if (nav.indexOf('es') === 0) return 'es';
+    if (nav.indexOf('en') === 0) return 'en';
+    /* 3. Défaut : français */
+    return 'fr';
   }
 
   function shouldShow() {
