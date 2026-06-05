@@ -2437,8 +2437,8 @@ function Footer({ accent }) {
           style={{ fontFamily: "'Inter', sans-serif" }}>
           <div>{t.footer?.copyright || "© 2026 — ABA sarl au — Atelier Boumahdi Adil"}</div>
           <div className="flex gap-6">
-            <span>{t.footer?.legal || "Mentions légales"}</span>
-            <span>{t.footer?.privacy || "Confidentialité"}</span>
+            <a href="mentions-legales.html" style={{color:"inherit",borderBottom:"1px solid rgba(255,255,255,0.3)",textDecoration:"none"}}>{t.footer?.legal || "Mentions légales"}</a>
+            <a href="mentions-legales.html#confidentialite" style={{color:"inherit",borderBottom:"1px solid rgba(255,255,255,0.3)",textDecoration:"none"}}>{t.footer?.privacy || "Confidentialité"}</a>
             <span>33°58'N · 6°51'W</span>
           </div>
         </div>
