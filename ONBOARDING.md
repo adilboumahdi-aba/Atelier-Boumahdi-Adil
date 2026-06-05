@@ -1,6 +1,6 @@
 # ABA Paysage — Onboarding Claude Code
 > Fichier de mémoire projet. Lis ce fichier en premier à chaque nouvelle session.
-> Dernière mise à jour automatique : 2026-06-05 21:38
+> Dernière mise à jour automatique : 2026-06-05 21:39
 
 ---
 
@@ -28,7 +28,7 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : 39c6101 — T7 — Sitemap mis à jour (25 URLs) + Search Console prêt (23 seconds ago)
+- Dernier commit : e5b6443 — GA4 — Ajout sur index.html (page manquante) (19 seconds ago)
 - Fichiers en attente : 17
 
 ### Stack
