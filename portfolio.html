@@ -19,7 +19,8 @@
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    /* ── Thèmes fond clair — changer data-theme sur <body> ── */
+    /* ── Thèmes fond clair — changer data-theme sur <div style="position:fixed;top:16px;right:16px;z-index:9999"><div class="seg" role="group"><button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button><button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button><button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button></div></div>
+<body> ── */
     /* theme-calcaire : #F0EBE2 warm stone  ← RECOMMANDÉ */
     /* theme-lin      : #F5F3EE white linen  */
     /* theme-velin    : #EDE8DF warm vellum  */
@@ -269,6 +270,7 @@
   <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
   <link rel="manifest" href="/site.webmanifest" />
   <meta name="theme-color" content="#efe9dd" />
+<style>.seg{display:flex;gap:3px;background:rgba(0,0,0,.2);border-radius:6px;padding:3px}.seg button{font-family:sans-serif;font-size:11px;font-weight:600;letter-spacing:.1em;padding:5px 10px;border-radius:4px;border:none;cursor:pointer;background:transparent;color:rgba(255,255,255,.7)}.seg button[aria-pressed="true"]{background:#1f3a5f;color:#fff}</style>
 </head>
 <body>
 
@@ -601,5 +603,6 @@ window.addEventListener('DOMContentLoaded', () => {
 document.addEventListener('keydown', e => { if (e.key === 'Escape') closeProject(); });
 </script>
 <script src="assets/newsletter-popup.js" defer></script>
+<script src="assets/i18n.js"></script>
 </body>
 </html>
