@@ -1,6 +1,6 @@
 # ABA Paysage — Onboarding Claude Code
 > Fichier de mémoire projet. Lis ce fichier en premier à chaque nouvelle session.
-> Dernière mise à jour automatique : 2026-06-05 13:58
+> Dernière mise à jour automatique : 2026-06-05 14:04
 
 ---
 
@@ -28,8 +28,8 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : 6011520 — T1 — Mentions légales dans TOUS les footers du site (30 seconds ago)
-- Fichiers en attente : 18
+- Dernier commit : 264f4c1 — Règle globale + T1 — Traduction FR/EN/ES intégrale du site (20 seconds ago)
+- Fichiers en attente : 17
 
 ### Stack
 - HTML statique + CSS vanilla + JS vanilla — aucun framework
@@ -194,24 +194,3 @@ Fichiers mémoire : `MEMOIRE-SESSION-[date-heure].md` (un par session active)
 ---
 
 *Source de vérité du projet ABA. Mise à jour automatique toutes les 30 min.*
-
----
-
-## ⚠️ RÈGLE ABSOLUE — TRADUCTION INTÉGRALE FR/EN/ES
-
-**L'INTÉGRALITÉ du site doit être traduite en FR, EN et ES.**
-
-Cela inclut SANS EXCEPTION :
-- Tous les articles du journal (corps, titres, deks, pull quotes, notes, figcaptions)
-- Toutes les pages statiques (mentions légales, 404, portfolio, accueil)
-- Tous les éléments de navigation (masthead, footer, backbar, boutons)
-- Tous les textes futurs créés sur le site
-- Toute nouvelle page, section ou composant ajouté
-
-**Méthode technique obligatoire :**
-- Éléments UI : `data-i18n="key"` + dictionnaire dans `assets/i18n.js`
-- Titres/deks : `data-fr="..." data-en="..." data-es="..."`
-- Corps de texte : blocs `data-lang-block="fr/en/es"`
-- Sélecteur FR/EN/ES présent sur CHAQUE page
-
-**Cette règle s'applique à chaque tâche, chaque agent, chaque session, chaque compte.**
