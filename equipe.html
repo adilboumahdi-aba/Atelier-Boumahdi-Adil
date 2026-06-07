@@ -1,0 +1,326 @@
+<!DOCTYPE html>
+<html lang="fr" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <!-- Google Analytics GA4 -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2MDTEBQVF"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-P2MDTEBQVF');
+  </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title data-fr="L'équipe — ABA Paysage" data-en="The team — ABA Paysage" data-es="El equipo — ABA Paysaje">L'équipe — ABA Paysage</title>
+  <meta name="description" content="L'atelier ABA — architectes paysagistes et agronomes à Rabat, Maroc." />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="assets/journal.css" />
+  <style>
+    .team-wrap { max-width: 880px; margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(20px,4vw,40px); }
+    .team-hero { margin-bottom: clamp(48px,6vw,80px); }
+    .team-hero h1 { font-family: var(--serif-display); font-size: clamp(36px,5vw,60px); font-weight: 400; color: var(--ink); margin: 0 0 20px; line-height: 1.1; }
+    .team-hero h1 em { font-style: italic; }
+    .team-hero .deck { font-family: var(--serif-body); font-size: clamp(17px,2vw,20px); color: var(--ink-soft); line-height: 1.7; max-width: 620px; margin: 0; }
+    .team-grid { display: grid; gap: clamp(32px,4vw,56px); }
+    .team-member { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); padding-top: clamp(28px,3vw,40px); }
+    .member-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 6px; flex-wrap: wrap; }
+    .member-name { font-family: var(--serif-display); font-size: clamp(22px,3vw,30px); font-weight: 400; color: var(--ink); margin: 0; }
+    .member-initials { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: color-mix(in srgb, var(--green) 12%, transparent); padding: 3px 8px; border-radius: 3px; }
+    .member-role { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 16px; }
+    .member-bio { font-family: var(--serif-body); font-size: 17px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+    .member-bio p { margin: 0 0 14px; }
+    .member-bio p:last-child { margin-bottom: 0; }
+    .team-cta { margin-top: clamp(48px,6vw,80px); padding: clamp(28px,3vw,40px); background: var(--surface); border: 1px solid var(--line); text-align: center; }
+    .team-cta p { font-family: var(--serif-body); font-size: 18px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 20px; }
+    .team-cta a.btn { display: inline-block; }
+    @media (min-width: 640px) {
+      .team-member { grid-template-columns: 200px 1fr; gap: 0 40px; }
+      .team-member .member-left { padding-top: 4px; }
+    }
+  </style>
+  <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
+  <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
+  <link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon-32x32.png" />
+  <link rel="apple-touch-icon" sizes="180x180" href="/assets/apple-touch-icon.png" />
+  <link rel="manifest" href="/site.webmanifest" />
+  <meta name="theme-color" content="#efe9dd" />
+</head>
+<body>
+
+<!-- MASTHEAD -->
+<header class="masthead">
+  <div class="wrap masthead__bar">
+    <div class="masthead__left">
+      <a href="preview.html" class="aba-logo" title="ABA — Retour à l'accueil">
+        <img class="aba-logo__img" src="assets/aba-logo.png" alt="ABA">
+        <div class="aba-logo__txt">
+          <span class="aba-logo__aba">ABA</span>
+          <span class="aba-logo__wm">Atelier Boumahdi Adil</span>
+        </div>
+      </a>
+    </div>
+    <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
+      <button class="icon-btn" onclick="toggleTheme()" aria-label="Thème">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/></svg>
+      </button>
+      <a href="preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px" data-i18n="initiateProject">Initier un projet</a>
+    </div>
+  </div>
+</header>
+
+<div class="wrap backbar">
+  <a href="preview.html" class="back-link" data-i18n="backToSite">← Retour au site ABA</a>
+</div>
+
+<main class="team-wrap">
+
+  <!-- FR -->
+  <div data-lang-block="fr">
+    <div class="team-hero">
+      <h1>L'<em>atelier</em></h1>
+      <p class="deck">Une équipe de quatre praticiens engagés dans une même vision : le paysage comme discipline exigeante, au service des lieux et de leurs habitants.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Adil Boumahdi</h2>
+            <span class="member-initials">AB</span>
+          </div>
+          <p class="member-role">Fondateur · Architecte paysagiste &amp; Agronome</p>
+        </div>
+        <div class="member-bio">
+          <p>Adil Boumahdi est architecte paysagiste et agronome, formé entre Rabat et l'Europe. Il fonde l'Atelier Boumahdi Adil avec la conviction que le paysage marocain — ses sols calcaires, ses espèces endémiques, ses traditions d'eau et de pierre — mérite une approche aussi rigoureuse que respectueuse.</p>
+          <p>Ses projets conjuguent maîtrise technique et sensibilité culturelle : jardins de villas privées, parcs urbains, espaces de prestige à Rabat, Casablanca, Marrakech et Fès. Il intervient également comme conseil auprès de promoteurs et d'architectes sur les volets végétation, eau et matériaux extérieurs.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Salma Othmani</h2>
+            <span class="member-initials">SO</span>
+          </div>
+          <p class="member-role">Architecte paysagiste · Végétation &amp; Biodiversité</p>
+        </div>
+        <div class="member-bio">
+          <p>Salma Othmani pilote les études de végétation et les plans de plantation. Spécialiste des espèces endémiques du Maroc et des écosystèmes méditerranéens arides, elle conçoit des palettes végétales adaptées au climat local, à faible consommation d'eau et à haute valeur écologique.</p>
+          <p>Elle coordonne également les programmes d'entretien et les suivis post-plantation sur les chantiers ABA.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Yassine El Fassi</h2>
+            <span class="member-initials">YF</span>
+          </div>
+          <p class="member-role">Ingénieur · Systèmes d'eau &amp; Infrastructures</p>
+        </div>
+        <div class="member-bio">
+          <p>Yassine El Fassi supervise l'ingénierie hydraulique des projets ABA : systèmes d'irrigation, bassins, fontaines, gestion des eaux pluviales et des eaux grises. Il optimise chaque installation pour la durabilité et l'économie de la ressource hydrique.</p>
+          <p>Son expertise couvre aussi les réseaux d'éclairage extérieur et les infrastructures enterrées des espaces paysagers.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Nadia Berrada</h2>
+            <span class="member-initials">NB</span>
+          </div>
+          <p class="member-role">Designer &amp; Coordination de projet</p>
+        </div>
+        <div class="member-bio">
+          <p>Nadia Berrada assure le lien entre la conception et la réalisation. Elle coordonne les équipes de maâlems et d'artisans sur les chantiers qui intègrent des matériaux traditionnels : tadelakt, zellige, pierre sèche. Elle veille à la cohérence esthétique de chaque projet, de l'esquisse à la livraison.</p>
+          <p>Elle prend également en charge la relation client tout au long du suivi de chantier.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="team-cta">
+      <p>Vous souhaitez travailler avec l'atelier ? Nous sommes disponibles pour des projets à Rabat, Casablanca, Marrakech et Fès.</p>
+      <a href="preview.html#contact" class="btn btn--brand">Initier un projet</a>
+    </div>
+  </div>
+
+  <!-- EN -->
+  <div data-lang-block="en" style="display:none">
+    <div class="team-hero">
+      <h1>The <em>atelier</em></h1>
+      <p class="deck">A team of four practitioners united by a single vision: landscape design as a rigorous discipline, in service of places and the people who inhabit them.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Adil Boumahdi</h2>
+            <span class="member-initials">AB</span>
+          </div>
+          <p class="member-role">Founder · Landscape Architect &amp; Agronomist</p>
+        </div>
+        <div class="member-bio">
+          <p>Adil Boumahdi is a landscape architect and agronomist, trained between Rabat and Europe. He founded Atelier Boumahdi Adil with the conviction that the Moroccan landscape — its limestone soils, endemic species, and traditions of water and stone — deserves an approach as rigorous as it is respectful.</p>
+          <p>His projects combine technical mastery with cultural sensitivity: private villa gardens, urban parks, prestigious outdoor spaces in Rabat, Casablanca, Marrakech, and Fès. He also advises developers and architects on vegetation, water management, and exterior materials.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Salma Othmani</h2>
+            <span class="member-initials">SO</span>
+          </div>
+          <p class="member-role">Landscape Architect · Vegetation &amp; Biodiversity</p>
+        </div>
+        <div class="member-bio">
+          <p>Salma Othmani leads vegetation studies and planting plans. A specialist in Moroccan endemic species and arid Mediterranean ecosystems, she designs plant palettes adapted to the local climate, with low water consumption and high ecological value.</p>
+          <p>She also coordinates maintenance programmes and post-planting monitoring on ABA sites.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Yassine El Fassi</h2>
+            <span class="member-initials">YF</span>
+          </div>
+          <p class="member-role">Engineer · Water Systems &amp; Infrastructure</p>
+        </div>
+        <div class="member-bio">
+          <p>Yassine El Fassi oversees hydraulic engineering on ABA projects: irrigation systems, ponds, fountains, rainwater and greywater management. He optimises every installation for durability and water resource efficiency.</p>
+          <p>His expertise also covers outdoor lighting networks and underground infrastructure for landscape spaces.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Nadia Berrada</h2>
+            <span class="member-initials">NB</span>
+          </div>
+          <p class="member-role">Designer &amp; Project Coordination</p>
+        </div>
+        <div class="member-bio">
+          <p>Nadia Berrada bridges design and execution. She coordinates maâlem craftsmen and artisan teams on projects integrating traditional materials: tadelakt, zellige, dry stone. She ensures aesthetic consistency across each project, from initial sketch to final delivery.</p>
+          <p>She also handles client relations throughout the construction phase.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="team-cta">
+      <p>Interested in working with the atelier? We are available for projects in Rabat, Casablanca, Marrakech, and Fès.</p>
+      <a href="preview.html#contact" class="btn btn--brand">Start a project</a>
+    </div>
+  </div>
+
+  <!-- ES -->
+  <div data-lang-block="es" style="display:none">
+    <div class="team-hero">
+      <h1>El <em>atelier</em></h1>
+      <p class="deck">Un equipo de cuatro profesionales unidos por una misma visión: el paisajismo como disciplina rigurosa, al servicio de los lugares y de quienes los habitan.</p>
+    </div>
+
+    <div class="team-grid">
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Adil Boumahdi</h2>
+            <span class="member-initials">AB</span>
+          </div>
+          <p class="member-role">Fundador · Arquitecto paisajista &amp; Agrónomo</p>
+        </div>
+        <div class="member-bio">
+          <p>Adil Boumahdi es arquitecto paisajista y agrónomo, formado entre Rabat y Europa. Fundó el Atelier Boumahdi Adil con la convicción de que el paisaje marroquí — sus suelos calcáreos, sus especies endémicas, sus tradiciones de agua y piedra — merece un enfoque tan riguroso como respetuoso.</p>
+          <p>Sus proyectos combinan maestría técnica y sensibilidad cultural: jardines de villas privadas, parques urbanos, espacios de prestigio en Rabat, Casablanca, Marrakech y Fez. También actúa como asesor para promotores y arquitectos en vegetación, gestión del agua y materiales exteriores.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Salma Othmani</h2>
+            <span class="member-initials">SO</span>
+          </div>
+          <p class="member-role">Arquitecta paisajista · Vegetación &amp; Biodiversidad</p>
+        </div>
+        <div class="member-bio">
+          <p>Salma Othmani dirige los estudios de vegetación y los planes de plantación. Especialista en especies endémicas de Marruecos y ecosistemas mediterráneos áridos, diseña paletas vegetales adaptadas al clima local, con bajo consumo de agua y alto valor ecológico.</p>
+          <p>También coordina los programas de mantenimiento y el seguimiento post-plantación en las obras ABA.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Yassine El Fassi</h2>
+            <span class="member-initials">YF</span>
+          </div>
+          <p class="member-role">Ingeniero · Sistemas de agua &amp; Infraestructuras</p>
+        </div>
+        <div class="member-bio">
+          <p>Yassine El Fassi supervisa la ingeniería hidráulica de los proyectos ABA: sistemas de riego, estanques, fuentes, gestión de aguas pluviales y grises. Optimiza cada instalación para la durabilidad y el ahorro de recursos hídricos.</p>
+          <p>Su experiencia abarca también las redes de iluminación exterior y las infraestructuras enterradas de los espacios paisajísticos.</p>
+        </div>
+      </div>
+
+      <div class="team-member">
+        <div class="member-left">
+          <div class="member-header">
+            <h2 class="member-name">Nadia Berrada</h2>
+            <span class="member-initials">NB</span>
+          </div>
+          <p class="member-role">Diseñadora &amp; Coordinación de proyectos</p>
+        </div>
+        <div class="member-bio">
+          <p>Nadia Berrada establece el vínculo entre diseño y ejecución. Coordina a los maâlems y equipos de artesanos en obras con materiales tradicionales: tadelakt, zellige, piedra seca. Vela por la coherencia estética de cada proyecto, del boceto a la entrega final.</p>
+          <p>También gestiona la relación con el cliente durante todo el seguimiento de la obra.</p>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="team-cta">
+      <p>¿Desea trabajar con el atelier? Estamos disponibles para proyectos en Rabat, Casablanca, Marrakech y Fez.</p>
+      <a href="preview.html#contact" class="btn btn--brand">Iniciar un proyecto</a>
+    </div>
+  </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <div class="wrap">
+    <div class="footer__grid">
+      <div>
+        <div class="footer__mark">ABA <em>Paysage</em></div>
+        <p class="footer__tag" data-i18n="footerTagline">Carnet d'idées d'un atelier paysager à Rabat.</p>
+      </div>
+    </div>
+    <div class="footer__base">
+      <span class="footer__copy" data-i18n="copyright">© 2026 ABA sarl au</span>
+      <div class="footer__legal">
+        <a href="mentions-legales.html" data-i18n="legalNotice">Mentions légales</a>
+        <a href="conditions-generales.html" data-i18n="termsOfService">CGP</a>
+      </div>
+    </div>
+  </div>
+</footer>
+<script src="assets/i18n.js"></script>
+<script src="assets/newsletter-popup.js" defer></script>
+</body>
+</html>

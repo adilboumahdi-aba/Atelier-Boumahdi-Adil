@@ -2353,7 +2353,7 @@ function Footer({ accent }) {
             <ul className="flex flex-col gap-2 text-white/70 text-[13px]"
               style={{ fontFamily: "'Inter', sans-serif" }}>
               {(t.footer?.col1_items || ["Philosophie","Équipe","Presse","Carrières"]).map((it, i) => {
-                const hrefs = ["#philosophie","#","#","#"];
+                const hrefs = ["#philosophie","/equipe.html","/presse.html","/carrieres.html"];
                 return <li key={it}><a href={hrefs[i]} style={{ color: "inherit", textDecoration: "none", transition: "color 200ms" }}
                   onMouseEnter={e => e.currentTarget.style.color = accent}
                   onMouseLeave={e => e.currentTarget.style.color = ""}>{it}</a></li>;
