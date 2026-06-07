@@ -18,27 +18,45 @@
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Spectral:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Hanken+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="assets/journal.css" />
   <style>
-    .team-wrap { max-width: 880px; margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(20px,4vw,40px); }
+    .team-wrap { max-width: 900px; margin: 0 auto; padding: clamp(40px,6vw,80px) clamp(20px,4vw,40px); }
     .team-hero { margin-bottom: clamp(48px,6vw,80px); }
     .team-hero h1 { font-family: var(--serif-display); font-size: clamp(36px,5vw,60px); font-weight: 400; color: var(--ink); margin: 0 0 20px; line-height: 1.1; }
     .team-hero h1 em { font-style: italic; }
     .team-hero .deck { font-family: var(--serif-body); font-size: clamp(17px,2vw,20px); color: var(--ink-soft); line-height: 1.7; max-width: 620px; margin: 0; }
-    .team-grid { display: grid; gap: clamp(32px,4vw,56px); }
-    .team-member { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line); padding-top: clamp(28px,3vw,40px); }
-    .member-header { display: flex; align-items: baseline; gap: 16px; margin-bottom: 6px; flex-wrap: wrap; }
-    .member-name { font-family: var(--serif-display); font-size: clamp(22px,3vw,30px); font-weight: 400; color: var(--ink); margin: 0; }
-    .member-initials { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: color-mix(in srgb, var(--green) 12%, transparent); padding: 3px 8px; border-radius: 3px; }
-    .member-role { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 16px; }
-    .member-bio { font-family: var(--serif-body); font-size: 17px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
-    .member-bio p { margin: 0 0 14px; }
+
+    /* --- Carte fondateur (avec photo) --- */
+    .founder-card { border-top: 1px solid var(--line); padding-top: clamp(32px,4vw,52px); margin-bottom: clamp(40px,5vw,64px); display: grid; grid-template-columns: 1fr; gap: 32px; }
+    @media (min-width: 680px) { .founder-card { grid-template-columns: 220px 1fr; gap: 48px; align-items: start; } }
+    .founder-photo { width: 100%; max-width: 220px; aspect-ratio: 3/4; object-fit: cover; object-position: top center; filter: grayscale(15%); display: block; }
+    .founder-body {}
+    .founder-header { display: flex; align-items: baseline; gap: 14px; flex-wrap: wrap; margin-bottom: 4px; }
+    .founder-name { font-family: var(--serif-display); font-size: clamp(26px,3.5vw,38px); font-weight: 400; color: var(--ink); margin: 0; }
+    .founder-initials { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: color-mix(in srgb, var(--green) 12%, transparent); padding: 3px 8px; border-radius: 3px; }
+    .founder-role { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 20px; }
+    .founder-bio { font-family: var(--serif-body); font-size: 17px; line-height: 1.78; color: var(--ink-soft); }
+    .founder-bio p { margin: 0 0 15px; }
+    .founder-bio p:last-child { margin-bottom: 0; }
+    .founder-tags { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+    .founder-tag { font-family: var(--sans); font-size: 10px; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink-faint); border: 1px solid var(--line); padding: 4px 10px; }
+    .pub-ref { display: inline-flex; align-items: center; gap: 6px; font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.1em; color: var(--accent-ink); border: 1px solid var(--accent-ink); padding: 5px 12px; margin-top: 18px; text-decoration: none; opacity: 0.8; }
+    .pub-ref:hover { opacity: 1; }
+    .pub-ref svg { width: 12px; height: 12px; flex-shrink: 0; }
+
+    /* --- Membres de l'équipe --- */
+    .team-section-title { font-family: var(--sans); font-size: 11px; font-weight: 700; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 clamp(24px,3vw,36px); padding-top: clamp(28px,3vw,40px); border-top: 1px solid var(--line); }
+    .team-grid { display: grid; gap: clamp(28px,3.5vw,44px); }
+    .team-member { display: grid; grid-template-columns: 1fr; gap: 0; border-top: 1px solid var(--line-soft, rgba(29,27,22,0.07)); padding-top: clamp(24px,2.5vw,36px); }
+    @media (min-width: 580px) { .team-member { grid-template-columns: 180px 1fr; gap: 0 36px; } }
+    .member-header { display: flex; align-items: baseline; gap: 12px; margin-bottom: 5px; flex-wrap: wrap; }
+    .member-name { font-family: var(--serif-display); font-size: clamp(20px,2.5vw,26px); font-weight: 400; color: var(--ink); margin: 0; }
+    .member-initials { font-family: var(--sans); font-size: 10px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--green); background: color-mix(in srgb, var(--green) 12%, transparent); padding: 2px 7px; border-radius: 3px; }
+    .member-role { font-family: var(--sans); font-size: 11px; font-weight: 600; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-faint); margin: 0 0 14px; }
+    .member-bio { font-family: var(--serif-body); font-size: 16px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+    .member-bio p { margin: 0 0 12px; }
     .member-bio p:last-child { margin-bottom: 0; }
-    .team-cta { margin-top: clamp(48px,6vw,80px); padding: clamp(28px,3vw,40px); background: var(--surface); border: 1px solid var(--line); text-align: center; }
+
+    .team-cta { margin-top: clamp(48px,6vw,72px); padding: clamp(28px,3vw,40px); background: var(--surface); border: 1px solid var(--line); text-align: center; }
     .team-cta p { font-family: var(--serif-body); font-size: 18px; color: var(--ink-soft); line-height: 1.7; margin: 0 0 20px; }
-    .team-cta a.btn { display: inline-block; }
-    @media (min-width: 640px) {
-      .team-member { grid-template-columns: 200px 1fr; gap: 0 40px; }
-      .team-member .member-left { padding-top: 4px; }
-    }
   </style>
   <link rel="icon" type="image/x-icon" href="/assets/favicon.ico" />
   <link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon-16x16.png" />
@@ -81,221 +99,259 @@
 
 <main class="team-wrap">
 
-  <!-- FR -->
+  <!-- ════════════════ FRANÇAIS ════════════════ -->
   <div data-lang-block="fr">
+
     <div class="team-hero">
       <h1>L'<em>atelier</em></h1>
-      <p class="deck">Une équipe de quatre praticiens engagés dans une même vision : le paysage comme discipline exigeante, au service des lieux et de leurs habitants.</p>
+      <p class="deck">Une équipe de praticiens formés à l'exigence de l'agronomie et du paysage — ancrés dans les réalités climatiques, botaniques et culturelles du Maroc.</p>
     </div>
 
+    <!-- Adil Boumahdi — Fondateur -->
+    <div class="founder-card">
+      <img class="founder-photo" src="assets/adil-boumahdi.jpg" alt="Adil Boumahdi — Fondateur ABA" />
+      <div class="founder-body">
+        <div class="founder-header">
+          <h2 class="founder-name">Adil Boumahdi</h2>
+          <span class="founder-initials">AB</span>
+        </div>
+        <p class="founder-role">Fondateur · Ingénieur agronome &amp; Architecte paysagiste · CAP agréé · Secrétaire général AMAP</p>
+        <div class="founder-bio">
+          <p>Ingénieur d'État en agronomie spécialisé en architecture du paysage (IAV Hassan II, 2015) et titulaire d'un M.Sc. <em>Cum Laude</em> en oléiculture et technologie des huiles (CIHEAM / Université de Córdoba, 2019), Adil Boumahdi est également Conseiller Agricole Privé (CAP) agréé par le Ministère de l'Agriculture marocain depuis 2021.</p>
+          <p>Il fonde l'Atelier Boumahdi Adil avec une conviction simple : le paysage marocain — ses sols calcaires, ses espèces endémiques, ses savoirs d'eau et de pierre — exige une rigueur agronomique autant qu'une intelligence des lieux. En plus de dix ans de pratique, il a dirigé des projets de référence : la réhabilitation du Parc historique de Bab Lamer à Fès (5,4 ha, site mérinide, 26 MM MAD), l'aménagement écologique du Parc Industriel TETOUANPARK (corridor écologique, flore endémique, réutilisation des eaux usées), des lacs artificiels à Rabat, des résidences et hôtels du nord au sud du Maroc, des plans urbains (Plan vert de Khénifra, Chartes paysagères de Sidi Slimane et Sidi Kacem). En 2016, en amont de la COP-22, il a conçu avec l'INRA, la FM6E et l'ONCF les projets de végétalisation par génie végétal des couloirs ferroviaires marocains.</p>
+          <p>Chercheur et praticien, il co-signe en 2022 un article dans <em>Land Use Policy</em> (Q1, IF 6.2) sur la dynamique des paysages oléicoles de Cordoue. Il enseigne aujourd'hui à l'IAV Hassan II (Master en aménagement paysager durable) et à l'École d'Architecture et du Paysage de Casablanca (M1 &amp; M2) — GIS, restauration écologique, biodiversité. Il est Secrétaire général de l'Association Marocaine des Architectes Paysagistes (AMAP).</p>
+        </div>
+        <div class="founder-tags">
+          <span class="founder-tag">IAV Hassan II · 2015</span>
+          <span class="founder-tag">M.Sc. CIHEAM / UCO · 2019 — Cum Laude</span>
+          <span class="founder-tag">CAP agréé MAPMDREF · 2021</span>
+          <span class="founder-tag">Secrétaire général AMAP</span>
+          <span class="founder-tag">Enseignant IAV Hassan II &amp; EAC</span>
+        </div>
+        <a class="pub-ref" href="https://doi.org/10.1016/j.landusepol.2022.106065" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Publication — Land Use Policy, 2022 (Q1)
+        </a>
+      </div>
+    </div>
+
+    <!-- Autres membres -->
+    <p class="team-section-title">L'équipe</p>
     <div class="team-grid">
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Adil Boumahdi</h2>
-            <span class="member-initials">AB</span>
-          </div>
-          <p class="member-role">Fondateur · Architecte paysagiste &amp; Agronome</p>
-        </div>
-        <div class="member-bio">
-          <p>Adil Boumahdi est architecte paysagiste et agronome, formé entre Rabat et l'Europe. Il fonde l'Atelier Boumahdi Adil avec la conviction que le paysage marocain — ses sols calcaires, ses espèces endémiques, ses traditions d'eau et de pierre — mérite une approche aussi rigoureuse que respectueuse.</p>
-          <p>Ses projets conjuguent maîtrise technique et sensibilité culturelle : jardins de villas privées, parcs urbains, espaces de prestige à Rabat, Casablanca, Marrakech et Fès. Il intervient également comme conseil auprès de promoteurs et d'architectes sur les volets végétation, eau et matériaux extérieurs.</p>
-        </div>
-      </div>
-
-      <div class="team-member">
-        <div class="member-left">
-          <div class="member-header">
-            <h2 class="member-name">Salma Othmani</h2>
+            <h3 class="member-name">Salma Othmani</h3>
             <span class="member-initials">SO</span>
           </div>
           <p class="member-role">Architecte paysagiste · Végétation &amp; Biodiversité</p>
         </div>
         <div class="member-bio">
-          <p>Salma Othmani pilote les études de végétation et les plans de plantation. Spécialiste des espèces endémiques du Maroc et des écosystèmes méditerranéens arides, elle conçoit des palettes végétales adaptées au climat local, à faible consommation d'eau et à haute valeur écologique.</p>
-          <p>Elle coordonne également les programmes d'entretien et les suivis post-plantation sur les chantiers ABA.</p>
+          <p>Salma Othmani pilote les études de végétation et les plans de plantation. Spécialiste des espèces endémiques du Maroc et des écosystèmes méditerranéens arides, elle conçoit des palettes végétales adaptées au climat local, à faible consommation d'eau et à haute valeur écologique. Elle coordonne également les programmes d'entretien et les suivis post-plantation sur les chantiers ABA.</p>
         </div>
       </div>
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Yassine El Fassi</h2>
+            <h3 class="member-name">Yassine El Fassi</h3>
             <span class="member-initials">YF</span>
           </div>
           <p class="member-role">Ingénieur · Systèmes d'eau &amp; Infrastructures</p>
         </div>
         <div class="member-bio">
-          <p>Yassine El Fassi supervise l'ingénierie hydraulique des projets ABA : systèmes d'irrigation, bassins, fontaines, gestion des eaux pluviales et des eaux grises. Il optimise chaque installation pour la durabilité et l'économie de la ressource hydrique.</p>
-          <p>Son expertise couvre aussi les réseaux d'éclairage extérieur et les infrastructures enterrées des espaces paysagers.</p>
+          <p>Yassine El Fassi supervise l'ingénierie hydraulique des projets ABA : systèmes d'irrigation, bassins, fontaines, gestion des eaux pluviales et grises. Il optimise chaque installation pour la durabilité et l'économie de la ressource hydrique. Son expertise couvre aussi les réseaux d'éclairage extérieur et les infrastructures enterrées des espaces paysagers.</p>
         </div>
       </div>
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Nadia Berrada</h2>
+            <h3 class="member-name">Nadia Berrada</h3>
             <span class="member-initials">NB</span>
           </div>
           <p class="member-role">Designer &amp; Coordination de projet</p>
         </div>
         <div class="member-bio">
-          <p>Nadia Berrada assure le lien entre la conception et la réalisation. Elle coordonne les équipes de maâlems et d'artisans sur les chantiers qui intègrent des matériaux traditionnels : tadelakt, zellige, pierre sèche. Elle veille à la cohérence esthétique de chaque projet, de l'esquisse à la livraison.</p>
-          <p>Elle prend également en charge la relation client tout au long du suivi de chantier.</p>
+          <p>Nadia Berrada assure le lien entre la conception et la réalisation. Elle coordonne les équipes de maâlems et d'artisans sur les chantiers qui intègrent des matériaux traditionnels — tadelakt, zellige, pierre sèche — et veille à la cohérence esthétique de chaque projet, de l'esquisse à la livraison. Elle prend en charge la relation client tout au long du suivi de chantier.</p>
         </div>
       </div>
 
     </div>
 
     <div class="team-cta">
-      <p>Vous souhaitez travailler avec l'atelier ? Nous sommes disponibles pour des projets à Rabat, Casablanca, Marrakech et Fès.</p>
+      <p>Vous souhaitez travailler avec l'atelier ? Nous intervenons à Rabat, Casablanca, Marrakech, Fès et dans tout le Maroc.</p>
       <a href="preview.html#contact" class="btn btn--brand">Initier un projet</a>
     </div>
   </div>
 
-  <!-- EN -->
+  <!-- ════════════════ ENGLISH ════════════════ -->
   <div data-lang-block="en" style="display:none">
+
     <div class="team-hero">
       <h1>The <em>atelier</em></h1>
-      <p class="deck">A team of four practitioners united by a single vision: landscape design as a rigorous discipline, in service of places and the people who inhabit them.</p>
+      <p class="deck">A team of practitioners trained to the demands of agronomy and landscape design — grounded in the climatic, botanical and cultural realities of Morocco.</p>
     </div>
 
+    <div class="founder-card">
+      <img class="founder-photo" src="assets/adil-boumahdi.jpg" alt="Adil Boumahdi — ABA Founder" />
+      <div class="founder-body">
+        <div class="founder-header">
+          <h2 class="founder-name">Adil Boumahdi</h2>
+          <span class="founder-initials">AB</span>
+        </div>
+        <p class="founder-role">Founder · Agronomist &amp; Landscape Architect · Accredited CAP Advisor · Secretary-General AMAP</p>
+        <div class="founder-bio">
+          <p>A state-registered agronomist specialising in landscape architecture (IAV Hassan II, 2015) and holder of an M.Sc. <em>Cum Laude</em> in Olive Growing &amp; Oil Technology (CIHEAM / University of Córdoba, 2019), Adil Boumahdi is also an accredited Private Agricultural Advisor (CAP) certified by Morocco's Ministry of Agriculture since 2021.</p>
+          <p>He founded Atelier Boumahdi Adil on a straightforward conviction: the Moroccan landscape — its limestone soils, endemic species, and traditions of water and stone — demands agronomic rigour as much as a sensitivity to place. Over more than ten years of practice, he has led reference projects: the rehabilitation of the historic Bab Lamer Park in Fès (5.4 ha, Merinid era site, 26 MM MAD), the ecological development of TETOUANPARK Industrial Park (ecological corridor, endemic flora, wastewater reuse), ornamental lakes in Rabat, residential and hotel projects across Morocco, and urban studies (Khénifra Green Plan, Landscape Charters for Sidi Slimane and Sidi Kacem). Ahead of COP-22 in 2016, he co-designed the bio-engineering revegetation of Morocco's railway corridors in partnership with INRA, FM6E and ONCF.</p>
+          <p>A researcher as well as a practitioner, he co-authored a 2022 paper in <em>Land Use Policy</em> (Q1, IF 6.2) on olive landscape dynamics in the Córdoba countryside. He now teaches at IAV Hassan II (Master's in Sustainable Landscape Management) and at the Casablanca School of Architecture and Landscape (M1 &amp; M2) — GIS, ecological restoration, biodiversity. He serves as Secretary-General of the Moroccan Association of Landscape Architects (AMAP).</p>
+        </div>
+        <div class="founder-tags">
+          <span class="founder-tag">IAV Hassan II · 2015</span>
+          <span class="founder-tag">M.Sc. CIHEAM / UCO · 2019 — Cum Laude</span>
+          <span class="founder-tag">Accredited CAP · MAPMDREF 2021</span>
+          <span class="founder-tag">Secretary-General AMAP</span>
+          <span class="founder-tag">Lecturer IAV Hassan II &amp; EAC</span>
+        </div>
+        <a class="pub-ref" href="https://doi.org/10.1016/j.landusepol.2022.106065" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Publication — Land Use Policy, 2022 (Q1)
+        </a>
+      </div>
+    </div>
+
+    <p class="team-section-title">The team</p>
     <div class="team-grid">
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Adil Boumahdi</h2>
-            <span class="member-initials">AB</span>
-          </div>
-          <p class="member-role">Founder · Landscape Architect &amp; Agronomist</p>
-        </div>
-        <div class="member-bio">
-          <p>Adil Boumahdi is a landscape architect and agronomist, trained between Rabat and Europe. He founded Atelier Boumahdi Adil with the conviction that the Moroccan landscape — its limestone soils, endemic species, and traditions of water and stone — deserves an approach as rigorous as it is respectful.</p>
-          <p>His projects combine technical mastery with cultural sensitivity: private villa gardens, urban parks, prestigious outdoor spaces in Rabat, Casablanca, Marrakech, and Fès. He also advises developers and architects on vegetation, water management, and exterior materials.</p>
-        </div>
-      </div>
-
-      <div class="team-member">
-        <div class="member-left">
-          <div class="member-header">
-            <h2 class="member-name">Salma Othmani</h2>
+            <h3 class="member-name">Salma Othmani</h3>
             <span class="member-initials">SO</span>
           </div>
           <p class="member-role">Landscape Architect · Vegetation &amp; Biodiversity</p>
         </div>
         <div class="member-bio">
-          <p>Salma Othmani leads vegetation studies and planting plans. A specialist in Moroccan endemic species and arid Mediterranean ecosystems, she designs plant palettes adapted to the local climate, with low water consumption and high ecological value.</p>
-          <p>She also coordinates maintenance programmes and post-planting monitoring on ABA sites.</p>
+          <p>Salma Othmani leads vegetation studies and planting plans. A specialist in Moroccan endemic species and arid Mediterranean ecosystems, she designs plant palettes adapted to the local climate, with low water consumption and high ecological value. She also coordinates maintenance programmes and post-planting monitoring on ABA sites.</p>
         </div>
       </div>
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Yassine El Fassi</h2>
+            <h3 class="member-name">Yassine El Fassi</h3>
             <span class="member-initials">YF</span>
           </div>
           <p class="member-role">Engineer · Water Systems &amp; Infrastructure</p>
         </div>
         <div class="member-bio">
-          <p>Yassine El Fassi oversees hydraulic engineering on ABA projects: irrigation systems, ponds, fountains, rainwater and greywater management. He optimises every installation for durability and water resource efficiency.</p>
-          <p>His expertise also covers outdoor lighting networks and underground infrastructure for landscape spaces.</p>
+          <p>Yassine El Fassi oversees hydraulic engineering on ABA projects: irrigation systems, ponds, fountains, rainwater and greywater management. He optimises every installation for durability and water resource efficiency. His expertise also covers outdoor lighting networks and underground infrastructure for landscape spaces.</p>
         </div>
       </div>
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Nadia Berrada</h2>
+            <h3 class="member-name">Nadia Berrada</h3>
             <span class="member-initials">NB</span>
           </div>
           <p class="member-role">Designer &amp; Project Coordination</p>
         </div>
         <div class="member-bio">
-          <p>Nadia Berrada bridges design and execution. She coordinates maâlem craftsmen and artisan teams on projects integrating traditional materials: tadelakt, zellige, dry stone. She ensures aesthetic consistency across each project, from initial sketch to final delivery.</p>
-          <p>She also handles client relations throughout the construction phase.</p>
+          <p>Nadia Berrada bridges design and execution. She coordinates maâlem craftsmen and artisan teams on projects integrating traditional materials — tadelakt, zellige, dry stone — ensuring aesthetic consistency from initial sketch to final delivery. She also handles client relations throughout the construction phase.</p>
         </div>
       </div>
 
     </div>
 
     <div class="team-cta">
-      <p>Interested in working with the atelier? We are available for projects in Rabat, Casablanca, Marrakech, and Fès.</p>
+      <p>Interested in working with the atelier? We operate in Rabat, Casablanca, Marrakech, Fès and across Morocco.</p>
       <a href="preview.html#contact" class="btn btn--brand">Start a project</a>
     </div>
   </div>
 
-  <!-- ES -->
+  <!-- ════════════════ ESPAÑOL ════════════════ -->
   <div data-lang-block="es" style="display:none">
+
     <div class="team-hero">
       <h1>El <em>atelier</em></h1>
-      <p class="deck">Un equipo de cuatro profesionales unidos por una misma visión: el paisajismo como disciplina rigurosa, al servicio de los lugares y de quienes los habitan.</p>
+      <p class="deck">Un equipo de profesionales formados en el rigor de la agronomía y el paisajismo — arraigados en las realidades climáticas, botánicas y culturales de Marruecos.</p>
     </div>
 
+    <div class="founder-card">
+      <img class="founder-photo" src="assets/adil-boumahdi.jpg" alt="Adil Boumahdi — Fundador ABA" />
+      <div class="founder-body">
+        <div class="founder-header">
+          <h2 class="founder-name">Adil Boumahdi</h2>
+          <span class="founder-initials">AB</span>
+        </div>
+        <p class="founder-role">Fundador · Agrónomo &amp; Arquitecto paisajista · Asesor CAP acreditado · Secretario General AMAP</p>
+        <div class="founder-bio">
+          <p>Ingeniero agrónomo especializado en arquitectura del paisaje (IAV Hassan II, 2015) y titular de un M.Sc. <em>Cum Laude</em> en Olivicultura y Tecnología de Aceites (CIHEAM / Universidad de Córdoba, 2019), Adil Boumahdi es también Asesor Agrícola Privado (CAP) acreditado por el Ministerio de Agricultura marroquí desde 2021.</p>
+          <p>Fundó el Atelier Boumahdi Adil con una convicción clara: el paisaje marroquí — sus suelos calcáreos, sus especies endémicas, sus tradiciones de agua y piedra — exige tanto rigor agronómico como inteligencia del lugar. En más de diez años de práctica, ha dirigido proyectos de referencia: la rehabilitación del Parque histórico de Bab Lamer en Fez (5,4 ha, sitio meriní, 26 MM MAD), el desarrollo ecológico del Parque Industrial TETOUANPARK (corredor ecológico, flora endémica, reutilización de aguas residuales), lagos ornamentales en Rabat, residencias y hoteles de norte a sur de Marruecos, y estudios urbanísticos (Plan Verde de Khénifra, Cartas Paisajísticas de Sidi Slimane y Sidi Kacem). En 2016, antes de la COP-22, codiseñó con el INRA, la FM6E y la ONCF los proyectos de revegetación por ingeniería vegetal de los corredores ferroviarios marroquíes.</p>
+          <p>Investigador y profesional al mismo tiempo, cofirmó en 2022 un artículo en <em>Land Use Policy</em> (Q1, IF 6,2) sobre la dinámica del paisaje olivarero de Córdoba. Actualmente enseña en el IAV Hassan II (Máster en Gestión Sostenible del Paisaje) y en la Escuela de Arquitectura y Paisaje de Casablanca (M1 y M2) — SIG, restauración ecológica, biodiversidad. Es Secretario General de la Asociación Marroquí de Arquitectos Paisajistas (AMAP).</p>
+        </div>
+        <div class="founder-tags">
+          <span class="founder-tag">IAV Hassan II · 2015</span>
+          <span class="founder-tag">M.Sc. CIHEAM / UCO · 2019 — Cum Laude</span>
+          <span class="founder-tag">CAP acreditado · MAPMDREF 2021</span>
+          <span class="founder-tag">Secretario General AMAP</span>
+          <span class="founder-tag">Docente IAV Hassan II &amp; EAC</span>
+        </div>
+        <a class="pub-ref" href="https://doi.org/10.1016/j.landusepol.2022.106065" target="_blank" rel="noopener noreferrer">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/><polyline points="14 2 14 8 20 8"/></svg>
+          Publicación — Land Use Policy, 2022 (Q1)
+        </a>
+      </div>
+    </div>
+
+    <p class="team-section-title">El equipo</p>
     <div class="team-grid">
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Adil Boumahdi</h2>
-            <span class="member-initials">AB</span>
-          </div>
-          <p class="member-role">Fundador · Arquitecto paisajista &amp; Agrónomo</p>
-        </div>
-        <div class="member-bio">
-          <p>Adil Boumahdi es arquitecto paisajista y agrónomo, formado entre Rabat y Europa. Fundó el Atelier Boumahdi Adil con la convicción de que el paisaje marroquí — sus suelos calcáreos, sus especies endémicas, sus tradiciones de agua y piedra — merece un enfoque tan riguroso como respetuoso.</p>
-          <p>Sus proyectos combinan maestría técnica y sensibilidad cultural: jardines de villas privadas, parques urbanos, espacios de prestigio en Rabat, Casablanca, Marrakech y Fez. También actúa como asesor para promotores y arquitectos en vegetación, gestión del agua y materiales exteriores.</p>
-        </div>
-      </div>
-
-      <div class="team-member">
-        <div class="member-left">
-          <div class="member-header">
-            <h2 class="member-name">Salma Othmani</h2>
+            <h3 class="member-name">Salma Othmani</h3>
             <span class="member-initials">SO</span>
           </div>
           <p class="member-role">Arquitecta paisajista · Vegetación &amp; Biodiversidad</p>
         </div>
         <div class="member-bio">
-          <p>Salma Othmani dirige los estudios de vegetación y los planes de plantación. Especialista en especies endémicas de Marruecos y ecosistemas mediterráneos áridos, diseña paletas vegetales adaptadas al clima local, con bajo consumo de agua y alto valor ecológico.</p>
-          <p>También coordina los programas de mantenimiento y el seguimiento post-plantación en las obras ABA.</p>
+          <p>Salma Othmani dirige los estudios de vegetación y los planes de plantación. Especialista en especies endémicas de Marruecos y ecosistemas mediterráneos áridos, diseña paletas vegetales adaptadas al clima local, con bajo consumo de agua y alto valor ecológico. También coordina los programas de mantenimiento y el seguimiento post-plantación en las obras ABA.</p>
         </div>
       </div>
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Yassine El Fassi</h2>
+            <h3 class="member-name">Yassine El Fassi</h3>
             <span class="member-initials">YF</span>
           </div>
           <p class="member-role">Ingeniero · Sistemas de agua &amp; Infraestructuras</p>
         </div>
         <div class="member-bio">
-          <p>Yassine El Fassi supervisa la ingeniería hidráulica de los proyectos ABA: sistemas de riego, estanques, fuentes, gestión de aguas pluviales y grises. Optimiza cada instalación para la durabilidad y el ahorro de recursos hídricos.</p>
-          <p>Su experiencia abarca también las redes de iluminación exterior y las infraestructuras enterradas de los espacios paisajísticos.</p>
+          <p>Yassine El Fassi supervisa la ingeniería hidráulica de los proyectos ABA: sistemas de riego, estanques, fuentes, gestión de aguas pluviales y grises. Optimiza cada instalación para la durabilidad y el ahorro de recursos hídricos. Su experiencia abarca también las redes de iluminación exterior y las infraestructuras enterradas de los espacios paisajísticos.</p>
         </div>
       </div>
 
       <div class="team-member">
         <div class="member-left">
           <div class="member-header">
-            <h2 class="member-name">Nadia Berrada</h2>
+            <h3 class="member-name">Nadia Berrada</h3>
             <span class="member-initials">NB</span>
           </div>
           <p class="member-role">Diseñadora &amp; Coordinación de proyectos</p>
         </div>
         <div class="member-bio">
-          <p>Nadia Berrada establece el vínculo entre diseño y ejecución. Coordina a los maâlems y equipos de artesanos en obras con materiales tradicionales: tadelakt, zellige, piedra seca. Vela por la coherencia estética de cada proyecto, del boceto a la entrega final.</p>
-          <p>También gestiona la relación con el cliente durante todo el seguimiento de la obra.</p>
+          <p>Nadia Berrada establece el vínculo entre diseño y ejecución. Coordina a los maâlems y equipos de artesanos en obras con materiales tradicionales — tadelakt, zellige, piedra seca — velando por la coherencia estética de cada proyecto, del boceto a la entrega. También gestiona la relación con el cliente durante todo el seguimiento de la obra.</p>
         </div>
       </div>
 
     </div>
 
     <div class="team-cta">
-      <p>¿Desea trabajar con el atelier? Estamos disponibles para proyectos en Rabat, Casablanca, Marrakech y Fez.</p>
+      <p>¿Desea trabajar con el atelier? Intervenimos en Rabat, Casablanca, Marrakech, Fez y en todo Marruecos.</p>
       <a href="preview.html#contact" class="btn btn--brand">Iniciar un proyecto</a>
     </div>
   </div>
