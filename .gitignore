@@ -1,0 +1,27 @@
+# Fichiers confidentiels — jamais sur GitHub
+ABA-CONNEXIONS-EXTERNES.md
+*-CREDENTIALS*.md
+*-PASSWORDS*.md
+
+# Dossiers de travail locaux
+INPUT/
+PREVIEW/
+SCRIPTS_TRAITEMENT/
+scripts/
+
+# Prototypes et variantes de développement
+prototype-*.html
+*-options.html
+*variant*.html
+variant-*.html
+blog-variant*.html
+og-cover.html
+
+# Fichiers système macOS
+.DS_Store
+**/.DS_Store
+
+# Fichiers temporaires Claude
+.claude/serve.py
+.claude/settings.json
+.claude/worktrees/
