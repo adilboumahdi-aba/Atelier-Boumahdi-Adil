@@ -6,29 +6,23 @@
   <title>Admin — ABA Atelier Boumahdi</title>
   <meta name="robots" content="noindex, nofollow" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700;800&family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="admin.css" />
 </head>
 <body>
 
 <!-- ══════════════════════════════════════════════
-     SETUP SCREEN — première utilisation
+     SETUP — première utilisation
 ══════════════════════════════════════════════ -->
 <div id="setup-screen" class="hidden">
-  <div class="setup-card">
-    <div class="auth-logo" style="margin-bottom:24px">
+  <div class="auth-card">
+    <div class="auth-logo">
       <span class="auth-logo__mark">ABA</span>
       <div class="auth-logo__sep"></div>
       <span class="auth-logo__name">Atelier Boumahdi<br>Interface Admin</span>
     </div>
-    <div class="setup-step">
-      <div class="setup-step__n">1</div>
-      Configuration initiale — créez votre mot de passe admin
-    </div>
-    <h2 style="font-size:20px;font-weight:700;margin-bottom:8px">Première connexion</h2>
-    <p style="font-size:13px;color:var(--text2);margin-bottom:28px">
-      Définissez un mot de passe pour protéger cette interface. Il sera stocké localement (chiffré) dans votre navigateur.
-    </p>
+    <h2 class="auth-title">Première connexion</h2>
+    <p class="auth-sub">Créez votre mot de passe local pour protéger cet accès.</p>
 
     <div class="auth-field">
       <label>Nouveau mot de passe</label>
@@ -36,25 +30,21 @@
     </div>
     <div class="auth-field">
       <label>Confirmer le mot de passe</label>
-      <input type="password" id="setup-pwd2" placeholder="Répétez le mot de passe" />
+      <input type="password" id="setup-pwd2" placeholder="Répétez" onkeydown="if(event.key==='Enter')ABA.setup()" />
     </div>
     <div class="auth-field">
       <label>GitHub Personal Access Token</label>
       <input type="password" id="setup-pat" placeholder="ghp_…" />
-      <div class="hint" style="font-size:11.5px;color:var(--text3);margin-top:5px">
-        Scope requis : <code>contents:write</code> sur le dépôt <code>adilboumahdi-aba/Atelier-Boumahdi-Adil</code>
-      </div>
+      <div class="hint">Scope <code>repo</code> — compte <strong>adilboumahdi-aba</strong> uniquement</div>
     </div>
-
     <button class="auth-btn" onclick="ABA.setup()">Configurer et accéder →</button>
-    <div id="setup-error" class="auth-error hidden">
-      <span>⚠</span> <span id="setup-error-msg">Erreur</span>
-    </div>
+    <div id="setup-error" class="auth-error hidden"><span>⚠</span><span id="setup-error-msg"></span></div>
+    <div class="auth-setup"><a href="#" onclick="ABA.showAuth();return false">← Déjà configuré</a></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     AUTH SCREEN — connexion
+     AUTH — connexion
 ══════════════════════════════════════════════ -->
 <div id="auth-screen">
   <div class="auth-card">
@@ -63,376 +53,325 @@
       <div class="auth-logo__sep"></div>
       <span class="auth-logo__name">Atelier Boumahdi<br>Interface Admin</span>
     </div>
-
     <h2 class="auth-title">Connexion</h2>
-    <p class="auth-sub">Interface d'édition du site ab-landscapes.com</p>
-
+    <p class="auth-sub">Éditeur visuel — ab-landscapes.com</p>
     <div class="auth-field">
       <label>Mot de passe</label>
-      <input type="password" id="auth-pwd" placeholder="••••••••"
-             onkeydown="if(event.key==='Enter')ABA.login()" />
+      <input type="password" id="auth-pwd" placeholder="••••••••" onkeydown="if(event.key==='Enter')ABA.login()" />
     </div>
     <div class="auth-field">
       <label>GitHub Personal Access Token</label>
-      <input type="password" id="auth-pat" placeholder="ghp_…"
-             onkeydown="if(event.key==='Enter')ABA.login()" />
-      <div class="hint">Scope <code>contents:write</code> — stocké en session, jamais persisté</div>
+      <input type="password" id="auth-pat" placeholder="ghp_…" onkeydown="if(event.key==='Enter')ABA.login()" />
+      <div class="hint">Stocké en session uniquement, jamais persisté</div>
     </div>
-
     <button class="auth-btn" onclick="ABA.login()">Accéder →</button>
-
-    <div id="auth-error" class="auth-error hidden">
-      <span>⚠</span> <span id="auth-error-msg">Mot de passe incorrect</span>
-    </div>
-
-    <div class="auth-setup">
-      <a href="#" onclick="ABA.showSetup();return false">Première utilisation / reconfigurer</a>
-    </div>
+    <div id="auth-error" class="auth-error hidden"><span>⚠</span><span id="auth-error-msg">Mot de passe incorrect</span></div>
+    <div class="auth-setup"><a href="#" onclick="ABA.showSetup();return false">Première utilisation / reconfigurer</a></div>
   </div>
 </div>
 
 <!-- ══════════════════════════════════════════════
-     APP PRINCIPAL
+     APP PRINCIPAL — 3 colonnes
 ══════════════════════════════════════════════ -->
 <div id="app" class="hidden">
 
   <!-- Topbar -->
   <header class="topbar">
     <span class="topbar__brand">ABA</span>
+    <span class="topbar__slash">/</span>
     <span class="topbar__label">Admin</span>
     <span class="topbar__sep"></span>
     <div class="topbar__status">
-      <div class="topbar__dot" id="github-status-dot"></div>
-      <span id="github-status-label">GitHub</span>
+      <div class="status-dot" id="gh-dot"></div>
+      <span id="gh-label">GitHub</span>
     </div>
-    <button class="topbar__btn topbar__btn--accent" onclick="ABA.editor.saveAndCommit()" id="btn-save-top" disabled>
-      ↑ Publier
-    </button>
+    <button class="topbar__btn" onclick="ABA.newArticleModal()" title="Nouvel article">+ Article</button>
+    <button class="topbar__btn topbar__btn--accent" id="btn-publish" onclick="ABA.openCommitModal()" disabled>↑ Publier</button>
     <button class="topbar__btn" onclick="ABA.logout()">Déconnexion</button>
   </header>
 
-  <!-- Sidebar -->
+  <!-- Sidebar articles -->
   <aside class="sidebar">
     <div class="sidebar__head">
       <span class="sidebar__title">Articles</span>
-      <button class="sidebar__new" onclick="ABA.newArticle()" title="Nouvel article">+</button>
+      <span class="sidebar__count" id="article-count">—</span>
+      <button class="sidebar__new" onclick="ABA.newArticleModal()" title="Nouvel article">+</button>
     </div>
     <div class="sidebar__search">
-      <input type="search" placeholder="Rechercher…" id="article-search" oninput="ABA.filterArticles(this.value)" />
+      <input type="search" placeholder="Rechercher…" id="search-input" oninput="ABA.filter(this.value)" />
     </div>
     <div class="sidebar__list" id="article-list">
-      <div style="padding:20px 16px;color:var(--text3);font-size:13px;text-align:center">
+      <div style="padding:24px 16px;text-align:center;color:var(--text3)">
         <div class="spinner" style="margin:0 auto 12px"></div>
-        Chargement…
+        Chargement des articles…
       </div>
     </div>
   </aside>
 
-  <!-- Main / Editor -->
-  <main class="main">
-
-    <!-- État vide -->
-    <div class="empty-state" id="empty-state">
-      <div class="empty-state__icon">✍️</div>
-      <div class="empty-state__title">Sélectionnez un article</div>
-      <p>Choisissez un article dans la liste, ou créez-en un nouveau avec le bouton +</p>
+  <!-- Preview zone (centre) -->
+  <section class="preview-zone" id="preview-zone">
+    <!-- Barre preview -->
+    <div class="preview-bar">
+      <span class="preview-bar__url" id="preview-url">Sélectionnez un article</span>
+      <div class="preview-bar__lang" id="preview-lang-switcher">
+        <button class="active" onclick="ABA.previewLang('fr')">FR</button>
+        <button onclick="ABA.previewLang('en')">EN</button>
+        <button onclick="ABA.previewLang('es')">ES</button>
+      </div>
+      <button class="preview-bar__refresh" onclick="ABA.refreshPreview()">↺ Rafraîchir</button>
     </div>
 
-    <!-- Éditeur d'article -->
-    <div class="editor hidden" id="editor">
+    <!-- État vide -->
+    <div class="preview-empty" id="preview-empty">
+      <div class="preview-empty__icon">✍</div>
+      <div class="preview-empty__title">Éditeur visuel ABA</div>
+      <p>Sélectionnez un article dans la liste pour voir son rendu fidèle et éditer son contenu</p>
+    </div>
 
-      <div class="editor__topbar">
-        <span class="editor__filename" id="editor-filename">—</span>
-        <div class="editor__actions">
-          <button class="btn btn--ghost" onclick="ABA.editor.preview()" id="btn-preview">
-            👁 Aperçu
-          </button>
-          <button class="btn btn--primary" onclick="ABA.editor.saveAndCommit()" id="btn-save" disabled>
-            ↑ Publier sur GitHub
-          </button>
-        </div>
+    <!-- iframe article -->
+    <iframe id="preview-frame" class="preview-iframe hidden" title="Aperçu article"></iframe>
+  </section>
+
+  <!-- Panneau édition (droite) -->
+  <aside class="edit-panel" id="edit-panel">
+
+    <!-- En-tête panneau -->
+    <div class="edit-panel__head">
+      <div class="edit-panel__file" id="panel-filename">—</div>
+      <div class="edit-panel__actions">
+        <button class="btn btn--ghost btn--sm" onclick="ABA.refreshPreview()">↺ Aperçu</button>
+        <button class="btn btn--primary btn--sm" id="btn-save" onclick="ABA.openCommitModal()" disabled>↑ Publier</button>
+      </div>
+    </div>
+
+    <!-- Onglets de langue -->
+    <div class="lang-tabs">
+      <button class="lang-tab active" data-lang="fr" onclick="ABA.switchLang('fr')">
+        FR
+      </button>
+      <button class="lang-tab" data-lang="en" onclick="ABA.switchLang('en')">
+        EN <span class="desync-dot hidden" id="desync-en"></span>
+      </button>
+      <button class="lang-tab" data-lang="es" onclick="ABA.switchLang('es')">
+        ES <span class="desync-dot hidden" id="desync-es"></span>
+      </button>
+    </div>
+
+    <!-- Corps scrollable du panneau -->
+    <div class="edit-panel__body" id="panel-body">
+
+      <!-- Vide initial -->
+      <div id="panel-empty" style="padding:32px 20px;text-align:center;color:var(--text3)">
+        <p style="font-size:13px">Ouvrez un article pour éditer son contenu</p>
       </div>
 
-      <div class="editor__body" id="editor-body">
+      <!-- Contenu éditeur (caché jusqu'à ouverture) -->
+      <div id="panel-content" class="hidden">
 
-        <!-- Métadonnées -->
-        <div class="field-group">
-          <div class="field-group__head">
-            <span class="field-group__title">Métadonnées SEO</span>
-          </div>
-          <div class="field-group__body">
-            <div class="field">
-              <label>Catégorie</label>
-              <input type="text" id="f-category" placeholder="ex: Paysagisme contemporain" />
-            </div>
-            <div class="field">
-              <label>Balise OG / meta title</label>
-              <input type="text" id="f-og-title" placeholder="Titre pour les réseaux sociaux" />
-            </div>
-            <div class="field">
-              <label>Meta description (OG)</label>
-              <textarea id="f-og-desc" rows="2" placeholder="Description pour les réseaux sociaux et Google"></textarea>
-            </div>
-          </div>
+        <!-- Désync banner -->
+        <div class="desync-banner hidden" id="desync-banner" style="margin:14px 18px 0">
+          ⚠ <strong>EN / ES désynchronisés</strong> — mettez à jour ou utilisez Claude pour traduire
         </div>
 
-        <!-- En-tête article -->
-        <div class="field-group">
-          <div class="field-group__head">
-            <span class="field-group__title">En-tête de l'article</span>
-          </div>
-          <div class="field-group__body">
+        <!-- Section : En-tête article -->
+        <div class="edit-section">
+          <button class="edit-section__toggle open" onclick="ABA.toggleSection(this)">
+            En-tête de l'article
+            <span class="edit-section__arrow">▼</span>
+          </button>
+          <div class="edit-section__body">
             <div class="field">
-              <label>Titre FR</label>
-              <input type="text" id="f-title-fr" placeholder="Titre en français" oninput="ABA.editor.markDirty('fr')" />
-            </div>
-            <div class="field">
-              <label>Titre EN</label>
-              <input type="text" id="f-title-en" placeholder="Title in English" />
+              <label>Titre <span id="title-lang-label">(FR)</span></label>
+              <input type="text" id="f-title" oninput="ABA.onEdit()" />
             </div>
             <div class="field">
-              <label>Título ES</label>
-              <input type="text" id="f-title-es" placeholder="Título en español" />
+              <label>Sous-titre / dek <span id="dek-lang-label">(FR)</span></label>
+              <textarea id="f-dek" rows="2" oninput="ABA.onEdit()"></textarea>
             </div>
-            <div class="field" style="margin-top:8px">
-              <label>Sous-titre / dek FR</label>
-              <textarea id="f-dek-fr" rows="2" oninput="ABA.editor.markDirty('fr')"></textarea>
-            </div>
-            <div class="field">
-              <label>Dek EN</label>
-              <textarea id="f-dek-en" rows="2"></textarea>
-            </div>
-            <div class="field">
-              <label>Dek ES</label>
-              <textarea id="f-dek-es" rows="2"></textarea>
-            </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:12px;margin-top:4px">
+            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
               <div class="field">
                 <label>Auteur</label>
-                <input type="text" id="f-author" placeholder="Prénom Nom" />
+                <input type="text" id="f-author" oninput="ABA.onEdit()" />
               </div>
               <div class="field">
                 <label>Date</label>
-                <input type="text" id="f-date" placeholder="ex: 21 mai 2026" />
-              </div>
-              <div class="field">
-                <label>Temps de lecture</label>
-                <input type="text" id="f-readtime" placeholder="ex: 9 min" />
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <!-- Contenu prose -->
-        <div class="field-group">
-          <div class="field-group__head">
-            <span class="field-group__title">Contenu de l'article</span>
-            <div id="desync-banner" class="desync-banner hidden" style="margin:0;padding:6px 12px;font-size:11.5px">
-              ⚠ EN / ES désynchronisés — pensez à traduire après vos modifications FR
-            </div>
-          </div>
-
-          <div class="lang-tabs">
-            <button class="lang-tab active" data-tab="fr" onclick="ABA.editor.switchTab('fr')">
-              FR
-            </button>
-            <button class="lang-tab" data-tab="en" onclick="ABA.editor.switchTab('en')">
-              EN
-              <span class="lang-tab__badge hidden" id="tab-badge-en"></span>
-            </button>
-            <button class="lang-tab" data-tab="es" onclick="ABA.editor.switchTab('es')">
-              ES
-              <span class="lang-tab__badge hidden" id="tab-badge-es"></span>
-            </button>
-          </div>
-
-          <div class="lang-panel active" id="panel-fr">
-            <div style="margin-bottom:10px;font-size:12px;color:var(--text3)">
-              HTML basique autorisé : &lt;p&gt;, &lt;h2&gt;, &lt;h3&gt;, &lt;em&gt;, &lt;strong&gt;, &lt;a href="…"&gt;
-            </div>
-            <textarea class="content-editor" id="content-fr" rows="20"
-                      oninput="ABA.editor.onContentChange('fr')"></textarea>
-          </div>
-          <div class="lang-panel" id="panel-en">
-            <textarea class="content-editor" id="content-en" rows="20"
-                      oninput="ABA.editor.onContentChange('en')"></textarea>
-          </div>
-          <div class="lang-panel" id="panel-es">
-            <textarea class="content-editor" id="content-es" rows="20"
-                      oninput="ABA.editor.onContentChange('es')"></textarea>
-          </div>
-        </div>
-
-        <!-- Images -->
-        <div class="field-group">
-          <div class="field-group__head">
-            <span class="field-group__title">Images</span>
-            <span style="font-size:11.5px;color:var(--text3)">Upload vers assets/blog/</span>
-          </div>
-          <div class="field-group__body">
-            <div class="image-grid" id="image-grid">
-              <!-- Filled by JS -->
-            </div>
-            <label class="upload-zone" for="image-upload">
-              <div class="upload-zone__icon">📸</div>
-              <p><strong>Cliquez ou glissez</strong> une image ici<br>
-              <span style="font-size:12px">JPG, PNG, WebP — max 4 Mo</span></p>
-              <input type="file" id="image-upload" accept="image/*" multiple
-                     onchange="ABA.images.handleUpload(this.files)" />
-            </label>
-            <div id="upload-progress" class="hidden" style="font-size:13px;color:var(--text2)">
-              <div class="spinner" style="display:inline-block;vertical-align:middle;margin-right:8px"></div>
-              Upload en cours…
-            </div>
-          </div>
-        </div>
-
-        <!-- Renvois par mot-clé (.xref) -->
-        <div class="field-group">
-          <div class="field-group__head">
-            <span class="field-group__title">Renvois par mot-clé</span>
-            <span style="font-size:11.5px;color:var(--text3)">Liens contextuels .xref dans le texte</span>
-          </div>
-          <div class="field-group__body">
-            <div id="xref-list" style="display:flex;flex-direction:column;gap:10px"></div>
-            <button class="btn btn--ghost" onclick="ABA.xref.add()" style="align-self:flex-start;font-size:12.5px">
-              + Ajouter un renvoi
-            </button>
-            <div style="font-size:12px;color:var(--text3);line-height:1.6">
-              Utilisation dans le texte : <code>&lt;span class="xref" data-slug="nom-article"&gt;mot clé&lt;/span&gt;</code>
-            </div>
-          </div>
-        </div>
-
-        <!-- Claude AI -->
-        <div class="claude-panel">
-          <div class="claude-panel__head">
-            <div class="claude-panel__badge">✦ Claude AI</div>
-            <span style="font-size:13px;color:var(--text2);margin-left:4px">
-              Générer ou traduire du contenu
-            </span>
-          </div>
-          <div class="claude-panel__body">
-            <div class="field">
-              <label>Clé API Anthropic</label>
-              <input type="password" id="claude-key"
-                     placeholder="sk-ant-…"
-                     value=""
-                     style="font-family:var(--mono)" />
-              <div style="font-size:11.5px;color:var(--text3);margin-top:4px">
-                Stockée en session uniquement — jamais envoyée ailleurs qu'à api.anthropic.com
-              </div>
-            </div>
-
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px">
-              <button class="btn btn--ghost" onclick="ABA.claude.translateEN()"
-                      style="font-size:12.5px" id="btn-translate-en">
-                🌐 Traduire FR → EN
-              </button>
-              <button class="btn btn--ghost" onclick="ABA.claude.translateES()"
-                      style="font-size:12.5px" id="btn-translate-es">
-                🌐 Traduire FR → ES
-              </button>
-            </div>
-
-            <div style="border-top:1px solid var(--border);padding-top:14px">
-              <div class="field">
-                <label>Générer un nouvel article (prompt libre)</label>
-                <textarea id="claude-prompt" rows="4"
-                          placeholder="Décrivez l'article à créer : sujet, angle, ton, longueur souhaitée, mots-clés à intégrer…"></textarea>
-              </div>
-              <button class="btn btn--ghost" onclick="ABA.claude.generate()" style="font-size:12.5px">
-                ✦ Générer l'article (FR + EN + ES)
-              </button>
-            </div>
-            <div id="claude-status" class="hidden" style="font-size:13px;color:var(--text2)">
-              <div class="spinner" style="display:inline-block;vertical-align:middle;margin-right:8px"></div>
-              <span id="claude-status-msg">Claude travaille…</span>
-            </div>
-          </div>
-        </div>
-
-      </div><!-- /editor-body -->
-    </div><!-- /editor -->
-
-    <!-- Nouvel article -->
-    <div class="editor hidden" id="new-article-panel">
-      <div class="editor__topbar">
-        <span class="editor__filename">Nouvel article</span>
-        <div class="editor__actions">
-          <button class="btn btn--ghost" onclick="ABA.cancelNewArticle()">Annuler</button>
-          <button class="btn btn--primary" onclick="ABA.createArticle()">Créer l'article →</button>
-        </div>
-      </div>
-      <div class="editor__body">
-        <div class="field-group">
-          <div class="field-group__head">
-            <span class="field-group__title">Informations de base</span>
-          </div>
-          <div class="field-group__body">
-            <div class="field">
-              <label>Slug (nom du fichier)</label>
-              <input type="text" id="new-slug" placeholder="ex: jardins-contemporains-maroc"
-                     oninput="ABA.updateSlugPreview(this.value)" />
-              <div style="font-size:12px;color:var(--text3);margin-top:4px">
-                Fichier créé : <code id="slug-preview">blog/—.html</code>
+                <input type="text" id="f-date" oninput="ABA.onEdit()" />
               </div>
             </div>
             <div class="field">
-              <label>Titre FR</label>
-              <input type="text" id="new-title-fr" placeholder="Titre de l'article en français" />
+              <label>Temps de lecture</label>
+              <input type="text" id="f-readtime" placeholder="ex: 9 min" oninput="ABA.onEdit()" />
             </div>
+          </div>
+        </div>
+
+        <!-- Section : Contenu -->
+        <div class="edit-section">
+          <button class="edit-section__toggle open" onclick="ABA.toggleSection(this)">
+            Contenu de l'article
+            <span class="edit-section__arrow">▼</span>
+          </button>
+          <div class="edit-section__body">
+            <div class="field">
+              <label id="content-lang-label">Prose FR</label>
+              <div class="hint" style="margin-bottom:6px">Balises autorisées : &lt;p&gt; &lt;h2&gt; &lt;h3&gt; &lt;em&gt; &lt;strong&gt; &lt;a href="…"&gt;</div>
+              <textarea class="content-textarea" id="f-content" oninput="ABA.onEdit()"></textarea>
+            </div>
+          </div>
+        </div>
+
+        <!-- Section : SEO -->
+        <div class="edit-section">
+          <button class="edit-section__toggle" onclick="ABA.toggleSection(this)">
+            SEO & Métadonnées
+            <span class="edit-section__arrow">▼</span>
+          </button>
+          <div class="edit-section__body collapsed">
             <div class="field">
               <label>Catégorie</label>
-              <input type="text" id="new-category" placeholder="ex: Paysagisme contemporain" />
+              <input type="text" id="f-category" oninput="ABA.onEdit()" />
             </div>
             <div class="field">
-              <label>Auteur</label>
-              <input type="text" id="new-author" placeholder="Prénom Nom" value="Adil Boumahdi" />
+              <label>OG Title (réseaux sociaux)</label>
+              <input type="text" id="f-og-title" oninput="ABA.onEdit()" />
+            </div>
+            <div class="field">
+              <label>OG Description</label>
+              <textarea id="f-og-desc" rows="2" oninput="ABA.onEdit()"></textarea>
             </div>
           </div>
         </div>
-        <div class="claude-panel">
-          <div class="claude-panel__head">
-            <div class="claude-panel__badge">✦ Claude AI</div>
-            <span style="font-size:13px;color:var(--text2);margin-left:4px">Optionnel — générer le contenu automatiquement</span>
-          </div>
-          <div class="claude-panel__body">
-            <div class="field">
-              <label>Prompt de génération</label>
-              <textarea id="new-claude-prompt" rows="5"
-                        placeholder="Décrivez l'article : thème, angle, longueur, mots-clés, exemples à citer…&#10;&#10;Claude générera la version FR + EN + ES avec votre voix éditoriale."></textarea>
-            </div>
-            <div class="hint">
-              Sans prompt, un article vide avec la structure correcte sera créé (vous remplissez ensuite l'éditeur).
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
 
-  </main>
-</div>
+        <!-- Section : Images -->
+        <div class="edit-section">
+          <button class="edit-section__toggle" onclick="ABA.toggleSection(this)">
+            Images
+            <span class="edit-section__arrow">▼</span>
+          </button>
+          <div class="edit-section__body collapsed">
+            <div class="img-grid" id="img-grid"></div>
+            <label class="upload-zone" for="img-upload" style="margin-top:10px">
+              <p><strong>Cliquez ou glissez</strong> une image<br><span style="font-size:11px;color:var(--text3)">JPG, PNG, WebP — max 4 Mo</span></p>
+              <input type="file" id="img-upload" accept="image/*" multiple onchange="ABA.uploadImages(this.files)" />
+            </label>
+            <div class="hint" style="margin-top:10px">
+              <strong>7 traitements :</strong> plein cadre · débordement · flottante · diptyque · duo collant · plan annoté · renvoi mot-clé<br>
+              Copiez le code depuis la carte image et collez-le dans le contenu.
+            </div>
+          </div>
+        </div>
+
+        <!-- Section : Claude AI -->
+        <div class="edit-section">
+          <button class="edit-section__toggle" onclick="ABA.toggleSection(this)">
+            <span class="claude-badge">✦ Claude AI</span>
+            <span class="edit-section__arrow">▼</span>
+          </button>
+          <div class="edit-section__body collapsed">
+            <div class="field">
+              <label>Clé API Anthropic</label>
+              <input type="password" id="claude-key" placeholder="sk-ant-…" style="font-family:var(--mono);font-size:12px" />
+              <div class="hint">Session uniquement — jamais envoyée ailleurs qu'à api.anthropic.com</div>
+            </div>
+            <div class="claude-row" style="margin-top:4px">
+              <button class="btn btn--ghost btn--sm" onclick="ABA.claude.translate('en')">🌐 FR → EN</button>
+              <button class="btn btn--ghost btn--sm" onclick="ABA.claude.translate('es')">🌐 FR → ES</button>
+            </div>
+            <div style="border-top:1px solid var(--border);padding-top:14px;margin-top:4px">
+              <div class="field">
+                <label>Prompt de rédaction / modification</label>
+                <textarea id="claude-prompt" rows="4" placeholder="Ex: Réécris l'introduction en insistant sur l'aspect technique, ton expert mais accessible…"></textarea>
+              </div>
+              <button class="btn btn--ghost btn--sm" onclick="ABA.claude.generate()" style="margin-top:4px">✦ Générer / modifier (3 langues)</button>
+            </div>
+            <div id="claude-loading" class="hidden" style="font-size:12.5px;color:var(--text2);margin-top:10px">
+              <span class="spinner"></span> Claude travaille…
+            </div>
+          </div>
+        </div>
+
+      </div><!-- /panel-content -->
+    </div><!-- /edit-panel__body -->
+  </aside>
+
+</div><!-- /app -->
 
 <!-- ══════════════════════════════════════════════
-     MODAL — Message de commit
+     MODAL — Publier (commit)
 ══════════════════════════════════════════════ -->
 <div class="modal-overlay hidden" id="commit-modal">
   <div class="modal">
-    <div class="modal__title">Publier l'article</div>
-    <div class="modal__sub">Ce message apparaîtra dans l'historique GitHub</div>
+    <div class="modal__title">Publier sur GitHub</div>
+    <div class="modal__sub">Sera en ligne sur ab-landscapes.com dans ~2 minutes</div>
     <div class="field">
       <label>Message de commit</label>
-      <input type="text" id="commit-message" placeholder="ex: Article : jardins contemporains" />
+      <input type="text" id="commit-msg" placeholder="ex: Mise à jour article cèdre de l'Atlas" />
     </div>
     <div class="modal__actions">
-      <button class="btn btn--ghost" onclick="ABA.closeCommitModal()">Annuler</button>
+      <button class="btn btn--ghost" onclick="ABA.closeModal('commit-modal')">Annuler</button>
       <button class="btn btn--primary" onclick="ABA.doCommit()">↑ Publier →</button>
     </div>
   </div>
 </div>
 
-<!-- Toast container -->
+<!-- ══════════════════════════════════════════════
+     MODAL — Nouvel article
+══════════════════════════════════════════════ -->
+<div class="modal-overlay hidden" id="new-modal">
+  <div class="new-modal">
+    <div class="new-modal__title">Nouvel article</div>
+    <div class="new-modal__sub">Créez un article vide ou générez le contenu avec Claude AI</div>
+
+    <div class="field">
+      <label>Titre de l'article (FR)</label>
+      <input type="text" id="new-title" placeholder="ex: Le cèdre de l'Atlas dans les jardins urbains"
+             oninput="ABA.autoSlug(this.value)" />
+    </div>
+    <div class="field">
+      <label>Slug (nom du fichier)</label>
+      <input type="text" id="new-slug" placeholder="auto-généré depuis le titre" oninput="ABA.updateSlugPreview(this.value)" />
+      <div class="slug-preview">Fichier : <code id="slug-preview">blog/—.html</code></div>
+    </div>
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+      <div class="field">
+        <label>Catégorie</label>
+        <input type="text" id="new-category" placeholder="ex: Paysagisme contemporain" />
+      </div>
+      <div class="field">
+        <label>Auteur</label>
+        <input type="text" id="new-author" value="Adil Boumahdi" />
+      </div>
+    </div>
+
+    <hr class="new-modal__divider" />
+
+    <div class="new-modal__section">
+      <span class="claude-badge">✦ Claude AI</span>
+      Optionnel — générer le contenu automatiquement
+    </div>
+
+    <div class="field">
+      <label>Clé API Anthropic</label>
+      <input type="password" id="new-claude-key" placeholder="sk-ant-…" style="font-family:var(--mono);font-size:12px" />
+    </div>
+    <div class="field">
+      <label>Prompt de génération</label>
+      <textarea id="new-prompt" rows="4"
+                placeholder="Décrivez l'article : thème, angle, longueur, mots-clés, exemples à citer…&#10;&#10;Sans prompt → article vide créé (vous remplissez ensuite l'éditeur)."></textarea>
+    </div>
+
+    <div id="new-loading" class="hidden" style="font-size:12.5px;color:var(--text2);margin-top:10px">
+      <span class="spinner"></span> Génération en cours…
+    </div>
+
+    <div class="new-modal__actions">
+      <button class="btn btn--ghost" onclick="ABA.closeModal('new-modal')">Annuler</button>
+      <button class="btn btn--primary" onclick="ABA.createArticle()">Créer l'article →</button>
+    </div>
+  </div>
+</div>
+
+<!-- Toasts -->
 <div id="toast-container"></div>
 
 <script src="admin.js"></script>

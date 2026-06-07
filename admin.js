@@ -1,202 +1,160 @@
 /* ============================================================
-   ABA ADMIN — Interface d'édition du site ab-landscapes.com
-   Gère : auth, GitHub API, parsing HTML i18n, éditeur, Claude
+   ABA ADMIN v2 — Éditeur visuel avec preview iframe
+   Layout 3 colonnes : sidebar | iframe preview | edit panel
    ============================================================ */
-
 'use strict';
 
-const REPO = 'adilboumahdi-aba/Atelier-Boumahdi-Adil';
-const GH_API = 'https://api.github.com';
-const BLOG_DIR = 'blog';
+const REPO    = 'adilboumahdi-aba/Atelier-Boumahdi-Adil';
+const GH_API  = 'https://api.github.com';
+const SITE    = 'https://www.ab-landscapes.com';
+const BLOG    = 'blog';
 
-/* ── Utilitaires crypto ── */
+/* ── Crypto ── */
 async function sha256(str) {
   const buf = await crypto.subtle.digest('SHA-256', new TextEncoder().encode(str));
-  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2, '0')).join('');
+  return Array.from(new Uint8Array(buf)).map(b => b.toString(16).padStart(2,'0')).join('');
 }
 
-/* ── Utilitaires base64 ── */
-function b64encode(str) {
-  return btoa(unescape(encodeURIComponent(str)));
-}
-function b64decode(b64) {
-  return decodeURIComponent(escape(atob(b64)));
-}
-function arrayBufferToBase64(buf) {
+/* ── Base64 ── */
+function b64enc(str) { return btoa(unescape(encodeURIComponent(str))); }
+function b64dec(b64) { return decodeURIComponent(escape(atob(b64))); }
+function buf2b64(buf) {
   const bytes = new Uint8Array(buf);
-  let binary = '';
-  for (let i = 0; i < bytes.byteLength; i++) binary += String.fromCharCode(bytes[i]);
-  return btoa(binary);
+  let s = '';
+  for (let i = 0; i < bytes.byteLength; i++) s += String.fromCharCode(bytes[i]);
+  return btoa(s);
 }
 
-/* ── Toast ── */
-function toast(msg, type = 'info', duration = 4000) {
-  const container = document.getElementById('toast-container');
+/* ── Toasts ── */
+function toast(msg, type = 'info', ms = 4000) {
+  const c = document.getElementById('toast-container');
   const el = document.createElement('div');
   el.className = `toast toast--${type}`;
   el.textContent = msg;
-  container.appendChild(el);
-  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity 0.3s'; }, duration - 300);
-  setTimeout(() => el.remove(), duration);
+  c.appendChild(el);
+  setTimeout(() => { el.style.opacity = '0'; el.style.transition = 'opacity 0.3s'; }, ms - 300);
+  setTimeout(() => el.remove(), ms);
 }
 
 /* ── GitHub API ── */
 const GH = {
-  get pat() { return sessionStorage.getItem('aba-admin-pat') || ''; },
-
-  headers() {
+  get pat() { return sessionStorage.getItem('aba-pat') || ''; },
+  hdrs() {
     return {
       'Authorization': `Bearer ${this.pat}`,
       'Accept': 'application/vnd.github.v3+json',
       'Content-Type': 'application/json',
     };
   },
-
   async get(path) {
-    const res = await fetch(`${GH_API}/repos/${REPO}/contents/${path}`, {
-      headers: this.headers(),
-    });
-    if (!res.ok) throw new Error(`GitHub ${res.status}: ${path}`);
-    return res.json();
+    const r = await fetch(`${GH_API}/repos/${REPO}/contents/${path}`, { headers: this.hdrs() });
+    if (!r.ok) throw new Error(`GitHub ${r.status} — ${path}`);
+    return r.json();
   },
-
   async put(path, content, sha, message) {
-    const body = {
-      message,
-      content: b64encode(content),
-    };
+    const body = { message, content: b64enc(content) };
     if (sha) body.sha = sha;
-    const res = await fetch(`${GH_API}/repos/${REPO}/contents/${path}`, {
-      method: 'PUT',
-      headers: this.headers(),
-      body: JSON.stringify(body),
+    const r = await fetch(`${GH_API}/repos/${REPO}/contents/${path}`, {
+      method: 'PUT', headers: this.hdrs(), body: JSON.stringify(body),
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.message || `GitHub ${res.status}`);
-    }
-    return res.json();
+    if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.message || `GitHub ${r.status}`); }
+    return r.json();
   },
-
-  async putBinary(path, base64Content, sha, message) {
-    const body = { message, content: base64Content };
+  async putBin(path, b64, sha, message) {
+    const body = { message, content: b64 };
     if (sha) body.sha = sha;
-    const res = await fetch(`${GH_API}/repos/${REPO}/contents/${path}`, {
-      method: 'PUT',
-      headers: this.headers(),
-      body: JSON.stringify(body),
+    const r = await fetch(`${GH_API}/repos/${REPO}/contents/${path}`, {
+      method: 'PUT', headers: this.hdrs(), body: JSON.stringify(body),
     });
-    if (!res.ok) {
-      const err = await res.json().catch(() => ({}));
-      throw new Error(err.message || `GitHub ${res.status}`);
-    }
-    return res.json();
+    if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.message || `GitHub ${r.status}`); }
+    return r.json();
   },
-
-  async testConnection() {
+  async ping() {
     try {
-      const res = await fetch(`${GH_API}/repos/${REPO}`, { headers: this.headers() });
-      return res.ok;
+      const r = await fetch(`${GH_API}/repos/${REPO}`, { headers: this.hdrs() });
+      return r.ok;
     } catch { return false; }
   },
 };
 
-/* ── Parser d'article HTML ── */
+/* ── Parser HTML ── */
 const Parser = {
   parse(html) {
     const doc = new DOMParser().parseFromString(html, 'text/html');
-    const data = {};
+    const g = (sel, attr) => doc.querySelector(sel)?.[attr] || '';
+    const ga = (sel, at) => doc.querySelector(sel)?.getAttribute(at) || '';
 
-    /* Métadonnées SEO */
-    data.ogTitle   = doc.querySelector('meta[property="og:title"]')?.getAttribute('content') || '';
-    data.ogDesc    = doc.querySelector('meta[property="og:description"]')?.getAttribute('content') || '';
-    data.metaTitle = doc.querySelector('title')?.textContent?.replace(/\s*—\s*ABA.*$/, '') || '';
-
-    /* Catégorie */
-    const catEl = doc.querySelector('.a-cat');
-    data.category = catEl?.textContent?.trim() || '';
-
-    /* Titre h1 multilingue */
-    const h1 = doc.querySelector('h1[data-fr], h1.a-title');
-    data.titleFr = h1?.getAttribute('data-fr') || h1?.textContent?.trim() || '';
-    data.titleEn = h1?.getAttribute('data-en') || '';
-    data.titleEs = h1?.getAttribute('data-es') || '';
-
-    /* Dek / sous-titre */
-    const dek = doc.querySelector('[data-fr].a-dek, p.a-dek[data-fr]');
-    data.dekFr = dek?.getAttribute('data-fr') || dek?.textContent?.trim() || '';
-    data.dekEn = dek?.getAttribute('data-en') || '';
-    data.dekEs = dek?.getAttribute('data-es') || '';
-
-    /* Byline */
+    const h1  = doc.querySelector('h1[data-fr], h1.a-title');
+    const dek = doc.querySelector('p.a-dek[data-fr], [data-fr].a-dek');
     const byline = doc.querySelector('.a-byline');
-    if (byline) {
-      const spans = byline.querySelectorAll('span:not(.dotsep)');
-      data.author   = spans[0]?.textContent?.replace(/^Par\s+/, '').trim() || '';
-      data.date     = spans[1]?.textContent?.trim() || '';
-      data.readtime = spans[2]?.textContent?.replace(/\s*de lecture\s*/, '').trim() || '';
-    }
+    const spans  = byline ? [...byline.querySelectorAll('span:not(.dotsep)')] : [];
 
-    /* Contenu par langue (data-lang-block) */
-    ['fr', 'en', 'es'].forEach(lang => {
-      const block = doc.querySelector(`[data-lang-block="${lang}"]`);
-      data[`content${lang.toUpperCase()}`] = block ? block.innerHTML.trim() : '';
-    });
+    const block = (lang) => doc.querySelector(`[data-lang-block="${lang}"]`)?.innerHTML?.trim() || '';
 
-    /* SHA du fichier (stocké séparément lors du fetch) */
-    return data;
+    return {
+      ogTitle:   ga('meta[property="og:title"]', 'content'),
+      ogDesc:    ga('meta[property="og:description"]', 'content'),
+      category:  doc.querySelector('.a-cat')?.textContent?.trim() || '',
+      titleFr:   h1?.getAttribute('data-fr') || h1?.textContent?.trim() || '',
+      titleEn:   h1?.getAttribute('data-en') || '',
+      titleEs:   h1?.getAttribute('data-es') || '',
+      dekFr:     dek?.getAttribute('data-fr') || dek?.textContent?.trim() || '',
+      dekEn:     dek?.getAttribute('data-en') || '',
+      dekEs:     dek?.getAttribute('data-es') || '',
+      author:    spans[0]?.textContent?.replace(/^Par\s+/,'').trim() || '',
+      date:      spans[1]?.textContent?.trim() || '',
+      readtime:  spans[2]?.textContent?.replace(/\s*de lecture\s*/,'').trim() || '',
+      contentFr: block('fr'),
+      contentEn: block('en'),
+      contentEs: block('es'),
+    };
   },
 
-  reconstruct(originalHtml, data) {
-    const doc = new DOMParser().parseFromString(originalHtml, 'text/html');
+  reconstruct(html, d) {
+    const doc = new DOMParser().parseFromString(html, 'text/html');
 
-    /* OG tags */
-    const setMeta = (sel, val) => {
-      const el = doc.querySelector(sel);
-      if (el) el.setAttribute('content', val);
-    };
-    setMeta('meta[property="og:title"]', data.ogTitle);
-    setMeta('meta[property="og:description"]', data.ogDesc);
+    const setMeta = (sel, val) => { const el = doc.querySelector(sel); if (el) el.setAttribute('content', val); };
+    setMeta('meta[property="og:title"]',       d.ogTitle);
+    setMeta('meta[property="og:description"]', d.ogDesc);
 
-    /* Titre page */
-    if (data.ogTitle && doc.querySelector('title')) {
-      doc.querySelector('title').textContent = data.ogTitle + ' — ABA Paysage';
-    }
+    const titleEl = doc.querySelector('title');
+    if (titleEl && d.ogTitle) titleEl.textContent = d.ogTitle + ' — ABA Paysage';
 
-    /* h1 */
     const h1 = doc.querySelector('h1[data-fr], h1.a-title');
     if (h1) {
-      h1.setAttribute('data-fr', data.titleFr);
-      h1.setAttribute('data-en', data.titleEn);
-      h1.setAttribute('data-es', data.titleEs);
-      h1.textContent = data.titleFr;
+      h1.setAttribute('data-fr', d.titleFr);
+      h1.setAttribute('data-en', d.titleEn);
+      h1.setAttribute('data-es', d.titleEs);
+      h1.textContent = d.titleFr;
     }
 
-    /* Dek */
-    const dek = doc.querySelector('[data-fr].a-dek, p.a-dek[data-fr]');
+    const dek = doc.querySelector('p.a-dek[data-fr], [data-fr].a-dek');
     if (dek) {
-      dek.setAttribute('data-fr', data.dekFr);
-      dek.setAttribute('data-en', data.dekEn);
-      dek.setAttribute('data-es', data.dekEs);
-      dek.textContent = data.dekFr;
+      dek.setAttribute('data-fr', d.dekFr);
+      dek.setAttribute('data-en', d.dekEn);
+      dek.setAttribute('data-es', d.dekEs);
+      dek.textContent = d.dekFr;
     }
 
-    /* Byline */
+    const cat = doc.querySelector('.a-cat');
+    if (cat) {
+      const dot = cat.querySelector('.chip__dot');
+      cat.textContent = d.category;
+      if (dot) cat.insertBefore(dot, cat.firstChild);
+    }
+
     const byline = doc.querySelector('.a-byline');
     if (byline) {
-      const spans = byline.querySelectorAll('span:not(.dotsep)');
-      if (spans[0]) spans[0].innerHTML = `Par <b>${data.author}</b>`;
-      if (spans[1]) spans[1].textContent = data.date;
-      if (spans[2]) spans[2].textContent = `${data.readtime} de lecture`;
+      const spans = [...byline.querySelectorAll('span:not(.dotsep)')];
+      if (spans[0]) spans[0].innerHTML = `Par <b>${d.author}</b>`;
+      if (spans[1]) spans[1].textContent = d.date;
+      if (spans[2]) spans[2].textContent = `${d.readtime} de lecture`;
     }
 
-    /* Blocs de contenu */
-    ['fr', 'en', 'es'].forEach(lang => {
+    ['fr','en','es'].forEach(lang => {
       const block = doc.querySelector(`[data-lang-block="${lang}"]`);
-      const key = `content${lang.toUpperCase()}`;
-      if (block && data[key] !== undefined) {
-        block.innerHTML = data[key];
-      }
+      const key = `content${lang.charAt(0).toUpperCase() + lang.slice(1)}`;
+      if (block && d[key] !== undefined) block.innerHTML = d[key];
     });
 
     return '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
@@ -204,30 +162,25 @@ const Parser = {
 };
 
 /* ── Template nouvel article ── */
-function articleTemplate(slug, titleFr, category, author, date) {
-  const url = `https://www.ab-landscapes.com/blog/${slug}.html`;
+function newArticleTemplate(slug, titleFr, category, author, date) {
+  const url = `${SITE}/${BLOG}/${slug}.html`;
   return `<!DOCTYPE html>
 <html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <script src="/assets/cookie-consent.js"><\/script>
   <script async src="https://www.googletagmanager.com/gtag/js?id=G-P2MDTEBQVF"><\/script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag(){dataLayer.push(arguments);}
-    gtag('js', new Date());
-    gtag('config', 'G-P2MDTEBQVF');
-  <\/script>
+  <script>window.dataLayer=window.dataLayer||[];function gtag(){dataLayer.push(arguments);}gtag('js',new Date());gtag('config','G-P2MDTEBQVF');<\/script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>${titleFr} — ABA Paysage</title>
   <meta name="description" content="" />
   <meta property="og:title" content="${titleFr} — ABA" />
   <meta property="og:description" content="" />
-  <meta property="og:image" content="https://www.ab-landscapes.com/assets/og-cover.jpg" />
+  <meta property="og:image" content="${SITE}/assets/og-cover.jpg" />
   <meta property="og:url" content="${url}" />
   <meta property="og:type" content="article" />
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:image" content="https://www.ab-landscapes.com/assets/og-cover.jpg" />
+  <meta name="twitter:image" content="${SITE}/assets/og-cover.jpg" />
   <link rel="canonical" href="${url}" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -238,60 +191,39 @@ function articleTemplate(slug, titleFr, category, author, date) {
   <meta name="theme-color" content="#efe9dd" />
 </head>
 <body>
-
 <header class="masthead">
-  <div class="wrap">
-    <div class="masthead__bar">
-      <div class="masthead__left">
-        <a href="../preview.html" class="aba-logo" aria-label="ABA — Atelier Boumahdi, retour à l'accueil">
-          <img class="aba-logo__img" src="../assets/aba-logo.png" alt="ABA">
-          <div class="aba-logo__txt">
-            <span class="aba-logo__aba">ABA</span>
-            <span class="aba-logo__wm">Atelier Boumahdi</span>
-          </div>
-        </a>
-        <div class="masthead__rule"></div>
-        <span class="eyebrow" style="white-space:nowrap;">Journal de l'Atelier</span>
-      </div>
-      <div class="masthead__tools">
-        <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
-          <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
-          <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
-          <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
-        </div>
-        <div class="seg" role="group" aria-label="Thème de lecture">
-          <button id="btn-dark" onclick="setTheme('dark')" aria-pressed="true">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
-          </button>
-          <button id="btn-light" onclick="setTheme('light')" aria-pressed="false">
-            <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
-          </button>
-        </div>
-        <a href="../blog.html" class="btn-ghost" style="font-size:11.5px;padding:8px 14px;" data-i18n="journalBtn">← Journal</a>
-        <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px;" data-i18n="initiateProject">Initier un projet</a>
-      </div>
+  <div class="wrap"><div class="masthead__bar">
+    <div class="masthead__left">
+      <a href="../preview.html" class="aba-logo" aria-label="ABA — retour accueil">
+        <img class="aba-logo__img" src="../assets/aba-logo.png" alt="ABA">
+        <div class="aba-logo__txt"><span class="aba-logo__aba">ABA</span><span class="aba-logo__wm">Atelier Boumahdi</span></div>
+      </a>
+      <div class="masthead__rule"></div>
+      <span class="eyebrow" style="white-space:nowrap;">Journal de l'Atelier</span>
     </div>
-  </div>
+    <div class="masthead__tools">
+      <div class="seg" role="group" aria-label="Langue" style="margin-right:4px">
+        <button data-lang="fr" aria-pressed="true" onclick="setLang('fr')">FR</button>
+        <button data-lang="en" aria-pressed="false" onclick="setLang('en')">EN</button>
+        <button data-lang="es" aria-pressed="false" onclick="setLang('es')">ES</button>
+      </div>
+      <div class="seg" role="group" aria-label="Thème">
+        <button id="btn-dark" onclick="setTheme('dark')" aria-pressed="true"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg></button>
+        <button id="btn-light" onclick="setTheme('light')" aria-pressed="false"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg></button>
+      </div>
+      <a href="../blog.html" class="btn-ghost" style="font-size:11.5px;padding:8px 14px;" data-i18n="journalBtn">← Journal</a>
+      <a href="../preview.html#contact" class="btn btn--brand" style="font-size:11px;padding:10px 20px;" data-i18n="initiateProject">Initier un projet</a>
+    </div>
+  </div></div>
 </header>
-
-<div class="wrap">
-  <div class="backbar">
-    <a href="../blog.html" class="back-link">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><polyline points="15 18 9 12 15 6"/></svg>
-      Retour au Journal
-    </a>
-  </div>
-</div>
+<div class="wrap"><div class="backbar">
+  <a href="../blog.html" class="back-link"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg> Retour au Journal</a>
+</div></div>
 <hr class="hr" />
-
 <article class="article fade-up">
-
   <header class="wrap-narrow" style="text-align:center;padding-top:clamp(16px,3vw,36px)">
     <div style="display:flex;justify-content:center;margin-bottom:6px">
-      <span class="a-cat">
-        <span class="chip__dot" style="background:#a8946f"></span>
-        ${category}
-      </span>
+      <span class="a-cat"><span class="chip__dot" style="background:#a8946f"></span>${category || 'Paysagisme'}</span>
     </div>
     <h1 class="a-title" style="font-size:clamp(34px,5vw,62px);margin:10px 0 18px"
         data-fr="${titleFr}" data-en="" data-es="">${titleFr}</h1>
@@ -305,19 +237,15 @@ function articleTemplate(slug, titleFr, category, author, date) {
       <span>8 min de lecture</span>
     </div>
   </header>
-
   <div data-lang-block="fr" class="wrap-narrow prose">
-    <p>Contenu FR à rédiger.</p>
+    <p>Contenu à rédiger.</p>
   </div>
-
   <div data-lang-block="en" class="wrap-narrow prose" hidden>
-    <p>English content to be written.</p>
+    <p>Content to be written.</p>
   </div>
-
   <div data-lang-block="es" class="wrap-narrow prose" hidden>
-    <p>Contenido ES por redactar.</p>
+    <p>Contenido por redactar.</p>
   </div>
-
   <footer class="article-foot wrap-narrow">
     <div class="author-bio">
       <img src="../assets/adil-boumahdi-portrait.jpg" alt="${author}" class="author-bio__img" />
@@ -329,9 +257,7 @@ function articleTemplate(slug, titleFr, category, author, date) {
       </div>
     </div>
   </footer>
-
 </article>
-
 <script src="../assets/i18n.js"><\/script>
 </body>
 </html>`;
@@ -341,680 +267,565 @@ function articleTemplate(slug, titleFr, category, author, date) {
    ABA — Objet principal
 ══════════════════════════════════════════════ */
 const ABA = {
+
+  /* État */
   articles: [],
   filtered: [],
-  currentArticle: null, /* { path, sha, data, originalHtml } */
-  isDirty: false,
-  desyncLangs: new Set(),
+  current: null,    /* { path, sha, data, html } */
+  lang: 'fr',       /* langue active dans l'éditeur */
+  dirty: false,
+  desync: new Set(),
+  debounceTimer: null,
 
   /* ── Init ── */
   async init() {
-    const hasHash = localStorage.getItem('aba-admin-hash');
-    if (!hasHash) {
+    if (!localStorage.getItem('aba-hash')) {
       this.showSetup();
-    } else {
-      /* Auth screen is default-visible */
     }
+    /* auth-screen visible par défaut */
   },
 
-  /* ── Setup (première utilisation) ── */
+  /* ── Écrans auth ── */
   showSetup() {
     document.getElementById('auth-screen').classList.add('hidden');
     document.getElementById('setup-screen').classList.remove('hidden');
+  },
+  showAuth() {
+    document.getElementById('setup-screen').classList.add('hidden');
+    document.getElementById('auth-screen').classList.remove('hidden');
   },
 
   async setup() {
     const pwd  = document.getElementById('setup-pwd').value;
     const pwd2 = document.getElementById('setup-pwd2').value;
     const pat  = document.getElementById('setup-pat').value.trim();
-    const errEl = document.getElementById('setup-error');
-    const msgEl = document.getElementById('setup-error-msg');
-
-    errEl.classList.add('hidden');
-
-    if (pwd.length < 8) {
-      msgEl.textContent = 'Le mot de passe doit faire au moins 8 caractères';
-      errEl.classList.remove('hidden'); return;
-    }
-    if (pwd !== pwd2) {
-      msgEl.textContent = 'Les mots de passe ne correspondent pas';
-      errEl.classList.remove('hidden'); return;
-    }
-    if (!pat.startsWith('ghp_') && !pat.startsWith('github_pat_')) {
-      msgEl.textContent = 'Token GitHub invalide (doit commencer par ghp_ ou github_pat_)';
-      errEl.classList.remove('hidden'); return;
-    }
-
-    const hash = await sha256(pwd);
-    localStorage.setItem('aba-admin-hash', hash);
-    sessionStorage.setItem('aba-admin-pat', pat);
-
+    const err  = (msg) => {
+      document.getElementById('setup-error-msg').textContent = msg;
+      document.getElementById('setup-error').classList.remove('hidden');
+    };
+    document.getElementById('setup-error').classList.add('hidden');
+    if (pwd.length < 8) return err('Minimum 8 caractères requis');
+    if (pwd !== pwd2)  return err('Les mots de passe ne correspondent pas');
+    if (!pat.startsWith('ghp_') && !pat.startsWith('github_pat_'))
+      return err('Token GitHub invalide (doit commencer par ghp_)');
+    localStorage.setItem('aba-hash', await sha256(pwd));
+    sessionStorage.setItem('aba-pat', pat);
     document.getElementById('setup-screen').classList.add('hidden');
-    await this.onAuthSuccess();
+    await this.launch();
   },
 
-  /* ── Login ── */
   async login() {
     const pwd = document.getElementById('auth-pwd').value;
     const pat = document.getElementById('auth-pat').value.trim();
-    const errEl = document.getElementById('auth-error');
-    const msgEl = document.getElementById('auth-error-msg');
-
-    errEl.classList.add('hidden');
-
-    if (!pwd || !pat) {
-      msgEl.textContent = 'Veuillez remplir les deux champs';
-      errEl.classList.remove('hidden'); return;
-    }
-
-    const hash = await sha256(pwd);
-    const stored = localStorage.getItem('aba-admin-hash');
-
-    if (hash !== stored) {
-      msgEl.textContent = 'Mot de passe incorrect';
-      errEl.classList.remove('hidden'); return;
-    }
-
-    sessionStorage.setItem('aba-admin-pat', pat);
+    const err = (msg) => {
+      document.getElementById('auth-error-msg').textContent = msg;
+      document.getElementById('auth-error').classList.remove('hidden');
+    };
+    document.getElementById('auth-error').classList.add('hidden');
+    if (!pwd || !pat) return err('Remplissez les deux champs');
+    if (await sha256(pwd) !== localStorage.getItem('aba-hash')) return err('Mot de passe incorrect');
+    sessionStorage.setItem('aba-pat', pat);
     document.getElementById('auth-screen').classList.add('hidden');
-    await this.onAuthSuccess();
-  },
-
-  async onAuthSuccess() {
-    document.getElementById('app').classList.remove('hidden');
-
-    /* Test connexion GitHub */
-    const ok = await GH.testConnection();
-    const dot = document.getElementById('github-status-dot');
-    const label = document.getElementById('github-status-label');
-    if (ok) {
-      dot.classList.remove('offline');
-      label.textContent = 'GitHub connecté';
-    } else {
-      dot.classList.add('offline');
-      label.textContent = 'GitHub — erreur token';
-      toast('Token GitHub invalide ou expiré', 'error', 6000);
-    }
-
-    await this.loadArticleList();
+    await this.launch();
   },
 
   logout() {
-    sessionStorage.removeItem('aba-admin-pat');
+    sessionStorage.removeItem('aba-pat');
     location.reload();
   },
 
-  /* ── Liste des articles ── */
-  async loadArticleList() {
-    const listEl = document.getElementById('article-list');
-    listEl.innerHTML = '<div style="padding:20px;color:var(--text3);font-size:13px;text-align:center"><div class="spinner" style="margin:0 auto 12px"></div>Chargement…</div>';
+  /* ── Lancement ── */
+  async launch() {
+    document.getElementById('app').classList.remove('hidden');
+    const ok = await GH.ping();
+    const dot = document.getElementById('gh-dot');
+    const lbl = document.getElementById('gh-label');
+    dot.classList.toggle('offline', !ok);
+    lbl.textContent = ok ? 'GitHub connecté' : 'Token invalide';
+    if (!ok) toast('Token GitHub invalide ou expiré', 'error', 7000);
+    await this.loadList();
+  },
 
+  /* ── Liste des articles ── */
+  async loadList() {
+    const listEl = document.getElementById('article-list');
+    listEl.innerHTML = '<div style="padding:24px;text-align:center;color:var(--text3)"><div class="spinner" style="margin:0 auto 12px"></div>Chargement…</div>';
     try {
-      const files = await GH.get(BLOG_DIR);
+      const files = await GH.get(BLOG);
       this.articles = files
         .filter(f => f.name.endsWith('.html'))
+        .sort((a,b) => a.name.localeCompare(b.name))
         .map(f => ({ name: f.name, path: f.path, sha: f.sha }));
       this.filtered = [...this.articles];
-      this.renderArticleList();
-    } catch (err) {
-      listEl.innerHTML = `<div style="padding:20px;color:var(--red);font-size:13px">${err.message}</div>`;
+      document.getElementById('article-count').textContent = this.articles.length;
+      this.renderList();
+    } catch(e) {
+      listEl.innerHTML = `<div style="padding:20px;color:var(--red);font-size:13px">${e.message}</div>`;
     }
   },
 
-  renderArticleList() {
-    const listEl = document.getElementById('article-list');
+  renderList() {
+    const el = document.getElementById('article-list');
     if (!this.filtered.length) {
-      listEl.innerHTML = '<div style="padding:20px;color:var(--text3);font-size:13px;text-align:center">Aucun article trouvé</div>';
+      el.innerHTML = '<div style="padding:20px;color:var(--text3);font-size:13px;text-align:center">Aucun article</div>';
       return;
     }
-    listEl.innerHTML = this.filtered.map(a => {
-      const active = this.currentArticle?.path === a.path ? 'active' : '';
-      const displayName = a.name.replace('.html', '').replace(/-/g, ' ');
-      return `<div class="article-item ${active}" onclick="ABA.openArticle('${a.path}','${a.sha}')">
-        <div class="article-item__title">${displayName}</div>
-        <div class="article-item__meta">
-          <span style="font-family:var(--mono)">${a.name}</span>
-        </div>
+    el.innerHTML = this.filtered.map(a => {
+      const active = this.current?.path === a.path ? 'active' : '';
+      const title = a.name.replace('.html','').replace(/-/g,' ');
+      return `<div class="article-item ${active}" onclick="ABA.open('${a.path}','${a.sha}')">
+        <div class="article-item__title">${title}</div>
+        <div class="article-item__file">${a.name}</div>
       </div>`;
     }).join('');
   },
 
-  filterArticles(q) {
+  filter(q) {
     q = q.toLowerCase();
-    this.filtered = q
-      ? this.articles.filter(a => a.name.toLowerCase().includes(q))
-      : [...this.articles];
-    this.renderArticleList();
+    this.filtered = q ? this.articles.filter(a => a.name.toLowerCase().includes(q)) : [...this.articles];
+    this.renderList();
   },
 
   /* ── Ouvrir un article ── */
-  async openArticle(path, sha) {
-    if (this.isDirty) {
-      if (!confirm('Modifications non sauvegardées. Continuer ?')) return;
-    }
+  async open(path, sha) {
+    if (this.dirty && !confirm('Modifications non sauvegardées. Continuer ?')) return;
 
-    document.getElementById('empty-state').classList.add('hidden');
-    document.getElementById('new-article-panel').classList.add('hidden');
-    document.getElementById('editor').classList.remove('hidden');
-
-    document.getElementById('editor-filename').textContent = path;
-    document.getElementById('editor-body').style.opacity = '0.4';
+    /* Activer dans la sidebar */
+    this.current = null;
+    this.renderList();
 
     try {
       const file = await GH.get(path);
-      const html = b64decode(file.content);
+      const html = b64dec(file.content);
       const data = Parser.parse(html);
 
-      this.currentArticle = { path, sha: file.sha, data, originalHtml: html };
-      this.isDirty = false;
-      this.desyncLangs.clear();
+      this.current = { path, sha: file.sha, data, html };
+      this.dirty = false;
+      this.desync.clear();
+      this.lang = 'fr';
 
-      this.fillEditor(data);
-      this.renderArticleList(); /* update active state */
+      /* UI */
+      document.getElementById('panel-filename').textContent = path;
+      document.getElementById('preview-url').textContent = `${SITE}/${path}`;
+      document.getElementById('panel-empty').classList.add('hidden');
+      document.getElementById('panel-content').classList.remove('hidden');
+      document.getElementById('preview-empty').classList.add('hidden');
+      document.getElementById('preview-frame').classList.remove('hidden');
       document.getElementById('btn-save').disabled = false;
-      document.getElementById('btn-save-top').disabled = false;
-    } catch (err) {
-      toast(`Erreur de chargement : ${err.message}`, 'error');
-    } finally {
-      document.getElementById('editor-body').style.opacity = '1';
+      document.getElementById('btn-publish').disabled = false;
+
+      this.fillFields();
+      this.renderList();
+      this.updatePreviewNow();
+
+    } catch(e) {
+      toast(`Erreur : ${e.message}`, 'error');
     }
   },
 
-  fillEditor(data) {
-    /* SEO */
-    document.getElementById('f-og-title').value  = data.ogTitle  || '';
-    document.getElementById('f-og-desc').value   = data.ogDesc   || '';
-    document.getElementById('f-category').value  = data.category || '';
+  /* ── Remplir les champs depuis data ── */
+  fillFields() {
+    const d = this.current.data;
+    const lang = this.lang;
+    const cap = l => l.charAt(0).toUpperCase() + l.slice(1);
 
-    /* Titre */
-    document.getElementById('f-title-fr').value  = data.titleFr  || '';
-    document.getElementById('f-title-en').value  = data.titleEn  || '';
-    document.getElementById('f-title-es').value  = data.titleEs  || '';
+    /* Labels de langue */
+    document.getElementById('title-lang-label').textContent   = `(${lang.toUpperCase()})`;
+    document.getElementById('dek-lang-label').textContent     = `(${lang.toUpperCase()})`;
+    document.getElementById('content-lang-label').textContent = `Prose ${lang.toUpperCase()}`;
 
-    /* Dek */
-    document.getElementById('f-dek-fr').value    = data.dekFr    || '';
-    document.getElementById('f-dek-en').value    = data.dekEn    || '';
-    document.getElementById('f-dek-es').value    = data.dekEs    || '';
+    /* Champs dépendants de la langue */
+    document.getElementById('f-title').value   = d[`title${cap(lang)}`]   || '';
+    document.getElementById('f-dek').value     = d[`dek${cap(lang)}`]     || '';
+    document.getElementById('f-content').value = d[`content${cap(lang)}`] || '';
 
-    /* Byline */
-    document.getElementById('f-author').value    = data.author   || '';
-    document.getElementById('f-date').value      = data.date     || '';
-    document.getElementById('f-readtime').value  = data.readtime || '';
+    /* Champs communs */
+    document.getElementById('f-author').value   = d.author   || '';
+    document.getElementById('f-date').value     = d.date     || '';
+    document.getElementById('f-readtime').value = d.readtime || '';
+    document.getElementById('f-category').value = d.category || '';
+    document.getElementById('f-og-title').value = d.ogTitle  || '';
+    document.getElementById('f-og-desc').value  = d.ogDesc   || '';
 
-    /* Contenu */
-    document.getElementById('content-fr').value  = data.contentFR || '';
-    document.getElementById('content-en').value  = data.contentEN || '';
-    document.getElementById('content-es').value  = data.contentES || '';
+    /* Onglets de langue */
+    document.querySelectorAll('.lang-tab').forEach(t => t.classList.toggle('active', t.dataset.lang === lang));
 
     /* Désync */
-    document.getElementById('desync-banner').classList.add('hidden');
-    document.getElementById('tab-badge-en').classList.add('hidden');
-    document.getElementById('tab-badge-es').classList.add('hidden');
+    this.updateDesyncUI();
   },
 
-  collectEditorData() {
-    return {
-      ogTitle:   document.getElementById('f-og-title').value,
-      ogDesc:    document.getElementById('f-og-desc').value,
-      category:  document.getElementById('f-category').value,
-      titleFr:   document.getElementById('f-title-fr').value,
-      titleEn:   document.getElementById('f-title-en').value,
-      titleEs:   document.getElementById('f-title-es').value,
-      dekFr:     document.getElementById('f-dek-fr').value,
-      dekEn:     document.getElementById('f-dek-en').value,
-      dekEs:     document.getElementById('f-dek-es').value,
-      author:    document.getElementById('f-author').value,
-      date:      document.getElementById('f-date').value,
-      readtime:  document.getElementById('f-readtime').value,
-      contentFR: document.getElementById('content-fr').value,
-      contentEN: document.getElementById('content-en').value,
-      contentES: document.getElementById('content-es').value,
-    };
+  /* ── Changer de langue d'édition ── */
+  switchLang(lang) {
+    /* Sauvegarder la valeur actuelle */
+    this.saveCurrentLangFields();
+    this.lang = lang;
+    this.fillFields();
   },
 
-  /* ── Éditeur helpers ── */
-  editor: {
-    switchTab(lang) {
-      document.querySelectorAll('.lang-tab').forEach(t => t.classList.toggle('active', t.dataset.tab === lang));
-      document.querySelectorAll('.lang-panel').forEach(p => p.classList.toggle('active', p.id === `panel-${lang}`));
-    },
+  saveCurrentLangFields() {
+    if (!this.current) return;
+    const d = this.current.data;
+    const lang = this.lang;
+    const cap = l => l.charAt(0).toUpperCase() + l.slice(1);
+    d[`title${cap(lang)}`]   = document.getElementById('f-title').value;
+    d[`dek${cap(lang)}`]     = document.getElementById('f-dek').value;
+    d[`content${cap(lang)}`] = document.getElementById('f-content').value;
+    d.author   = document.getElementById('f-author').value;
+    d.date     = document.getElementById('f-date').value;
+    d.readtime = document.getElementById('f-readtime').value;
+    d.category = document.getElementById('f-category').value;
+    d.ogTitle  = document.getElementById('f-og-title').value;
+    d.ogDesc   = document.getElementById('f-og-desc').value;
+  },
 
-    markDirty(lang) {
-      ABA.isDirty = true;
-      if (lang === 'fr') {
-        /* FR modifié → marquer EN et ES comme désynchronisés */
-        const enEmpty = !document.getElementById('content-en').value.trim();
-        const esEmpty = !document.getElementById('content-es').value.trim();
-        if (!enEmpty) {
-          document.getElementById('tab-badge-en').classList.remove('hidden');
-          document.getElementById('desync-banner').classList.remove('hidden');
-        }
-        if (!esEmpty) {
-          document.getElementById('tab-badge-es').classList.remove('hidden');
-          document.getElementById('desync-banner').classList.remove('hidden');
-        }
-      }
-    },
+  /* ── Modification d'un champ ── */
+  onEdit() {
+    this.dirty = true;
+    /* Si on modifie FR → marquer EN/ES désynchronisés */
+    if (this.lang === 'fr') {
+      if (this.current?.data.contentEn) this.desync.add('en');
+      if (this.current?.data.contentEs) this.desync.add('es');
+    } else {
+      this.desync.delete(this.lang);
+    }
+    this.updateDesyncUI();
+    this.schedulePreviewUpdate();
+  },
 
-    onContentChange(lang) {
-      ABA.isDirty = true;
-      if (lang === 'fr') {
-        this.markDirty('fr');
-      } else {
-        /* EN ou ES mis à jour → retirer badge si rempli */
-        const val = document.getElementById(`content-${lang}`).value.trim();
-        if (val) document.getElementById(`tab-badge-${lang}`).classList.add('hidden');
-        /* Vérifier si tous les badges sont cachés */
-        const enBadge = document.getElementById('tab-badge-en');
-        const esBadge = document.getElementById('tab-badge-es');
-        if (enBadge.classList.contains('hidden') && esBadge.classList.contains('hidden')) {
-          document.getElementById('desync-banner').classList.add('hidden');
-        }
-      }
-    },
+  updateDesyncUI() {
+    const hasDesync = this.desync.size > 0;
+    document.getElementById('desync-banner').classList.toggle('hidden', !hasDesync);
+    document.getElementById('desync-en').classList.toggle('hidden', !this.desync.has('en'));
+    document.getElementById('desync-es').classList.toggle('hidden', !this.desync.has('es'));
+  },
 
-    preview() {
-      if (!ABA.currentArticle) return;
-      const data = ABA.collectEditorData();
-      const html = Parser.reconstruct(ABA.currentArticle.originalHtml, data);
-      const blob = new Blob([html], { type: 'text/html' });
-      const url  = URL.createObjectURL(blob);
-      window.open(url, '_blank');
-      setTimeout(() => URL.revokeObjectURL(url), 30000);
-    },
+  /* ── Preview iframe ── */
+  schedulePreviewUpdate() {
+    clearTimeout(this.debounceTimer);
+    this.debounceTimer = setTimeout(() => this.updatePreviewNow(), 600);
+  },
 
-    saveAndCommit() {
-      if (!ABA.currentArticle) return;
-      const msg = `Admin: mise à jour ${ABA.currentArticle.path.split('/').pop().replace('.html', '')}`;
-      document.getElementById('commit-message').value = msg;
-      document.getElementById('commit-modal').classList.remove('hidden');
-    },
+  updatePreviewNow() {
+    if (!this.current) return;
+    this.saveCurrentLangFields();
+    const html = Parser.reconstruct(this.current.html, this.current.data);
+
+    /* Injecter base href pour charger les assets depuis le site live */
+    const previewHtml = html
+      .replace('<head>', `<head>\n  <base href="${SITE}/">`)
+      /* Supprimer cookie consent pour l'aperçu */
+      .replace(/<script[^>]*cookie-consent[^>]*><\/script>/gi, '');
+
+    const frame = document.getElementById('preview-frame');
+    frame.srcdoc = previewHtml;
+  },
+
+  refreshPreview() {
+    this.updatePreviewNow();
+  },
+
+  /* ── Langue de la preview ── */
+  previewLang(lang) {
+    document.querySelectorAll('.preview-bar__lang button').forEach(b => {
+      b.classList.toggle('active', b.textContent.toLowerCase() === lang);
+    });
+    const frame = document.getElementById('preview-frame');
+    if (frame.contentWindow) {
+      try { frame.contentWindow.setLang && frame.contentWindow.setLang(lang); } catch(e) {}
+    }
+  },
+
+  /* ── Sections toggle ── */
+  toggleSection(btn) {
+    const body = btn.nextElementSibling;
+    const open = btn.classList.toggle('open');
+    body.classList.toggle('collapsed', !open);
   },
 
   /* ── Commit ── */
-  closeCommitModal() {
-    document.getElementById('commit-modal').classList.add('hidden');
+  openCommitModal() {
+    if (!this.current) return;
+    const name = this.current.path.split('/').pop().replace('.html','');
+    document.getElementById('commit-msg').value = `Admin: mise à jour "${name}"`;
+    document.getElementById('commit-modal').classList.remove('hidden');
+  },
+
+  closeModal(id) {
+    document.getElementById(id).classList.add('hidden');
   },
 
   async doCommit() {
-    const message = document.getElementById('commit-message').value.trim();
-    if (!message) { toast('Message de commit requis', 'warning'); return; }
-
-    this.closeCommitModal();
+    const msg = document.getElementById('commit-msg').value.trim();
+    if (!msg) { toast('Message requis', 'warning'); return; }
+    this.closeModal('commit-modal');
 
     const btn = document.getElementById('btn-save');
-    btn.disabled = true;
+    const btnTop = document.getElementById('btn-publish');
+    btn.disabled = btnTop.disabled = true;
     btn.textContent = '↑ Publication…';
 
     try {
-      const data = this.collectEditorData();
-      const html = Parser.reconstruct(this.currentArticle.originalHtml, data);
-      const result = await GH.put(this.currentArticle.path, html, this.currentArticle.sha, message);
-
-      /* Mettre à jour le SHA local */
-      this.currentArticle.sha = result.content.sha;
-      this.currentArticle.data = data;
-      this.currentArticle.originalHtml = html;
-      this.isDirty = false;
-
-      toast(`✓ Publié — en ligne dans ~2 min`, 'success');
-      btn.textContent = '↑ Publier sur GitHub';
-      btn.disabled = false;
-
-      /* Refresh liste */
-      await this.loadArticleList();
-    } catch (err) {
-      toast(`Erreur : ${err.message}`, 'error', 8000);
-      btn.textContent = '↑ Publier sur GitHub';
-      btn.disabled = false;
+      this.saveCurrentLangFields();
+      const html = Parser.reconstruct(this.current.html, this.current.data);
+      const result = await GH.put(this.current.path, html, this.current.sha, msg);
+      this.current.sha  = result.content.sha;
+      this.current.html = html;
+      this.dirty = false;
+      toast('✓ Publié — en ligne dans ~2 min', 'success');
+      btn.textContent = '↑ Publier';
+      btn.disabled = btnTop.disabled = false;
+      await this.loadList();
+    } catch(e) {
+      toast(`Erreur : ${e.message}`, 'error', 8000);
+      btn.textContent = '↑ Publier';
+      btn.disabled = btnTop.disabled = false;
     }
   },
 
   /* ── Nouvel article ── */
-  newArticle() {
-    if (this.isDirty && !confirm('Modifications non sauvegardées. Continuer ?')) return;
-    document.getElementById('empty-state').classList.add('hidden');
-    document.getElementById('editor').classList.add('hidden');
-    document.getElementById('new-article-panel').classList.remove('hidden');
-    document.getElementById('new-slug').value = '';
-    document.getElementById('new-title-fr').value = '';
-    document.getElementById('slug-preview').textContent = 'blog/—.html';
+  newArticleModal() {
+    document.getElementById('new-title').value  = '';
+    document.getElementById('new-slug').value   = '';
+    document.getElementById('new-category').value = '';
+    document.getElementById('new-author').value = 'Adil Boumahdi';
+    document.getElementById('new-prompt').value = '';
+    document.getElementById('slug-preview').textContent = '—';
+    document.getElementById('new-modal').classList.remove('hidden');
   },
 
-  cancelNewArticle() {
-    document.getElementById('new-article-panel').classList.add('hidden');
-    if (this.currentArticle) {
-      document.getElementById('editor').classList.remove('hidden');
-    } else {
-      document.getElementById('empty-state').classList.remove('hidden');
-    }
+  autoSlug(title) {
+    const slug = title.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9\s-]/g,'')
+      .trim().replace(/\s+/g,'-').replace(/-+/g,'-')
+      .slice(0, 60);
+    document.getElementById('new-slug').value = slug;
+    document.getElementById('slug-preview').textContent = slug || '—';
   },
 
   updateSlugPreview(val) {
-    const slug = val.toLowerCase().replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-');
-    document.getElementById('slug-preview').textContent = `blog/${slug || '—'}.html`;
+    const slug = val.toLowerCase()
+      .normalize('NFD').replace(/[̀-ͯ]/g,'')
+      .replace(/[^a-z0-9-]/g,'-').replace(/-+/g,'-').slice(0,60);
     document.getElementById('new-slug').value = slug;
+    document.getElementById('slug-preview').textContent = slug || '—';
   },
 
   async createArticle() {
+    const title    = document.getElementById('new-title').value.trim();
     const slug     = document.getElementById('new-slug').value.trim();
-    const titleFr  = document.getElementById('new-title-fr').value.trim();
     const category = document.getElementById('new-category').value.trim();
     const author   = document.getElementById('new-author').value.trim() || 'Adil Boumahdi';
-    const prompt   = document.getElementById('new-claude-prompt').value.trim();
+    const prompt   = document.getElementById('new-prompt').value.trim();
+    const claudeKey= document.getElementById('new-claude-key').value.trim();
 
-    if (!slug || !titleFr) {
-      toast('Slug et titre FR requis', 'warning'); return;
-    }
+    if (!title || !slug) { toast('Titre et slug requis', 'warning'); return; }
 
-    const path = `${BLOG_DIR}/${slug}.html`;
+    const path = `${BLOG}/${slug}.html`;
     const now  = new Date();
-    const date = now.toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
-    let html = articleTemplate(slug, titleFr, category, author, date);
+    const date = now.toLocaleDateString('fr-FR', { day:'numeric', month:'long', year:'numeric' });
+    let html = newArticleTemplate(slug, title, category, author, date);
 
-    /* Génération Claude si prompt fourni */
-    if (prompt) {
-      const key = document.getElementById('claude-key').value.trim();
-      if (!key) {
-        toast('Clé API Anthropic requise pour la génération', 'warning'); return;
-      }
-      toast('Claude génère le contenu…', 'info', 15000);
+    if (prompt && claudeKey) {
+      document.getElementById('new-loading').classList.remove('hidden');
       try {
-        const generated = await this.claude._callClaude(key,
-          `Tu es rédacteur pour ABA Paysage, cabinet marocain de paysagisme haut de gamme fondé par Adil Boumahdi (ingénieur agronome, IAV Hassan II + CIHEAM Montpellier). Ton ton est expert, sobre, élégant.
+        const gen = await this.claude._call(claudeKey,
+          `Tu es rédacteur senior pour ABA Paysage, cabinet marocain de paysagisme haut de gamme (fondateur Adil Boumahdi, ingénieur agronome IAV Hassan II + CIHEAM Montpellier). Ton ton est expert, sobre, élégant.
 
-Crée un article complet avec ce titre : "${titleFr}"
-Catégorie : ${category || 'Paysagisme'}
+Article : "${title}" — Catégorie : ${category || 'Paysagisme'}
+
 ${prompt}
 
-Réponds UNIQUEMENT avec un JSON valide :
-{
-  "titleFr": "...",
-  "titleEn": "...",
-  "titleEs": "...",
-  "dekFr": "...",
-  "dekEn": "...",
-  "dekEs": "...",
-  "contentFR": "<p>...</p><p>...</p>",
-  "contentEN": "<p>...</p>",
-  "contentES": "<p>...</p>"
-}
+Réponds UNIQUEMENT avec un JSON valide (sans markdown) :
+{"titleFr":"...","titleEn":"...","titleEs":"...","dekFr":"...","dekEn":"...","dekEs":"...","contentFr":"<p>...</p>","contentEn":"<p>...</p>","contentEs":"<p>...</p>"}`);
 
-Les champs content* doivent contenir du HTML valide avec balises <p>, <h2>, <h3>, <em>, <strong>.`);
-
-        const doc = new DOMParser().parseFromString(html, 'text/html');
-        const h1 = doc.querySelector('h1');
-        if (h1) { h1.setAttribute('data-fr', generated.titleFr || titleFr); h1.setAttribute('data-en', generated.titleEn || ''); h1.setAttribute('data-es', generated.titleEs || ''); h1.textContent = generated.titleFr || titleFr; }
-        const dek = doc.querySelector('p.a-dek');
-        if (dek) { dek.setAttribute('data-fr', generated.dekFr || ''); dek.setAttribute('data-en', generated.dekEn || ''); dek.setAttribute('data-es', generated.dekEs || ''); dek.textContent = generated.dekFr || ''; }
-        ['fr', 'en', 'es'].forEach(lang => {
-          const block = doc.querySelector(`[data-lang-block="${lang}"]`);
-          const key2 = `content${lang.toUpperCase()}`;
-          if (block && generated[key2]) block.innerHTML = generated[key2];
+        /* Injecter le contenu généré dans le template */
+        const doc2 = new DOMParser().parseFromString(html, 'text/html');
+        const h1 = doc2.querySelector('h1');
+        if (h1) { h1.setAttribute('data-fr', gen.titleFr||title); h1.setAttribute('data-en', gen.titleEn||''); h1.setAttribute('data-es', gen.titleEs||''); h1.textContent = gen.titleFr||title; }
+        const dek = doc2.querySelector('p.a-dek');
+        if (dek) { dek.setAttribute('data-fr', gen.dekFr||''); dek.setAttribute('data-en', gen.dekEn||''); dek.setAttribute('data-es', gen.dekEs||''); dek.textContent = gen.dekFr||''; }
+        ['fr','en','es'].forEach(l => {
+          const b = doc2.querySelector(`[data-lang-block="${l}"]`);
+          const k = `content${l.charAt(0).toUpperCase()+l.slice(1)}`;
+          if (b && gen[k]) b.innerHTML = gen[k];
         });
-        html = '<!DOCTYPE html>\n' + doc.documentElement.outerHTML;
-        toast('Contenu généré !', 'success');
-      } catch (err) {
-        toast(`Claude : ${err.message}`, 'error');
+        html = '<!DOCTYPE html>\n' + doc2.documentElement.outerHTML;
+        toast('Contenu généré par Claude ✓', 'success');
+      } catch(e) {
+        toast(`Claude : ${e.message}`, 'error');
+        document.getElementById('new-loading').classList.add('hidden');
         return;
       }
+      document.getElementById('new-loading').classList.add('hidden');
     }
 
     try {
-      await GH.put(path, html, null, `Admin: nouvel article "${titleFr}"`);
+      await GH.put(path, html, null, `Admin: nouvel article "${title}"`);
       toast(`✓ Article créé : ${path}`, 'success');
-      await this.loadArticleList();
-      await this.openArticle(path, null);
-    } catch (err) {
-      toast(`Erreur création : ${err.message}`, 'error', 8000);
+      this.closeModal('new-modal');
+      await this.loadList();
+      /* Chercher le sha du nouveau fichier */
+      const file = await GH.get(path);
+      await this.open(path, file.sha);
+    } catch(e) {
+      toast(`Erreur création : ${e.message}`, 'error', 8000);
     }
   },
 
-  /* ── Images ── */
-  images: {
-    async handleUpload(files) {
-      if (!files.length) return;
-      const progress = document.getElementById('upload-progress');
-      progress.classList.remove('hidden');
-
-      for (const file of files) {
-        if (file.size > 4 * 1024 * 1024) {
-          toast(`${file.name} : trop lourd (max 4 Mo)`, 'warning'); continue;
-        }
-        try {
-          const buf    = await file.arrayBuffer();
-          const b64    = arrayBufferToBase64(buf);
-          const ext    = file.name.split('.').pop().toLowerCase();
-          const safe   = file.name.replace(/[^a-z0-9._-]/gi, '-').toLowerCase();
-          const path   = `assets/blog/${safe}`;
-          await GH.putBinary(path, b64, null, `Admin: upload image ${safe}`);
-          toast(`✓ ${safe} uploadé`, 'success');
-          ABA.images.addToGrid(path, safe);
-        } catch (err) {
-          toast(`${file.name} : ${err.message}`, 'error');
-        }
+  /* ── Upload images ── */
+  async uploadImages(files) {
+    if (!files.length) return;
+    for (const file of files) {
+      if (file.size > 4*1024*1024) { toast(`${file.name} : trop lourd (max 4 Mo)`, 'warning'); continue; }
+      try {
+        const b64  = buf2b64(await file.arrayBuffer());
+        const safe = file.name.replace(/[^a-z0-9._-]/gi,'-').toLowerCase();
+        const path = `assets/blog/${safe}`;
+        await GH.putBin(path, b64, null, `Admin: image ${safe}`);
+        toast(`✓ ${safe} uploadé`, 'success');
+        this.addImageCard(path, safe);
+      } catch(e) {
+        toast(`${file.name} : ${e.message}`, 'error');
       }
-      progress.classList.add('hidden');
-    },
-
-    addToGrid(path, name) {
-      const grid = document.getElementById('image-grid');
-      const card = document.createElement('div');
-      card.className = 'image-card';
-      card.innerHTML = `
-        <div class="image-card__thumb">
-          <img src="https://www.ab-landscapes.com/${path}" alt="${name}" loading="lazy" />
-        </div>
-        <div class="image-card__info">
-          <div class="image-card__name">${name}</div>
-          <select class="treatment-select" title="Traitement visuel">
-            <option value="">— Traitement image —</option>
-            <option value="span-full">Plein cadre (bord à bord)</option>
-            <option value="span-feat">Débordement de marge</option>
-            <option value="span-wide">Légèrement élargie</option>
-            <option value="fig-float">Flottante (texte enveloppant)</option>
-            <option value="duo">Diptyque (2 images côte à côte)</option>
-            <option value="duet">Duo à défilement (image collante)</option>
-            <option value="plan">Plan annoté avec repères</option>
-          </select>
-          <button onclick="ABA.images.copySnippet('${path}', this)" style="margin-top:6px;font-size:11px;color:var(--accent);background:none;border:none;cursor:pointer;padding:0">
-            📋 Copier le code HTML
-          </button>
-        </div>`;
-      grid.insertBefore(card, grid.firstChild);
-    },
-
-    copySnippet(path, btn) {
-      const select = btn.parentElement.querySelector('select');
-      const treatment = select.value;
-      let code = '';
-      const url = `https://www.ab-landscapes.com/${path}`;
-      const name = path.split('/').pop();
-
-      if (treatment === 'fig-float') {
-        code = `<figure class="fig-float">\n  <div class="plate__frame" style="aspect-ratio:4/3"><img src="${url}" alt="${name}" /></div>\n  <figcaption>Légende…</figcaption>\n</figure>`;
-      } else if (treatment === 'duo') {
-        code = `<div class="duo span-wide">\n  <figure class="plate"><div class="plate__frame" style="aspect-ratio:4/3"><img src="${url}" alt="${name}" /></div></figure>\n  <figure class="plate"><div class="plate__frame" style="aspect-ratio:4/3"><img src="" alt="" /></div></figure>\n</div>`;
-      } else if (treatment === 'duet') {
-        code = `<section class="duet">\n  <div class="duet__in">\n    <div class="duet__media">\n      <figure class="plate"><div class="plate__frame" style="aspect-ratio:3/4"><img src="${url}" alt="${name}" /></div></figure>\n    </div>\n    <div class="duet__text">\n      <h2>Titre section</h2>\n      <p>Texte qui défile pendant que l'image reste collée…</p>\n    </div>\n  </div>\n</section>`;
-      } else if (treatment === 'plan') {
-        code = `<section class="plan">\n  <div class="plan__in">\n    <div class="plan__head"><p class="plan__kicker">Plan</p><h2 class="plan__title">Titre du plan</h2></div>\n    <div class="plan__stage">\n      <img src="${url}" alt="${name}" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover" />\n      <div class="plan__grid"></div>\n      <div class="pin" style="left:30%;top:40%">1</div>\n    </div>\n    <div class="plan__legend">\n      <div class="plan__item"><div class="plan__num">1</div><div><div class="plan__k">Élément</div><div class="plan__v">Description</div></div></div>\n    </div>\n  </div>\n</section>`;
-      } else {
-        const cls = treatment ? ` ${treatment}` : '';
-        code = `<figure class="plate${cls}">\n  <div class="plate__frame" style="aspect-ratio:16/9"><img src="${url}" alt="${name}" /></div>\n  <figcaption>Légende de l'image.</figcaption>\n</figure>`;
-      }
-
-      navigator.clipboard.writeText(code).then(() => {
-        btn.textContent = '✓ Copié !';
-        setTimeout(() => { btn.textContent = '📋 Copier le code HTML'; }, 2000);
-      });
-    },
+    }
   },
 
-  /* ── Renvois .xref ── */
-  xref: {
-    add() {
-      const list = document.getElementById('xref-list');
-      const row = document.createElement('div');
-      row.style.cssText = 'display:grid;grid-template-columns:1fr 1fr auto;gap:8px;align-items:center';
-      row.innerHTML = `
-        <input type="text" placeholder="Mot-clé dans le texte" style="padding:7px 10px" />
-        <input type="text" placeholder="Slug article cible" style="padding:7px 10px;font-family:var(--mono);font-size:12px" />
-        <button onclick="this.parentElement.remove()" style="color:var(--red);font-size:18px;line-height:1;padding:4px 8px">×</button>`;
-      list.appendChild(row);
-    },
+  addImageCard(path, name) {
+    const grid = document.getElementById('img-grid');
+    const card = document.createElement('div');
+    card.className = 'img-card';
+    const url = `${SITE}/${path}`;
+    card.innerHTML = `
+      <div class="img-card__thumb"><img src="${url}" alt="${name}" loading="lazy"/></div>
+      <div class="img-card__foot">
+        <div class="img-card__name">${name}</div>
+        <button class="img-card__copy" onclick="ABA.copyImgSnippet('${url}','${name}',this)">📋 Copier code HTML</button>
+      </div>`;
+    grid.insertBefore(card, grid.firstChild);
+  },
+
+  copyImgSnippet(url, name, btn) {
+    const code = `<figure class="plate span-feat">\n  <div class="plate__frame" style="aspect-ratio:16/9"><img src="${url}" alt="${name}" /></div>\n  <figcaption>Légende de l'image.</figcaption>\n</figure>`;
+    navigator.clipboard.writeText(code).then(() => {
+      btn.textContent = '✓ Copié !';
+      setTimeout(() => { btn.textContent = '📋 Copier code HTML'; }, 2000);
+    });
   },
 
   /* ── Claude AI ── */
   claude: {
-    async _callClaude(key, prompt) {
-      const status = document.getElementById('claude-status');
-      const msg = document.getElementById('claude-status-msg');
-      status.classList.remove('hidden');
-      msg.textContent = 'Claude travaille…';
+    async _call(key, prompt) {
+      const r = await fetch('https://api.anthropic.com/v1/messages', {
+        method: 'POST',
+        headers: {
+          'x-api-key': key,
+          'anthropic-version': '2023-06-01',
+          'content-type': 'application/json',
+          'anthropic-dangerous-direct-browser-calls': 'true',
+        },
+        body: JSON.stringify({
+          model: 'claude-sonnet-4-6',
+          max_tokens: 4096,
+          messages: [{ role: 'user', content: prompt }],
+        }),
+      });
+      if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.error?.message || `API ${r.status}`); }
+      const data = await r.json();
+      const text = data.content[0].text.trim();
+      const m = text.match(/\{[\s\S]*\}/);
+      if (!m) throw new Error('Réponse Claude non-JSON');
+      return JSON.parse(m[0]);
+    },
+
+    async translate(targetLang) {
+      const key = document.getElementById('claude-key').value.trim();
+      if (!key) { toast('Clé API Anthropic requise', 'warning'); return; }
+      if (!ABA.current) { toast('Ouvrez un article', 'warning'); return; }
+
+      ABA.saveCurrentLangFields();
+      const d = ABA.current.data;
+      if (!d.contentFr) { toast('Contenu FR vide — rédigez le FR en premier', 'warning'); return; }
+
+      const loadEl = document.getElementById('claude-loading');
+      loadEl.classList.remove('hidden');
+
+      const cap = l => l.charAt(0).toUpperCase() + l.slice(1);
+      const tname = targetLang === 'en' ? 'anglais' : 'espagnol';
+      const jkey  = `content${cap(targetLang)}`;
+      const tkey  = `title${cap(targetLang)}`;
+      const dkey  = `dek${cap(targetLang)}`;
 
       try {
-        const res = await fetch('https://api.anthropic.com/v1/messages', {
-          method: 'POST',
-          headers: {
-            'x-api-key': key,
-            'anthropic-version': '2023-06-01',
-            'content-type': 'application/json',
-            'anthropic-dangerous-direct-browser-calls': 'true',
-          },
-          body: JSON.stringify({
-            model: 'claude-sonnet-4-6',
-            max_tokens: 4096,
-            messages: [{ role: 'user', content: prompt }],
-          }),
-        });
+        const result = await this._call(key,
+          `Traduis en ${tname} de haute qualité (niveau magazine international) ce contenu d'article de paysagisme. Respecte la structure HTML exacte.
 
-        if (!res.ok) {
-          const err = await res.json().catch(() => ({}));
-          throw new Error(err.error?.message || `API ${res.status}`);
-        }
+Titre FR : ${d.titleFr}
+Dek FR : ${d.dekFr}
+Contenu FR :
+${d.contentFr}
 
-        const data = await res.json();
-        const text = data.content[0].text.trim();
+Réponds UNIQUEMENT avec un JSON valide :
+{"title":"...","dek":"...","content":"<p>...</p>"}`);
 
-        /* Extraire le JSON de la réponse */
-        const jsonMatch = text.match(/\{[\s\S]*\}/);
-        if (!jsonMatch) throw new Error('Réponse Claude non-JSON');
-        return JSON.parse(jsonMatch[0]);
+        d[tkey] = result.title || '';
+        d[dkey] = result.dek  || '';
+        d[jkey] = result.content || '';
+        ABA.desync.delete(targetLang);
+        ABA.updateDesyncUI();
+        if (ABA.lang === targetLang) ABA.fillFields();
+        ABA.dirty = true;
+        toast(`✓ Traduction ${targetLang.toUpperCase()} générée`, 'success');
+      } catch(e) {
+        toast(`Claude : ${e.message}`, 'error', 8000);
       } finally {
-        status.classList.add('hidden');
-      }
-    },
-
-    async translateEN() {
-      const key = document.getElementById('claude-key').value.trim();
-      if (!key) { toast('Clé API Anthropic requise', 'warning'); return; }
-      const frContent = document.getElementById('content-fr').value;
-      const titleFr   = document.getElementById('f-title-fr').value;
-      const dekFr     = document.getElementById('f-dek-fr').value;
-      if (!frContent) { toast('Contenu FR vide', 'warning'); return; }
-
-      try {
-        const result = await this._callClaude(key,
-          `Traduis en anglais de haute qualité (niveau magazine international) ce contenu d'article de paysagisme. Garde la structure HTML exacte (balises <p>, <h2>, <h3>, <em>, <strong>).
-
-Titre FR : ${titleFr}
-Dek FR : ${dekFr}
-Contenu FR :
-${frContent}
-
-Réponds UNIQUEMENT avec un JSON :
-{
-  "titleEn": "...",
-  "dekEn": "...",
-  "contentEN": "<p>...</p>..."
-}`);
-
-        if (result.titleEn) document.getElementById('f-title-en').value = result.titleEn;
-        if (result.dekEn)   document.getElementById('f-dek-en').value   = result.dekEn;
-        if (result.contentEN) document.getElementById('content-en').value = result.contentEN;
-
-        document.getElementById('tab-badge-en').classList.add('hidden');
-        toast('✓ Traduction EN générée', 'success');
-      } catch (err) {
-        toast(`Claude EN : ${err.message}`, 'error', 8000);
-      }
-    },
-
-    async translateES() {
-      const key = document.getElementById('claude-key').value.trim();
-      if (!key) { toast('Clé API Anthropic requise', 'warning'); return; }
-      const frContent = document.getElementById('content-fr').value;
-      const titleFr   = document.getElementById('f-title-fr').value;
-      const dekFr     = document.getElementById('f-dek-fr').value;
-      if (!frContent) { toast('Contenu FR vide', 'warning'); return; }
-
-      try {
-        const result = await this._callClaude(key,
-          `Traduis en espagnol de haute qualité (niveau magazine) ce contenu d'article de paysagisme. Garde la structure HTML exacte.
-
-Titre FR : ${titleFr}
-Dek FR : ${dekFr}
-Contenu FR :
-${frContent}
-
-Réponds UNIQUEMENT avec un JSON :
-{
-  "titleEs": "...",
-  "dekEs": "...",
-  "contentES": "<p>...</p>..."
-}`);
-
-        if (result.titleEs) document.getElementById('f-title-es').value = result.titleEs;
-        if (result.dekEs)   document.getElementById('f-dek-es').value   = result.dekEs;
-        if (result.contentES) document.getElementById('content-es').value = result.contentES;
-
-        document.getElementById('tab-badge-es').classList.add('hidden');
-        toast('✓ Traduction ES générée', 'success');
-      } catch (err) {
-        toast(`Claude ES : ${err.message}`, 'error', 8000);
+        loadEl.classList.add('hidden');
       }
     },
 
     async generate() {
       const key    = document.getElementById('claude-key').value.trim();
       const prompt = document.getElementById('claude-prompt').value.trim();
-      if (!key)    { toast('Clé API Anthropic requise', 'warning'); return; }
+      if (!key)    { toast('Clé API requise', 'warning'); return; }
       if (!prompt) { toast('Prompt requis', 'warning'); return; }
-      if (!ABA.currentArticle) { toast('Ouvrez d\'abord un article', 'warning'); return; }
+      if (!ABA.current) { toast('Ouvrez un article', 'warning'); return; }
+
+      ABA.saveCurrentLangFields();
+      const loadEl = document.getElementById('claude-loading');
+      loadEl.classList.remove('hidden');
 
       try {
-        const titleFr = document.getElementById('f-title-fr').value;
-        const result  = await this._callClaude(key,
-          `Tu es rédacteur pour ABA Paysage (cabinet marocain de paysagisme haut de gamme, fondateur Adil Boumahdi). Ton ton : expert, sobre, élégant, voix éditoriale française.
+        const d = ABA.current.data;
+        const result = await this._call(key,
+          `Tu es rédacteur senior pour ABA Paysage. Voix éditoriale experte, sobre, élégante.
 
-Article : "${titleFr}"
-Demande : ${prompt}
+Article : "${d.titleFr || 'Sans titre'}"
+${prompt}
 
-Réponds UNIQUEMENT avec un JSON :
-{
-  "titleFr": "...", "titleEn": "...", "titleEs": "...",
-  "dekFr": "...", "dekEn": "...", "dekEs": "...",
-  "contentFR": "<p>...</p>",
-  "contentEN": "<p>...</p>",
-  "contentES": "<p>...</p>"
-}`);
+Génère ou modifie le contenu dans les 3 langues.
+Réponds UNIQUEMENT avec un JSON valide :
+{"titleFr":"...","titleEn":"...","titleEs":"...","dekFr":"...","dekEn":"...","dekEs":"...","contentFr":"<p>...</p>","contentEn":"<p>...</p>","contentEs":"<p>...</p>"}`);
 
-        /* Remplir tous les champs */
-        if (result.titleFr) document.getElementById('f-title-fr').value  = result.titleFr;
-        if (result.titleEn) document.getElementById('f-title-en').value  = result.titleEn;
-        if (result.titleEs) document.getElementById('f-title-es').value  = result.titleEs;
-        if (result.dekFr)   document.getElementById('f-dek-fr').value    = result.dekFr;
-        if (result.dekEn)   document.getElementById('f-dek-en').value    = result.dekEn;
-        if (result.dekEs)   document.getElementById('f-dek-es').value    = result.dekEs;
-        if (result.contentFR) document.getElementById('content-fr').value = result.contentFR;
-        if (result.contentEN) document.getElementById('content-en').value = result.contentEN;
-        if (result.contentES) document.getElementById('content-es').value = result.contentES;
-
-        ABA.isDirty = true;
+        Object.assign(d, {
+          titleFr: result.titleFr || d.titleFr,
+          titleEn: result.titleEn || d.titleEn,
+          titleEs: result.titleEs || d.titleEs,
+          dekFr:   result.dekFr   || d.dekFr,
+          dekEn:   result.dekEn   || d.dekEn,
+          dekEs:   result.dekEs   || d.dekEs,
+          contentFr: result.contentFr || d.contentFr,
+          contentEn: result.contentEn || d.contentEn,
+          contentEs: result.contentEs || d.contentEs,
+        });
+        ABA.desync.clear();
+        ABA.fillFields();
+        ABA.dirty = true;
+        ABA.updatePreviewNow();
         toast('✓ Article généré dans les 3 langues', 'success');
-      } catch (err) {
-        toast(`Claude : ${err.message}`, 'error', 8000);
+      } catch(e) {
+        toast(`Claude : ${e.message}`, 'error', 8000);
+      } finally {
+        loadEl.classList.add('hidden');
       }
     },
   },
