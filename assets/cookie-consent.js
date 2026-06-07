@@ -1,25 +1,69 @@
 /* ============================================================
    ABA Paysage — Cookie Consent RGPD
+   Affiché uniquement aux visiteurs depuis l'UE / EEE / UK
+   Détection : api.country.is (IP → code pays, sans clé API)
+   Résultat mis en cache 30 jours dans localStorage
    GA4 : window['ga-disable-G-P2MDTEBQVF'] = true si refus
-   Stockage : localStorage 'aba-cookie-consent' (accepted / refused)
    FR / EN / ES — suit localStorage 'aba-lang'
    ============================================================ */
 (function () {
   'use strict';
 
   var GA_ID       = 'G-P2MDTEBQVF';
-  var CONSENT_KEY = 'aba-cookie-consent';
-  var consent     = localStorage.getItem(CONSENT_KEY);
+  var CONSENT_KEY = 'aba-cookie-consent';   /* 'accepted' | 'refused' */
+  var GEO_KEY     = 'aba-geo-country';      /* 'FR' | 'MA' | … */
+  var GEO_TTL_KEY = 'aba-geo-ts';           /* timestamp du cache */
+  var GEO_TTL_MS  = 30 * 24 * 3600 * 1000; /* 30 jours */
+  var GEO_API     = 'https://api.country.is/';
 
-  /* Bloquer GA4 immédiatement si déjà refusé */
+  /* Pays soumis au RGPD (UE 27 + EEE + Royaume-Uni) */
+  var EU = {
+    AT:1,BE:1,BG:1,CY:1,CZ:1,DE:1,DK:1,EE:1,ES:1,FI:1,FR:1,
+    GR:1,HR:1,HU:1,IE:1,IT:1,LT:1,LU:1,LV:1,MT:1,NL:1,PL:1,
+    PT:1,RO:1,SE:1,SI:1,SK:1,
+    /* EEE */
+    IS:1,LI:1,NO:1,
+    /* Royaume-Uni (UK GDPR) */
+    GB:1
+  };
+
+  /* ── 1. Blocage immédiat si déjà refusé ── */
+  var consent = localStorage.getItem(CONSENT_KEY);
   if (consent === 'refused') {
     window['ga-disable-' + GA_ID] = true;
   }
 
-  /* Rien à afficher si déjà choisi */
+  /* ── 2. Si déjà choisi, rien à afficher ── */
   if (consent) return;
 
-  /* ── Traductions ── */
+  /* ── 3. Vérifier le cache géo ── */
+  var cachedCountry = localStorage.getItem(GEO_KEY);
+  var cachedTs      = parseInt(localStorage.getItem(GEO_TTL_KEY) || '0', 10);
+  var cacheValid    = cachedCountry && (Date.now() - cachedTs < GEO_TTL_MS);
+
+  if (cacheValid) {
+    if (EU[cachedCountry]) initBanner();
+    return;
+  }
+
+  /* ── 4. Appel API géo (une seule fois par appareil / 30 jours) ── */
+  fetch(GEO_API)
+    .then(function (r) { return r.json(); })
+    .then(function (data) {
+      var country = (data.country || '').toUpperCase();
+      localStorage.setItem(GEO_KEY, country);
+      localStorage.setItem(GEO_TTL_KEY, String(Date.now()));
+      if (EU[country]) initBanner();
+    })
+    .catch(function () {
+      /* En cas d'échec API → afficher le banner par sécurité */
+      initBanner();
+    });
+
+  /* ══════════════════════════════════════════════════════════
+     Banner
+  ══════════════════════════════════════════════════════════ */
+
   var T = {
     fr: {
       msg:    'Nous utilisons Google Analytics pour mesurer l\'audience de notre site. Vos données restent anonymisées et ne sont jamais revendues.',
@@ -51,7 +95,6 @@
   }
 
   function getPrivacyHref() {
-    /* Chemin relatif selon la profondeur de la page */
     var p = window.location.pathname;
     if (p.indexOf('/blog/') !== -1 || p.indexOf('/assets/portfolio/') !== -1) {
       return '../mentions-legales.html';
@@ -119,7 +162,10 @@
     var banner = document.createElement('div');
     banner.id = 'aba-cookie-banner';
     banner.setAttribute('role', 'region');
-    banner.setAttribute('aria-label', lang === 'en' ? 'Cookie consent' : lang === 'es' ? 'Consentimiento de cookies' : 'Consentement cookies');
+    banner.setAttribute('aria-label',
+      lang === 'en' ? 'Cookie consent' :
+      lang === 'es' ? 'Consentimiento de cookies' :
+      'Consentement cookies');
 
     banner.innerHTML =
       '<div class="aba-ck-inner">' +
@@ -137,7 +183,6 @@
 
     banner.querySelector('.aba-ck-accept').addEventListener('click', function () {
       localStorage.setItem(CONSENT_KEY, 'accepted');
-      /* GA4 tourne déjà — consentement accordé rétroactivement */
       if (window.gtag) {
         window.gtag('consent', 'update', { analytics_storage: 'granted' });
       }
@@ -165,11 +210,12 @@
     setTimeout(function () { el.remove(); }, 300);
   }
 
-  /* Afficher après chargement du DOM */
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', showBanner);
-  } else {
-    showBanner();
+  function initBanner() {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', showBanner);
+    } else {
+      showBanner();
+    }
   }
 
 })();
