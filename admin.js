@@ -722,7 +722,7 @@ Réponds UNIQUEMENT avec un JSON valide (sans markdown) :
           'x-api-key': key,
           'anthropic-version': '2023-06-01',
           'content-type': 'application/json',
-          'anthropic-dangerous-direct-browser-calls': 'true',
+          'anthropic-dangerous-direct-browser-access': 'true',
         },
         body: JSON.stringify({
           model: 'claude-sonnet-4-6',
