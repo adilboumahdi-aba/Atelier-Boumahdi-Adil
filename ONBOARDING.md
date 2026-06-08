@@ -1,6 +1,6 @@
 # ABA Paysage — Onboarding Claude Code
 > Fichier de mémoire projet. Lis ce fichier en premier à chaque nouvelle session.
-> Dernière mise à jour automatique : 2026-06-08 14:28
+> Dernière mise à jour automatique : 2026-06-08 14:31
 
 ---
 
@@ -28,7 +28,7 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : ed68739 — Fix header CORS Claude API — anthropic-dangerous-direct-browser-access (27 seconds ago)
+- Dernier commit : b410d75 — Auto-memory — MAJ ONBOARDING + mémoire session 2026-06-08 14:28 (3 minutes ago)
 - Fichiers en attente : 3
 
 ### Stack
