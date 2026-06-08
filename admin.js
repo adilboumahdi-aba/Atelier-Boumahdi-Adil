@@ -726,16 +726,26 @@ Réponds UNIQUEMENT avec un JSON valide (sans markdown) :
         },
         body: JSON.stringify({
           model: 'claude-sonnet-4-6',
-          max_tokens: 4096,
+          max_tokens: 8000,
+          system: 'Tu réponds UNIQUEMENT avec un objet JSON valide, sans markdown, sans texte avant ou après. Pas de ```json, pas de commentaires. Juste le JSON brut.',
           messages: [{ role: 'user', content: prompt }],
         }),
       });
       if (!r.ok) { const e = await r.json().catch(()=>({})); throw new Error(e.error?.message || `API ${r.status}`); }
       const data = await r.json();
       const text = data.content[0].text.trim();
-      const m = text.match(/\{[\s\S]*\}/);
-      if (!m) throw new Error('Réponse Claude non-JSON');
-      return JSON.parse(m[0]);
+      // Extraire le JSON même entouré de markdown ou texte
+      const m = text.match(/```(?:json)?\s*(\{[\s\S]*?\})\s*```/) || text.match(/(\{[\s\S]*\})/);
+      if (!m) {
+        console.error('[Claude raw response]', text);
+        throw new Error(`Réponse inattendue : ${text.substring(0,120)}…`);
+      }
+      try {
+        return JSON.parse(m[1] || m[0]);
+      } catch(parseErr) {
+        console.error('[Claude parse error]', parseErr, text);
+        throw new Error('JSON invalide dans la réponse Claude');
+      }
     },
 
     async translate(targetLang) {
