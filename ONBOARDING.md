@@ -28,7 +28,7 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : 91aa49e — Add Pinterest domain verification meta tag (36 seconds ago)
+- Dernier commit : fe69180 — Add Pinterest HTML verification file (18 seconds ago)
 - Fichiers en attente : 3
 
 ### Stack
