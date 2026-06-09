@@ -28,7 +28,7 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : 5810746 — Auto-memory — MAJ ONBOARDING + mémoire session 2026-06-09 14:54 (3 minutes ago)
+- Dernier commit : 8d43b77 — Auto-memory — MAJ ONBOARDING + mémoire session 2026-06-09 14:58 (34 seconds ago)
 - Fichiers en attente : 3
 
 ### Stack
