@@ -1,6 +1,6 @@
 # ABA Paysage — Onboarding Claude Code
 > Fichier de mémoire projet. Lis ce fichier en premier à chaque nouvelle session.
-> Dernière mise à jour automatique : 2026-06-09 15:04
+> Dernière mise à jour automatique : 2026-06-09 15:09
 
 ---
 
@@ -28,7 +28,7 @@ Branche  : main → déploiement auto GitHub Pages
 Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 
 ### Git — État actuel
-- Dernier commit : 7a1e23e — Auto-memory — MAJ ONBOARDING + mémoire session 2026-06-09 15:01 (3 minutes ago)
+- Dernier commit : 91aa49e — Add Pinterest domain verification meta tag (36 seconds ago)
 - Fichiers en attente : 3
 
 ### Stack
@@ -52,7 +52,7 @@ Ne jamais utiliser abhub-prog, ikenproapp ou tout autre compte.
 │   ├── i18n.js           ← Moteur traduction FR/EN/ES
 │   ├── aba-logo.png      ← Logo noir (thème clair)
 │   └── portfolio/        ← 5 fiches HTML
-└── blog/                 ← 23 articles (23 traduits FR/EN/ES)
+└── blog/                 ← 24 articles (24 traduits FR/EN/ES)
 ```
 
 ---
@@ -102,7 +102,7 @@ Thème clair : `mix-blend-mode: multiply` | Sombre : `filter: invert(1)` + `mix-
 
 ---
 
-## 6. ARTICLES (23 total — 23 traduits FR/EN/ES)
+## 6. ARTICLES (24 total — 24 traduits FR/EN/ES)
 
 ### Handoff (10 articles) ✅ FR/EN/ES
 eau-ecrite-dans-la-pierre · riad-jardin-clos · art-pierre-seche · tadelakt-zellige-lumiere
