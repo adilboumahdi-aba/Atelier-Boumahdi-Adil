@@ -1,0 +1,1565 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ABA — Gestionnaire d'images</title>
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Hanken+Grotesk:wght@400;500;600;700&family=Cormorant+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #efe9dd;
+      --bg2: #e7e0d1;
+      --card: #f5f0e8;
+      --accent: #1f3a5f;
+      --green: #a8c61c;
+      --green-dk: #8aaa0f;
+      --ink: #1d1b16;
+      --ink2: rgba(29,27,22,0.55);
+      --border: rgba(29,27,22,0.10);
+      --border-md: rgba(29,27,22,0.18);
+      --radius: 6px;
+      --radius-lg: 10px;
+      --shadow: 0 2px 12px rgba(29,27,22,0.10);
+      --shadow-lg: 0 8px 40px rgba(29,27,22,0.18);
+      --font: 'Hanken Grotesk', system-ui, sans-serif;
+      --font-serif: 'Cormorant Garamond', Georgia, serif;
+      --transition: 180ms ease;
+    }
+
+    html, body { height: 100%; font-family: var(--font); background: var(--bg); color: var(--ink); }
+
+    /* ── AUTH SCREEN ── */
+    #auth-screen {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--bg);
+    }
+
+    .auth-card {
+      background: var(--card);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius-lg);
+      padding: 40px 36px;
+      width: 360px;
+      box-shadow: var(--shadow-lg);
+    }
+
+    .auth-logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .auth-logo__mark {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.25em;
+      color: var(--accent);
+    }
+
+    .auth-logo__sep { width: 1px; height: 28px; background: var(--border-md); }
+
+    .auth-logo__name {
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--ink2);
+      line-height: 1.5;
+      letter-spacing: 0.04em;
+    }
+
+    .auth-title {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      margin-bottom: 6px;
+    }
+
+    .auth-sub { font-size: 13px; color: var(--ink2); margin-bottom: 24px; line-height: 1.5; }
+
+    .auth-field { margin-bottom: 16px; }
+    .auth-field label { display: block; font-size: 12px; font-weight: 600; letter-spacing: 0.06em; text-transform: uppercase; color: var(--ink2); margin-bottom: 6px; }
+    .auth-field input {
+      width: 100%;
+      padding: 10px 12px;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      background: var(--bg);
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .auth-field input:focus { border-color: var(--accent); }
+    .auth-field .hint { font-size: 11px; color: var(--ink2); margin-top: 5px; }
+    .auth-field .hint code { font-family: monospace; background: var(--bg2); padding: 1px 4px; border-radius: 3px; }
+
+    .auth-btn {
+      width: 100%;
+      padding: 11px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      cursor: pointer;
+      transition: background var(--transition);
+      margin-top: 4px;
+    }
+    .auth-btn:hover { background: #17305a; }
+
+    .auth-error {
+      margin-top: 12px;
+      padding: 10px 12px;
+      background: #fef0ee;
+      border: 1px solid #f5c4bb;
+      border-radius: var(--radius);
+      font-size: 12px;
+      color: #c0392b;
+      display: flex;
+      gap: 8px;
+      align-items: center;
+    }
+
+    /* ── TOPBAR ── */
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      display: flex;
+      align-items: center;
+      gap: 0;
+      padding: 0 20px;
+      height: 48px;
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .topbar__brand { font-size: 15px; font-weight: 700; letter-spacing: 0.2em; }
+    .topbar__slash { margin: 0 8px; opacity: 0.35; }
+    .topbar__label { font-size: 12px; font-weight: 500; letter-spacing: 0.12em; opacity: 0.75; }
+    .topbar__icon { font-size: 14px; margin-left: 8px; opacity: 0.5; }
+    .topbar__spacer { flex: 1; }
+    .topbar__status { display: flex; align-items: center; gap: 7px; font-size: 12px; opacity: 0.7; margin-right: 16px; }
+
+    .status-dot { width: 7px; height: 7px; border-radius: 50%; background: #6b7280; transition: background 0.3s; }
+    .status-dot.ok { background: var(--green); }
+    .status-dot.error { background: #ef4444; }
+    .status-dot.loading { background: #f59e0b; animation: pulse-dot 1s ease infinite; }
+    @keyframes pulse-dot { 0%,100%{opacity:1}50%{opacity:0.3} }
+
+    .topbar__btn {
+      padding: 6px 14px;
+      border-radius: var(--radius);
+      border: 1px solid rgba(255,255,255,0.2);
+      background: transparent;
+      color: #fff;
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: background var(--transition);
+      margin-left: 8px;
+    }
+    .topbar__btn:hover { background: rgba(255,255,255,0.12); }
+    .topbar__btn--accent { background: var(--green); border-color: var(--green); color: var(--accent); font-weight: 700; }
+    .topbar__btn--accent:hover { background: var(--green-dk); border-color: var(--green-dk); }
+    .topbar__btn:disabled { opacity: 0.4; cursor: not-allowed; pointer-events: none; }
+
+    /* ── APP LAYOUT ── */
+    #app { display: flex; flex-direction: column; height: 100vh; }
+
+    .app-body { flex: 1; display: grid; grid-template-columns: 280px 1fr; overflow: hidden; }
+
+    /* ── LEFT PANEL ── */
+    .left-panel {
+      border-right: 1px solid var(--border);
+      background: var(--card);
+      display: flex;
+      flex-direction: column;
+      overflow-y: auto;
+    }
+
+    .left-panel__head {
+      padding: 20px 20px 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .left-panel__title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      margin-bottom: 12px;
+    }
+
+    .article-select {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      background: var(--bg);
+      font-family: var(--font);
+      font-size: 13px;
+      color: var(--ink);
+      outline: none;
+      cursor: pointer;
+      transition: border-color var(--transition);
+    }
+    .article-select:focus { border-color: var(--accent); }
+
+    .load-btn {
+      margin-top: 10px;
+      width: 100%;
+      padding: 9px 12px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .load-btn:hover { background: #17305a; }
+    .load-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .article-meta {
+      padding: 16px 20px;
+      flex: 1;
+    }
+
+    .meta-item { margin-bottom: 12px; }
+    .meta-label { font-size: 10px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); margin-bottom: 3px; }
+    .meta-value { font-size: 12px; color: var(--ink); line-height: 1.4; }
+    .meta-value a { color: var(--accent); text-decoration: none; font-size: 11px; }
+    .meta-value a:hover { text-decoration: underline; }
+
+    .meta-badge {
+      display: inline-block;
+      padding: 2px 8px;
+      background: var(--bg2);
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--ink2);
+    }
+    .meta-badge.ok { background: #e8f5c4; color: var(--green-dk); }
+
+    /* ── RIGHT PANEL ── */
+    .right-panel { overflow-y: auto; padding: 24px 28px; }
+
+    .panel-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      gap: 12px;
+      color: var(--ink2);
+    }
+    .panel-empty__icon { font-size: 40px; opacity: 0.3; }
+    .panel-empty__text { font-size: 14px; text-align: center; }
+
+    .panel-header {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .panel-header h2 {
+      font-family: var(--font-serif);
+      font-size: 22px;
+      font-weight: 400;
+      color: var(--ink);
+    }
+
+    .panel-header .count-badge {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      background: var(--bg2);
+      padding: 3px 9px;
+      border-radius: 20px;
+    }
+
+    .changes-bar {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      background: #e8f5c4;
+      border: 1px solid #c9e07b;
+      border-radius: var(--radius);
+      margin-bottom: 20px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--green-dk);
+    }
+    .changes-bar.hidden { display: none; }
+    .changes-bar__spacer { flex: 1; }
+    .changes-bar__save {
+      padding: 6px 14px;
+      background: var(--accent);
+      color: #fff;
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      cursor: pointer;
+    }
+    .changes-bar__save:hover { background: #17305a; }
+    .changes-bar__discard {
+      padding: 6px 10px;
+      background: transparent;
+      color: var(--ink2);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 11px;
+      cursor: pointer;
+    }
+    .changes-bar__discard:hover { background: var(--bg2); }
+
+    /* ── IMAGES GRID ── */
+    .images-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      gap: 16px;
+    }
+
+    .img-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: box-shadow var(--transition), border-color var(--transition);
+      position: relative;
+    }
+    .img-card:hover { box-shadow: var(--shadow); border-color: var(--border-md); }
+    .img-card.changed { border-color: var(--green); box-shadow: 0 0 0 2px rgba(168,198,28,0.2); }
+
+    .img-card__thumb {
+      width: 100%;
+      aspect-ratio: 4/3;
+      object-fit: cover;
+      display: block;
+      background: var(--bg2);
+    }
+
+    .img-card__body { padding: 10px 12px 12px; }
+
+    .img-card__index {
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--ink2);
+      margin-bottom: 4px;
+    }
+
+    .img-card__id {
+      font-family: monospace;
+      font-size: 11px;
+      color: var(--ink2);
+      margin-bottom: 8px;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .img-card__changed-badge {
+      display: none;
+      position: absolute;
+      top: 8px;
+      right: 8px;
+      background: var(--green);
+      color: var(--accent);
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      padding: 2px 7px;
+      border-radius: 20px;
+    }
+    .img-card.changed .img-card__changed-badge { display: block; }
+
+    .img-card__btn {
+      display: block;
+      width: 100%;
+      padding: 7px;
+      background: var(--bg2);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--accent);
+      cursor: pointer;
+      transition: background var(--transition), border-color var(--transition);
+      text-align: center;
+    }
+    .img-card__btn:hover { background: var(--accent); color: #fff; border-color: var(--accent); }
+
+    /* ── MODAL ── */
+    .modal-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(29,27,22,0.55);
+      z-index: 200;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      backdrop-filter: blur(2px);
+    }
+    .modal-overlay.hidden { display: none; }
+
+    .modal {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-lg);
+      width: 860px;
+      max-width: 100%;
+      max-height: 90vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .modal__header {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 16px 20px;
+      border-bottom: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+    .modal__title {
+      font-family: var(--font-serif);
+      font-size: 18px;
+      font-weight: 400;
+      flex: 1;
+    }
+    .modal__close {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      border: 1px solid var(--border-md);
+      background: transparent;
+      color: var(--ink2);
+      font-size: 16px;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      line-height: 1;
+    }
+    .modal__close:hover { background: var(--bg2); }
+
+    .modal__body {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 0;
+      overflow: hidden;
+      flex: 1;
+    }
+
+    .modal__left {
+      padding: 20px;
+      border-right: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .modal__left-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); }
+
+    .modal__preview-wrap {
+      flex: 1;
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+      min-height: 180px;
+      position: relative;
+    }
+    .modal__preview-wrap img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .modal__preview-label {
+      position: absolute;
+      bottom: 8px;
+      left: 8px;
+      background: rgba(29,27,22,0.65);
+      color: #fff;
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 3px 8px;
+      border-radius: 4px;
+    }
+
+    .modal__right {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      overflow-y: auto;
+    }
+
+    .modal__right-title { font-size: 11px; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink2); }
+
+    /* Tabs */
+    .tab-bar {
+      display: flex;
+      gap: 0;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+    .tab-btn {
+      flex: 1;
+      padding: 8px 4px;
+      border: none;
+      background: var(--bg);
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.05em;
+      color: var(--ink2);
+      cursor: pointer;
+      transition: background var(--transition), color var(--transition);
+      border-right: 1px solid var(--border-md);
+    }
+    .tab-btn:last-child { border-right: none; }
+    .tab-btn.active { background: var(--accent); color: #fff; }
+    .tab-btn:hover:not(.active) { background: var(--bg2); }
+
+    .tab-panel { display: none; }
+    .tab-panel.active { display: flex; flex-direction: column; gap: 10px; }
+
+    /* Input groups */
+    .field-label { font-size: 11px; font-weight: 600; color: var(--ink2); letter-spacing: 0.04em; margin-bottom: 4px; }
+    .field-input {
+      width: 100%;
+      padding: 9px 12px;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      background: var(--bg);
+      font-family: var(--font);
+      font-size: 12px;
+      color: var(--ink);
+      outline: none;
+      transition: border-color var(--transition);
+    }
+    .field-input:focus { border-color: var(--accent); }
+    .field-hint { font-size: 11px; color: var(--ink2); line-height: 1.5; }
+    .field-hint a { color: var(--accent); }
+
+    .preview-btn {
+      padding: 8px 14px;
+      background: var(--bg2);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .preview-btn:hover { background: var(--bg); border-color: var(--accent); }
+
+    .new-preview-wrap {
+      border-radius: var(--radius);
+      overflow: hidden;
+      background: var(--bg2);
+      aspect-ratio: 16/9;
+      position: relative;
+      border: 1px dashed var(--border-md);
+    }
+    .new-preview-wrap img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .new-preview-wrap .placeholder {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+      font-size: 12px;
+      color: var(--ink2);
+    }
+
+    .upload-area {
+      border: 2px dashed var(--border-md);
+      border-radius: var(--radius);
+      padding: 24px;
+      text-align: center;
+      cursor: pointer;
+      transition: border-color var(--transition), background var(--transition);
+    }
+    .upload-area:hover { border-color: var(--accent); background: rgba(31,58,95,0.03); }
+    .upload-area input { display: none; }
+    .upload-area__icon { font-size: 24px; margin-bottom: 6px; }
+    .upload-area__text { font-size: 12px; color: var(--ink2); line-height: 1.5; }
+    .upload-area__btn {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 6px 14px;
+      background: var(--bg);
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--accent);
+      cursor: pointer;
+    }
+    .upload-progress {
+      font-size: 11px;
+      color: var(--ink2);
+      text-align: center;
+      padding: 8px;
+      background: var(--bg2);
+      border-radius: var(--radius);
+    }
+
+    .modal__footer {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      justify-content: flex-end;
+      padding: 14px 20px;
+      border-top: 1px solid var(--border);
+      flex-shrink: 0;
+    }
+
+    .btn-cancel {
+      padding: 8px 16px;
+      background: transparent;
+      border: 1px solid var(--border-md);
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--ink2);
+      cursor: pointer;
+    }
+    .btn-cancel:hover { background: var(--bg2); }
+
+    .btn-apply {
+      padding: 8px 18px;
+      background: var(--green);
+      border: none;
+      border-radius: var(--radius);
+      font-family: var(--font);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--accent);
+      cursor: pointer;
+      transition: background var(--transition);
+    }
+    .btn-apply:hover { background: var(--green-dk); }
+    .btn-apply:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    /* ── TOAST ── */
+    #toast {
+      position: fixed;
+      bottom: 24px;
+      left: 50%;
+      transform: translateX(-50%) translateY(80px);
+      background: var(--ink);
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 40px;
+      font-size: 13px;
+      font-weight: 500;
+      z-index: 999;
+      transition: transform 300ms ease;
+      white-space: nowrap;
+    }
+    #toast.show { transform: translateX(-50%) translateY(0); }
+    #toast.success { background: var(--accent); }
+    #toast.error { background: #c0392b; }
+
+    /* ── SPINNER ── */
+    .spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255,255,255,0.3);
+      border-top-color: #fff;
+      border-radius: 50%;
+      animation: spin 0.7s linear infinite;
+      display: inline-block;
+      vertical-align: middle;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .loading-state {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      padding: 60px;
+      color: var(--ink2);
+      font-size: 13px;
+    }
+    .loading-state .spin-lg {
+      width: 32px;
+      height: 32px;
+      border: 3px solid var(--border-md);
+      border-top-color: var(--accent);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    .hidden { display: none !important; }
+
+    /* ── SAVE MODAL ── */
+    .save-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(29,27,22,0.55);
+      z-index: 300;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(2px);
+    }
+    .save-overlay.hidden { display: none; }
+    .save-card {
+      background: var(--card);
+      border-radius: var(--radius-lg);
+      padding: 28px 32px;
+      width: 420px;
+      box-shadow: var(--shadow-lg);
+    }
+    .save-card h3 { font-family: var(--font-serif); font-size: 20px; font-weight: 400; margin-bottom: 8px; }
+    .save-card p { font-size: 13px; color: var(--ink2); margin-bottom: 18px; line-height: 1.5; }
+    .save-card label { display: block; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; color: var(--ink2); margin-bottom: 6px; }
+    .save-card input { width: 100%; padding: 9px 12px; border: 1px solid var(--border-md); border-radius: var(--radius); background: var(--bg); font-family: var(--font); font-size: 13px; outline: none; margin-bottom: 16px; }
+    .save-card input:focus { border-color: var(--accent); }
+    .save-card__btns { display: flex; gap: 10px; justify-content: flex-end; }
+    .save-card__progress { font-size: 12px; color: var(--ink2); margin-top: 12px; padding: 8px 0; }
+    .save-card__progress .prog-item { display: flex; align-items: center; gap: 8px; padding: 4px 0; }
+    .save-card__progress .prog-icon { font-size: 13px; width: 16px; text-align: center; }
+  </style>
+</head>
+<body>
+
+<!-- ── AUTH SCREEN ── -->
+<div id="auth-screen">
+  <div class="auth-card">
+    <div class="auth-logo">
+      <span class="auth-logo__mark">ABA</span>
+      <div class="auth-logo__sep"></div>
+      <span class="auth-logo__name">Atelier Boumahdi<br>Gestionnaire d'images</span>
+    </div>
+    <h2 class="auth-title">Accès administrateur</h2>
+    <p class="auth-sub">Entrez votre Personal Access Token GitHub pour modifier les images des articles.</p>
+    <div class="auth-field">
+      <label>GitHub Personal Access Token</label>
+      <input type="password" id="auth-pat" placeholder="ghp_…" onkeydown="if(event.key==='Enter')App.login()" />
+      <div class="hint">Scope <code>repo</code> — compte <strong>adilboumahdi-aba</strong> uniquement</div>
+    </div>
+    <button class="auth-btn" onclick="App.login()">Accéder →</button>
+    <div id="auth-error" class="auth-error hidden">
+      <span>⚠</span><span id="auth-error-msg">Token invalide ou accès refusé</span>
+    </div>
+  </div>
+</div>
+
+<!-- ── APP ── -->
+<div id="app" class="hidden">
+
+  <!-- Topbar -->
+  <header class="topbar">
+    <span class="topbar__brand">ABA</span>
+    <span class="topbar__slash">/</span>
+    <span class="topbar__label">Images</span>
+    <span class="topbar__icon">🖼</span>
+    <span class="topbar__spacer"></span>
+    <div class="topbar__status">
+      <div class="status-dot" id="gh-dot"></div>
+      <span id="gh-label">GitHub</span>
+    </div>
+    <button class="topbar__btn" onclick="window.open('admin.html','_blank')">← Admin</button>
+    <button class="topbar__btn topbar__btn--accent" id="btn-save-all" onclick="App.openSaveModal()" disabled>↑ Enregistrer &amp; Publier</button>
+    <button class="topbar__btn" onclick="App.logout()">Déconnexion</button>
+  </header>
+
+  <!-- Body -->
+  <div class="app-body">
+
+    <!-- Left panel -->
+    <div class="left-panel">
+      <div class="left-panel__head">
+        <div class="left-panel__title">Article</div>
+        <select class="article-select" id="article-select" onchange="App.onArticleChange()">
+          <option value="">— Sélectionnez un article —</option>
+        </select>
+        <button class="load-btn" id="load-btn" onclick="App.loadArticle()" disabled>Charger les images</button>
+      </div>
+      <div class="article-meta" id="article-meta">
+        <div class="meta-item">
+          <div class="meta-label">Utilisation</div>
+          <div class="meta-value">
+            Sélectionnez un article pour voir et modifier ses images.<br><br>
+            Toutes les modifications sont appliquées aux 3 langues (FR / EN / ES) simultanément.
+          </div>
+        </div>
+        <div class="meta-item" style="margin-top:auto">
+          <div class="meta-label">Source images</div>
+          <div class="meta-value">
+            <a href="https://unsplash.com" target="_blank">unsplash.com ↗</a> — libre de droits
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right panel -->
+    <div class="right-panel" id="right-panel">
+      <div class="panel-empty" id="panel-empty">
+        <div class="panel-empty__icon">🖼</div>
+        <div class="panel-empty__text">Sélectionnez un article<br>et cliquez sur <strong>Charger les images</strong></div>
+      </div>
+      <div id="panel-content" class="hidden">
+        <div class="panel-header">
+          <h2 id="panel-title">—</h2>
+          <span class="count-badge" id="panel-count">0 image</span>
+        </div>
+        <div class="changes-bar hidden" id="changes-bar">
+          <span>✓</span>
+          <span id="changes-text">— modification(s) en attente</span>
+          <div class="changes-bar__spacer"></div>
+          <button class="changes-bar__discard" onclick="App.discardChanges()">Annuler</button>
+          <button class="changes-bar__save" onclick="App.openSaveModal()">↑ Enregistrer &amp; Publier</button>
+        </div>
+        <div class="images-grid" id="images-grid"></div>
+      </div>
+      <div class="loading-state hidden" id="loading-state">
+        <div class="spin-lg"></div>
+        <span id="loading-text">Chargement…</span>
+      </div>
+    </div>
+
+  </div><!-- .app-body -->
+</div><!-- #app -->
+
+<!-- ── REPLACE MODAL ── -->
+<div class="modal-overlay hidden" id="replace-modal">
+  <div class="modal">
+    <div class="modal__header">
+      <span class="modal__title">Changer l'image</span>
+      <button class="modal__close" onclick="App.closeModal()">✕</button>
+    </div>
+    <div class="modal__body">
+      <!-- Current -->
+      <div class="modal__left">
+        <div class="modal__left-title">Image actuelle</div>
+        <div class="modal__preview-wrap">
+          <img id="modal-current-img" src="" alt="" />
+          <div class="modal__preview-label">ACTUEL</div>
+        </div>
+        <div style="font-size:11px;color:var(--ink2);word-break:break-all" id="modal-current-id">—</div>
+      </div>
+      <!-- New -->
+      <div class="modal__right">
+        <div class="modal__right-title">Nouvelle image</div>
+
+        <!-- Tab bar -->
+        <div class="tab-bar">
+          <button class="tab-btn active" onclick="App.switchTab('unsplash', this)">Unsplash</button>
+          <button class="tab-btn" onclick="App.switchTab('url', this)">Autre URL</button>
+          <button class="tab-btn" onclick="App.switchTab('upload', this)">Ma photo</button>
+        </div>
+
+        <!-- Tab: Unsplash -->
+        <div class="tab-panel active" id="tab-unsplash">
+          <div>
+            <div class="field-label">URL ou ID de la photo Unsplash</div>
+            <input class="field-input" type="text" id="unsplash-input"
+              placeholder="photo-1632739148604 ou URL complète"
+              oninput="App.onUnsplashInput()" />
+            <div class="field-hint" style="margin-top:6px">
+              Allez sur <a href="https://unsplash.com" target="_blank">unsplash.com</a>, trouvez une photo, copiez l'URL et collez-la ici.<br>
+              Exemple : <code style="font-size:10px;background:var(--bg2);padding:1px 4px;border-radius:3px">photo-1632739148604</code>
+            </div>
+          </div>
+          <div class="new-preview-wrap" id="unsplash-preview-wrap">
+            <div class="placeholder" id="unsplash-placeholder">Aperçu apparaîtra ici</div>
+            <img id="unsplash-preview-img" src="" alt="" style="display:none" />
+          </div>
+        </div>
+
+        <!-- Tab: URL -->
+        <div class="tab-panel" id="tab-url">
+          <div>
+            <div class="field-label">URL directe de l'image</div>
+            <input class="field-input" type="url" id="url-input"
+              placeholder="https://…/image.jpg"
+              oninput="App.onUrlInput()" />
+            <div class="field-hint" style="margin-top:6px">
+              Collez n'importe quelle URL d'image (jpg, png, webp).<br>
+              L'image doit être accessible publiquement.
+            </div>
+          </div>
+          <div class="new-preview-wrap" id="url-preview-wrap">
+            <div class="placeholder" id="url-placeholder">Aperçu apparaîtra ici</div>
+            <img id="url-preview-img" src="" alt="" style="display:none" />
+          </div>
+        </div>
+
+        <!-- Tab: Upload -->
+        <div class="tab-panel" id="tab-upload">
+          <div class="field-hint">Téléversez votre propre photo vers le site. Elle sera enregistrée dans <code style="font-size:10px;background:var(--bg2);padding:1px 4px;border-radius:3px">assets/blog-images/</code>.</div>
+          <div class="upload-area" id="upload-area" onclick="document.getElementById('file-input').click()"
+               ondragover="event.preventDefault()" ondrop="App.onFileDrop(event)">
+            <input type="file" id="file-input" accept="image/*" onchange="App.onFileSelect(event)" />
+            <div class="upload-area__icon">📷</div>
+            <div class="upload-area__text">Glissez une photo ici<br>ou cliquez pour choisir</div>
+            <span class="upload-area__btn">Parcourir…</span>
+          </div>
+          <div class="upload-progress hidden" id="upload-progress">Téléversement en cours…</div>
+          <div class="new-preview-wrap" id="upload-preview-wrap" style="display:none">
+            <img id="upload-preview-img" src="" alt="" />
+          </div>
+        </div>
+
+      </div><!-- .modal__right -->
+    </div><!-- .modal__body -->
+    <div class="modal__footer">
+      <button class="btn-cancel" onclick="App.closeModal()">Annuler</button>
+      <button class="btn-apply" id="btn-apply" onclick="App.applyChange()" disabled>Appliquer →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ── SAVE MODAL ── -->
+<div class="save-overlay hidden" id="save-overlay">
+  <div class="save-card">
+    <h3>Enregistrer &amp; Publier</h3>
+    <p id="save-desc">—</p>
+    <label>Message de commit</label>
+    <input type="text" id="save-msg" value="Images: mise à jour photos articles" />
+    <div class="save-card__btns">
+      <button class="btn-cancel" onclick="App.closeSaveModal()">Annuler</button>
+      <button class="btn-apply" id="btn-confirm-save" onclick="App.saveAndPublish()">Publier →</button>
+    </div>
+    <div class="save-card__progress hidden" id="save-progress"></div>
+  </div>
+</div>
+
+<!-- ── TOAST ── -->
+<div id="toast"></div>
+
+<script>
+'use strict';
+
+/* ──────────────────────────────────────────────
+   CONFIG
+────────────────────────────────────────────── */
+const REPO   = 'adilboumahdi-aba/Atelier-Boumahdi-Adil';
+const BRANCH = 'main';
+const GHAPI  = 'https://api.github.com';
+
+const ARTICLES = [
+  { slug: 'ombre-sous-l-olivier',                                          label: "Jardiner l'ombre sous l'olivier" },
+  { slug: 'cedre-de-latlas',                                               label: "Le Cèdre de l'Atlas" },
+  { slug: 'xeropaysage-luxe-sobre',                                        label: "Xéropaysage — le luxe sobre" },
+  { slug: 'riad-jardin-clos',                                              label: "Le riad, jardin clos" },
+  { slug: 'eau-ecrite-dans-la-pierre',                                     label: "L'eau écrite dans la pierre" },
+  { slug: 'arganier-amenagement-paysager-usages-contraintes-potentiel',    label: "L'Arganier en aménagement paysager" },
+  { slug: 'tadelakt-zellige-lumiere',                                      label: "Tadelakt, zellige et lumière" },
+  { slug: 'villa-des-oudayas-patio',                                       label: "Villa des Oudayas — le patio" },
+  { slug: 'florilege-du-sec',                                              label: "Florilège du sec" },
+  { slug: 'nuit-au-jardin',                                                label: "La nuit au jardin" },
+  { slug: 'jeu-mineral',                                                   label: "Jeu minéral" },
+  { slug: 'art-pierre-seche',                                              label: "L'art de la pierre sèche" },
+  { slug: 'le-cedre',                                                      label: "Le cèdre" },
+  { slug: 'concevoir-espace-jeu-materiaux-naturels-sable-bois-rocher',     label: "Concevoir un espace de jeu naturel" },
+  { slug: 'arrosage-automatique-programmer-l-eau-comme-un-agronome',       label: "Arrosage automatique" },
+  { slug: 'choisir-une-plante-endemique-pas-decorative',                   label: "Choisir une plante endémique" },
+  { slug: 'eclairage-exterieur-composer-avec-la-nuit',                     label: "Éclairage extérieur" },
+  { slug: 'etang-rabat-hydraulique-filtre-biologique-koi',                 label: "Étang de Rabat — hydraulique &amp; koïs" },
+  { slug: 'l-entretien-signe-ce-que-jardiner-vraiment-veut-dire',          label: "L'entretien signe" },
+  { slug: 'la-pierre-seche-pourquoi-elle-dure-300-ans',                   label: "La pierre sèche — pourquoi elle dure 300 ans" },
+  { slug: 'lire-un-terrain-avant-de-le-toucher',                           label: "Lire un terrain avant de le toucher" },
+  { slug: 'parc-merinide-de-la-lecture-du-site-a-l-inauguration',          label: "Parc Mérinide — lecture du site" },
+  { slug: 'revetements-exterieurs-choisir-un-sol-pour-30-ans',             label: "Revêtements extérieurs — 30 ans" },
+  { slug: 'un-lac-artificiel-comment-ca-vit-vraiment',                     label: "Un lac artificiel — comment ça vit" },
+];
+
+/* ──────────────────────────────────────────────
+   STATE
+────────────────────────────────────────────── */
+const state = {
+  pat: null,
+  currentSlug: null,
+  currentHtml: null,
+  currentSha: null,
+  images: [],       // { url, id, alt, thumbnail }
+  pendingUrl: null, // new URL for current edit
+  pendingIndex: null,
+  changes: {},      // { originalUrl → newUrl }
+};
+
+/* ──────────────────────────────────────────────
+   GITHUB API
+────────────────────────────────────────────── */
+async function ghGet(path) {
+  const res = await fetch(`${GHAPI}/repos/${REPO}/contents/${path}`, {
+    headers: { Authorization: `Bearer ${state.pat}`, Accept: 'application/vnd.github.v3+json' }
+  });
+  if (!res.ok) {
+    const j = await res.json().catch(() => ({}));
+    throw new Error(j.message || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+async function ghPut(path, utf8content, sha, message) {
+  const body = { message, content: toBase64(utf8content), branch: BRANCH };
+  if (sha) body.sha = sha;
+  const res = await fetch(`${GHAPI}/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${state.pat}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    const j = await res.json().catch(() => ({}));
+    throw new Error(j.message || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+async function ghPutBinary(path, base64content, message) {
+  const body = { message, content: base64content, branch: BRANCH };
+  const res = await fetch(`${GHAPI}/repos/${REPO}/contents/${path}`, {
+    method: 'PUT',
+    headers: {
+      Authorization: `Bearer ${state.pat}`,
+      Accept: 'application/vnd.github.v3+json',
+      'Content-Type': 'application/json'
+    },
+    body: JSON.stringify(body)
+  });
+  if (!res.ok) {
+    const j = await res.json().catch(() => ({}));
+    throw new Error(j.message || `HTTP ${res.status}`);
+  }
+  return res.json();
+}
+
+function fromBase64(b64) {
+  return decodeURIComponent(escape(atob(b64.replace(/\n/g, ''))));
+}
+
+function toBase64(str) {
+  return btoa(unescape(encodeURIComponent(str)));
+}
+
+/* ──────────────────────────────────────────────
+   IMAGE EXTRACTION
+────────────────────────────────────────────── */
+function extractImages(html) {
+  const regex = /<img\s+[^>]*src="(https:\/\/images\.unsplash\.com\/photo-([a-zA-Z0-9]+)[^"]*)"[^>]*>/g;
+  const seen = new Set();
+  const images = [];
+  let match;
+  while ((match = regex.exec(html)) !== null) {
+    const url = match[1];
+    const id  = match[2];
+    if (!seen.has(id)) {
+      seen.add(id);
+      const altM = match[0].match(/alt="([^"]*)"/);
+      images.push({
+        url,
+        id,
+        alt: altM ? altM[1] : '',
+        thumbnail: `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=400&q=70`,
+      });
+    }
+  }
+  return images;
+}
+
+function parseUnsplashId(input) {
+  input = input.trim();
+  // Direct photo ID: photo-XXXXXXX
+  let m = input.match(/photo-([a-zA-Z0-9]+)/);
+  if (m) return m[1];
+  // Unsplash URL: unsplash.com/photos/XXXXX or unsplash.com/@user/XXXXX
+  m = input.match(/unsplash\.com\/photos\/([a-zA-Z0-9_-]+)/);
+  if (m) return m[0].split('/').pop();
+  // Raw CDN: images.unsplash.com/photo-XXXXX
+  m = input.match(/images\.unsplash\.com\/photo-([a-zA-Z0-9]+)/);
+  if (m) return m[1];
+  return null;
+}
+
+function replaceUrl(html, oldUrl, newUrl) {
+  const escaped = oldUrl.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+  return html.replace(new RegExp(escaped, 'g'), newUrl);
+}
+
+/* ──────────────────────────────────────────────
+   APP
+────────────────────────────────────────────── */
+const App = {
+
+  async login() {
+    const patInput = document.getElementById('auth-pat');
+    const pat = patInput.value.trim();
+    if (!pat || !pat.startsWith('ghp_') && !pat.startsWith('github_pat_')) {
+      App.showError('Le token doit commencer par ghp_ ou github_pat_');
+      return;
+    }
+    state.pat = pat;
+    setGhStatus('loading', 'Vérification…');
+    try {
+      const res = await fetch(`${GHAPI}/repos/${REPO}`, {
+        headers: { Authorization: `Bearer ${pat}`, Accept: 'application/vnd.github.v3+json' }
+      });
+      if (!res.ok) throw new Error('Accès refusé');
+      setGhStatus('ok', 'GitHub');
+      document.getElementById('auth-screen').classList.add('hidden');
+      document.getElementById('app').classList.remove('hidden');
+      App.populateSelect();
+      patInput.value = '';
+    } catch (err) {
+      state.pat = null;
+      setGhStatus('error', 'Erreur');
+      App.showError(err.message);
+    }
+  },
+
+  showError(msg) {
+    const el = document.getElementById('auth-error');
+    document.getElementById('auth-error-msg').textContent = msg;
+    el.classList.remove('hidden');
+    setTimeout(() => el.classList.add('hidden'), 4000);
+  },
+
+  logout() {
+    state.pat = null;
+    state.currentSlug = null;
+    state.currentHtml = null;
+    state.currentSha = null;
+    state.images = [];
+    state.changes = {};
+    document.getElementById('auth-screen').classList.remove('hidden');
+    document.getElementById('app').classList.add('hidden');
+    document.getElementById('auth-pat').value = '';
+  },
+
+  populateSelect() {
+    const sel = document.getElementById('article-select');
+    sel.innerHTML = '<option value="">— Sélectionnez un article —</option>';
+    ARTICLES.forEach(a => {
+      const opt = document.createElement('option');
+      opt.value = a.slug;
+      opt.textContent = a.label;
+      sel.appendChild(opt);
+    });
+  },
+
+  onArticleChange() {
+    const slug = document.getElementById('article-select').value;
+    document.getElementById('load-btn').disabled = !slug;
+  },
+
+  async loadArticle() {
+    const slug = document.getElementById('article-select').value;
+    if (!slug) return;
+
+    state.changes = {};
+    state.currentSlug = slug;
+    App.updateChangesBar();
+
+    showLoading('Chargement de l\'article…');
+
+    try {
+      const data = await ghGet(`blog/${slug}.html`);
+      state.currentHtml = fromBase64(data.content);
+      state.currentSha  = data.sha;
+      state.images = extractImages(state.currentHtml);
+
+      App.renderImages();
+      setGhStatus('ok', 'GitHub');
+    } catch (err) {
+      setGhStatus('error', 'Erreur');
+      toast(`Erreur: ${err.message}`, 'error');
+      showEmpty();
+    }
+  },
+
+  renderImages() {
+    const article = ARTICLES.find(a => a.slug === state.currentSlug);
+    document.getElementById('panel-title').textContent = article ? article.label : state.currentSlug;
+    const n = state.images.length;
+    document.getElementById('panel-count').textContent = `${n} image${n !== 1 ? 's' : ''}`;
+
+    const grid = document.getElementById('images-grid');
+    grid.innerHTML = '';
+
+    if (n === 0) {
+      grid.innerHTML = '<div style="grid-column:1/-1;padding:32px;text-align:center;color:var(--ink2);font-size:13px;">Aucune image Unsplash trouvée dans cet article.</div>';
+    } else {
+      state.images.forEach((img, i) => {
+        const changed = state.changes[img.url] !== undefined;
+        const displayUrl = changed ? state.changes[img.url] : img.url;
+        const displayThumb = changed
+          ? thumbFromUrl(state.changes[img.url])
+          : img.thumbnail;
+
+        const card = document.createElement('div');
+        card.className = `img-card${changed ? ' changed' : ''}`;
+        card.id = `img-card-${i}`;
+        card.innerHTML = `
+          <span class="img-card__changed-badge">MODIFIÉ</span>
+          <img class="img-card__thumb" src="${displayThumb}" alt="${esc(img.alt)}"
+               onerror="this.style.opacity='0.3'" loading="lazy" id="img-thumb-${i}">
+          <div class="img-card__body">
+            <div class="img-card__index">Image ${i + 1} sur ${n}</div>
+            <div class="img-card__id">${extractIdDisplay(displayUrl)}</div>
+            <button class="img-card__btn" onclick="App.openModal(${i})">Changer →</button>
+          </div>`;
+        grid.appendChild(card);
+      });
+    }
+
+    showContent();
+  },
+
+  openModal(index) {
+    const img = state.images[index];
+    state.pendingIndex = index;
+    state.pendingUrl = null;
+
+    const currentUrl = state.changes[img.url] !== undefined ? state.changes[img.url] : img.url;
+    document.getElementById('modal-current-img').src = thumbFromUrl(currentUrl, 600);
+    document.getElementById('modal-current-id').textContent = currentUrl;
+
+    // Reset tabs
+    App.switchTab('unsplash', document.querySelector('.tab-btn'));
+    document.getElementById('unsplash-input').value = '';
+    document.getElementById('url-input').value = '';
+    resetPreview('unsplash');
+    resetPreview('url');
+    resetUpload();
+    document.getElementById('btn-apply').disabled = true;
+
+    document.getElementById('replace-modal').classList.remove('hidden');
+  },
+
+  closeModal() {
+    document.getElementById('replace-modal').classList.add('hidden');
+    state.pendingIndex = null;
+    state.pendingUrl = null;
+  },
+
+  switchTab(tab, btn) {
+    document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+    if (btn) btn.classList.add('active');
+    document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+    document.getElementById(`tab-${tab}`).classList.add('active');
+    App.updateApplyBtn();
+  },
+
+  onUnsplashInput() {
+    const val = document.getElementById('unsplash-input').value.trim();
+    const id = parseUnsplashId(val);
+    const wrap = document.getElementById('unsplash-preview-wrap');
+    const img  = document.getElementById('unsplash-preview-img');
+    const ph   = document.getElementById('unsplash-placeholder');
+
+    if (id) {
+      const url = `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=800&q=80`;
+      img.src = url;
+      img.style.display = 'block';
+      ph.style.display  = 'none';
+      img.onerror = () => { img.style.display='none'; ph.textContent='Image introuvable'; ph.style.display='flex'; };
+      state.pendingUrl = `https://images.unsplash.com/photo-${id}?auto=format&fit=crop&w=1200&q=85`;
+    } else {
+      img.style.display = 'none';
+      ph.textContent = 'Aperçu apparaîtra ici';
+      ph.style.display = 'flex';
+      state.pendingUrl = null;
+    }
+    App.updateApplyBtn();
+  },
+
+  onUrlInput() {
+    const val = document.getElementById('url-input').value.trim();
+    const img  = document.getElementById('url-preview-img');
+    const ph   = document.getElementById('url-placeholder');
+
+    if (val && val.startsWith('http')) {
+      img.src = val;
+      img.style.display = 'block';
+      ph.style.display  = 'none';
+      img.onerror = () => { img.style.display='none'; ph.textContent='Image introuvable'; ph.style.display='flex'; };
+      state.pendingUrl = val;
+    } else {
+      img.style.display = 'none';
+      ph.textContent = 'Aperçu apparaîtra ici';
+      ph.style.display = 'flex';
+      state.pendingUrl = null;
+    }
+    App.updateApplyBtn();
+  },
+
+  onFileDrop(e) {
+    e.preventDefault();
+    const file = e.dataTransfer.files[0];
+    if (file) App.processFile(file);
+  },
+
+  onFileSelect(e) {
+    const file = e.target.files[0];
+    if (file) App.processFile(file);
+  },
+
+  async processFile(file) {
+    if (!file.type.startsWith('image/')) { toast('Fichier non supporté', 'error'); return; }
+    if (file.size > 10 * 1024 * 1024) { toast('Fichier trop volumineux (max 10 Mo)', 'error'); return; }
+
+    const progress = document.getElementById('upload-progress');
+    const previewWrap = document.getElementById('upload-preview-wrap');
+    const previewImg  = document.getElementById('upload-preview-img');
+    progress.classList.remove('hidden');
+    progress.textContent = 'Lecture du fichier…';
+
+    const reader = new FileReader();
+    reader.onload = async (ev) => {
+      const dataUrl = ev.target.result;
+      const base64  = dataUrl.split(',')[1];
+      const safeName = file.name.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9._-]/g, '').toLowerCase();
+      const path = `assets/blog-images/${safeName}`;
+
+      progress.textContent = 'Téléversement vers GitHub…';
+      try {
+        await ghPutBinary(path, base64, `Upload photo: ${file.name}`);
+        const pubUrl = `https://www.ab-landscapes.com/${path}`;
+        state.pendingUrl = pubUrl;
+        previewImg.src = dataUrl;
+        previewWrap.style.display = 'block';
+        progress.textContent = `✓ Photo téléversée — URL : ${pubUrl}`;
+        App.updateApplyBtn();
+      } catch (err) {
+        progress.textContent = `Erreur: ${err.message}`;
+      }
+    };
+    reader.readAsDataURL(file);
+  },
+
+  updateApplyBtn() {
+    document.getElementById('btn-apply').disabled = !state.pendingUrl;
+  },
+
+  applyChange() {
+    const idx = state.pendingIndex;
+    if (idx === null || !state.pendingUrl) return;
+
+    const img = state.images[idx];
+    state.changes[img.url] = state.pendingUrl;
+    App.closeModal();
+    App.renderImages();
+    App.updateChangesBar();
+    toast('Image remplacée — cliquez sur Enregistrer & Publier pour sauvegarder.', 'success');
+  },
+
+  discardChanges() {
+    state.changes = {};
+    App.renderImages();
+    App.updateChangesBar();
+    toast('Modifications annulées');
+  },
+
+  updateChangesBar() {
+    const n = Object.keys(state.changes).length;
+    const bar = document.getElementById('changes-bar');
+    const btn = document.getElementById('btn-save-all');
+    if (n > 0) {
+      bar.classList.remove('hidden');
+      document.getElementById('changes-text').textContent = `${n} modification${n > 1 ? 's' : ''} en attente`;
+      btn.disabled = false;
+    } else {
+      bar.classList.add('hidden');
+      btn.disabled = true;
+    }
+  },
+
+  openSaveModal() {
+    const n = Object.keys(state.changes).length;
+    if (n === 0) { toast('Aucune modification à enregistrer'); return; }
+    const article = ARTICLES.find(a => a.slug === state.currentSlug);
+    document.getElementById('save-desc').textContent =
+      `${n} image${n > 1 ? 's' : ''} seront mises à jour dans « ${article ? article.label : state.currentSlug} » (FR + EN + ES simultanément). Le site sera mis à jour en quelques secondes.`;
+    document.getElementById('save-progress').classList.add('hidden');
+    document.getElementById('save-progress').innerHTML = '';
+    document.getElementById('btn-confirm-save').disabled = false;
+    document.getElementById('save-overlay').classList.remove('hidden');
+  },
+
+  closeSaveModal() {
+    document.getElementById('save-overlay').classList.add('hidden');
+  },
+
+  async saveAndPublish() {
+    const progressEl = document.getElementById('save-progress');
+    const btn = document.getElementById('btn-confirm-save');
+    const msg = document.getElementById('save-msg').value.trim() || 'Images: mise à jour photos';
+    btn.disabled = true;
+    progressEl.classList.remove('hidden');
+
+    function addLog(icon, text) {
+      progressEl.innerHTML += `<div class="prog-item"><span class="prog-icon">${icon}</span><span>${text}</span></div>`;
+    }
+
+    addLog('⏳', 'Application des remplacements…');
+
+    let html = state.currentHtml;
+    const changes = state.changes;
+    let count = 0;
+
+    for (const [oldUrl, newUrl] of Object.entries(changes)) {
+      html = replaceUrl(html, oldUrl, newUrl);
+      count++;
+      addLog('✓', `Image ${count} remplacée`);
+    }
+
+    addLog('⏳', 'Envoi vers GitHub…');
+
+    try {
+      await ghPut(`blog/${state.currentSlug}.html`, html, state.currentSha, msg);
+      state.currentHtml = html;
+      state.currentSha  = null; // will be refreshed on next load
+      state.changes = {};
+
+      addLog('✓', 'Publié avec succès !');
+      addLog('🌍', 'Site mis à jour — visible sur ab-landscapes.com dans ~60 secondes');
+
+      App.renderImages();
+      App.updateChangesBar();
+      toast('Publié ! Visible dans ~60 secondes.', 'success');
+      setTimeout(() => App.closeSaveModal(), 2500);
+      setGhStatus('ok', 'Publié');
+    } catch (err) {
+      addLog('✗', `Erreur: ${err.message}`);
+      btn.disabled = false;
+      setGhStatus('error', 'Erreur');
+      toast(`Erreur de publication: ${err.message}`, 'error');
+    }
+  },
+
+};
+
+/* ──────────────────────────────────────────────
+   UI HELPERS
+────────────────────────────────────────────── */
+function showLoading(msg) {
+  document.getElementById('panel-empty').classList.add('hidden');
+  document.getElementById('panel-content').classList.add('hidden');
+  document.getElementById('loading-state').classList.remove('hidden');
+  document.getElementById('loading-text').textContent = msg;
+}
+
+function showContent() {
+  document.getElementById('panel-empty').classList.add('hidden');
+  document.getElementById('loading-state').classList.add('hidden');
+  document.getElementById('panel-content').classList.remove('hidden');
+}
+
+function showEmpty() {
+  document.getElementById('panel-empty').classList.remove('hidden');
+  document.getElementById('panel-content').classList.add('hidden');
+  document.getElementById('loading-state').classList.add('hidden');
+}
+
+function setGhStatus(state, label) {
+  const dot = document.getElementById('gh-dot');
+  dot.className = `status-dot ${state}`;
+  document.getElementById('gh-label').textContent = label;
+}
+
+function thumbFromUrl(url, w = 400) {
+  if (url && url.includes('unsplash.com')) {
+    const m = url.match(/photo-([a-zA-Z0-9]+)/);
+    if (m) return `https://images.unsplash.com/photo-${m[1]}?auto=format&fit=crop&w=${w}&q=70`;
+  }
+  return url;
+}
+
+function extractIdDisplay(url) {
+  if (!url) return '—';
+  const m = url.match(/photo-([a-zA-Z0-9]+)/);
+  if (m) return `photo-${m[1]}`;
+  try { return new URL(url).hostname + '…'; } catch { return url.slice(0, 30) + '…'; }
+}
+
+function resetPreview(tab) {
+  document.getElementById(`${tab}-preview-img`).style.display = 'none';
+  document.getElementById(`${tab}-preview-img`).src = '';
+  const ph = document.getElementById(`${tab}-placeholder`);
+  if (ph) { ph.textContent = 'Aperçu apparaîtra ici'; ph.style.display = 'flex'; }
+}
+
+function resetUpload() {
+  document.getElementById('upload-progress').classList.add('hidden');
+  document.getElementById('upload-preview-wrap').style.display = 'none';
+  document.getElementById('upload-preview-img').src = '';
+  document.getElementById('file-input').value = '';
+}
+
+function esc(s) { return (s||'').replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;'); }
+
+let toastTimer;
+function toast(msg, type = '') {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show ${type}`;
+  clearTimeout(toastTimer);
+  toastTimer = setTimeout(() => { el.className = type; }, 3500);
+}
+
+// Keyboard: Escape closes modal
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    document.getElementById('replace-modal').classList.add('hidden');
+    document.getElementById('save-overlay').classList.add('hidden');
+  }
+});
+</script>
+</body>
+</html>
