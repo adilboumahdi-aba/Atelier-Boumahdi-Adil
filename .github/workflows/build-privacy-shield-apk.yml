@@ -9,6 +9,9 @@ on:
       - '.github/workflows/build-privacy-shield-apk.yml'
   workflow_dispatch: {}
 
+permissions:
+  contents: write
+
 jobs:
   build-debug-apk:
     runs-on: ubuntu-latest
@@ -42,3 +45,20 @@ jobs:
           name: aba-privacy-shield-debug-apk
           path: hidden-device-detector-app/app/build/outputs/apk/debug/*.apk
           if-no-files-found: error
+
+      # Le build tourne aussi depuis un environnement Claude Code sans accès direct
+      # au stockage blob des artefacts GitHub Actions : on committe donc l'APK dans
+      # le dépôt (accessible via git, lui autorisé) pour pouvoir le récupérer.
+      - name: Commit built APK to repo
+        run: |
+          mkdir -p dist
+          cp app/build/outputs/apk/debug/*.apk dist/aba-privacy-shield-debug.apk
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add dist/aba-privacy-shield-debug.apk
+          if ! git diff --cached --quiet; then
+            git commit -m "chore: attach built debug APK (CI run ${{ github.run_number }})"
+            git push
+          else
+            echo "APK unchanged, nothing to commit."
+          fi
