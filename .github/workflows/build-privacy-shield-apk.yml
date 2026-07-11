@@ -1,0 +1,44 @@
+name: Build ABA Privacy Shield APK
+
+on:
+  push:
+    branches:
+      - claude/hidden-device-detector-app-rqvkws
+    paths:
+      - 'hidden-device-detector-app/**'
+      - '.github/workflows/build-privacy-shield-apk.yml'
+  workflow_dispatch: {}
+
+jobs:
+  build-debug-apk:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: hidden-device-detector-app
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '17'
+
+      - name: Ensure required Android SDK components
+        run: |
+          yes | sdkmanager --licenses > /dev/null || true
+          sdkmanager "platforms;android-34" "build-tools;34.0.0" || true
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
+      - name: Build debug APK
+        run: ./gradlew assembleDebug --no-daemon --stacktrace
+
+      - name: Upload APK artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: aba-privacy-shield-debug-apk
+          path: hidden-device-detector-app/app/build/outputs/apk/debug/*.apk
+          if-no-files-found: error
