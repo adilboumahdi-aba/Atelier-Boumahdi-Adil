@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">ABA Privacy Shield</string>
+    <string name="tagline">Contre-surveillance personnelle</string>
+
+    <!-- Home -->
+    <string name="home_title">Tableau de bord</string>
+    <string name="home_subtitle">Choisissez un module de détection</string>
+    <string name="module_camera">Détecteur d\'objectifs</string>
+    <string name="module_camera_desc">Repère les reflets de lentilles cachées</string>
+    <string name="module_network">Scanner réseau</string>
+    <string name="module_network_desc">Appareils suspects sur le Wi-Fi local</string>
+    <string name="module_bluetooth">Radar Bluetooth</string>
+    <string name="module_bluetooth_desc">Balises et traceurs BLE à proximité</string>
+    <string name="module_magnetic">Détecteur magnétique</string>
+    <string name="module_magnetic_desc">Anomalies de champ magnétique</string>
+    <string name="module_checklist">Checklist d\'inspection</string>
+    <string name="module_checklist_desc">Points de contrôle physiques guidés</string>
+    <string name="module_history">Historique des scans</string>
+    <string name="module_history_desc">Rapports enregistrés localement</string>
+
+    <!-- Disclaimer -->
+    <string name="disclaimer_title">Avertissement légal</string>
+    <string name="disclaimer_body">Cette application est un outil d\'aide à la détection, pas une preuve juridique formelle. Utilisez-la uniquement dans les lieux où vous êtes légalement présent, pour protéger votre propre vie privée. La loi encadre strictement la surveillance d\'autrui : ne vous en servez jamais pour espionner des tiers. En cas de découverte, contactez la gérance du lieu et, si nécessaire, les autorités compétentes.</string>
+    <string name="disclaimer_accept">J\'ai compris, continuer</string>
+
+    <!-- Permissions -->
+    <string name="permission_required">Autorisation nécessaire</string>
+    <string name="permission_camera_rationale">La caméra et le flash sont nécessaires pour détecter les reflets de lentilles cachées.</string>
+    <string name="permission_bluetooth_rationale">Le Bluetooth est nécessaire pour repérer les balises et traceurs à proximité.</string>
+    <string name="permission_location_rationale">Android exige cette autorisation pour scanner le Bluetooth sur cette version du système. Aucune position GPS n\'est utilisée par l\'application.</string>
+    <string name="permission_grant">Autoriser</string>
+    <string name="permission_denied">Autorisation refusée. Ce module ne peut pas fonctionner sans elle.</string>
+
+    <!-- Camera scanner -->
+    <string name="camera_instructions">Éteignez les lumières, activez le flash, et balayez lentement la pièce. Les points lumineux détectés sont encerclés en rouge.</string>
+    <string name="camera_sensitivity">Sensibilité</string>
+    <string name="camera_torch_on">Flash activé</string>
+    <string name="camera_torch_off">Flash désactivé</string>
+    <string name="camera_blobs_found">%1$d point(s) suspect(s) détecté(s)</string>
+    <string name="camera_save_evidence">Enregistrer cette détection</string>
+
+    <!-- Network scanner -->
+    <string name="network_start_scan">Lancer le scan réseau</string>
+    <string name="network_scanning">Analyse en cours… %1$d / %2$d appareils</string>
+    <string name="network_no_wifi">Connectez-vous à un réseau Wi-Fi pour lancer le scan.</string>
+    <string name="network_results_title">Appareils détectés</string>
+    <string name="network_risk_high">Risque élevé</string>
+    <string name="network_risk_medium">À vérifier</string>
+    <string name="network_risk_low">Faible risque</string>
+    <string name="network_no_devices">Aucun appareil suspect détecté sur ce réseau.</string>
+
+    <!-- Bluetooth scanner -->
+    <string name="bluetooth_start_scan">Démarrer le radar</string>
+    <string name="bluetooth_stop_scan">Arrêter le radar</string>
+    <string name="bluetooth_scanning">Recherche d\'appareils Bluetooth…</string>
+    <string name="bluetooth_no_devices">Aucun appareil Bluetooth détecté pour le moment.</string>
+    <string name="bluetooth_signal_strength">Force du signal</string>
+    <string name="bluetooth_move_closer">Rapprochez-vous de la source suspectée : plus le signal est fort, plus vous êtes proche.</string>
+
+    <!-- Magnetic scanner -->
+    <string name="magnetic_calibrate">Calibrer (niveau ambiant)</string>
+    <string name="magnetic_instructions">Calibrez dans une zone neutre, puis approchez le téléphone des objets suspects (miroirs, détecteurs de fumée, prises).</string>
+    <string name="magnetic_anomaly_detected">Anomalie magnétique détectée</string>
+    <string name="magnetic_field_value">%1$.1f µT</string>
+
+    <!-- Checklist -->
+    <string name="checklist_title">Checklist d\'inspection physique</string>
+    <string name="checklist_progress">%1$d / %2$d points vérifiés</string>
+    <string name="checklist_reset">Réinitialiser</string>
+
+    <!-- History -->
+    <string name="history_title">Historique des scans</string>
+    <string name="history_empty">Aucun scan enregistré pour l\'instant.</string>
+    <string name="history_new_session">Nouvelle session</string>
+    <string name="history_location_label">Lieu (ex: Hôtel Ibis Rabat - Chambre 214)</string>
+    <string name="history_export">Exporter le rapport</string>
+    <string name="history_delete">Supprimer</string>
+
+    <string name="common_cancel">Annuler</string>
+    <string name="common_save">Enregistrer</string>
+    <string name="common_close">Fermer</string>
+    <string name="common_back">Retour</string>
+</resources>

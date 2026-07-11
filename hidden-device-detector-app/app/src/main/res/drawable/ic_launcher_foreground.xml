@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="108dp"
+    android:height="108dp"
+    android:viewportWidth="108"
+    android:viewportHeight="108">
+    <!-- Bouclier stylisé -->
+    <path
+        android:fillColor="#39FF6A"
+        android:pathData="M54,20 L78,30 V54 C78,70 68,82 54,88 C40,82 30,70 30,54 V30 Z" />
+    <!-- Œil / point de scan au centre -->
+    <path
+        android:fillColor="#0A0E0C"
+        android:pathData="M54,46 m-9,0 a9,9 0,1 1,18 0 a9,9 0,1 1,-18 0" />
+    <path
+        android:fillColor="#39FF6A"
+        android:pathData="M54,46 m-4,0 a4,4 0,1 1,8 0 a4,4 0,1 1,-8 0" />
+</vector>

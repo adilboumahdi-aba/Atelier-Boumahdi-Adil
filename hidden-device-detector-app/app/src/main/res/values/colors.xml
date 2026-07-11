@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- Palette "tactique" sombre : fond quasi-noir, accent vert phosphorescent (style HUD) -->
+    <color name="tactical_background">#0A0E0C</color>
+    <color name="tactical_surface">#141914</color>
+    <color name="tactical_surface_variant">#1E251E</color>
+    <color name="tactical_accent">#39FF6A</color>
+    <color name="tactical_accent_dim">#1F8A3E</color>
+    <color name="tactical_text_primary">#E8F5E9</color>
+    <color name="tactical_text_secondary">#9AB0A0</color>
+    <color name="risk_high">#FF3B30</color>
+    <color name="risk_medium">#FFB020</color>
+    <color name="risk_low">#39FF6A</color>
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+</resources>
