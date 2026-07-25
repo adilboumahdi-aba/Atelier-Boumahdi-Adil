@@ -1,0 +1,19 @@
+{
+  "name": "GeoField — Relevé de terrain",
+  "short_name": "GeoField",
+  "description": "Relevé GPS géoréférencé pour ingénieurs et paysagistes : points, mesures, fiches métier, photos localisées et cartes hors ligne.",
+  "start_url": "./index.html",
+  "scope": "./",
+  "id": "/geofield/",
+  "display": "standalone",
+  "orientation": "any",
+  "background_color": "#efe9dd",
+  "theme_color": "#1f3a5f",
+  "lang": "fr",
+  "icons": [
+    { "src": "../assets/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "../assets/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "../assets/android-chrome-192x192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "../assets/android-chrome-512x512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ]
+}
