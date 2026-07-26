@@ -1,0 +1,25 @@
+{
+  "name": "maillon",
+  "version": "0.1.0",
+  "private": true,
+  "type": "module",
+  "description": "Messagerie chiffrée en réseau maillé, sans internet ni serveur",
+  "license": "AGPL-3.0-or-later",
+  "scripts": {
+    "test": "vitest run",
+    "test:watch": "vitest",
+    "typecheck": "tsc --noEmit",
+    "check": "npm run typecheck && npm run test"
+  },
+  "dependencies": {
+    "@noble/ciphers": "^2.2.0",
+    "@noble/curves": "^2.2.0",
+    "@noble/hashes": "^2.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^26.1.1",
+    "tsx": "^4.23.1",
+    "typescript": "^7.0.2",
+    "vitest": "^4.1.10"
+  }
+}
