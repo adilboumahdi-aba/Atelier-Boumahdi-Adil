@@ -421,9 +421,10 @@ export async function buildReport({ features = state.features, project = state.p
   .small { font-size: 10px; }
   footer { margin-top: 18px; padding-top: 8px; border-top: 1px solid #d9d2c2;
            font-size: 10px; color: #6b6558; display: flex; justify-content: space-between; }
-  .noprint { position: fixed; top: 10px; right: 10px; }
-  .noprint button { font: inherit; padding: 8px 16px; border-radius: 6px;
-                    border: 0; background: #1f3a5f; color: #fff; cursor: pointer; }
+  .noprint { position: fixed; bottom: 16px; right: 16px; z-index: 10; }
+  .noprint button { font: inherit; padding: 10px 18px; border-radius: 999px;
+                    border: 0; background: #1f3a5f; color: #fff; cursor: pointer;
+                    box-shadow: 0 3px 12px rgba(0,0,0,.28); }
   @media print { .noprint { display: none; } }
 </style></head>
 <body>
