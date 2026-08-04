@@ -1,0 +1,400 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover, maximum-scale=1, user-scalable=no">
+<title>GeoField — relevé de terrain géoréférencé</title>
+<meta name="description" content="Application de relevé de terrain géoréférencé pour ingénieurs et paysagistes : levé GPS, mesures, fiches métier, photos localisées, cartes hors ligne et export SIG.">
+<meta name="theme-color" content="#1f3a5f">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" href="../assets/favicon-32x32.png" sizes="32x32">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="stylesheet" href="vendor/leaflet/leaflet.css">
+<link rel="stylesheet" href="app.css">
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════════ écran projets ══ -->
+<section id="screen-projects" class="screen is-active">
+  <div class="wrap">
+    <header class="hero">
+      <div class="hero__mark">GeoField</div>
+      <h1>Relevé de terrain géoréférencé</h1>
+      <p>Lève des points GPS, mesure des surfaces, remplis des fiches métier et prends des photos
+         localisées — même sans réseau. Tout reste sur ton appareil.</p>
+    </header>
+
+    <div class="panel">
+      <div class="panel__head">
+        <h2>Projets</h2>
+        <button id="btn-new-project" class="btn btn--primary">+ Nouveau projet</button>
+      </div>
+      <div id="projects-list" class="projects"></div>
+    </div>
+
+    <form id="form-project" class="panel panel--form hidden">
+      <h2 id="form-project-title">Nouveau projet</h2>
+      <div class="field">
+        <label class="field__label" for="p-name">Nom du projet *</label>
+        <input id="p-name" type="text" required placeholder="Ex. Parc urbain Hay Riad — lot 2">
+      </div>
+      <div class="grid-2">
+        <div class="field">
+          <label class="field__label" for="p-client">Client / maître d'ouvrage</label>
+          <input id="p-client" type="text">
+        </div>
+        <div class="field">
+          <label class="field__label" for="p-ref">Référence</label>
+          <input id="p-ref" type="text" placeholder="Ex. ABA-2026-014">
+        </div>
+      </div>
+      <div class="field">
+        <label class="field__label" for="p-crs">Système de coordonnées des exports</label>
+        <select id="p-crs"></select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="p-desc">Note de contexte</label>
+        <textarea id="p-desc" rows="2"></textarea>
+      </div>
+      <div class="row-end">
+        <button type="button" class="btn" id="btn-cancel-project">Annuler</button>
+        <button type="submit" class="btn btn--primary">Enregistrer</button>
+      </div>
+    </form>
+
+    <div class="panel panel--muted">
+      <h2>Sauvegarde &amp; restauration</h2>
+      <p class="hint">Les données vivent dans le navigateur de cet appareil. Exporte une sauvegarde
+         avant de changer de téléphone ou de vider le cache.</p>
+      <div class="row">
+        <button class="btn" id="btn-import-backup">Restaurer une sauvegarde</button>
+        <button class="btn" id="btn-about">À propos</button>
+      </div>
+      <p class="hint" id="storage-info"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════════════ écran carte ══ -->
+<section id="screen-map" class="screen">
+  <header class="topbar">
+    <button class="icon-btn" id="btn-menu" title="Menu" aria-label="Menu">☰</button>
+    <div class="topbar__title">
+      <strong id="project-name">Projet</strong>
+      <span id="project-sub"></span>
+    </div>
+    <button class="chip" id="chip-net" title="État du réseau">•</button>
+  </header>
+
+  <div id="map"></div>
+
+  <div class="gps-hud" id="gps-hud" hidden>
+    <div class="gps-hud__row">
+      <span class="gps-hud__badge" id="gps-quality">GPS</span>
+      <span id="gps-accuracy">—</span>
+      <span class="sep">·</span>
+      <span id="gps-alt">—</span>
+    </div>
+    <div class="gps-hud__coords mono" id="gps-coords">Position en cours d'acquisition…</div>
+  </div>
+
+  <div class="map-tools">
+    <button class="tool-btn" id="btn-locate" title="Me localiser">◎</button>
+    <button class="tool-btn" id="btn-layers" title="Fonds de carte et hors ligne">▤</button>
+    <button class="tool-btn" id="btn-fit" title="Voir tous les objets">⤢</button>
+    <button class="tool-btn" id="btn-north" title="Cap boussole"><span id="north-arrow">↑</span></button>
+  </div>
+
+  <!-- barre de dessin -->
+  <div class="workbar hidden" id="draw-bar">
+    <div class="workbar__info">
+      <strong id="draw-title">Dessin</strong>
+      <span id="draw-metrics" class="mono">—</span>
+    </div>
+    <div class="workbar__actions">
+      <button class="btn btn--sm" id="draw-gps">+ Sommet GPS</button>
+      <button class="btn btn--sm" id="draw-walk">▶ Marche</button>
+      <button class="btn btn--sm" id="draw-undo">↶</button>
+      <button class="btn btn--sm btn--ghost" id="draw-cancel">Abandon</button>
+      <button class="btn btn--sm btn--primary" id="draw-finish">Terminer</button>
+    </div>
+  </div>
+
+  <!-- barre de mesure -->
+  <div class="workbar hidden" id="measure-bar">
+    <div class="workbar__info">
+      <strong id="measure-title">Mesure</strong>
+      <span id="measure-result" class="mono">Tape la carte pour poser des points</span>
+    </div>
+    <div class="workbar__actions">
+      <button class="btn btn--sm" id="measure-gps">+ Point GPS</button>
+      <button class="btn btn--sm" id="measure-undo">↶</button>
+      <button class="btn btn--sm" id="measure-save">Enregistrer</button>
+      <button class="btn btn--sm btn--ghost" id="measure-close">Fermer</button>
+    </div>
+  </div>
+
+  <!-- barre d'implantation -->
+  <div class="workbar workbar--stake hidden" id="stake-bar">
+    <div class="stake-grid">
+      <div class="stake-main">
+        <span class="stake-label" id="stake-name">Cible</span>
+        <span class="stake-dist mono" id="stake-dist">—</span>
+      </div>
+      <div class="stake-arrow" id="stake-arrow">↑</div>
+      <div class="stake-deltas mono">
+        <div>Est <b id="stake-de">—</b></div>
+        <div>Nord <b id="stake-dn">—</b></div>
+        <div>Az. <b id="stake-az">—</b></div>
+      </div>
+    </div>
+    <div class="workbar__actions">
+      <button class="btn btn--sm" id="stake-mark">Marquer comme implanté</button>
+      <button class="btn btn--sm btn--ghost" id="stake-close">Fermer</button>
+    </div>
+  </div>
+
+  <nav class="actionbar">
+    <button class="act" data-act="point"><span>📍</span>Point</button>
+    <button class="act" data-act="line"><span>〰️</span>Ligne</button>
+    <button class="act" data-act="polygon"><span>⬟</span>Surface</button>
+    <button class="act" data-act="measure"><span>📐</span>Mesure</button>
+    <button class="act" data-act="photo"><span>📷</span>Photo</button>
+    <button class="act" data-act="list"><span>☰</span>Objets</button>
+  </nav>
+</section>
+
+<!-- ══════════════════════════════════════════════════════ feuilles ══ -->
+<div id="scrim" class="scrim"></div>
+
+<!-- fiche objet -->
+<div class="sheet" id="sheet-feature" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3 id="feature-sheet-title">Nouvelle fiche</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <div class="geo-summary" id="feature-geo"></div>
+
+    <div class="field">
+      <label class="field__label" for="f-template">Modèle de fiche</label>
+      <select id="f-template"></select>
+    </div>
+    <div class="field">
+      <label class="field__label" for="f-name">Nom / repère</label>
+      <input id="f-name" type="text" placeholder="Ex. Arbre A12">
+    </div>
+
+    <div id="f-fields"></div>
+
+    <details class="disclosure">
+      <summary>Champs personnalisés</summary>
+      <div id="f-custom"></div>
+      <button class="btn btn--sm" id="btn-add-custom" type="button">+ Ajouter un champ</button>
+    </details>
+
+    <div class="photos-block">
+      <div class="photos-block__head">
+        <h4>Photos</h4>
+        <div class="row">
+          <button class="btn btn--sm" id="btn-photo-cam" type="button">📷 Prendre</button>
+          <button class="btn btn--sm" id="btn-photo-lib" type="button">🖼 Choisir</button>
+        </div>
+      </div>
+      <div class="photo-strip" id="f-photos"></div>
+    </div>
+  </div>
+  <div class="sheet__foot">
+    <button class="btn btn--danger" id="btn-delete-feature">Supprimer</button>
+    <div class="row">
+      <button class="btn" id="btn-stake-feature">🎯 Guider</button>
+      <button class="btn btn--primary" id="btn-save-feature">Enregistrer</button>
+    </div>
+  </div>
+</div>
+
+<!-- liste des objets -->
+<div class="sheet sheet--tall" id="sheet-list" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3>Objets levés</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <div class="row row--filters">
+      <input type="search" id="list-search" placeholder="Rechercher…">
+      <select id="list-filter"><option value="">Tous les modèles</option></select>
+    </div>
+    <div id="list-stats" class="stats"></div>
+    <div id="features-list" class="feature-list"></div>
+  </div>
+</div>
+
+<!-- fonds de carte / hors ligne -->
+<div class="sheet sheet--tall" id="sheet-layers" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3>Carte &amp; hors ligne</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <h4>Fond de carte</h4>
+    <div class="basemaps" id="basemaps"></div>
+
+    <h4>Télécharger la zone visible</h4>
+    <p class="hint">Enregistre les tuiles de l'emprise actuelle pour travailler sans réseau.
+       Reste sur la zone du chantier : le volume grimpe vite avec le zoom.</p>
+    <div class="grid-2">
+      <div class="field">
+        <label class="field__label" for="dl-min">Zoom minimum</label>
+        <select id="dl-min"></select>
+      </div>
+      <div class="field">
+        <label class="field__label" for="dl-max">Zoom maximum</label>
+        <select id="dl-max"></select>
+      </div>
+    </div>
+    <p class="estimate" id="dl-estimate">—</p>
+    <div class="progress hidden" id="dl-progress"><div class="progress__bar" id="dl-bar"></div></div>
+    <div class="row">
+      <button class="btn btn--primary" id="btn-download">Télécharger</button>
+      <button class="btn btn--ghost hidden" id="btn-download-abort">Arrêter</button>
+    </div>
+
+    <h4>Cache de tuiles</h4>
+    <p class="hint" id="tile-stats">—</p>
+    <button class="btn btn--danger btn--sm" id="btn-clear-tiles">Vider le cache de tuiles</button>
+  </div>
+</div>
+
+<!-- menu -->
+<div class="sheet" id="sheet-menu" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3 id="menu-project-name">Projet</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <div class="stats" id="menu-stats"></div>
+    <div class="menu-grid">
+      <button class="menu-item" id="mi-goto"><span>🎯</span>Aller à des coordonnées</button>
+      <button class="menu-item" id="mi-crs"><span>🧭</span>Système de coordonnées</button>
+      <button class="menu-item" id="mi-export"><span>📤</span>Exporter</button>
+      <button class="menu-item" id="mi-import"><span>📥</span>Importer un GeoJSON</button>
+      <button class="menu-item" id="mi-report"><span>📄</span>Rapport PDF</button>
+      <button class="menu-item" id="mi-settings"><span>⚙️</span>Réglages</button>
+      <button class="menu-item" id="mi-edit-project"><span>✏️</span>Modifier le projet</button>
+      <button class="menu-item" id="mi-projects"><span>📁</span>Changer de projet</button>
+    </div>
+  </div>
+</div>
+
+<!-- export -->
+<div class="sheet" id="sheet-export" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3>Exporter</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <p class="hint">Les exports vectoriels sont en WGS84 (standard SIG). Le CSV ajoute une colonne
+       de coordonnées projetées dans le système du projet.</p>
+    <div class="menu-grid">
+      <button class="menu-item" data-export="geojson"><span>🗺</span>GeoJSON <em>QGIS, ArcGIS</em></button>
+      <button class="menu-item" data-export="csv"><span>📊</span>CSV <em>Excel</em></button>
+      <button class="menu-item" data-export="gpx"><span>🛰</span>GPX <em>GPS de terrain</em></button>
+      <button class="menu-item" data-export="kml"><span>🌍</span>KML <em>Google Earth</em></button>
+      <button class="menu-item" data-export="report"><span>📄</span>Rapport <em>PDF imprimable</em></button>
+      <button class="menu-item" data-export="backup"><span>💾</span>Sauvegarde <em>avec photos</em></button>
+    </div>
+    <p class="hint" id="export-status"></p>
+  </div>
+</div>
+
+<!-- réglages -->
+<div class="sheet sheet--tall" id="sheet-settings" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3>Réglages</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <div class="field">
+      <label class="field__label" for="s-author">Nom de l'opérateur</label>
+      <input id="s-author" type="text" placeholder="Ton nom — inscrit sur chaque relevé">
+    </div>
+    <div class="field">
+      <label class="field__label" for="s-crs">Système de coordonnées affiché</label>
+      <select id="s-crs"></select>
+    </div>
+    <div class="field">
+      <label class="field__label" for="s-samples">Moyennage d'un point GPS</label>
+      <select id="s-samples">
+        <option value="1">Instantané (1 mesure)</option>
+        <option value="5">5 mesures</option>
+        <option value="10" selected>10 mesures (recommandé)</option>
+        <option value="30">30 mesures (précision maximale)</option>
+      </select>
+    </div>
+    <div class="field">
+      <label class="field__label" for="s-walk-dist">Mode marche — distance mini entre sommets</label>
+      <select id="s-walk-dist">
+        <option value="1">1 m (détail fin)</option>
+        <option value="3" selected>3 m</option>
+        <option value="5">5 m</option>
+        <option value="10">10 m (grandes parcelles)</option>
+      </select>
+    </div>
+    <div class="field field--inline">
+      <input type="checkbox" id="s-sun">
+      <label class="field__label" for="s-sun">Mode plein soleil (contraste renforcé)</label>
+    </div>
+    <div class="field field--inline">
+      <input type="checkbox" id="s-compass">
+      <label class="field__label" for="s-compass">Activer la boussole</label>
+    </div>
+    <p class="hint" id="settings-storage"></p>
+    <button class="btn btn--sm" id="btn-persist">Protéger les données contre l'effacement</button>
+  </div>
+</div>
+
+<!-- aller à des coordonnées -->
+<div class="sheet" id="sheet-goto" role="dialog" aria-modal="true">
+  <div class="sheet__head">
+    <h3>Aller à des coordonnées</h3>
+    <button class="icon-btn" data-close>✕</button>
+  </div>
+  <div class="sheet__body">
+    <div class="field">
+      <label class="field__label" for="g-crs">Système</label>
+      <select id="g-crs"></select>
+    </div>
+    <div class="grid-2">
+      <div class="field">
+        <label class="field__label" id="g-x-label" for="g-x">Longitude</label>
+        <input id="g-x" type="text" inputmode="decimal" placeholder="-6.8416">
+      </div>
+      <div class="field">
+        <label class="field__label" id="g-y-label" for="g-y">Latitude</label>
+        <input id="g-y" type="text" inputmode="decimal" placeholder="34.0209">
+      </div>
+    </div>
+    <p class="hint">Formats acceptés en WGS84 : décimal (34.0209) ou sexagésimal (34°01'15.2"N).</p>
+    <div class="row-end">
+      <button class="btn" id="btn-goto-view">Centrer la carte</button>
+      <button class="btn btn--primary" id="btn-goto-create">Créer un point ici</button>
+    </div>
+  </div>
+</div>
+
+<!-- visionneuse photo -->
+<div class="lightbox" id="lightbox">
+  <button class="icon-btn lightbox__close" id="lb-close">✕</button>
+  <img id="lb-img" alt="">
+  <div class="lightbox__meta mono" id="lb-meta"></div>
+  <button class="btn btn--danger btn--sm" id="lb-delete">Supprimer la photo</button>
+</div>
+
+<div id="toasts" class="toasts"></div>
+
+<script src="vendor/leaflet/leaflet.js"></script>
+<script type="module" src="js/app.js"></script>
+</body>
+</html>

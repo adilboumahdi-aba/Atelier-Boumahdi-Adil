@@ -4,6 +4,68 @@
 
 ---
 
+## 🆕 0. PASSATION EN COURS — GEOFIELD (app GPS terrain)
+> Ajouté manuellement le 26/07/2026 — ce bloc ne fait PAS partie du site ABA Paysage
+> ci-dessous (sections 1-12). C'est un sous-projet distinct, démarré dans une session
+> Claude Code Remote (cloud), à reprendre ici.
+
+**Quoi** : une PWA de relevé de terrain géoréférencé pour ingénieurs/paysagistes —
+levé GPS, mesures, fiches métier (arbres, réseaux, plantations…), photos localisées,
+cartes hors ligne, exports SIG. Pensée pour être vendue en marque blanche à d'autres
+bureaux d'études, pas seulement pour ABA.
+
+**Où ça vit** : `/geofield/` à la racine de ce même dépôt. Statique, vanilla JS,
+IndexedDB, aucun backend — compatible avec l'hébergement GitHub Pages existant.
+Leaflet est vendorisé en local (`geofield/vendor/leaflet/`), aucun CDN externe.
+
+**État git** :
+- Branche : `claude/gps-app-engineer-features-1ru6th` (pas encore mergée sur `main`)
+- PR (draft) : https://github.com/adilboumahdi-aba/Atelier-Boumahdi-Adil/pull/2
+- 2 commits : ajout de la v1 complète + correction du bouton flottant du rapport PDF
+
+**Ce qui est fait et testé** (tests bout-en-bout Playwright headless, 0 erreur JS) :
+- Levé GPS point/ligne/polygone, moyennage de précision, mode marche, boussole
+- 8 fiches métier configurables + champs libres (`geofield/js/templates.js`)
+- Guidage d'implantation (stakeout), mesure distance/surface
+- Photos géolocalisées (bug corrigé : elles restaient orphelines si prises avant
+  d'enregistrer une nouvelle fiche — fix dans `js/app.js`, fonction `addPhotoToFeature`)
+- Cartes hors ligne (téléchargement de tuiles par zone, IndexedDB) — `js/offline.js`
+- Géodésie interne validée : WGS84, UTM, **Lambert 93**, **Lambert Maroc Nord/Sud**
+  (`js/geo.js` — projections testées contre des valeurs de référence connues)
+- Exports GeoJSON/CSV/GPX/KML + rapport PDF imprimable + sauvegarde complète
+  (`js/exporter.js`)
+- PWA installable (`manifest.webmanifest` + `sw.js`)
+
+**Fichiers clés** :
+```
+geofield/
+├── index.html          ← écran unique (projets + carte), toutes les feuilles modales
+├── app.css             ← design system dédié (palette proche de journal.css)
+├── js/app.js            ← orchestrateur — tout le câblage UI passe par là
+├── js/geo.js             ← géodésie/projections (aucune dépendance)
+├── js/store.js           ← état + CRUD au-dessus d'IndexedDB
+├── js/map.js             ← carte Leaflet, dessin, mesure, implantation
+├── js/exporter.js        ← tous les exports + rapport HTML imprimable
+├── js/templates.js       ← les 8 modèles de fiche terrain
+└── vendor/leaflet/       ← Leaflet vendorisé (pas de CDN)
+```
+
+**Maquette visuelle livrée** (captures réelles Android/web + proposition console bureau) :
+https://claude.ai/code/artifact/2154ac98-4dcb-470f-977b-0d280a89d072
+
+**⚠️ 3 arbitrages en attente d'Adil avant de continuer** :
+1. Construit-on la **console bureau** (vue 3 volets calques/carte/fiche, tableau,
+   prévu/réalisé) maintenant, ou est-ce que l'app mobile-first actuelle suffit pour l'instant ?
+2. Reste-t-on **mono-appareil** (données locales sur le téléphone qui les a saisies),
+   ou faut-il un **backend** pour partager un chantier en direct entre plusieurs personnes ?
+3. Parmi les 8 modèles de fiche (générique, arbre, plantation, réseau, désordre,
+   implantation, sondage, mesure), **lequel approfondir en premier** sur un vrai chantier ?
+
+**Prochaine étape** : reprendre avec « Continue GeoField — [réponse aux 3 arbitrages] »,
+ou juste demander l'état d'avancement si les décisions ne sont pas encore prises.
+
+---
+
 ## 1. IDENTITÉ DU PROJET
 
 **Client** : Adil Boumahdi — Fondateur & architecte paysagiste
