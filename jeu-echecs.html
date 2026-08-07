@@ -301,6 +301,49 @@
       50% { box-shadow: inset 0 0 0 999px rgba(255,77,77,0.45); }
     }
 
+    /* ── 3D medieval mode ── */
+    .board3d-wrap {
+      background: #0e0b1a;
+    }
+    #board3d {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: grab;
+      touch-action: none;
+    }
+    #board3d:active { cursor: grabbing; }
+    .board3d-loading {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #F3EEFF;
+      font-weight: 700;
+      font-size: 14px;
+      background: #0e0b1a;
+      text-align: center;
+      padding: 20px;
+    }
+    .board3d-hint {
+      position: absolute;
+      left: 50%;
+      bottom: 8px;
+      transform: translateX(-50%);
+      font-size: 11px;
+      font-weight: 600;
+      color: rgba(255,255,255,0.75);
+      background: rgba(0,0,0,0.4);
+      padding: 4px 10px;
+      border-radius: 999px;
+      pointer-events: none;
+      white-space: nowrap;
+      max-width: 92%;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
     .piece {
       position: relative;
       z-index: 2;
@@ -468,18 +511,31 @@
         <option value="3">🦁 Difficile</option>
       </select>
     </div>
+    <div>
+      <label for="styleSel">Style</label>
+      <select id="styleSel">
+        <option value="2d">🎨 2D Fantaisie</option>
+        <option value="3d">🏰 3D Médiéval</option>
+      </select>
+    </div>
     <button class="btn" id="newGameBtn">✨ Nouvelle partie</button>
     <button class="btn ghost" id="undoBtn">↩️ Annuler</button>
     <button class="icon-btn" id="tiltBtn" title="Effet de relief des pièces : activer/désactiver">🧊</button>
-    <button class="icon-btn" id="soundBtn" title="Activer/couper le son">🔊</button>
+    <button class="icon-btn" id="soundBtn" title="Activer/couper les bruitages">🔊</button>
+    <button class="icon-btn" id="musicBtn" title="Musique d'ambiance médiévale">🎼</button>
   </div>
 
   <div class="layout">
     <div class="board-card">
       <div class="status-bar" id="statusBar">Le Royaume de Lumière commence — clique sur une créature !</div>
       <div class="board-outer" id="boardOuter">
-        <div class="board-stage">
+        <div class="board-stage" id="boardStage2d">
           <div class="board" id="board"></div>
+        </div>
+        <div class="board-stage board3d-wrap" id="board3dWrap" style="display:none;">
+          <canvas id="board3d"></canvas>
+          <div class="board3d-loading" id="board3dLoading">🏰 Construction de la salle du trône...</div>
+          <div class="board3d-hint">🖱️ Glisse pour tourner la caméra · clique une créature puis une case</div>
         </div>
       </div>
     </div>
@@ -521,6 +577,9 @@
     <div class="promo-options" id="promoOptions"></div>
   </div>
 </div>
+
+<script src="assets/vendor/three.min.js"></script>
+<script src="assets/vendor/OrbitControls.js"></script>
 
 <script>
 (function () {
@@ -848,10 +907,16 @@
   const promoOverlay = document.getElementById('promoOverlay');
   const promoOptions = document.getElementById('promoOptions');
   const soundBtn = document.getElementById('soundBtn');
+  const musicBtn = document.getElementById('musicBtn');
+  const styleSel = document.getElementById('styleSel');
+  const boardStage2dEl = document.getElementById('boardStage2d');
+  const board3dWrapEl = document.getElementById('board3dWrap');
+  const board3dLoadingEl = document.getElementById('board3dLoading');
 
   let current, selected, legalTargets, lastMove, gameOver, stateStack, moveLog, capturedTray;
   let soundOn = true;
   let pendingPromotionMove = null;
+  let animating3D = false;
 
   function resetGame() {
     current = initialState();
@@ -859,9 +924,11 @@
     legalTargets = [];
     lastMove = null;
     gameOver = false;
+    animating3D = false;
     stateStack = [];
     moveLog = [];
     capturedTray = { w: [], b: [] };
+    rebuildPieces3D();
     render();
     updateStatus();
   }
@@ -919,6 +986,9 @@
 
     boardOuterEl.classList.remove('turn-w', 'turn-b');
     boardOuterEl.classList.add('turn-' + current.turn);
+
+    syncHighlights3D();
+    setDesiredTorchColor3D(current.turn);
   }
 
   function isKingInCheckSafe(state, color) {
@@ -957,7 +1027,7 @@
   }
 
   function onSquareClick(r, c) {
-    if (gameOver) return;
+    if (gameOver || animating3D) return;
     if (modeSel.value === 'ai' && current.turn === 'b') return;
     const piece = current.board[r][c];
 
@@ -1012,22 +1082,30 @@
       : current.board[move.to.r][move.to.c];
     const notation = buildNotation(piece, move, capturedPiece, promotionChoice);
 
-    stateStack.push({
-      state: current,
-      capturedTray: { w: capturedTray.w.slice(), b: capturedTray.b.slice() },
-      moveLog: moveLog.slice()
-    });
+    const commit = () => {
+      stateStack.push({
+        state: current,
+        capturedTray: { w: capturedTray.w.slice(), b: capturedTray.b.slice() },
+        moveLog: moveLog.slice()
+      });
 
-    current = applyMove(current, move, promotionChoice);
-    if (capturedPiece) capturedTray[piece.color].push(capturedPiece);
-    moveLog.push({ text: notation });
-    lastMove = move;
-    selected = null;
-    legalTargets = [];
+      current = applyMove(current, move, promotionChoice);
+      if (capturedPiece) capturedTray[piece.color].push(capturedPiece);
+      moveLog.push({ text: notation });
+      lastMove = move;
+      selected = null;
+      legalTargets = [];
 
-    playSound(capturedPiece ? 'capture' : 'move');
-    render();
-    updateStatus();
+      if (styleSel.value !== '3d') playSound(capturedPiece ? 'capture' : 'move');
+      render();
+      updateStatus();
+    };
+
+    if (styleSel.value === '3d' && ready3d) {
+      playBattle3D(piece, capturedPiece, move, promotionChoice, commit);
+    } else {
+      commit();
+    }
   }
 
   function openPromotionModal(color) {
@@ -1047,7 +1125,7 @@
   }
 
   function aiPlay() {
-    if (gameOver || current.turn !== 'b') return;
+    if (gameOver || animating3D || current.turn !== 'b') return;
     const depth = parseInt(diffSel.value, 10);
     const move = chooseAIMove(current, depth);
     if (!move) { updateStatus(); return; }
@@ -1057,18 +1135,23 @@
   }
 
   function undo() {
-    if (!stateStack.length) return;
+    if (!stateStack.length || animating3D) return;
     const snap = stateStack.pop();
     current = snap.state;
     capturedTray = snap.capturedTray;
     moveLog = snap.moveLog;
     selected = null; legalTargets = []; lastMove = null; gameOver = false;
+    rebuildPieces3D();
     render();
     updateStatus();
   }
 
   /* ── sound ── */
   let audioCtx = null;
+  function ensureAudioCtx() {
+    audioCtx = audioCtx || new (window.AudioContext || window.webkitAudioContext)();
+    return audioCtx;
+  }
   function playSound(kind) {
     if (!soundOn) return;
     try {
@@ -1099,6 +1182,145 @@
     soundBtn.textContent = soundOn ? '🔊' : '🔇';
   });
 
+  /* ── richer medieval SFX (3D battle effects) ── */
+  function noiseBuffer(ctx, seconds, shape) {
+    const size = Math.max(1, Math.floor(ctx.sampleRate * seconds));
+    const buffer = ctx.createBuffer(1, size, ctx.sampleRate);
+    const data = buffer.getChannelData(0);
+    for (let i = 0; i < size; i++) {
+      const env = shape === 'boom' ? Math.pow(1 - i / size, 1.5) : (1 - i / size);
+      data[i] = (Math.random() * 2 - 1) * env;
+    }
+    const src = ctx.createBufferSource();
+    src.buffer = buffer;
+    return src;
+  }
+
+  function playSound3D(kind) {
+    if (!soundOn) return;
+    try {
+      const ctx = ensureAudioCtx();
+      const t0 = ctx.currentTime;
+      if (kind === 'select' || kind === 'place') {
+        const noise = noiseBuffer(ctx, 0.08, 'knock');
+        const filt = ctx.createBiquadFilter();
+        filt.type = 'bandpass';
+        filt.frequency.value = kind === 'select' ? 950 : 620;
+        const ngain = ctx.createGain();
+        ngain.gain.value = 0.12;
+        noise.connect(filt); filt.connect(ngain); ngain.connect(ctx.destination);
+        noise.start(t0);
+
+        const thud = ctx.createOscillator();
+        thud.type = 'sine';
+        thud.frequency.value = kind === 'select' ? 175 : 130;
+        const tgain = ctx.createGain();
+        thud.connect(tgain); tgain.connect(ctx.destination);
+        tgain.gain.setValueAtTime(0.13, t0);
+        tgain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.18);
+        thud.start(t0); thud.stop(t0 + 0.2);
+      } else if (kind === 'clang') {
+        [1200, 780].forEach((freq, i) => {
+          const osc = ctx.createOscillator();
+          osc.type = 'triangle';
+          osc.frequency.value = freq;
+          const gain = ctx.createGain();
+          osc.connect(gain); gain.connect(ctx.destination);
+          const t = t0 + i * 0.03;
+          gain.gain.setValueAtTime(0.11, t);
+          gain.gain.exponentialRampToValueAtTime(0.001, t + 0.35);
+          osc.start(t); osc.stop(t + 0.4);
+        });
+      } else if (kind === 'explosion') {
+        const noise = noiseBuffer(ctx, 0.5, 'boom');
+        const filt = ctx.createBiquadFilter();
+        filt.type = 'lowpass';
+        filt.frequency.value = 500;
+        const ngain = ctx.createGain();
+        ngain.gain.value = 0.3;
+        noise.connect(filt); filt.connect(ngain); ngain.connect(ctx.destination);
+        noise.start(t0);
+
+        const boom = ctx.createOscillator();
+        boom.type = 'sine';
+        boom.frequency.setValueAtTime(95, t0);
+        boom.frequency.exponentialRampToValueAtTime(35, t0 + 0.4);
+        const bgain = ctx.createGain();
+        boom.connect(bgain); bgain.connect(ctx.destination);
+        bgain.gain.setValueAtTime(0.32, t0);
+        bgain.gain.exponentialRampToValueAtTime(0.001, t0 + 0.5);
+        boom.start(t0); boom.stop(t0 + 0.55);
+      }
+    } catch (e) { /* audio unsupported, ignore */ }
+  }
+
+  /* ── procedural medieval ambient music ── */
+  const MEDIEVAL_SCALE = [220.00, 246.94, 261.63, 293.66, 329.63, 349.23, 392.00, 440.00, 493.88, 587.33];
+  const MEDIEVAL_PATTERN = [0, 2, 4, 2, 5, 4, 2, -1, 3, 5, 7, 5, 3, 2, 0, -1];
+  let musicOn = false;
+  let musicTimer = null;
+  let musicStep = 0;
+  let droneOsc = null, droneGain = null;
+
+  function playPluck(freq, t0) {
+    const ctx = ensureAudioCtx();
+    const osc = ctx.createOscillator();
+    const gain = ctx.createGain();
+    const filt = ctx.createBiquadFilter();
+    filt.type = 'lowpass';
+    filt.frequency.value = 1600;
+    osc.type = 'triangle';
+    osc.frequency.value = freq;
+    osc.connect(filt); filt.connect(gain); gain.connect(ctx.destination);
+    gain.gain.setValueAtTime(0.0001, t0);
+    gain.gain.exponentialRampToValueAtTime(0.05, t0 + 0.02);
+    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 1.1);
+    osc.start(t0); osc.stop(t0 + 1.15);
+  }
+
+  function scheduleMusicStep() {
+    if (!musicOn) return;
+    try {
+      const ctx = ensureAudioCtx();
+      const idx = MEDIEVAL_PATTERN[musicStep % MEDIEVAL_PATTERN.length];
+      if (idx >= 0) playPluck(MEDIEVAL_SCALE[idx], ctx.currentTime);
+    } catch (e) { /* ignore */ }
+    musicStep++;
+    musicTimer = setTimeout(scheduleMusicStep, 480);
+  }
+
+  function startMusic() {
+    const ctx = ensureAudioCtx();
+    if (ctx.state === 'suspended') ctx.resume();
+    if (!droneOsc) {
+      droneOsc = ctx.createOscillator();
+      droneGain = ctx.createGain();
+      droneOsc.type = 'sine';
+      droneOsc.frequency.value = 110;
+      droneGain.gain.value = 0.0001;
+      droneOsc.connect(droneGain); droneGain.connect(ctx.destination);
+      droneOsc.start();
+    }
+    droneGain.gain.linearRampToValueAtTime(0.03, ctx.currentTime + 1.2);
+    musicOn = true;
+    musicStep = 0;
+    scheduleMusicStep();
+  }
+
+  function stopMusic() {
+    musicOn = false;
+    if (musicTimer) clearTimeout(musicTimer);
+    if (droneGain) {
+      const ctx = ensureAudioCtx();
+      droneGain.gain.linearRampToValueAtTime(0.0001, ctx.currentTime + 0.6);
+    }
+  }
+
+  musicBtn.addEventListener('click', () => {
+    if (musicOn) { stopMusic(); musicBtn.textContent = '🎼'; }
+    else { startMusic(); musicBtn.textContent = '🎵'; }
+  });
+
   /* ── confetti ── */
   function launchConfetti() {
     const colors = ['#FF7A59', '#4EC5B5', '#FFC145', '#9C6ADE', '#4EA8A0'];
@@ -1125,6 +1347,554 @@
     diffWrap.style.display = modeSel.value === 'ai' ? '' : 'none';
     resetGame();
   });
+
+  styleSel.addEventListener('change', () => {
+    const is3d = styleSel.value === '3d';
+    boardStage2dEl.style.display = is3d ? 'none' : '';
+    board3dWrapEl.style.display = is3d ? '' : 'none';
+    tiltBtn.style.display = is3d ? 'none' : '';
+    if (is3d) {
+      board3dLoadingEl.style.display = 'flex';
+      board3dLoadingEl.textContent = '🏰 Construction de la salle du trône...';
+      requestAnimationFrame(() => {
+        try {
+          initScene3D();
+          rebuildPieces3D();
+          syncHighlights3D();
+          onResize3D();
+          board3dLoadingEl.style.display = 'none';
+        } catch (e) {
+          board3dLoadingEl.textContent = '⚠️ La vue 3D n\'a pas pu se charger sur cet appareil. Repasse en 2D Fantaisie ci-dessus.';
+          console.error(e);
+        }
+      });
+    }
+  });
+
+  /* ============ 3D MEDIEVAL SCENE ============ */
+
+  let scene3d = null, camera3d = null, renderer3d = null, controls3d = null;
+  let boardMesh3d = null, ready3d = false;
+  let pieceMeshes3d = new Map();
+  let highlightMeshes3d = [];
+  let activeTweens3d = [];
+  let scene3dLights = null;
+  let desiredTorchColor3D = null;
+  let pointerDownPos3D = null;
+  const cellSize3d = 1.1;
+  const raycaster3d = typeof THREE !== 'undefined' ? new THREE.Raycaster() : null;
+  const clock3d = typeof THREE !== 'undefined' ? new THREE.Clock() : null;
+
+  function cellToWorld3D(r, c) {
+    return { x: (c - 3.5) * cellSize3d, z: (r - 3.5) * cellSize3d };
+  }
+  function worldToCell3D(x, z) {
+    return { r: Math.round(z / cellSize3d + 3.5), c: Math.round(x / cellSize3d + 3.5) };
+  }
+  function easeOutCubic3D(t) { return 1 - Math.pow(1 - t, 3); }
+
+  function makeCheckerTexture3D() {
+    const size = 512, cells = 8, cs = size / cells;
+    const cnv = document.createElement('canvas');
+    cnv.width = cnv.height = size;
+    const ctx = cnv.getContext('2d');
+    for (let r = 0; r < cells; r++) {
+      for (let c = 0; c < cells; c++) {
+        ctx.fillStyle = (r + c) % 2 === 0 ? '#E9DBAA' : '#3D7C71';
+        ctx.fillRect(c * cs, r * cs, cs, cs);
+      }
+    }
+    ctx.strokeStyle = 'rgba(20,10,30,0.25)';
+    ctx.lineWidth = 2;
+    for (let i = 0; i <= cells; i++) {
+      ctx.beginPath(); ctx.moveTo(i * cs, 0); ctx.lineTo(i * cs, size); ctx.stroke();
+      ctx.beginPath(); ctx.moveTo(0, i * cs); ctx.lineTo(size, i * cs); ctx.stroke();
+    }
+    const tex = new THREE.CanvasTexture(cnv);
+    tex.anisotropy = 4;
+    return tex;
+  }
+
+  function makeWoodTexture3D() {
+    const w = 512, h = 512;
+    const cnv = document.createElement('canvas');
+    cnv.width = w; cnv.height = h;
+    const ctx = cnv.getContext('2d');
+    ctx.fillStyle = '#5b3a24';
+    ctx.fillRect(0, 0, w, h);
+    for (let i = 0; i < 70; i++) {
+      ctx.strokeStyle = `rgba(35,18,8,${0.05 + Math.random() * 0.12})`;
+      ctx.lineWidth = 2 + Math.random() * 4;
+      ctx.beginPath();
+      const y = Math.random() * h;
+      ctx.moveTo(0, y);
+      ctx.bezierCurveTo(w * 0.3, y + (Math.random() - 0.5) * 40, w * 0.7, y + (Math.random() - 0.5) * 40, w, y + (Math.random() - 0.5) * 20);
+      ctx.stroke();
+    }
+    const tex = new THREE.CanvasTexture(cnv);
+    tex.wrapS = tex.wrapT = THREE.RepeatWrapping;
+    tex.repeat.set(2, 2);
+    return tex;
+  }
+
+  function createPieceMesh3D(type, color) {
+    const isLight = color === 'w';
+    const mat = new THREE.MeshStandardMaterial({
+      color: isLight ? 0xEDE3C8 : 0x2A2A33,
+      metalness: isLight ? 0.15 : 0.35,
+      roughness: isLight ? 0.55 : 0.4,
+      emissive: isLight ? 0x3a2f10 : 0x1a0a24,
+      emissiveIntensity: 0.15
+    });
+    const trimMat = new THREE.MeshStandardMaterial({
+      color: isLight ? 0xC9A227 : 0x8B1E3F,
+      metalness: 0.6, roughness: 0.35,
+      emissive: isLight ? 0xC9A227 : 0x8B1E3F,
+      emissiveIntensity: 0.25
+    });
+    const g = new THREE.Group();
+    const base = new THREE.Mesh(new THREE.CylinderGeometry(0.34, 0.38, 0.12, 16), mat);
+    base.position.y = 0.06;
+    g.add(base);
+
+    if (type === 'p') {
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.22, 0.28, 12), mat);
+      body.position.y = 0.12 + 0.14;
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.17, 12, 10), mat);
+      head.position.y = 0.12 + 0.28 + 0.14;
+      g.add(body, head);
+    } else if (type === 'r') {
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.26, 0.3, 0.42, 16), mat);
+      body.position.y = 0.12 + 0.21;
+      g.add(body);
+      const topY = 0.12 + 0.42 + 0.05;
+      const crenCount = 8;
+      for (let i = 0; i < crenCount; i++) {
+        const ang = (i / crenCount) * Math.PI * 2;
+        const cren = new THREE.Mesh(new THREE.BoxGeometry(0.09, 0.12, 0.09), mat);
+        cren.position.set(Math.cos(ang) * 0.24, topY, Math.sin(ang) * 0.24);
+        g.add(cren);
+      }
+      const cap = new THREE.Mesh(new THREE.CylinderGeometry(0.22, 0.22, 0.06, 16), mat);
+      cap.position.y = topY;
+      g.add(cap);
+    } else if (type === 'n') {
+      const torso = new THREE.Mesh(new THREE.BoxGeometry(0.22, 0.42, 0.22), mat);
+      torso.position.y = 0.12 + 0.21;
+      torso.rotation.z = 0.12;
+      const neck = new THREE.Mesh(new THREE.BoxGeometry(0.16, 0.28, 0.16), mat);
+      neck.position.set(0.08, 0.12 + 0.42, 0.02);
+      neck.rotation.z = 0.55;
+      const head = new THREE.Mesh(new THREE.BoxGeometry(0.14, 0.16, 0.22), mat);
+      head.position.set(0.2, 0.12 + 0.5, 0.03);
+      head.rotation.z = 0.85;
+      g.add(torso, neck, head);
+    } else if (type === 'b') {
+      const robe = new THREE.Mesh(new THREE.ConeGeometry(0.26, 0.46, 14), mat);
+      robe.position.y = 0.12 + 0.23;
+      const head = new THREE.Mesh(new THREE.SphereGeometry(0.14, 12, 10), mat);
+      head.position.y = 0.12 + 0.46 + 0.10;
+      const brim = new THREE.Mesh(new THREE.TorusGeometry(0.14, 0.03, 8, 16), trimMat);
+      brim.rotation.x = Math.PI / 2;
+      brim.position.y = 0.12 + 0.46 + 0.02;
+      g.add(robe, head, brim);
+    } else if (type === 'q') {
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.16, 0.28, 0.52, 16), mat);
+      body.position.y = 0.12 + 0.26;
+      g.add(body);
+      const crownY = 0.12 + 0.52 + 0.04;
+      const spikes = 6;
+      for (let i = 0; i < spikes; i++) {
+        const ang = (i / spikes) * Math.PI * 2;
+        const spike = new THREE.Mesh(new THREE.ConeGeometry(0.045, 0.16, 6), trimMat);
+        spike.position.set(Math.cos(ang) * 0.16, crownY + 0.06, Math.sin(ang) * 0.16);
+        g.add(spike);
+      }
+      const ball = new THREE.Mesh(new THREE.SphereGeometry(0.09, 12, 10), trimMat);
+      ball.position.y = crownY + 0.03;
+      g.add(ball);
+    } else if (type === 'k') {
+      const body = new THREE.Mesh(new THREE.CylinderGeometry(0.18, 0.3, 0.6, 16), mat);
+      body.position.y = 0.12 + 0.3;
+      g.add(body);
+      const crossY = 0.12 + 0.6 + 0.12;
+      const vBar = new THREE.Mesh(new THREE.BoxGeometry(0.07, 0.24, 0.07), trimMat);
+      vBar.position.y = crossY;
+      const hBar = new THREE.Mesh(new THREE.BoxGeometry(0.2, 0.07, 0.07), trimMat);
+      hBar.position.y = crossY + 0.03;
+      g.add(vBar, hBar);
+    }
+
+    g.traverse((m) => { if (m.isMesh) m.castShadow = true; });
+    return g;
+  }
+
+  function initScene3D() {
+    if (ready3d) return;
+    if (typeof THREE === 'undefined') throw new Error('THREE not loaded');
+    const canvas = document.getElementById('board3d');
+    renderer3d = new THREE.WebGLRenderer({ canvas, antialias: true });
+    renderer3d.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
+    renderer3d.shadowMap.enabled = true;
+    renderer3d.shadowMap.type = THREE.PCFSoftShadowMap;
+
+    scene3d = new THREE.Scene();
+    scene3d.background = new THREE.Color(0x0e0b1a);
+    scene3d.fog = new THREE.Fog(0x0e0b1a, 13, 28);
+
+    camera3d = new THREE.PerspectiveCamera(45, 1, 0.1, 100);
+    camera3d.position.set(0, 9.5, 10);
+
+    controls3d = new THREE.OrbitControls(camera3d, renderer3d.domElement);
+    controls3d.enableDamping = true;
+    controls3d.dampingFactor = 0.08;
+    controls3d.minDistance = 7;
+    controls3d.maxDistance = 18;
+    controls3d.minPolarAngle = 0.35;
+    controls3d.maxPolarAngle = 1.15;
+    controls3d.enablePan = false;
+    controls3d.target.set(0, 0, 0);
+
+    scene3d.add(new THREE.AmbientLight(0x554466, 0.55));
+    scene3d.add(new THREE.HemisphereLight(0x8888aa, 0x201018, 0.4));
+    const torch1 = new THREE.PointLight(0xffa552, 1.4, 14, 2);
+    torch1.position.set(-4, 3.2, 3);
+    scene3d.add(torch1);
+    const torch2 = new THREE.PointLight(0xffa552, 1.1, 14, 2);
+    torch2.position.set(4, 3.2, -3);
+    scene3d.add(torch2);
+    const keyLight = new THREE.DirectionalLight(0xfff2df, 0.5);
+    keyLight.position.set(2, 8, 4);
+    keyLight.castShadow = true;
+    scene3d.add(keyLight);
+    scene3dLights = { torch1, torch2 };
+    desiredTorchColor3D = new THREE.Color(0xffa552);
+
+    const tableGeo = new THREE.CylinderGeometry(6.6, 6.9, 0.5, 48);
+    const tableMat = new THREE.MeshStandardMaterial({ map: makeWoodTexture3D(), roughness: 0.8, metalness: 0.05 });
+    const table3d = new THREE.Mesh(tableGeo, tableMat);
+    table3d.position.y = -0.42;
+    table3d.receiveShadow = true;
+    scene3d.add(table3d);
+
+    const boardGeo = new THREE.BoxGeometry(8 * cellSize3d, 0.16, 8 * cellSize3d);
+    const boardMat = new THREE.MeshStandardMaterial({ map: makeCheckerTexture3D(), roughness: 0.75, metalness: 0.05 });
+    boardMesh3d = new THREE.Mesh(boardGeo, boardMat);
+    boardMesh3d.position.y = -0.08;
+    boardMesh3d.receiveShadow = true;
+    boardMesh3d.userData.isBoardPlane = true;
+    scene3d.add(boardMesh3d);
+
+    const rim = new THREE.Mesh(
+      new THREE.TorusGeometry(8 * cellSize3d * 0.51, 0.08, 8, 48),
+      new THREE.MeshStandardMaterial({ color: 0x2B2140, roughness: 0.5, metalness: 0.3 })
+    );
+    rim.rotation.x = Math.PI / 2;
+    rim.position.y = -0.02;
+    scene3d.add(rim);
+
+    window.addEventListener('resize', onResize3D);
+    canvas.addEventListener('pointerdown', (e) => { pointerDownPos3D = { x: e.clientX, y: e.clientY }; });
+    canvas.addEventListener('pointerup', onPointerUp3D);
+
+    ready3d = true;
+    requestAnimationFrame(animate3D);
+  }
+
+  function onResize3D() {
+    if (!ready3d) return;
+    const w = board3dWrapEl.clientWidth, h = board3dWrapEl.clientHeight;
+    if (!w || !h) return;
+    renderer3d.setSize(w, h, false);
+    camera3d.aspect = w / h;
+    camera3d.updateProjectionMatrix();
+  }
+
+  function animate3D() {
+    requestAnimationFrame(animate3D);
+    if (!ready3d || board3dWrapEl.style.display === 'none') return;
+    const dt = Math.min(clock3d.getDelta(), 0.05);
+    const t = clock3d.elapsedTime;
+    if (scene3dLights) {
+      scene3dLights.torch1.intensity = 1.4 + Math.sin(t * 3.1) * 0.15 + Math.sin(t * 7.7) * 0.06;
+      scene3dLights.torch2.intensity = 1.1 + Math.sin(t * 2.6 + 1) * 0.15 + Math.sin(t * 6.3 + 1) * 0.06;
+      if (desiredTorchColor3D) {
+        scene3dLights.torch1.color.lerp(desiredTorchColor3D, dt * 1.5);
+        scene3dLights.torch2.color.lerp(desiredTorchColor3D, dt * 1.5);
+      }
+    }
+    controls3d.update();
+    activeTweens3d = activeTweens3d.filter((fn) => fn(dt));
+    renderer3d.render(scene3d, camera3d);
+  }
+
+  function setDesiredTorchColor3D(turn) {
+    if (!desiredTorchColor3D) return;
+    desiredTorchColor3D.set(turn === 'w' ? 0xffb35c : 0x9b6bd1);
+  }
+
+  function addTween3D(duration, onUpdate, onDone) {
+    let elapsed = 0;
+    activeTweens3d.push((dt) => {
+      elapsed += dt;
+      const t = Math.min(1, elapsed / duration);
+      onUpdate(t);
+      if (t >= 1) { if (onDone) onDone(); return false; }
+      return true;
+    });
+  }
+
+  function rebuildPieces3D() {
+    if (!ready3d) return;
+    pieceMeshes3d.forEach((g) => scene3d.remove(g));
+    pieceMeshes3d.clear();
+    activeTweens3d = [];
+    for (let r = 0; r < 8; r++) {
+      for (let c = 0; c < 8; c++) {
+        const p = current.board[r][c];
+        if (p) placePieceMesh3D(r, c, p.type, p.color);
+      }
+    }
+  }
+
+  function placePieceMesh3D(r, c, type, color) {
+    const g = createPieceMesh3D(type, color);
+    const pos = cellToWorld3D(r, c);
+    g.position.set(pos.x, 0, pos.z);
+    g.userData.r = r; g.userData.c = c;
+    scene3d.add(g);
+    pieceMeshes3d.set(r + ',' + c, g);
+    return g;
+  }
+
+  function clearHighlights3D() {
+    highlightMeshes3d.forEach((m) => scene3d.remove(m));
+    highlightMeshes3d = [];
+  }
+
+  function syncHighlights3D() {
+    if (!ready3d) return;
+    clearHighlights3D();
+    if (selected) {
+      const pos = cellToWorld3D(selected.r, selected.c);
+      const ring = new THREE.Mesh(
+        new THREE.RingGeometry(0.42, 0.5, 24),
+        new THREE.MeshBasicMaterial({ color: 0xFFC145, side: THREE.DoubleSide, transparent: true, opacity: 0.9 })
+      );
+      ring.rotation.x = -Math.PI / 2;
+      ring.position.set(pos.x, 0.02, pos.z);
+      scene3d.add(ring); highlightMeshes3d.push(ring);
+    }
+    legalTargets.forEach((m) => {
+      const pos = cellToWorld3D(m.to.r, m.to.c);
+      const color = m.captured ? 0xFF5A5A : 0x4EC585;
+      const disc = new THREE.Mesh(
+        new THREE.CircleGeometry(m.captured ? 0.46 : 0.16, 20),
+        new THREE.MeshBasicMaterial({ color, transparent: true, opacity: 0.65, side: THREE.DoubleSide })
+      );
+      disc.rotation.x = -Math.PI / 2;
+      disc.position.set(pos.x, 0.03, pos.z);
+      scene3d.add(disc); highlightMeshes3d.push(disc);
+    });
+    ['w', 'b'].forEach((color) => {
+      if (isKingInCheckSafe(current, color)) {
+        const kp = findKing(current.board, color);
+        if (kp) {
+          const pos = cellToWorld3D(kp.r, kp.c);
+          const glow = new THREE.Mesh(
+            new THREE.RingGeometry(0.3, 0.55, 24),
+            new THREE.MeshBasicMaterial({ color: 0xFF4D4D, side: THREE.DoubleSide, transparent: true, opacity: 0.8 })
+          );
+          glow.rotation.x = -Math.PI / 2;
+          glow.position.set(pos.x, 0.02, pos.z);
+          scene3d.add(glow); highlightMeshes3d.push(glow);
+        }
+      }
+    });
+  }
+
+  function onPointerUp3D(e) {
+    if (!pointerDownPos3D) return;
+    const dx = e.clientX - pointerDownPos3D.x, dy = e.clientY - pointerDownPos3D.y;
+    pointerDownPos3D = null;
+    if (Math.hypot(dx, dy) > 6) return;
+    if (animating3D || gameOver) return;
+    const canvas = document.getElementById('board3d');
+    const rect = canvas.getBoundingClientRect();
+    const nx = ((e.clientX - rect.left) / rect.width) * 2 - 1;
+    const ny = -(((e.clientY - rect.top) / rect.height) * 2 - 1);
+    raycaster3d.setFromCamera({ x: nx, y: ny }, camera3d);
+    // Try piece meshes first (an exact hit on what the player visually clicked), then
+    // fall back to the flat board plane (for empty squares) using board-space (x,z) math.
+    const pieceList = [];
+    pieceMeshes3d.forEach((g) => pieceList.push(g));
+    const pieceHits = raycaster3d.intersectObjects(pieceList, true);
+    let r, c;
+    if (pieceHits.length) {
+      let hit = pieceHits[0].object;
+      while (hit && hit.userData.r === undefined) hit = hit.parent;
+      r = hit.userData.r; c = hit.userData.c;
+    } else {
+      const boardHits = raycaster3d.intersectObject(boardMesh3d, false);
+      if (!boardHits.length) return;
+      const cell = worldToCell3D(boardHits[0].point.x, boardHits[0].point.z);
+      r = cell.r; c = cell.c;
+    }
+    if (r < 0 || r > 7 || c < 0 || c > 7) return;
+    onSquareClick(r, c);
+  }
+
+  function shakeCamera3D(intensity) {
+    let elapsed = 0;
+    const total = 0.3;
+    activeTweens3d.push((dt) => {
+      elapsed += dt;
+      const t = Math.min(1, elapsed / total);
+      const damp = 1 - t;
+      camera3d.position.x += (Math.random() - 0.5) * intensity * damp;
+      camera3d.position.y += (Math.random() - 0.5) * intensity * damp;
+      return t < 1;
+    });
+  }
+
+  function deathFall3D(mesh) {
+    let elapsed = 0;
+    const total = 0.5;
+    const axis = Math.random() < 0.5 ? 'x' : 'z';
+    const dir = Math.random() < 0.5 ? 1 : -1;
+    activeTweens3d.push((dt) => {
+      elapsed += dt;
+      const t = Math.min(1, elapsed / total);
+      const e = t * t;
+      if (axis === 'x') mesh.rotation.x = dir * e * (Math.PI / 2);
+      else mesh.rotation.z = dir * e * (Math.PI / 2);
+      mesh.position.y = -e * 0.15;
+      mesh.scale.setScalar(1 - e * 0.4);
+      if (t >= 1) { scene3d.remove(mesh); return false; }
+      return true;
+    });
+  }
+
+  function explodePiece3D(mesh, pos) {
+    scene3d.remove(mesh);
+    const shardMat = new THREE.MeshStandardMaterial({ color: 0x4b4b57, roughness: 0.9 });
+    const shards = [];
+    for (let i = 0; i < 12; i++) {
+      const size = 0.06 + Math.random() * 0.07;
+      const s = new THREE.Mesh(new THREE.BoxGeometry(size, size, size), shardMat);
+      s.position.set(pos.x + (Math.random() - 0.5) * 0.15, 0.35, pos.z + (Math.random() - 0.5) * 0.15);
+      const ang = Math.random() * Math.PI * 2;
+      const speed = 1.8 + Math.random() * 2.2;
+      s.userData.vel = new THREE.Vector3(Math.cos(ang) * speed, 2.6 + Math.random() * 2.0, Math.sin(ang) * speed);
+      s.userData.rotVel = new THREE.Vector3((Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8, (Math.random() - 0.5) * 8);
+      s.castShadow = true;
+      scene3d.add(s);
+      shards.push(s);
+    }
+    let elapsed = 0;
+    const total = 0.9, gravity = 7.5;
+    activeTweens3d.push((dt) => {
+      elapsed += dt;
+      shards.forEach((s) => {
+        s.userData.vel.y -= gravity * dt;
+        s.position.addScaledVector(s.userData.vel, dt);
+        s.rotation.x += s.userData.rotVel.x * dt;
+        s.rotation.y += s.userData.rotVel.y * dt;
+        s.rotation.z += s.userData.rotVel.z * dt;
+        if (s.position.y < 0.03) {
+          s.position.y = 0.03;
+          s.userData.vel.y *= -0.3;
+          s.userData.vel.x *= 0.7;
+          s.userData.vel.z *= 0.7;
+        }
+      });
+      if (elapsed > total) {
+        const fadeT = Math.min(1, (elapsed - total) / 0.3);
+        shards.forEach((s) => s.scale.setScalar(Math.max(0.001, 1 - fadeT)));
+        if (fadeT >= 1) { shards.forEach((s) => scene3d.remove(s)); return false; }
+      }
+      return true;
+    });
+  }
+
+  function playBattle3D(piece, capturedPiece, move, promotionChoice, onComplete) {
+    const fromKey = move.from.r + ',' + move.from.c;
+    const toKey = move.to.r + ',' + move.to.c;
+    const attackerMesh = pieceMeshes3d.get(fromKey);
+    if (!attackerMesh) { onComplete(); return; }
+
+    animating3D = true;
+    playSound3D('select');
+
+    const startPos = cellToWorld3D(move.from.r, move.from.c);
+    const endPos = cellToWorld3D(move.to.r, move.to.c);
+    const isCharge = piece.type === 'n';
+    const duration = isCharge ? 0.38 : 0.5;
+
+    let capturedKey = toKey;
+    if (move.isEnPassant) capturedKey = move.from.r + ',' + move.to.c;
+    const capturedMesh = capturedPiece ? pieceMeshes3d.get(capturedKey) : null;
+
+    addTween3D(duration, (t) => {
+      const e = easeOutCubic3D(t);
+      const x = startPos.x + (endPos.x - startPos.x) * e;
+      const z = startPos.z + (endPos.z - startPos.z) * e;
+      const y = Math.sin(t * Math.PI) * (isCharge ? 0.55 : 0.18);
+      attackerMesh.position.set(x, y, z);
+      attackerMesh.rotation.x = isCharge ? -Math.sin(t * Math.PI) * 0.25 : 0;
+    }, () => {
+      attackerMesh.position.set(endPos.x, 0, endPos.z);
+      attackerMesh.rotation.x = 0;
+      pieceMeshes3d.delete(fromKey);
+      pieceMeshes3d.set(toKey, attackerMesh);
+      attackerMesh.userData.r = move.to.r; attackerMesh.userData.c = move.to.c;
+
+      let extraDelay = 250;
+      if (capturedPiece && capturedMesh) {
+        pieceMeshes3d.delete(capturedKey);
+        if (capturedPiece.type === 'r') {
+          explodePiece3D(capturedMesh, endPos);
+          playSound3D('explosion');
+          shakeCamera3D(0.22);
+          extraDelay = 550;
+        } else {
+          deathFall3D(capturedMesh);
+          playSound3D('clang');
+          shakeCamera3D(0.1);
+          extraDelay = 300;
+        }
+      } else {
+        playSound3D('place');
+      }
+
+      if (move.castle) {
+        const rFrom = move.castle === 'K' ? { r: move.from.r, c: 7 } : { r: move.from.r, c: 0 };
+        const rTo = move.castle === 'K' ? { r: move.from.r, c: 5 } : { r: move.from.r, c: 3 };
+        const rk = pieceMeshes3d.get(rFrom.r + ',' + rFrom.c);
+        if (rk) {
+          const s = cellToWorld3D(rFrom.r, rFrom.c);
+          const p2 = cellToWorld3D(rTo.r, rTo.c);
+          pieceMeshes3d.delete(rFrom.r + ',' + rFrom.c);
+          pieceMeshes3d.set(rTo.r + ',' + rTo.c, rk);
+          rk.userData.r = rTo.r; rk.userData.c = rTo.c;
+          addTween3D(0.35, (t2) => {
+            const e2 = easeOutCubic3D(t2);
+            rk.position.set(s.x + (p2.x - s.x) * e2, 0, s.z + (p2.z - s.z) * e2);
+          }, null);
+        }
+      }
+
+      if (promotionChoice && piece.type === 'p') {
+        scene3d.remove(attackerMesh);
+        pieceMeshes3d.delete(toKey);
+        const newMesh = placePieceMesh3D(move.to.r, move.to.c, promotionChoice, piece.color);
+        newMesh.scale.set(0.01, 0.01, 0.01);
+        addTween3D(0.3, (t3) => { const s = easeOutCubic3D(t3); newMesh.scale.set(s, s, s); }, null);
+      }
+
+      setTimeout(() => { animating3D = false; onComplete(); }, extraDelay);
+    });
+  }
 
   buildBoardDom();
   resetGame();
